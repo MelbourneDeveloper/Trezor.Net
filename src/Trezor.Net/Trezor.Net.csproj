@@ -4,6 +4,21 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <CodeAnalysisRuleSet>..\Hid.Net\CodeRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Version>1.1.0</Version>
+    <Authors>Christian Findlay</Authors>
+    <Company>Christian Findlay</Company>
+    <Description>A library for communicating with the Satoshi Labs' Trezor Hardware Wallet</Description>
+    <Copyright>Christian Findlay</Copyright>
+    <PackageLicenseUrl>https://github.com/MelbourneDeveloper/Trezor.Net/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/MelbourneDeveloper/Trezor.Net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MelbourneDeveloper/Trezor.Net</RepositoryUrl>
+    <PackageTags>Hid Trezor Hardwarewallet Bitcoin Ethereum</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>C:\GitRepos\Trezor.Net\NuGet\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
