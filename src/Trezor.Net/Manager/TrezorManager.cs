@@ -103,7 +103,34 @@ namespace Trezor.Manager
             return (TReadMessage)await SendMessage(message);
         }
 
-        protected async Task<TReadMessage> SendMessage<TReadMessage, TWriteMessage>(TWriteMessage message)
+        private async Task<object> PinMatrixAck(string pin)
+        {
+            var retVal = await SendMessage(new PinMatrixAck { Pin = pin });
+
+            if (retVal is Failure failure)
+            {
+                throw new FailureException("PIN Attempt Failed.", failure);
+            }
+
+            return retVal;
+        }
+
+        private async Task<object> ButtonAck()
+        {
+            var retVal = await SendMessage(new ButtonAck());
+
+            if (retVal is Failure failure)
+            {
+                throw new FailureException("PIN Attempt Failed.", failure);
+            }
+
+            return retVal;
+        }
+
+        #endregion
+
+        #region Public Methods
+        public async Task<TReadMessage> SendMessageAsync<TReadMessage, TWriteMessage>(TWriteMessage message)
         {
             if (Features == null)
             {
@@ -143,33 +170,6 @@ namespace Trezor.Manager
             throw new NotImplementedException();
         }
 
-        private async Task<object> PinMatrixAck(string pin)
-        {
-            var retVal = await SendMessage(new PinMatrixAck { Pin = pin });
-
-            if (retVal is Failure failure)
-            {
-                throw new FailureException("PIN Attempt Failed.", failure);
-            }
-
-            return retVal;
-        }
-
-        private async Task<object> ButtonAck()
-        {
-            var retVal = await SendMessage(new ButtonAck());
-
-            if (retVal is Failure failure)
-            {
-                throw new FailureException("PIN Attempt Failed.", failure);
-            }
-
-            return retVal;
-        }
-
-        #endregion
-
-        #region Public Methods
         public Task<bool> GetIsConnected() => _TrezorHidDevice.GetIsConnectedAsync();
 
 
@@ -188,11 +188,11 @@ namespace Trezor.Manager
                 {
                     case AddressType.Bitcoin:
 
-                        return (await SendMessage<Address, GetAddress>(new GetAddress { ShowDisplay = showDisplay, AddressNs = path, CoinName = GetCoinType(coinShortcut)?.CoinName, ScriptType = isSegwit ? InputScriptType.Spendp2shwitness : InputScriptType.Spendaddress })).address;
+                        return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = showDisplay, AddressNs = path, CoinName = GetCoinType(coinShortcut)?.CoinName, ScriptType = isSegwit ? InputScriptType.Spendp2shwitness : InputScriptType.Spendaddress })).address;
 
                     case AddressType.Ethereum:
 
-                        var ethereumAddress = await SendMessage<EthereumAddress, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = showDisplay, AddressNs = path });
+                        var ethereumAddress = await SendMessageAsync<EthereumAddress, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = showDisplay, AddressNs = path });
 
                         var sb = new StringBuilder();
                         foreach (var b in ethereumAddress.Address)
@@ -219,7 +219,7 @@ namespace Trezor.Manager
 
         public async Task<PublicKey> GetPublicKeyAsync(string coinShortcut, uint addressNumber)
         {
-            return await SendMessage<PublicKey, GetPublicKey>(new GetPublicKey { CoinName = GetCoinType(coinShortcut).CoinName, AddressNs = new[] { addressNumber } });
+            return await SendMessageAsync<PublicKey, GetPublicKey>(new GetPublicKey { CoinName = GetCoinType(coinShortcut).CoinName, AddressNs = new[] { addressNumber } });
         }
 
         public async Task InitializeAsync()

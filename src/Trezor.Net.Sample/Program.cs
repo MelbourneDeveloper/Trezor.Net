@@ -37,7 +37,7 @@ namespace TrezorTestApp
                 throw new Exception("No Trezor is not connected or USB access was not granted to this application.");
             }
 
-            var retVal = new WindowsHidDevice(trezorDeviceInformation.DevicePath);
+            var retVal = new WindowsHidDevice(trezorDeviceInformation);
 
             await retVal.InitializeAsync();
 
