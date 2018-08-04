@@ -6,18 +6,20 @@
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>1.1.2</Version>
+    <Version>1.2.0</Version>
     <Authors>Christian Findlay</Authors>
     <Company>Christian Findlay</Company>
-    <Description>A library for communicating with the Satoshi Labs' Trezor Hardware Wallet</Description>
+    <Description>A cross platform library for communicating with the Satoshi Labs' Trezor Hardware Wallet
+
+Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for other platforms can be added with Hid.Net dependency injection</Description>
     <Copyright>Christian Findlay</Copyright>
     <PackageLicenseUrl>https://github.com/MelbourneDeveloper/Trezor.Net/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/MelbourneDeveloper/Trezor.Net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MelbourneDeveloper/Trezor.Net</RepositoryUrl>
     <PackageTags>Hid Trezor Hardwarewallet Bitcoin Ethereum SatoshiLabs</PackageTags>
-    <AssemblyVersion>1.1.2.0</AssemblyVersion>
-    <FileVersion>1.1.2.0</FileVersion>
-    <PackageReleaseNotes>Expose SendMessageAsync</PackageReleaseNotes>
+    <AssemblyVersion>1.2.0.0</AssemblyVersion>
+    <FileVersion>1.2.0.0</FileVersion>
+    <PackageReleaseNotes>Introduce thread safey (first in, first out async locking with SemaphoreSlim)</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
