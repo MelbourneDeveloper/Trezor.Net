@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Trezor.Manager
@@ -52,6 +53,7 @@ namespace Trezor.Manager
         private IHidDevice _TrezorHidDevice;
         private int invalidChunksCounter;
         private readonly EnterPinArgs _EnterPinCallback;
+        protected SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
         #endregion
 
         #region Public Properties
@@ -137,37 +139,46 @@ namespace Trezor.Manager
                 throw new Exception("The Trezor has not been successfully initialised.");
             }
 
-            var response = await SendMessage(message);
+            await _Lock.WaitAsync();
 
-            if (response is PinMatrixRequest pinMatrixRequest)
+            try
             {
-                var pin = await _EnterPinCallback.Invoke();
-                var result = await PinMatrixAck(pin);
-                if (result is TReadMessage readMessage)
+                var response = await SendMessage(message);
+
+                if (response is PinMatrixRequest pinMatrixRequest)
+                {
+                    var pin = await _EnterPinCallback.Invoke();
+                    var result = await PinMatrixAck(pin);
+                    if (result is TReadMessage readMessage)
+                    {
+                        return readMessage;
+                    }
+                }
+                else if (response is ButtonRequest)
+                {
+                    var retVal = await ButtonAck();
+
+                    while (retVal is ButtonRequest)
+                    {
+                        retVal = ButtonAck();
+                    }
+
+                    if (retVal is TReadMessage readMessage)
+                    {
+                        return readMessage;
+                    }
+                }
+                else if (response is TReadMessage readMessage)
                 {
                     return readMessage;
                 }
+
+                throw new NotImplementedException();
             }
-            else if (response is ButtonRequest)
+            finally
             {
-                var retVal = await ButtonAck();
-
-                while (retVal is ButtonRequest)
-                {
-                    retVal = ButtonAck();
-                }
-
-                if (retVal is TReadMessage readMessage)
-                {
-                    return readMessage;
-                }
+                _Lock.Release();
             }
-            else if (response is TReadMessage readMessage)
-            {
-                return readMessage;
-            }
-
-            throw new NotImplementedException();
         }
 
         public Task<bool> GetIsConnected() => _TrezorHidDevice.GetIsConnectedAsync();

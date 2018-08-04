@@ -1,5 +1,6 @@
 ﻿using Hid.Net;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Trezor.Manager;
@@ -52,9 +53,15 @@ namespace TrezorTestApp
                 {
                     await trezorManager.InitializeAsync();
 
-                    var address = await trezorManager.GetAddressAsync("CRW", 72, false, 0, false, AddressType.Bitcoin);
+                    var tasks = new List<Task>();
 
-                    Console.WriteLine(address);
+                    for (var i = 0; i < 50; i++)
+                    {
+                        var address = await trezorManager.GetAddressAsync("CRW", 72, false, (uint)i, false, AddressType.Bitcoin);
+                        Console.WriteLine(address);
+                    }
+
+                    await Task.WhenAll(tasks);
 
                     Console.ReadLine();
                 }
