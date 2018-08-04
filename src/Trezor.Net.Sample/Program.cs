@@ -10,6 +10,11 @@ namespace TrezorTestApp
 {
     class Program
     {
+        #region Fields
+        private static List<string> addresses = new List<string>();
+        #endregion
+
+        #region Main
         static void Main(string[] args)
         {
             try
@@ -23,7 +28,9 @@ namespace TrezorTestApp
                 Console.ReadLine();
             }
         }
+        #endregion
 
+        #region Private  Methods
         private static async Task<IHidDevice> Connect()
         {
             var devices = WindowsHidDevice.GetConnectedDeviceInformations();
@@ -45,8 +52,10 @@ namespace TrezorTestApp
             return retVal;
         }
 
-        static List<string> addresses = new List<string>();
-
+        /// <summary>
+        /// TODO: This should be made in to a unit test but it's annoying to add the UI for a unit test as the Trezor requires human intervention for the pin
+        /// </summary>
+        /// <returns></returns>
         private async static Task Go()
         {
             using (var trezorHid = await Connect())
@@ -60,15 +69,21 @@ namespace TrezorTestApp
                     for (var i = 0; i < 50; i++)
                     {
                         tasks.Add(DoGetAddress(trezorManager, i));
-
                     }
 
                     await Task.WhenAll(tasks);
 
-                    foreach(var asdasd in addresses)
+                    for (var i = 0; i < 50; i++)
                     {
-                        Console.WriteLine(asdasd);
+                        var address = await GetAddress(trezorManager, i);
+
+                        if (address != addresses[i])
+                        {
+                            throw new Exception("The ordering got messed up");
+                        }
                     }
+
+                    Console.WriteLine("All good");
 
                     Console.ReadLine();
                 }
@@ -77,13 +92,19 @@ namespace TrezorTestApp
 
         private async static Task DoGetAddress(TrezorManager trezorManager, int i)
         {
-            addresses.Insert(i, await trezorManager.GetAddressAsync("CRW", 72, false, (uint)i, false, AddressType.Bitcoin));
+            addresses.Insert(i, await GetAddress(trezorManager, i));
         }
 
-        public async static Task<string> GetPin()
+        private static async Task<string> GetAddress(TrezorManager trezorManager, int i)
+        {
+            return await trezorManager.GetAddressAsync("CRW", 72, false, (uint)i, false, AddressType.Bitcoin);
+        }
+
+        private async static Task<string> GetPin()
         {
             Console.WriteLine("Enter PIN based on Trezor values: ");
             return Console.ReadLine().Trim();
         }
+        #endregion
     }
 }
