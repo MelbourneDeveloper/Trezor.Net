@@ -11,7 +11,7 @@ namespace TrezorTestApp
     class Program
     {
         #region Fields
-        private static List<string> addresses = new List<string>();
+        private static List<string> _Addresses = new List<string>();
         #endregion
 
         #region Main
@@ -77,7 +77,9 @@ namespace TrezorTestApp
                     {
                         var address = await GetAddress(trezorManager, i);
 
-                        if (address != addresses[i])
+                        Console.WriteLine($"Index: {i} (No change) - Address: {address}");
+
+                        if (address != _Addresses[i])
                         {
                             throw new Exception("The ordering got messed up");
                         }
@@ -92,12 +94,12 @@ namespace TrezorTestApp
 
         private async static Task DoGetAddress(TrezorManager trezorManager, int i)
         {
-            addresses.Insert(i, await GetAddress(trezorManager, i));
+            _Addresses.Insert(i, await GetAddress(trezorManager, i));
         }
 
         private static async Task<string> GetAddress(TrezorManager trezorManager, int i)
         {
-            return await trezorManager.GetAddressAsync("CRW", 72, false, (uint)i, false, AddressType.Bitcoin);
+            return await trezorManager.GetAddressAsync("BTC", 0, false, (uint)i, false, AddressType.Bitcoin);
         }
 
         private async static Task<string> GetPin()
