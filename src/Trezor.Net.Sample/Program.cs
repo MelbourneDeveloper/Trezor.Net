@@ -45,6 +45,8 @@ namespace TrezorTestApp
             return retVal;
         }
 
+        static List<string> addresses = new List<string>();
+
         private async static Task Go()
         {
             using (var trezorHid = await Connect())
@@ -57,15 +59,25 @@ namespace TrezorTestApp
 
                     for (var i = 0; i < 50; i++)
                     {
-                        var address = await trezorManager.GetAddressAsync("CRW", 72, false, (uint)i, false, AddressType.Bitcoin);
-                        Console.WriteLine(address);
+                        tasks.Add(DoGetAddress(trezorManager, i));
+
                     }
 
                     await Task.WhenAll(tasks);
 
+                    foreach(var asdasd in addresses)
+                    {
+                        Console.WriteLine(asdasd);
+                    }
+
                     Console.ReadLine();
                 }
             }
+        }
+
+        private async static Task DoGetAddress(TrezorManager trezorManager, int i)
+        {
+            addresses.Insert(i, await trezorManager.GetAddressAsync("CRW", 72, false, (uint)i, false, AddressType.Bitcoin));
         }
 
         public async static Task<string> GetPin()
