@@ -2,9 +2,9 @@
 
 ## Getting Started
 
--Clone the repo and open the solution
--There is a sample/unit test app there called Trezor.Net.Sample
--This sample is a .NET Core console app and shows you how to get addresses
+- Clone the repo and open the solution
+- There is a sample/unit test app there called Trezor.Net.Sample
+- This sample is a .NET Core console app and shows you how to get addresses
 
 ## NuGet
 
@@ -12,10 +12,10 @@ Install-Package Trezor.Net
 
 ## Suported Platforms
 
--.NET Framework
--.NET Core
--Android
--UWP 
+- .NET Framework
+- .NET Core
+- Android
+- UWP 
 
 ## More Samples
 
