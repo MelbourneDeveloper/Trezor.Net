@@ -85,47 +85,6 @@ namespace Trezor.Manager
         }
         #endregion
 
-        #region Protected Methods
-        protected async Task<object> SendMessage(object message)
-        {
-            await WriteAsync(message);
-
-            var retVal = await ReadAsync();
-
-            if (retVal is Failure failure)
-            {
-                throw new FailureException($"Error sending message to Trezor.\r\n{message.GetType().Name}", failure);
-            }
-
-            return retVal;
-        }
-
-        private async Task<object> PinMatrixAck(string pin)
-        {
-            var retVal = await SendMessage(new PinMatrixAck { Pin = pin });
-
-            if (retVal is Failure failure)
-            {
-                throw new FailureException("PIN Attempt Failed.", failure);
-            }
-
-            return retVal;
-        }
-
-        private async Task<object> ButtonAck()
-        {
-            var retVal = await SendMessage(new ButtonAck());
-
-            if (retVal is Failure failure)
-            {
-                throw new FailureException("PIN Attempt Failed.", failure);
-            }
-
-            return retVal;
-        }
-
-        #endregion
-
         #region Public Methods
         public async Task<TReadMessage> SendMessageAsync<TReadMessage, TWriteMessage>(TWriteMessage message)
         {
@@ -138,12 +97,12 @@ namespace Trezor.Manager
 
             try
             {
-                var response = await SendMessage(message);
+                var response = await SendMessageAsync(message);
 
                 if (response is PinMatrixRequest pinMatrixRequest)
                 {
                     var pin = await _EnterPinCallback.Invoke();
-                    var result = await PinMatrixAck(pin);
+                    var result = await PinMatrixAckAsync(pin);
                     if (result is TReadMessage readMessage)
                     {
                         return readMessage;
@@ -151,11 +110,11 @@ namespace Trezor.Manager
                 }
                 else if (response is ButtonRequest)
                 {
-                    var retVal = await ButtonAck();
+                    var retVal = await ButtonAckAsync();
 
                     while (retVal is ButtonRequest)
                     {
-                        retVal = ButtonAck();
+                        retVal = ButtonAckAsync();
                     }
 
                     if (retVal is TReadMessage readMessage)
@@ -176,8 +135,7 @@ namespace Trezor.Manager
             }
         }
 
-        public Task<bool> GetIsConnected() => _TrezorHidDevice.GetIsConnectedAsync();
-
+        public Task<bool> GetIsConnectedAsync() => _TrezorHidDevice.GetIsConnectedAsync();
 
         public async Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType)
         {
@@ -230,14 +188,7 @@ namespace Trezor.Manager
 
         public async Task InitializeAsync()
         {
-            if (Features != null)
-            {
-                return;
-            }
-
-            var retVal = await SendMessageAsync<Features, Initialize>(new Initialize());
-
-            Features = retVal as Features;
+            Features = await SendMessageAsync<Features, Initialize>(new Initialize());
 
             if (Features == null)
             {
@@ -253,6 +204,44 @@ namespace Trezor.Manager
         #endregion
 
         #region Private Methods
+        private async Task<object> SendMessageAsync(object message)
+        {
+            await WriteAsync(message);
+
+            var retVal = await ReadAsync();
+
+            if (retVal is Failure failure)
+            {
+                throw new FailureException($"Error sending message to Trezor.\r\n{message.GetType().Name}", failure);
+            }
+
+            return retVal;
+        }
+
+        private async Task<object> PinMatrixAckAsync(string pin)
+        {
+            var retVal = await SendMessageAsync(new PinMatrixAck { Pin = pin });
+
+            if (retVal is Failure failure)
+            {
+                throw new FailureException("PIN Attempt Failed.", failure);
+            }
+
+            return retVal;
+        }
+
+        private async Task<object> ButtonAckAsync()
+        {
+            var retVal = await SendMessageAsync(new ButtonAck());
+
+            if (retVal is Failure failure)
+            {
+                throw new FailureException("PIN Attempt Failed.", failure);
+            }
+
+            return retVal;
+        }
+
         private CoinType GetCoinType(string coinShortcut)
         {
             if (Features == null)

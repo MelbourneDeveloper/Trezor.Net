@@ -11,7 +11,7 @@ namespace TrezorTestApp
     class Program
     {
         #region Fields
-        private static List<string> _Addresses = new List<string>();
+        private static readonly string[] _Addresses = new string[50];
         #endregion
 
         #region Main
@@ -94,7 +94,8 @@ namespace TrezorTestApp
 
         private async static Task DoGetAddress(TrezorManager trezorManager, int i)
         {
-            _Addresses.Insert(i, await GetAddress(trezorManager, i));
+            var address = await GetAddress(trezorManager, i);
+            _Addresses[i] = address;
         }
 
         private static async Task<string> GetAddress(TrezorManager trezorManager, int i)
