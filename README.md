@@ -12,10 +12,10 @@ Install-Package Trezor.Net
 
 ## Suported Platforms
 
-- .NET Framework
-- .NET Core
-- Android
-- UWP 
+-.NET Framework
+-.NET Core
+-Android
+-UWP 
 
 ## More Samples
 
