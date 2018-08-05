@@ -100,11 +100,6 @@ namespace Trezor.Manager
             return retVal;
         }
 
-        protected async Task<TReadMessage> SendMessage<TReadMessage>(object message)
-        {
-            return (TReadMessage)await SendMessage(message);
-        }
-
         private async Task<object> PinMatrixAck(string pin)
         {
             var retVal = await SendMessage(new PinMatrixAck { Pin = pin });
@@ -134,7 +129,7 @@ namespace Trezor.Manager
         #region Public Methods
         public async Task<TReadMessage> SendMessageAsync<TReadMessage, TWriteMessage>(TWriteMessage message)
         {
-            if (Features == null)
+            if (Features == null && !(message is Initialize))
             {
                 throw new Exception("The Trezor has not been successfully initialised.");
             }
@@ -240,12 +235,7 @@ namespace Trezor.Manager
                 return;
             }
 
-            var retVal = await SendMessage(new Initialize());
-
-            while (retVal is ButtonRequest)
-            {
-                retVal = ButtonAck();
-            }
+            var retVal = await SendMessageAsync<Features, Initialize>(new Initialize());
 
             Features = retVal as Features;
 
