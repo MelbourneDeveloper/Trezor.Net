@@ -6,6 +6,8 @@
 - There is a sample/unit test app there called Trezor.Net.Sample
 - This sample is a .NET Core console app and shows you how to get addresses
 
+Note: not all messages have a public method, but all messages exist. If you want to send a message to the Trezor you need to construct the message object and send it to the Trezor with the SendMessageAsync method. This requires that you know the result type before calling.
+
 ## NuGet
 
 Install-Package Trezor.Net
@@ -32,5 +34,9 @@ https://play.google.com/store/apps/details?id=com.Hardfolio
 Trezor.Net is based on Hid.Net. You can see the repo for this library here:
 
 https://github.com/MelbourneDeveloper/Hid.Net
+
+## Contribution
+
+Contribution is welcome. Please fork, tighten up the code (real tight), test, and submit a pull request.
 
 
