@@ -86,6 +86,13 @@ namespace Trezor.Manager
         #endregion
 
         #region Public Methods
+        /// <summary>
+        /// Send a message to the Trezor and receive the result
+        /// </summary>
+        /// <typeparam name="TReadMessage">The message type</typeparam>
+        /// <typeparam name="TWriteMessage">The result type</typeparam>
+        /// <param name="message">The message</param>
+        /// <returns>The result</returns>
         public async Task<TReadMessage> SendMessageAsync<TReadMessage, TWriteMessage>(TWriteMessage message)
         {
             if (Features == null && !(message is Initialize))
@@ -135,8 +142,14 @@ namespace Trezor.Manager
             }
         }
 
+        /// <summary>
+        /// Check to see if the Trezor is connected to the device
+        /// </summary>
         public Task<bool> GetIsConnectedAsync() => _TrezorHidDevice.GetIsConnectedAsync();
 
+        /// <summary>
+        /// Get an address from the Trezor
+        /// </summary>
         public async Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType)
         {
             try
@@ -181,11 +194,17 @@ namespace Trezor.Manager
             }
         }
 
+        /// <summary>
+        /// Get the Trezor's public key at the specified index.
+        /// </summary>
         public async Task<PublicKey> GetPublicKeyAsync(string coinShortcut, uint addressNumber)
         {
             return await SendMessageAsync<PublicKey, GetPublicKey>(new GetPublicKey { CoinName = GetCoinType(coinShortcut).CoinName, AddressNs = new[] { addressNumber } });
         }
 
+        /// <summary>
+        /// Initialize the Trezor. Should only be called once.
+        /// </summary>
         public async Task InitializeAsync()
         {
             Features = await SendMessageAsync<Features, Initialize>(new Initialize());
@@ -204,6 +223,9 @@ namespace Trezor.Manager
         #endregion
 
         #region Private Methods
+        /// <summary>
+        /// Warning: This is not thread safe. It should only be used inside the generic version of this method or to call pin related stuff
+        /// </summary>
         private async Task<object> SendMessageAsync(object message)
         {
             await WriteAsync(message);
