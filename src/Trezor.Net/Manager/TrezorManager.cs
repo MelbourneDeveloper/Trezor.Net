@@ -1,4 +1,7 @@
 ﻿using Hid.Net;
+using System;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Trezor.Manager
@@ -44,5 +47,55 @@ namespace Trezor.Manager
             return retVal;
         }
         #endregion
+
+        #region Public Overrides
+        /// <summary>
+        /// Get an address from the Trezor
+        /// </summary>
+        public override async Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType)
+        {
+            try
+            {
+                //ETH and ETC don't appear here so we have to hard code these not to be segwit
+                var coinType = Features.Coins.FirstOrDefault(c => c.CoinShortcut.ToLower() == coinShortcut.ToLower());
+
+                var isSegwit = coinType != null && coinType.Segwit;
+
+                var path = GetAddressPath(isSegwit, isChange, index, coinNumber);
+
+                switch (addressType)
+                {
+                    case AddressType.Bitcoin:
+
+                        return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = showDisplay, AddressNs = path, CoinName = GetCoinType(coinShortcut)?.CoinName, ScriptType = isSegwit ? InputScriptType.Spendp2shwitness : InputScriptType.Spendaddress })).address;
+
+                    case AddressType.Ethereum:
+
+                        var ethereumAddress = await SendMessageAsync<EthereumAddress, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = showDisplay, AddressNs = path });
+
+                        var sb = new StringBuilder();
+                        foreach (var b in ethereumAddress.Address)
+                        {
+                            sb.Append(b.ToString("X2").ToLower());
+                        }
+
+                        var hexString = sb.ToString();
+
+                        return $"0x{hexString}";
+
+                    case AddressType.NEM:
+                        throw new NotImplementedException();
+                    default:
+                        throw new NotImplementedException();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log("Error Getting Trezor Address", ex, LogSection);
+                throw;
+            }
+        }
+        #endregion
+
     }
 }

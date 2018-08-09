@@ -3,7 +3,6 @@ using ProtoBuf;
 using System;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -131,52 +130,7 @@ namespace Trezor.Manager
         /// </summary>
         public Task<bool> GetIsConnectedAsync() => _TrezorHidDevice.GetIsConnectedAsync();
 
-        /// <summary>
-        /// Get an address from the Trezor
-        /// </summary>
-        public async Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType)
-        {
-            try
-            {
-                //ETH and ETC don't appear here so we have to hard code these not to be segwit
-                var coinType = Features.Coins.FirstOrDefault(c => c.CoinShortcut.ToLower() == coinShortcut.ToLower());
-
-                var isSegwit = coinType != null && coinType.Segwit;
-
-                var path = GetAddressPath(isSegwit, isChange, index, coinNumber);
-
-                switch (addressType)
-                {
-                    case AddressType.Bitcoin:
-
-                        return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = showDisplay, AddressNs = path, CoinName = GetCoinType(coinShortcut)?.CoinName, ScriptType = isSegwit ? InputScriptType.Spendp2shwitness : InputScriptType.Spendaddress })).address;
-
-                    case AddressType.Ethereum:
-
-                        var ethereumAddress = await SendMessageAsync<EthereumAddress, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = showDisplay, AddressNs = path });
-
-                        var sb = new StringBuilder();
-                        foreach (var b in ethereumAddress.Address)
-                        {
-                            sb.Append(b.ToString("X2").ToLower());
-                        }
-
-                        var hexString = sb.ToString();
-
-                        return $"0x{hexString}";
-
-                    case AddressType.NEM:
-                        throw new NotImplementedException();
-                    default:
-                        throw new NotImplementedException();
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Log("Error Getting Trezor Address", ex, LogSection);
-                throw;
-            }
-        }
+        public abstract Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType);
 
         /// <summary>
         /// Get the Trezor's public key at the specified index.
@@ -207,37 +161,6 @@ namespace Trezor.Manager
         #endregion
 
         #region Private Methods
-        /// <summary>
-        /// Warning: This is not thread safe. It should only be used inside the generic version of this method or to call pin related stuff
-        /// </summary>
-        protected async Task<object> SendMessageAsync(object message)
-        {
-            await WriteAsync(message);
-
-            var retVal = await ReadAsync();
-
-            if (retVal is Failure failure)
-            {
-                throw new FailureException<Failure>($"Error sending message to Trezor.\r\n{message.GetType().Name}", failure);
-            }
-
-            return retVal;
-        }
-
-        protected abstract Task<object> PinMatrixAckAsync(string pin);
-
-        protected abstract Task<object> ButtonAckAsync();
-
-        private CoinType GetCoinType(string coinShortcut)
-        {
-            if (Features == null)
-            {
-                throw new Exception("The Trezor has not been successfully initialised.");
-            }
-
-            return Features.Coins.FirstOrDefault(c => c.CoinShortcut == coinShortcut);
-        }
-
         private async Task WriteAsync(object msg)
         {
             Logger.Log($"Write: {msg}", null, LogSection);
@@ -371,12 +294,40 @@ namespace Trezor.Manager
 
         #endregion
 
-        #region Private Static Methods
-        private static uint[] GetAddressPath(bool isSegwit, bool isChange, uint index, uint coinnumber)
+        #region Protected Methods
+        /// <summary>
+        /// Warning: This is not thread safe. It should only be used inside the generic version of this method or to call pin related stuff
+        /// </summary>
+        protected async Task<object> SendMessageAsync(object message)
         {
-            return new[] { ((isSegwit ? (uint)49 : 44) | HardeningConstant) >> 0, (coinnumber | HardeningConstant) >> 0, (0 | HardeningConstant) >> 0, isChange ? 1 : (uint)0, index };
+            await WriteAsync(message);
+
+            var retVal = await ReadAsync();
+
+            if (retVal is Failure failure)
+            {
+                throw new FailureException<Failure>($"Error sending message to Trezor.\r\n{message.GetType().Name}", failure);
+            }
+
+            return retVal;
         }
 
+        protected abstract Task<object> PinMatrixAckAsync(string pin);
+
+        protected abstract Task<object> ButtonAckAsync();
+
+        protected CoinType GetCoinType(string coinShortcut)
+        {
+            if (Features == null)
+            {
+                throw new Exception("The Trezor has not been successfully initialised.");
+            }
+
+            return Features.Coins.FirstOrDefault(c => c.CoinShortcut == coinShortcut);
+        }
+        #endregion
+
+        #region Private Static Methods
         /// <summary>
         /// Horribly inefficient array thing
         /// </summary>
@@ -424,6 +375,13 @@ namespace Trezor.Manager
             {
                 throw new Exception("InvalidProtocolBufferException");
             }
+        }
+        #endregion
+
+        #region Protected Static Methods
+        protected static uint[] GetAddressPath(bool isSegwit, bool isChange, uint index, uint coinnumber)
+        {
+            return new[] { ((isSegwit ? (uint)49 : 44) | HardeningConstant) >> 0, (coinnumber | HardeningConstant) >> 0, (0 | HardeningConstant) >> 0, isChange ? 1 : (uint)0, index };
         }
         #endregion
     }
