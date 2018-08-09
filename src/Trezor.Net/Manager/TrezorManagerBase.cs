@@ -16,7 +16,7 @@ namespace Trezor.Manager
     public abstract partial class TrezorManagerBase : IDisposable
     {
         #region Events
-        public event EventHandler TrezorConnected;
+        public event EventHandler Connected;
         #endregion
 
         #region Enums
@@ -28,14 +28,13 @@ namespace Trezor.Manager
         #endregion
 
         #region Constants
-        private const string USBTwoName = "U2F Interface";
         private const int FirstChunkStartIndex = 9;
         private const uint HardeningConstant = 0x80000000;
         #endregion
 
         #region Fields
-        private IHidDevice _TrezorHidDevice;
-        private int invalidChunksCounter;
+        private IHidDevice _HidDevice;
+        private int _InvalidChunksCounter;
         private readonly EnterPinArgs _EnterPinCallback;
         protected SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
         private string LogSection = nameof(TrezorManagerBase);
@@ -56,35 +55,37 @@ namespace Trezor.Manager
         #endregion
 
         #region Constructor
-        public TrezorManagerBase(EnterPinArgs enterPinCallback, IHidDevice trezorHidDevice)
+        public TrezorManagerBase(EnterPinArgs enterPinCallback, IHidDevice hidDevice)
         {
-            //TODO: Move this to the point when the Trezor is connected
-            if (trezorHidDevice != null)
+            //TODO: Move this to the point when the device is connected
+            if (hidDevice != null)
             {
-                trezorHidDevice.Connected += TrezorHidDevice_Connected;
+                hidDevice.Connected += HidDevice_Connected;
             }
 
             //USBType Two not currently supported...
             USBType = USBTypeEnum.One;
             _EnterPinCallback = enterPinCallback;
-            _TrezorHidDevice = trezorHidDevice;
+            _HidDevice = hidDevice;
         }
         #endregion
 
         #region Event Handlers
-        private void TrezorHidDevice_Connected(object sender, EventArgs e)
+        private void HidDevice_Connected(object sender, EventArgs e)
         {
-            Logger.Log("Trezor Hid Device Connected", null, LogSection);
-            TrezorConnected?.Invoke(this, new EventArgs());
+            Logger.Log("Hid Device Connected", null, LogSection);
+            Connected?.Invoke(this, new EventArgs());
         }
         #endregion
 
-        #region Public Methods
-
+        #region Protected Abstract Methods
         protected abstract bool IsButtonRequest(object response);
         protected abstract bool IsPinMatrixRequest(object response);
         protected abstract bool IsInitialize(object response);
 
+        #endregion
+
+        #region Public Methods
         /// <summary>
         /// Send a message to the Trezor and receive the result
         /// </summary>
@@ -144,9 +145,7 @@ namespace Trezor.Manager
         /// <summary>
         /// Check to see if the Trezor is connected to the device
         /// </summary>
-        public Task<bool> GetIsConnectedAsync() => _TrezorHidDevice.GetIsConnectedAsync();
-
-        public abstract Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, uint account, bool isChange, uint index, bool showDisplay, AddressType addressType, bool? isSegwit);
+        public Task<bool> GetIsConnectedAsync() => _HidDevice.GetIsConnectedAsync();
 
         public Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType)
         {
@@ -160,8 +159,13 @@ namespace Trezor.Manager
 
         public void Dispose()
         {
-            _TrezorHidDevice?.Dispose();
+            _HidDevice?.Dispose();
         }
+
+        #endregion
+
+        #region Public Abstract Methods
+        public abstract Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, uint account, bool isChange, uint index, bool showDisplay, AddressType addressType, bool? isSegwit);
 
         #endregion
 
@@ -208,14 +212,14 @@ namespace Trezor.Manager
             {
                 var range = data.GetRange((i * 64) + 1, 64);
                 range[0] = (byte)'?';
-                await _TrezorHidDevice.WriteAsync(range);
+                await _HidDevice.WriteAsync(range);
             }
         }
 
         private async Task<object> ReadAsync()
         {
             //Read a chunk
-            var readBuffer = await _TrezorHidDevice.ReadAsync();
+            var readBuffer = await _HidDevice.ReadAsync();
             MessageType messageType;
 
             //Check to see that this is a valid first chunk 
@@ -251,12 +255,12 @@ namespace Trezor.Manager
 
             remainingDataLength -= allData.Length;
 
-            invalidChunksCounter = 0;
+            _InvalidChunksCounter = 0;
 
             while (remainingDataLength > 0)
             {
                 //Read a chunk
-                readBuffer = await _TrezorHidDevice.ReadAsync();
+                readBuffer = await _HidDevice.ReadAsync();
 
                 //check that there was some data returned
                 if (readBuffer.Length <= 0)
@@ -269,7 +273,7 @@ namespace Trezor.Manager
 
                 if (readBuffer[0] != (byte)'?')
                 {
-                    if (invalidChunksCounter++ > 5)
+                    if (_InvalidChunksCounter++ > 5)
                     {
                         throw new Exception("messageRead: too many invalid chunks (2)");
                     }
@@ -331,9 +335,10 @@ namespace Trezor.Manager
 
             return retVal;
         }
+        #endregion
 
+        #region Protected Abstract Methods
         protected abstract Task<object> PinMatrixAckAsync(string pin);
-
         protected abstract Task<object> ButtonAckAsync();
         #endregion
 
@@ -407,7 +412,6 @@ namespace Trezor.Manager
                 return writer.ToArray();
             }
         }
-
 
         private static object Deserialize(Type type, byte[] data)
         {
