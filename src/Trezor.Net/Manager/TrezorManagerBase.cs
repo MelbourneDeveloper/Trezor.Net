@@ -1,8 +1,10 @@
 ﻿using Hid.Net;
 using ProtoBuf;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -37,6 +39,11 @@ namespace Trezor.Manager
         private readonly EnterPinArgs _EnterPinCallback;
         protected SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
         private string LogSection = nameof(TrezorManagerBase);
+        #endregion
+
+        #region Private Static Fields
+        private static Assembly[] _Assemblies;
+        private static Dictionary<string, Type> _ContractsByName = new Dictionary<string, Type>();
         #endregion
 
         #region Public Properties
@@ -294,15 +301,11 @@ namespace Trezor.Manager
         {
             try
             {
-                var typeName = $"{ContractNamespace}.{messageType.ToString().Replace("MessageType", "")}";
+                var typeName = $"{ContractNamespace}.{messageType.ToString().Replace("MessageType", string.Empty)}";
 
-                var type = Type.GetType(typeName);
-                if (type == null)
-                {
-                    throw new Exception($"The device returned a message of {messageType}. There was no corresponding contract type at {typeName}");
-                }
+                var contractType = GetContractType(messageType, typeName);
 
-                return Deserialize(type, data);
+                return Deserialize(contractType, data);
             }
             catch
             {
@@ -335,6 +338,50 @@ namespace Trezor.Manager
         #endregion
 
         #region Private Static Methods
+        private static Type GetContractType(MessageType messageType, string typeName)
+        {
+            Type contractType;
+
+            lock (_ContractsByName)
+            {
+                if (!_ContractsByName.TryGetValue(typeName, out contractType))
+                {
+                    contractType = Type.GetType(typeName);
+
+                    if (contractType == null)
+                    {
+                        if (_Assemblies == null)
+                        {
+                            _Assemblies = AppDomain.CurrentDomain.GetAssemblies();
+                        }
+
+                        foreach (var assembly in _Assemblies)
+                        {
+                            foreach (var type in assembly.GetTypes())
+                            {
+                                if (type.FullName == typeName)
+                                {
+                                    contractType = type;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (contractType == null)
+                    {
+                        throw new Exception($"The device returned a message of {messageType}. There was no corresponding contract type at {typeName}");
+                    }
+                    else
+                    {
+                        _ContractsByName.Add(typeName, contractType);
+                    }
+                }
+            }
+
+            return contractType;
+        }
+
         /// <summary>
         /// Horribly inefficient array thing
         /// </summary>

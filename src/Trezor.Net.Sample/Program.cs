@@ -99,7 +99,7 @@ namespace TrezorTestApp
 
         private static async Task<string> GetAddress(TrezorManagerBase trezorManager, int i)
         {
-            return await trezorManager.GetAddressAsync("BTC", 0, false, (uint)i, false,Trezor.Manager.AddressType.Bitcoin);
+            return await trezorManager.GetAddressAsync("BTC", 0, false, (uint)i, false,Trezor.Manager.AddressType.Bitcoin, true);
         }
 
         private async static Task<string> GetPin()
