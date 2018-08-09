@@ -218,7 +218,7 @@ namespace Trezor.Manager
 
             if (retVal is Failure failure)
             {
-                throw new FailureException($"Error sending message to Trezor.\r\n{message.GetType().Name}", failure);
+                throw new FailureException<Failure>($"Error sending message to Trezor.\r\n{message.GetType().Name}", failure);
             }
 
             return retVal;

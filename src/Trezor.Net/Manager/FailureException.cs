@@ -3,14 +3,13 @@
 namespace Trezor.Manager
 {
     [Serializable]
-    internal class FailureException : Exception
+    public class FailureException<T> : Exception
     {
-        public Failure Failure { get; private set; }
+        public T Failure { get; private set; }
 
-        public FailureException(string message, Failure failure) : base($"{message}\r\n{failure.Message}")
+        public FailureException(string message, T failure) : base($"{message}\r\n{(failure as dynamic).Message}")
         {
             Failure = failure;
         }
-
     }
 }

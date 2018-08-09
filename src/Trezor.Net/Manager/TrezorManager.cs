@@ -26,7 +26,7 @@ namespace Trezor.Manager
 
             if (retVal is Failure failure)
             {
-                throw new FailureException("PIN Attempt Failed.", failure);
+                throw new FailureException<Failure>("PIN Attempt Failed.", failure);
             }
 
             return retVal;
@@ -38,7 +38,7 @@ namespace Trezor.Manager
 
             if (retVal is Failure failure)
             {
-                throw new FailureException("PIN Attempt Failed.", failure);
+                throw new FailureException<Failure>("PIN Attempt Failed.", failure);
             }
 
             return retVal;
