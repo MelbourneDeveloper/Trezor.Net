@@ -295,7 +295,13 @@ namespace Trezor.Manager
             try
             {
                 var typeName = $"{ContractNamespace}.{messageType.ToString().Replace("MessageType", "")}";
+
                 var type = Type.GetType(typeName);
+                if (type == null)
+                {
+                    throw new Exception($"The device returned a message of {messageType}. There was no corresponding contract type at {typeName}");
+                }
+
                 return Deserialize(type, data);
             }
             catch

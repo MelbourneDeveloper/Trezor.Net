@@ -20,7 +20,7 @@ namespace Trezor.Manager
 
         protected override bool HasFeatures => Features != null;
 
-        protected override string ContractNamespace => nameof(Trezor);
+        protected override string ContractNamespace => "Trezor";
 
         #region Constructor
         public TrezorManager(EnterPinArgs enterPinCallback, IHidDevice trezorHidDevice) : base(enterPinCallback, trezorHidDevice)
