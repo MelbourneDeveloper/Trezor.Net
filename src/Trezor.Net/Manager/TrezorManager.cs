@@ -8,19 +8,24 @@ namespace Trezor.Manager
 {
     public class TrezorManager : TrezorManagerBase
     {
+        #region Private Constants
+        private const string LogSection = "Trezor Manager";
+        #endregion
+
         #region Public Constants
         public const ushort TrezorVendorId = 21324;
         public const int TrezorProductId = 1;
         public const string USBOneName = "TREZOR Interface";
-        //TODO: This might not be cool.
-        private const string LogSection = "Trezor Manager";
         #endregion
 
+        #region Public Properties
         public Features Features { get; private set; }
+        #endregion
 
+        #region Protected Override Properties
         protected override bool HasFeatures => Features != null;
-
         protected override string ContractNamespace => "Trezor";
+        #endregion
 
         #region Constructor
         public TrezorManager(EnterPinArgs enterPinCallback, IHidDevice trezorHidDevice) : base(enterPinCallback, trezorHidDevice)
@@ -28,7 +33,7 @@ namespace Trezor.Manager
         }
         #endregion
 
-        #region Protected Overrides
+        #region Protected Override Methods
         protected override bool IsButtonRequest(object response)
         {
             return response is ButtonRequest;
@@ -92,6 +97,7 @@ namespace Trezor.Manager
         #region Public Overrides
         /// <summary>
         /// Get an address from the Trezor
+        /// //TODO: Move this back down to TrezorManagerBase
         /// </summary>
         public override async Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, uint account, bool isChange, uint index, bool showDisplay, AddressType addressType, bool? isSegwit)
         {
@@ -153,6 +159,5 @@ namespace Trezor.Manager
             }
         }
         #endregion
-
     }
 }
