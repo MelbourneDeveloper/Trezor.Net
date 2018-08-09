@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trezor.Net", "Trezor.Net\Tr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trezor.Net.Sample", "Trezor.Net.Sample\Trezor.Net.Sample.csproj", "{488A29B9-D291-4733-BDBE-9FD1EE26B4E5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeepKey.Net", "..\..\KeepKey.Net\src\KeepKey.Net\KeepKey.Net.csproj", "{C582E684-8D7A-47F0-84B6-E7932445C36F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{488A29B9-D291-4733-BDBE-9FD1EE26B4E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{488A29B9-D291-4733-BDBE-9FD1EE26B4E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{488A29B9-D291-4733-BDBE-9FD1EE26B4E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C582E684-8D7A-47F0-84B6-E7932445C36F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C582E684-8D7A-47F0-84B6-E7932445C36F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C582E684-8D7A-47F0-84B6-E7932445C36F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C582E684-8D7A-47F0-84B6-E7932445C36F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

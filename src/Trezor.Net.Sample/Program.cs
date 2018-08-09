@@ -34,7 +34,7 @@ namespace TrezorTestApp
         private static async Task<IHidDevice> Connect()
         {
             var devices = WindowsHidDevice.GetConnectedDeviceInformations();
-            var trezors = devices.Where(d => d.VendorId == TrezorManager.TrezorVendorId && TrezorManager.TrezorProductId == 1);
+            var trezors = devices.Where(d => d.VendorId == TrezorVendorId && TrezorProductId == 1);
 
             DeviceInformation trezorDeviceInformation;
 
@@ -100,7 +100,7 @@ namespace TrezorTestApp
 
         private static async Task<string> GetAddress(TrezorManager trezorManager, int i)
         {
-            return await trezorManager.GetAddressAsync("BTC", 0, false, (uint)i, false, AddressType.Bitcoin);
+            return await trezorManager.GetAddressAsync("BTC", 0, false, (uint)i, false,Trezor.Manager.AddressType.Bitcoin);
         }
 
         private async static Task<string> GetPin()
