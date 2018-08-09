@@ -16,7 +16,7 @@ Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for ot
     <PackageLicenseUrl>https://github.com/MelbourneDeveloper/Trezor.Net/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/MelbourneDeveloper/Trezor.Net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MelbourneDeveloper/Trezor.Net</RepositoryUrl>
-    <PackageTags>Hid Trezor Hardwarewallet Bitcoin Ethereum SatoshiLabs</PackageTags>
+    <PackageTags>Hid Trezor Hardwarewallet Bitcoin Ethereum SatoshiLabs KeepKey</PackageTags>
     <AssemblyVersion>1.3.0.0</AssemblyVersion>
     <FileVersion>1.3.0.0</FileVersion>
     <PackageReleaseNotes>Introduce thread safey (first in, first out async locking with SemaphoreSlim)
