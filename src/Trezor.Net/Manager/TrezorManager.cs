@@ -27,6 +27,21 @@ namespace Trezor.Manager
         #endregion
 
         #region Protected Overrides
+        protected override bool IsButtonRequest(object response)
+        {
+            return response is ButtonRequest;
+        }
+
+        protected override bool IsPinMatrixRequest(object response)
+        {
+            return response is PinMatrixRequest;
+        }
+
+        protected override bool IsInitialize(object response)
+        {
+            return response is Initialize;
+        }
+
         protected override async Task<object> PinMatrixAckAsync(string pin)
         {
             var retVal = await SendMessageAsync(new PinMatrixAck { Pin = pin });

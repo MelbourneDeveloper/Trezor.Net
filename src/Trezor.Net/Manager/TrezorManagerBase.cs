@@ -72,6 +72,11 @@ namespace Trezor.Manager
         #endregion
 
         #region Public Methods
+
+        protected abstract bool IsButtonRequest(object response);
+        protected abstract bool IsPinMatrixRequest(object response);
+        protected abstract bool IsInitialize(object response);
+
         /// <summary>
         /// Send a message to the Trezor and receive the result
         /// </summary>
@@ -81,7 +86,7 @@ namespace Trezor.Manager
         /// <returns>The result</returns>
         public async Task<TReadMessage> SendMessageAsync<TReadMessage, TWriteMessage>(TWriteMessage message)
         {
-            if (!HasFeatures && !(message is Initialize))
+            if (!HasFeatures && !(IsInitialize(message)))
             {
                 throw new Exception("The Trezor has not been successfully initialised.");
             }
@@ -92,7 +97,7 @@ namespace Trezor.Manager
             {
                 var response = await SendMessageAsync(message);
 
-                if (response is PinMatrixRequest pinMatrixRequest)
+                if (IsPinMatrixRequest(response))
                 {
                     var pin = await _EnterPinCallback.Invoke();
                     var result = await PinMatrixAckAsync(pin);
@@ -101,11 +106,11 @@ namespace Trezor.Manager
                         return readMessage;
                     }
                 }
-                else if (response is ButtonRequest)
+                else if (IsButtonRequest(response))
                 {
                     var retVal = await ButtonAckAsync();
 
-                    while (retVal is ButtonRequest)
+                    while (IsButtonRequest(response))
                     {
                         retVal = ButtonAckAsync();
                     }
