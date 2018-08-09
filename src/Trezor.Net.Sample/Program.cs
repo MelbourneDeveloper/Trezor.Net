@@ -91,13 +91,13 @@ namespace TrezorTestApp
             }
         }
 
-        private async static Task DoGetAddress(TrezorManager trezorManager, int i)
+        private async static Task DoGetAddress(TrezorManagerBase trezorManager, int i)
         {
             var address = await GetAddress(trezorManager, i);
             _Addresses[i] = address;
         }
 
-        private static async Task<string> GetAddress(TrezorManager trezorManager, int i)
+        private static async Task<string> GetAddress(TrezorManagerBase trezorManager, int i)
         {
             return await trezorManager.GetAddressAsync("BTC", 0, false, (uint)i, false,Trezor.Manager.AddressType.Bitcoin);
         }

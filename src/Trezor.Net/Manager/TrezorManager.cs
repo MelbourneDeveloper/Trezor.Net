@@ -51,7 +51,7 @@ namespace Trezor.Manager
             return retVal;
         }
 
-        protected  CoinType GetCoinType(string coinShortcut)
+        protected CoinType GetCoinType(string coinShortcut)
         {
             if (!HasFeatures)
             {
@@ -76,22 +76,25 @@ namespace Trezor.Manager
         /// <summary>
         /// Get an address from the Trezor
         /// </summary>
-        public override async Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType)
+        public override async Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType, bool? isSegwit)
         {
             try
             {
                 //ETH and ETC don't appear here so we have to hard code these not to be segwit
                 var coinType = Features.Coins.FirstOrDefault(c => c.CoinShortcut.ToLower() == coinShortcut.ToLower());
 
-                var isSegwit = coinType != null && coinType.Segwit;
+                if (isSegwit == null)
+                {
+                    isSegwit = coinType != null && coinType.Segwit;
+                }
 
-                var path = GetAddressPath(isSegwit, isChange, index, coinNumber);
+                var path = GetAddressPath(isSegwit.Value, isChange, index, coinNumber);
 
                 switch (addressType)
                 {
                     case AddressType.Bitcoin:
 
-                        return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = showDisplay, AddressNs = path, CoinName = GetCoinType(coinShortcut)?.CoinName, ScriptType = isSegwit ? InputScriptType.Spendp2shwitness : InputScriptType.Spendaddress })).address;
+                        return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = showDisplay, AddressNs = path, CoinName = GetCoinType(coinShortcut)?.CoinName, ScriptType = isSegwit.Value ? InputScriptType.Spendp2shwitness : InputScriptType.Spendaddress })).address;
 
                     case AddressType.Ethereum:
 

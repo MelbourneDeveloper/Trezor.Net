@@ -133,7 +133,12 @@ namespace Trezor.Manager
         /// </summary>
         public Task<bool> GetIsConnectedAsync() => _TrezorHidDevice.GetIsConnectedAsync();
 
-        public abstract Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType);
+        public abstract Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType, bool? isSegwit);
+
+        public Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType)
+        {
+            return GetAddressAsync(coinShortcut, coinNumber, isChange, index, showDisplay, addressType, null);
+        }
 
         /// <summary>
         /// Initialize the Trezor. Should only be called once.
