@@ -35,20 +35,20 @@ namespace TrezorTestApp
         private static async Task<IHidDevice> Connect()
         {
             var devices = WindowsHidDevice.GetConnectedDeviceInformations();
-            var trezor = devices.FirstOrDefault(d => d.VendorId == 11044 && TrezorProductId == 1);
+            var keepKeyDeviceInformation = devices.FirstOrDefault(d => d.VendorId == 11044 && TrezorProductId == 1);
 
-            DeviceInformation trezorDeviceInformation;
-
-            if (trezor == null)
+            if (keepKeyDeviceInformation == null)
             {
                 throw new Exception("No Trezor is not connected or USB access was not granted to this application.");
             }
 
-            var retVal = new WindowsHidDevice(trezor);
+            var keepKeyHidDevice = new WindowsHidDevice(keepKeyDeviceInformation);
 
-            await retVal.InitializeAsync();
+            keepKeyHidDevice.DataHasExtraByte = false;
 
-            return retVal;
+            await keepKeyHidDevice.InitializeAsync();
+
+            return keepKeyHidDevice;
         }
 
         /// <summary>

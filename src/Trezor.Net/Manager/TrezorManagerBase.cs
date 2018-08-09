@@ -45,6 +45,7 @@ namespace Trezor.Manager
 
         #region Protected Abstract Properties
         protected abstract bool HasFeatures { get; }
+        protected abstract string ContractNamespace { get; }
         #endregion
 
         #region Constructor
@@ -289,6 +290,19 @@ namespace Trezor.Manager
 
         }
 
+        private object Deserialize(MessageType messageType, byte[] data)
+        {
+            try
+            {
+                var typeName = $"{ContractNamespace}.{messageType.ToString().Replace("MessageType", "")}";
+                var type = Type.GetType(typeName);
+                return Deserialize(type, data);
+            }
+            catch
+            {
+                throw new Exception("InvalidProtocolBufferException");
+            }
+        }
         #endregion
 
         #region Protected Methods
@@ -347,20 +361,6 @@ namespace Trezor.Manager
             using (var writer = new MemoryStream(data))
             {
                 return Serializer.NonGeneric.Deserialize(type, writer);
-            }
-        }
-
-        public static object Deserialize(MessageType messageType, byte[] data)
-        {
-            try
-            {
-                var typeName = $"Trezor.{messageType.ToString().Replace("MessageType", "")}";
-                var type = Type.GetType(typeName);
-                return Deserialize(type, data);
-            }
-            catch
-            {
-                throw new Exception("InvalidProtocolBufferException");
             }
         }
         #endregion
