@@ -146,11 +146,11 @@ namespace Trezor.Manager
         /// </summary>
         public Task<bool> GetIsConnectedAsync() => _TrezorHidDevice.GetIsConnectedAsync();
 
-        public abstract Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType, bool? isSegwit);
+        public abstract Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, uint account, bool isChange, uint index, bool showDisplay, AddressType addressType, bool? isSegwit);
 
         public Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType)
         {
-            return GetAddressAsync(coinShortcut, coinNumber, isChange, index, showDisplay, addressType, null);
+            return GetAddressAsync(coinShortcut, coinNumber, 0, isChange, index, showDisplay, addressType, null);
         }
 
         /// <summary>
@@ -419,9 +419,9 @@ namespace Trezor.Manager
         #endregion
 
         #region Protected Static Methods
-        protected static uint[] GetAddressPath(bool isSegwit, bool isChange, uint index, uint coinnumber)
+        protected static uint[] GetAddressPath(bool isSegwit, uint account, bool isChange, uint index, uint coinnumber)
         {
-            return new[] { ((isSegwit ? (uint)49 : 44) | HardeningConstant) >> 0, (coinnumber | HardeningConstant) >> 0, (0 | HardeningConstant) >> 0, isChange ? 1 : (uint)0, index };
+            return new[] { ((isSegwit ? (uint)49 : 44) | HardeningConstant) >> 0, (coinnumber | HardeningConstant) >> 0, (0 | HardeningConstant) >> (int)account, isChange ? 1 : (uint)0, index };
         }
         #endregion
     }
