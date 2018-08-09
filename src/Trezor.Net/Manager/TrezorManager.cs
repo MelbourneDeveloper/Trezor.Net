@@ -16,6 +16,10 @@ namespace Trezor.Manager
         private const string LogSection = "Trezor Manager";
         #endregion
 
+        public Features Features { get; private set; }
+
+        protected override bool HasFeatures => Features != null;
+
         #region Constructor
         public TrezorManager(EnterPinArgs enterPinCallback, IHidDevice trezorHidDevice) : base(enterPinCallback, trezorHidDevice)
         {
@@ -45,6 +49,26 @@ namespace Trezor.Manager
             }
 
             return retVal;
+        }
+
+        protected  CoinType GetCoinType(string coinShortcut)
+        {
+            if (!HasFeatures)
+            {
+                throw new Exception("The Trezor has not been successfully initialised.");
+            }
+
+            return Features.Coins.FirstOrDefault(c => c.CoinShortcut == coinShortcut);
+        }
+        #endregion
+
+        #region Public Methods
+        /// <summary>
+        /// Get the Trezor's public key at the specified index.
+        /// </summary>
+        public async Task<PublicKey> GetPublicKeyAsync(string coinShortcut, uint addressNumber)
+        {
+            return await SendMessageAsync<PublicKey, GetPublicKey>(new GetPublicKey { CoinName = GetCoinType(coinShortcut).CoinName, AddressNs = new[] { addressNumber } });
         }
         #endregion
 
@@ -93,6 +117,19 @@ namespace Trezor.Manager
             {
                 Logger.Log("Error Getting Trezor Address", ex, LogSection);
                 throw;
+            }
+        }
+
+        /// <summary>
+        /// Initialize the Trezor. Should only be called once.
+        /// </summary>
+        public override async Task InitializeAsync()
+        {
+            Features = await SendMessageAsync<Features, Initialize>(new Initialize());
+
+            if (Features == null)
+            {
+                throw new Exception("Error initializing Trezor. Features were not retrieved");
             }
         }
         #endregion

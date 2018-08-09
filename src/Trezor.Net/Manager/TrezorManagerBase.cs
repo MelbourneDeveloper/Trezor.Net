@@ -41,7 +41,10 @@ namespace Trezor.Manager
 
         #region Public Properties
         public USBTypeEnum USBType { get; }
-        public Features Features { get; private set; }
+        #endregion
+
+        #region Protected Abstract Properties
+        protected abstract bool HasFeatures { get; }
         #endregion
 
         #region Constructor
@@ -78,7 +81,7 @@ namespace Trezor.Manager
         /// <returns>The result</returns>
         public async Task<TReadMessage> SendMessageAsync<TReadMessage, TWriteMessage>(TWriteMessage message)
         {
-            if (Features == null && !(message is Initialize))
+            if (!HasFeatures && !(message is Initialize))
             {
                 throw new Exception("The Trezor has not been successfully initialised.");
             }
@@ -133,25 +136,9 @@ namespace Trezor.Manager
         public abstract Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType);
 
         /// <summary>
-        /// Get the Trezor's public key at the specified index.
-        /// </summary>
-        public async Task<PublicKey> GetPublicKeyAsync(string coinShortcut, uint addressNumber)
-        {
-            return await SendMessageAsync<PublicKey, GetPublicKey>(new GetPublicKey { CoinName = GetCoinType(coinShortcut).CoinName, AddressNs = new[] { addressNumber } });
-        }
-
-        /// <summary>
         /// Initialize the Trezor. Should only be called once.
         /// </summary>
-        public async Task InitializeAsync()
-        {
-            Features = await SendMessageAsync<Features, Initialize>(new Initialize());
-
-            if (Features == null)
-            {
-                throw new Exception("Error initializing Trezor. Features were not retrieved");
-            }
-        }
+        public abstract Task InitializeAsync();
 
         public void Dispose()
         {
@@ -315,16 +302,6 @@ namespace Trezor.Manager
         protected abstract Task<object> PinMatrixAckAsync(string pin);
 
         protected abstract Task<object> ButtonAckAsync();
-
-        protected CoinType GetCoinType(string coinShortcut)
-        {
-            if (Features == null)
-            {
-                throw new Exception("The Trezor has not been successfully initialised.");
-            }
-
-            return Features.Coins.FirstOrDefault(c => c.CoinShortcut == coinShortcut);
-        }
         #endregion
 
         #region Private Static Methods

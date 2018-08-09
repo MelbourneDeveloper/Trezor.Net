@@ -1,4 +1,5 @@
 ﻿using Hid.Net;
+using KeepKey.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,18 +35,16 @@ namespace TrezorTestApp
         private static async Task<IHidDevice> Connect()
         {
             var devices = WindowsHidDevice.GetConnectedDeviceInformations();
-            var trezors = devices.Where(d => d.VendorId == TrezorVendorId && TrezorProductId == 1);
+            var trezor = devices.FirstOrDefault(d => d.VendorId == 11044 && TrezorProductId == 1);
 
             DeviceInformation trezorDeviceInformation;
 
-            trezorDeviceInformation = trezors.FirstOrDefault(t => t.Product == USBOneName);
-
-            if (trezorDeviceInformation == null)
+            if (trezor == null)
             {
                 throw new Exception("No Trezor is not connected or USB access was not granted to this application.");
             }
 
-            var retVal = new WindowsHidDevice(trezorDeviceInformation);
+            var retVal = new WindowsHidDevice(trezor);
 
             await retVal.InitializeAsync();
 
@@ -60,7 +59,7 @@ namespace TrezorTestApp
         {
             using (var trezorHid = await Connect())
             {
-                using (var trezorManager = new TrezorManager(GetPin, trezorHid))
+                using (var trezorManager = new KeepKeyManager(GetPin, trezorHid))
                 {
                     await trezorManager.InitializeAsync();
 
