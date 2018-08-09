@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\KeepKey.Net\src\KeepKey.Net\KeepKey.Net.csproj" />
     <ProjectReference Include="..\Trezor.Net\Trezor.Net.csproj" />
   </ItemGroup>
 
