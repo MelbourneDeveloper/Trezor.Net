@@ -1,5 +1,4 @@
 ﻿using Hid.Net;
-using KeepKey.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,20 +34,22 @@ namespace TrezorTestApp
         private static async Task<IHidDevice> Connect()
         {
             var devices = WindowsHidDevice.GetConnectedDeviceInformations();
-            var keepKeyDeviceInformation = devices.FirstOrDefault(d => d.VendorId == 11044 && TrezorProductId == 1);
+            var trezors = devices.Where(d => d.VendorId == TrezorManager.TrezorVendorId && TrezorManager.TrezorProductId == 1);
 
-            if (keepKeyDeviceInformation == null)
+            DeviceInformation trezorDeviceInformation;
+
+            trezorDeviceInformation = trezors.FirstOrDefault(t => t.Product == USBOneName);
+
+            if (trezorDeviceInformation == null)
             {
                 throw new Exception("No Trezor is not connected or USB access was not granted to this application.");
             }
 
-            var keepKeyHidDevice = new WindowsHidDevice(keepKeyDeviceInformation);
+            var retVal = new WindowsHidDevice(trezorDeviceInformation);
 
-            keepKeyHidDevice.DataHasExtraByte = false;
+            await retVal.InitializeAsync();
 
-            await keepKeyHidDevice.InitializeAsync();
-
-            return keepKeyHidDevice;
+            return retVal;
         }
 
         /// <summary>
@@ -59,7 +60,7 @@ namespace TrezorTestApp
         {
             using (var trezorHid = await Connect())
             {
-                using (var trezorManager = new KeepKeyManager(GetPin, trezorHid))
+                using (var trezorManager = new TrezorManager(GetPin, trezorHid))
                 {
                     await trezorManager.InitializeAsync();
 
@@ -91,15 +92,15 @@ namespace TrezorTestApp
             }
         }
 
-        private async static Task DoGetAddress(TrezorManagerBase trezorManager, int i)
+        private async static Task DoGetAddress(TrezorManager trezorManager, int i)
         {
             var address = await GetAddress(trezorManager, i);
             _Addresses[i] = address;
         }
 
-        private static async Task<string> GetAddress(TrezorManagerBase trezorManager, int i)
+        private static async Task<string> GetAddress(TrezorManager trezorManager, int i)
         {
-            return await trezorManager.GetAddressAsync("BTC", 0, 0, false, (uint)i, false, AddressType.Bitcoin, false);
+            return await trezorManager.GetAddressAsync("BTC", 0, false, (uint)i, false, AddressType.Bitcoin);
         }
 
         private async static Task<string> GetPin()
