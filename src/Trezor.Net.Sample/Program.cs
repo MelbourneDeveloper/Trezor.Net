@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Trezor;
 using Trezor.Manager;
 using static Trezor.Manager.TrezorManager;
 
@@ -84,6 +85,11 @@ namespace TrezorTestApp
                             throw new Exception("The ordering got messed up");
                         }
                     }
+
+                    var ethAddress = await trezorManager.GetAddressAsync("ETH", 60, false, 0, true, AddressType.Ethereum);
+                    Console.WriteLine($"First ETH address: {ethAddress}");
+
+                    //trezorManager.SendMessageAsync<EthereumSignTx>(new EthereumSignTx { AddressNs });
 
                     Console.WriteLine("All good");
 
