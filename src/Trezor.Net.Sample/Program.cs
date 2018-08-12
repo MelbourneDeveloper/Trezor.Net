@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Trezor;
 using Trezor.Net;
 
 namespace TrezorTestApp
@@ -87,7 +88,10 @@ namespace TrezorTestApp
                     var ethAddress = await trezorManager.GetAddressAsync("ETH", 60, false, 0, true, AddressType.Ethereum);
                     Console.WriteLine($"First ETH address: {ethAddress}");
 
-                    //var txMessage = new EthereumSignTx { AddressNs =  }
+                    var txMessage = new EthereumSignTx
+                    {
+                        AddressNs = ManagerHelpers.GetAddressPath(false, 0, false, 0, 60)
+                    };
 
                     //trezorManager.SendMessageAsync<EthereumSignTx>(new EthereumSignTx { AddressNs });
 

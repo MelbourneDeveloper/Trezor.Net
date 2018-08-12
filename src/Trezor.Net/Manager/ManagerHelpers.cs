@@ -1,6 +1,6 @@
 ﻿namespace Trezor.Net
 {
-    public class Helpers
+    public class ManagerHelpers
     {
         #region Constants
         private const uint HardeningConstant = 0x80000000;
