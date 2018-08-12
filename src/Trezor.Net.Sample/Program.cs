@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Trezor;
 using Trezor.Net;
@@ -58,47 +59,60 @@ namespace TrezorTestApp
         /// <returns></returns>
         private async static Task Go()
         {
-            using (var trezorHid = await Connect())
+            try
             {
-                using (var trezorManager = new TrezorManager(GetPin, trezorHid))
+                using (var trezorHid = await Connect())
                 {
-                    await trezorManager.InitializeAsync();
-
-                    var tasks = new List<Task>();
-
-                    for (var i = 0; i < 50; i++)
+                    using (var trezorManager = new TrezorManager(GetPin, trezorHid))
                     {
-                        tasks.Add(DoGetAddress(trezorManager, i));
-                    }
+                        await trezorManager.InitializeAsync();
 
-                    await Task.WhenAll(tasks);
+                        //var tasks = new List<Task>();
 
-                    for (var i = 0; i < 50; i++)
-                    {
-                        var address = await GetAddress(trezorManager, i);
+                        //for (var i = 0; i < 50; i++)
+                        //{
+                        //    tasks.Add(DoGetAddress(trezorManager, i));
+                        //}
 
-                        Console.WriteLine($"Index: {i} (No change) - Address: {address}");
+                        //await Task.WhenAll(tasks);
 
-                        if (address != _Addresses[i])
+                        //for (var i = 0; i < 50; i++)
+                        //{
+                        //    var address = await GetAddress(trezorManager, i);
+
+                        //    Console.WriteLine($"Index: {i} (No change) - Address: {address}");
+
+                        //    if (address != _Addresses[i])
+                        //    {
+                        //        throw new Exception("The ordering got messed up");
+                        //    }
+                        //}
+
+                        var ethAddress = await trezorManager.GetAddressAsync("ETH", 60, false, 0, false, AddressType.Ethereum);
+                        Console.WriteLine($"First ETH address: {ethAddress}");
+
+                        var txMessage = new EthereumSignTx
                         {
-                            throw new Exception("The ordering got messed up");
-                        }
+                            AddressNs = ManagerHelpers.GetAddressPath(false, 0, false, 0, 60),
+                            GasLimit = Encoding.Unicode.GetBytes("98bca5a00"),
+                            GasPrice = Encoding.Unicode.GetBytes("a3ff"),
+                            To = Encoding.Unicode.GetBytes("0xdc7359317ef4cc723a3980213a013c0433a33891"),
+                            Nonce = Encoding.Unicode.GetBytes("01"),
+                            Value = Encoding.Unicode.GetBytes("0x1"),
+                        };
+
+                        var transaction = await trezorManager.SendMessageAsync<EthereumSignMessage, EthereumSignTx>(txMessage);
+
+                        Console.WriteLine("All good");
+
+                        Console.ReadLine();
                     }
-
-                    var ethAddress = await trezorManager.GetAddressAsync("ETH", 60, false, 0, true, AddressType.Ethereum);
-                    Console.WriteLine($"First ETH address: {ethAddress}");
-
-                    var txMessage = new EthereumSignTx
-                    {
-                        AddressNs = ManagerHelpers.GetAddressPath(false, 0, false, 0, 60)
-                    };
-
-                    //trezorManager.SendMessageAsync<EthereumSignTx>(new EthereumSignTx { AddressNs });
-
-                    Console.WriteLine("All good");
-
-                    Console.ReadLine();
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                Console.ReadLine();
             }
         }
 
