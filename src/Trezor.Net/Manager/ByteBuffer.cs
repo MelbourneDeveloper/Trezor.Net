@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Trezor.Manager
+namespace Trezor.Net
 {
     public class ByteBuffer
     {

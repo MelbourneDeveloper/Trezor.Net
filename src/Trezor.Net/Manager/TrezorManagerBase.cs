@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Trezor.Manager
+namespace Trezor.Net
 {
     /// <summary>
     /// An interface for dealing with the Trezor that works across all platforms
@@ -29,7 +29,6 @@ namespace Trezor.Manager
 
         #region Constants
         private const int FirstChunkStartIndex = 9;
-        private const uint HardeningConstant = 0x80000000;
         #endregion
 
         #region Fields
@@ -419,13 +418,6 @@ namespace Trezor.Manager
             {
                 return Serializer.NonGeneric.Deserialize(type, writer);
             }
-        }
-        #endregion
-
-        #region Protected Static Methods
-        protected static uint[] GetAddressPath(bool isSegwit, uint account, bool isChange, uint index, uint coinnumber)
-        {
-            return new[] { ((isSegwit ? (uint)49 : 44) | HardeningConstant) >> 0, (coinnumber | HardeningConstant) >> 0, (0 | HardeningConstant) >> (int)account, isChange ? 1 : (uint)0, index };
         }
         #endregion
     }

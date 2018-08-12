@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Trezor.Manager
+namespace Trezor.Net
 {
     [Serializable]
     public class FailureException<T> : Exception

@@ -1,10 +1,10 @@
-﻿using Hid.Net;
-using System;
+﻿using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hid.Net;
 
-namespace Trezor.Manager
+namespace Trezor.Net
 {
     public class TrezorManager : TrezorManagerBase
     {
@@ -111,7 +111,7 @@ namespace Trezor.Manager
                     isSegwit = coinType != null && coinType.Segwit;
                 }
 
-                var path = GetAddressPath(isSegwit.Value, account, isChange, index, coinNumber);
+                var path = ManagerHelpers.GetAddressPath(isSegwit.Value, account, isChange, index, coinNumber);
 
                 switch (addressType)
                 {

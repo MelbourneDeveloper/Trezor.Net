@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Trezor.Manager
+namespace Trezor.Net
 {
     public delegate Task<string> EnterPinArgs();
 }

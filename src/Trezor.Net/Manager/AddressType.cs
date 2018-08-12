@@ -1,4 +1,4 @@
-﻿namespace Trezor.Manager
+﻿namespace Trezor.Net
 {
     public enum AddressType
     {
