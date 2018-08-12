@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class WordRequest
     {
         [ProtoMember(1, Name = @"type")]

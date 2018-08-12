@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class RecoveryDevice
     {
         [ProtoMember(1, Name = @"word_count")]

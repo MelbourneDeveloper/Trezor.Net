@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class TxRequestDetailsType
     {
         [ProtoMember(1, Name = @"request_index")]

@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class EncryptedMessage 
     {
         [ProtoMember(1, Name = @"nonce")]

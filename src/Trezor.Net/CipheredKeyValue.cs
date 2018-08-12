@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class CipheredKeyValue
     {
         [ProtoMember(1, Name = @"value")]

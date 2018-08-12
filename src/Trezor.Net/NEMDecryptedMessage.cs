@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class NEMDecryptedMessage
     {
         [ProtoMember(1, Name = @"payload")]

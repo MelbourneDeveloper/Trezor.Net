@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public enum NEMImportanceTransferMode
     {
         [ProtoEnum(Name = @"ImportanceTransfer_Activate")]

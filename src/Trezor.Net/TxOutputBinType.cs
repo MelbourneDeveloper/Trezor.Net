@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class TxOutputBinType
     {
         [ProtoMember(1, Name = @"amount", IsRequired = true)]

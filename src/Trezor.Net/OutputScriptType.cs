@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public enum OutputScriptType
     {
         [ProtoEnum(Name = @"PAYTOADDRESS")]

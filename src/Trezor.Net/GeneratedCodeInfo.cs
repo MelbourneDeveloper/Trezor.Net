@@ -4,6 +4,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class GeneratedCodeInfo
     {
         [ProtoMember(1, Name = @"annotation")]

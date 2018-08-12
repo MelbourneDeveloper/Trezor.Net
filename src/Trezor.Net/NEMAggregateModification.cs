@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class NEMAggregateModification
     {
         [ProtoMember(1, Name = @"modifications")]

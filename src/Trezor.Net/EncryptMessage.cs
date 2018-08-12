@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class EncryptMessage
     {
         [ProtoMember(1, Name = @"pubkey")]

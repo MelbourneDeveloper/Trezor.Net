@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class ApplyFlags
     {
         [ProtoMember(1, Name = @"flags")]

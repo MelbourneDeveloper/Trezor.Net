@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class ECDHSessionKey
     {
         [ProtoMember(1, Name = @"session_key")]

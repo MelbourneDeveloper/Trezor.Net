@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class DebugLinkMemoryWrite
     {
         [ProtoMember(1, Name = @"address")]

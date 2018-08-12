@@ -4,6 +4,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class DescriptorProto
     {
         [ProtoMember(1, Name = @"name")]

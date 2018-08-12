@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public static class Extensions
     {
         public static bool GetWireIn(this EnumValueOptions obj)

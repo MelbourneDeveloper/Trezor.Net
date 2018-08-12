@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class SelfTest
     {
         [ProtoMember(1, Name = @"payload")]

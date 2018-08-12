@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class EthereumVerifyMessage
     {
         [ProtoMember(1, Name = @"address")]

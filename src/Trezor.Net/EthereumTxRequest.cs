@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class EthereumTxRequest
     {
         [ProtoMember(1, Name = @"data_length")]

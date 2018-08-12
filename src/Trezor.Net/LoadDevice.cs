@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class LoadDevice
     {
         [ProtoMember(1, Name = @"mnemonic")]

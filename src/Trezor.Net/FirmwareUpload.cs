@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class FirmwareUpload
     {
         [ProtoMember(1, Name = @"payload", IsRequired = true)]

@@ -4,6 +4,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class UninterpretedOption
     {
         [ProtoMember(2, Name = @"name")]

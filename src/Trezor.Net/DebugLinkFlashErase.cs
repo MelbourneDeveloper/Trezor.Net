@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class DebugLinkFlashErase
     {
         [ProtoMember(1, Name = @"sector")]

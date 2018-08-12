@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class GetECDHSessionKey
     {
         [ProtoMember(1, Name = @"identity")]

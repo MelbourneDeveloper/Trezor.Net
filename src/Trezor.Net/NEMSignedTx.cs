@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class NEMSignedTx
     {
         [ProtoMember(1, Name = @"data")]

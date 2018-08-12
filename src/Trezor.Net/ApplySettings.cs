@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class ApplySettings
     {
         [ProtoMember(1, Name = @"language")]

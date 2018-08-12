@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class DebugLinkLog
     {
         [ProtoMember(1, Name = @"level")]

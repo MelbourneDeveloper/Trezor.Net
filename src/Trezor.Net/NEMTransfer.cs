@@ -4,6 +4,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class NEMTransfer
     {
         [ProtoMember(1, Name = @"recipient")]

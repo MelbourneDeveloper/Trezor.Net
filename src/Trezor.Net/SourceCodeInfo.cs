@@ -4,6 +4,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class SourceCodeInfo
     {
         [ProtoMember(1, Name = @"location")]

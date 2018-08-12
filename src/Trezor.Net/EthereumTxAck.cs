@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class EthereumTxAck
     {
         [ProtoMember(1, Name = @"data_chunk")]

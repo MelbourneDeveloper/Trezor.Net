@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class ChangePin
     {
         [ProtoMember(1, Name = @"remove")]

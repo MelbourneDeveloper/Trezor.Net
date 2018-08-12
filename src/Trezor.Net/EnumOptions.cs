@@ -4,6 +4,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class EnumOptions : IExtensible
     {
         private IExtension __pbn__extensionData;

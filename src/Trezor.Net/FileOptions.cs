@@ -5,6 +5,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class FileOptions : IExtensible
     {
         private IExtension __pbn__extensionData;

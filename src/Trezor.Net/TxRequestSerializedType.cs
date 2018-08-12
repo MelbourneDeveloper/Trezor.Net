@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class TxRequestSerializedType
     {
         [ProtoMember(1, Name = @"signature_index")]

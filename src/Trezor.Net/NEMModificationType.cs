@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public enum NEMModificationType
     {
         [ProtoEnum(Name = @"CosignatoryModification_Add")]

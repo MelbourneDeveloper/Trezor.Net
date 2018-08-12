@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class NEMCosignatoryModification
     {
         [ProtoMember(1, Name = @"type")]

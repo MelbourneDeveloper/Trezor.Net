@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class NEMImportanceTransfer
     {
         [ProtoMember(1, Name = @"mode")]

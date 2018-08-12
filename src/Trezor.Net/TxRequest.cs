@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class TxRequest
     {
         [ProtoMember(1, Name = @"request_type")]

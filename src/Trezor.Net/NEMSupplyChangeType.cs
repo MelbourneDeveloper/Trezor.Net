@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public enum NEMSupplyChangeType
     {
         [ProtoEnum(Name = @"SupplyChange_Increase")]

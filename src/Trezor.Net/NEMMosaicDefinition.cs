@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class NEMMosaicDefinition
     {
         [ProtoMember(1, Name = @"name")]

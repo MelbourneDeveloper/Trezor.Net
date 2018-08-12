@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class TransactionType
     {
         [ProtoMember(1, Name = @"version")]

@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public enum NEMMosaicLevy
     {
         [ProtoEnum(Name = @"MosaicLevy_Absolute")]

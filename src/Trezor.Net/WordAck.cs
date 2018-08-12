@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class WordAck
     {
         [ProtoMember(1, Name = @"word", IsRequired = true)]

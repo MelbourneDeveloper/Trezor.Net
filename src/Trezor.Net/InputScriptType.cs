@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public enum InputScriptType
     {
         [ProtoEnum(Name = @"SPENDADDRESS")]

@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class TxInputType
     {
         [ProtoMember(1, Name = @"address_n")]

@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class FirmwareErase
     {
         [ProtoMember(1, Name = @"length")]

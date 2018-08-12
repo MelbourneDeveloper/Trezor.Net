@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class MethodDescriptorProto
     {
         [ProtoMember(1, Name = @"name")]

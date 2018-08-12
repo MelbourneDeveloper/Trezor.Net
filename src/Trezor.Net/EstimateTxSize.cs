@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class EstimateTxSize
     {
         [ProtoMember(1, Name = @"outputs_count", IsRequired = true)]

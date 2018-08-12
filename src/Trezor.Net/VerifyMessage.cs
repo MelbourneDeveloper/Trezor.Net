@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class VerifyMessage
     {
         [ProtoMember(1, Name = @"address")]

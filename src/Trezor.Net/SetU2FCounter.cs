@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class SetU2FCounter
     {
         [ProtoMember(1, Name = @"u2f_counter")]

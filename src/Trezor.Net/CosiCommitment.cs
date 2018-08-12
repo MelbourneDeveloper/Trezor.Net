@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class CosiCommitment
     {
         [ProtoMember(1, Name = @"commitment")]

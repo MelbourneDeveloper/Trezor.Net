@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class NEMProvisionNamespace
     {
         [ProtoMember(1, Name = @"namespace")]

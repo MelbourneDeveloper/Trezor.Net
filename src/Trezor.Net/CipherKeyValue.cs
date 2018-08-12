@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class CipherKeyValue
     {
         [ProtoMember(1, Name = @"address_n")]

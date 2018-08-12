@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class OneofOptions : IExtensible
     {
         private IExtension __pbn__extensionData;

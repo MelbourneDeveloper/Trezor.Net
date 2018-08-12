@@ -4,6 +4,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class MessageOptions : IExtensible
     {
         private IExtension __pbn__extensionData;

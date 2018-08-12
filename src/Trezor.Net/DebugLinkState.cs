@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class DebugLinkState
     {
         [ProtoMember(1, Name = @"layout")]

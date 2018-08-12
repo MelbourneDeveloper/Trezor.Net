@@ -4,6 +4,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class SimpleSignTx
     {
         [ProtoMember(1, Name = @"inputs")]

@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class SignedIdentity
     {
         [ProtoMember(1, Name = @"address")]

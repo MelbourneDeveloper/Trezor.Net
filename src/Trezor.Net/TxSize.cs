@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class TxSize
     {
         [ProtoMember(1)]

@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class EnumValueDescriptorProto
     {
         [ProtoMember(1, Name = @"name")]

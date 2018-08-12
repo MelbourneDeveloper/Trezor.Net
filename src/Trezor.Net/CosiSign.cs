@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class CosiSign
     {
         [ProtoMember(1, Name = @"address_n")]

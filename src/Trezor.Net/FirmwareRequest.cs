@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public class FirmwareRequest
     {
         [ProtoMember(1, Name = @"offset")]

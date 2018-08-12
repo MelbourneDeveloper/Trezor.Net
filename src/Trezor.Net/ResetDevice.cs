@@ -3,6 +3,7 @@ using ProtoBuf;
 
 namespace Trezor
 {
+    [ProtoContract]
     public class ResetDevice
     {
         [ProtoMember(1, Name = @"display_random")]

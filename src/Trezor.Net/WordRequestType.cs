@@ -2,6 +2,7 @@
 
 namespace Trezor
 {
+    [ProtoContract]
     public enum WordRequestType
     {
         [ProtoEnum(Name = @"WordRequestType_Plain")]
