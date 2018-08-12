@@ -89,6 +89,8 @@ namespace TrezorTestApp
                     var ethAddress = await trezorManager.GetAddressAsync("ETH", 60, false, 0, true, AddressType.Ethereum);
                     Console.WriteLine($"First ETH address: {ethAddress}");
 
+                    var txMessage = new EthereumSignTx { AddressNs =  }
+
                     //trezorManager.SendMessageAsync<EthereumSignTx>(new EthereumSignTx { AddressNs });
 
                     Console.WriteLine("All good");

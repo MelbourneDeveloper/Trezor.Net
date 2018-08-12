@@ -1,7 +1,7 @@
 ﻿using System;
 using ProtoBuf;
 
-namespace Trezor.Manager
+namespace Trezor.Net
 {
     public enum MessageType
     {

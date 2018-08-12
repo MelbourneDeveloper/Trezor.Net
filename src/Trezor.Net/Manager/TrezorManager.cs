@@ -1,10 +1,10 @@
-﻿using Hid.Net;
-using System;
+﻿using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using hn = Hid.Net;
 
-namespace Trezor.Manager
+namespace Trezor.Net
 {
     public class TrezorManager : TrezorManagerBase
     {
@@ -28,7 +28,7 @@ namespace Trezor.Manager
         #endregion
 
         #region Constructor
-        public TrezorManager(EnterPinArgs enterPinCallback, IHidDevice trezorHidDevice) : base(enterPinCallback, trezorHidDevice)
+        public TrezorManager(EnterPinArgs enterPinCallback, hn.IHidDevice trezorHidDevice) : base(enterPinCallback, trezorHidDevice)
         {
         }
         #endregion
@@ -111,7 +111,7 @@ namespace Trezor.Manager
                     isSegwit = coinType != null && coinType.Segwit;
                 }
 
-                var path = GetAddressPath(isSegwit.Value, account, isChange, index, coinNumber);
+                var path = Helpers.GetAddressPath(isSegwit.Value, account, isChange, index, coinNumber);
 
                 switch (addressType)
                 {
@@ -141,7 +141,7 @@ namespace Trezor.Manager
             }
             catch (Exception ex)
             {
-                Logger.Log("Error Getting Trezor Address", ex, LogSection);
+                hn.Logger.Log("Error Getting Trezor Address", ex, LogSection);
                 throw;
             }
         }
