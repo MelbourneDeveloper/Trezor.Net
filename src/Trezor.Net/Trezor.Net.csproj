@@ -6,7 +6,7 @@
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>1.3.0</Version>
+    <Version>1.4.0</Version>
     <Authors>Christian Findlay</Authors>
     <Company>Christian Findlay</Company>
     <Description>A cross platform library for communicating with the Satoshi Labs' Trezor Hardware Wallet
@@ -17,10 +17,10 @@ Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for ot
     <PackageProjectUrl>https://github.com/MelbourneDeveloper/Trezor.Net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MelbourneDeveloper/Trezor.Net</RepositoryUrl>
     <PackageTags>Hid Trezor Hardwarewallet Bitcoin Ethereum SatoshiLabs KeepKey</PackageTags>
-    <AssemblyVersion>1.3.0.0</AssemblyVersion>
-    <FileVersion>1.3.0.0</FileVersion>
-    <PackageReleaseNotes>Introduce thread safey (first in, first out async locking with SemaphoreSlim)
-Abstraction for wallets with the same protocol as Trezor like KeepKey (See KeepKey.Net)</PackageReleaseNotes>
+    <AssemblyVersion>1.4.0.0</AssemblyVersion>
+    <FileVersion>1.4.0.0</FileVersion>
+    <PackageReleaseNotes>BREAKING CHANGE. Main namespace moved from Trezor.Manager -&gt; Trezor.Net.
+Add missing Protobuf contracts. All are implemented now.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
