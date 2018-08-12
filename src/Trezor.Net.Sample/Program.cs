@@ -3,9 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Trezor;
-using Trezor.Manager;
-using static Trezor.Manager.TrezorManager;
+using Trezor.Net;
 
 namespace TrezorTestApp
 {
@@ -39,7 +37,7 @@ namespace TrezorTestApp
 
             DeviceInformation trezorDeviceInformation;
 
-            trezorDeviceInformation = trezors.FirstOrDefault(t => t.Product == USBOneName);
+            trezorDeviceInformation = trezors.FirstOrDefault(t => t.Product == TrezorManager.USBOneName);
 
             if (trezorDeviceInformation == null)
             {
@@ -89,7 +87,7 @@ namespace TrezorTestApp
                     var ethAddress = await trezorManager.GetAddressAsync("ETH", 60, false, 0, true, AddressType.Ethereum);
                     Console.WriteLine($"First ETH address: {ethAddress}");
 
-                    var txMessage = new EthereumSignTx { AddressNs =  }
+                    //var txMessage = new EthereumSignTx { AddressNs =  }
 
                     //trezorManager.SendMessageAsync<EthereumSignTx>(new EthereumSignTx { AddressNs });
 
