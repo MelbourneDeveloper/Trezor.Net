@@ -91,6 +91,11 @@ namespace TrezorTestApp
                         var ethAddress = await trezorManager.GetAddressAsync("ETH", 60, false, 0, false, AddressType.Ethereum);
                         Console.WriteLine($"First ETH address: {ethAddress}");
 
+                        //This fails with 'Safety check failed'
+                        //See https://github.com/trezor/trezor-mcu/issues/143
+                        //https://github.com/trezor/trezor-mcu/blob/master/firmware/ethereum.c
+                        //Which values here need leading zeros? Is Unicode the correct encoding?
+
                         //var txMessage = new EthereumSignTx
                         //{
                         //    AddressNs = ManagerHelpers.GetAddressPath(false, 0, false, 0, 60),
