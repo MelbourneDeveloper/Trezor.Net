@@ -87,9 +87,9 @@ namespace Trezor.Net
         /// <summary>
         /// Get the Trezor's public key at the specified index.
         /// </summary>
-        public async Task<PublicKey> GetPublicKeyAsync(string coinShortcut, uint addressNumber)
+        public Task<PublicKey> GetPublicKeyAsync(string coinShortcut, uint addressNumber)
         {
-            return await SendMessageAsync<PublicKey, GetPublicKey>(new GetPublicKey { CoinName = GetCoinType(coinShortcut).CoinName, AddressNs = new[] { addressNumber } });
+            return SendMessageAsync<PublicKey, GetPublicKey>(new GetPublicKey { CoinName = GetCoinType(coinShortcut).CoinName, AddressNs = new[] { addressNumber } });
         }
         #endregion
 
