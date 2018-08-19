@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hid.Net;
@@ -80,7 +79,7 @@ namespace Trezor.Net
                 throw new Exception("The Trezor has not been successfully initialised.");
             }
 
-            return Features.Coins.FirstOrDefault(c => c.CoinShortcut == coinShortcut);
+            return Features.Coins.Find(c => c.CoinShortcut == coinShortcut);
         }
         #endregion
 
@@ -104,11 +103,11 @@ namespace Trezor.Net
             try
             {
                 //ETH and ETC don't appear here so we have to hard code these not to be segwit
-                var coinType = Features.Coins.FirstOrDefault(c => c.CoinShortcut.ToLower() == coinShortcut.ToLower());
+                var coinType = Features.Coins.Find(c => string.Equals(c.CoinShortcut, coinShortcut, StringComparison.OrdinalIgnoreCase));
 
                 if (isSegwit == null)
                 {
-                    isSegwit = coinType != null && coinType.Segwit;
+                    isSegwit = coinType?.Segwit == true;
                 }
 
                 var path = ManagerHelpers.GetAddressPath(isSegwit.Value, account, isChange, index, coinNumber);
