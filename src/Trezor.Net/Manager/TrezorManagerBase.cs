@@ -32,16 +32,16 @@ namespace Trezor.Net
         #endregion
 
         #region Fields
-        private IHidDevice _HidDevice;
+        private readonly IHidDevice _HidDevice;
         private int _InvalidChunksCounter;
         private readonly EnterPinArgs _EnterPinCallback;
         protected SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
-        private string LogSection = nameof(TrezorManagerBase);
+        private readonly string LogSection = nameof(TrezorManagerBase);
         #endregion
 
         #region Private Static Fields
         private static Assembly[] _Assemblies;
-        private static Dictionary<string, Type> _ContractsByName = new Dictionary<string, Type>();
+        private static readonly Dictionary<string, Type> _ContractsByName = new Dictionary<string, Type>();
         #endregion
 
         #region Public Properties
@@ -54,7 +54,7 @@ namespace Trezor.Net
         #endregion
 
         #region Constructor
-        public TrezorManagerBase(EnterPinArgs enterPinCallback, IHidDevice hidDevice)
+        protected TrezorManagerBase(EnterPinArgs enterPinCallback, IHidDevice hidDevice)
         {
             //TODO: Move this to the point when the device is connected
             if (hidDevice != null)
@@ -94,7 +94,7 @@ namespace Trezor.Net
         /// <returns>The result</returns>
         public async Task<TReadMessage> SendMessageAsync<TReadMessage, TWriteMessage>(TWriteMessage message)
         {
-            if (!HasFeatures && !(IsInitialize(message)))
+            if (!HasFeatures && !IsInitialize(message))
             {
                 throw new Exception("The Trezor has not been successfully initialised.");
             }
@@ -297,7 +297,6 @@ namespace Trezor.Net
             Logger.Log($"Read: {msg}", null, LogSection);
 
             return msg;
-
         }
 
         private object Deserialize(MessageType messageType, byte[] data)
