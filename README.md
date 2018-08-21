@@ -29,6 +29,14 @@ https://www.microsoft.com/en-au/p/hardfolio/9p8xx70n5d2j
 Google Play
 https://play.google.com/store/apps/details?id=com.Hardfolio
 
+## Donate
+
+Bitcoin: 33LrG1p81kdzNUHoCnsYGj6EHRprTKWu3U
+
+Ethereum: 0x7ba0ea9975ac0efb5319886a287dcf5eecd3038e
+
+Litecoin: MVAbLaNPq7meGXvZMU4TwypUsDEuU6stpY
+
 ## Hid.Net
 
 Trezor.Net is based on Hid.Net. You can see the repo for this library here:
