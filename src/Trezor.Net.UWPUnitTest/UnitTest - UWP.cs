@@ -21,8 +21,12 @@ namespace Trezor.Net.UWPUnitTest
         {
             var taskCompletionSource = new TaskCompletionSource<IHidDevice>();
             var trezorHidDevice = new UWPHidDevice();
-            new UWPHidDevicePoller(TrezorManager.TrezorProductId, TrezorManager.TrezorVendorId, trezorHidDevice);
-            trezorHidDevice.Connected += (a, b) => taskCompletionSource.SetResult(trezorHidDevice);
+            var poller = new UWPHidDevicePoller(TrezorManager.TrezorProductId, TrezorManager.TrezorVendorId, trezorHidDevice);
+            trezorHidDevice.Connected += (a, b) =>
+            {
+                poller.Stop();
+                taskCompletionSource.SetResult(trezorHidDevice);
+            };
             return await taskCompletionSource.Task;
         }
 
