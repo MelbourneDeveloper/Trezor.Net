@@ -1,10 +1,15 @@
 # Trezor.Net
 
-## Getting Started
+## Quick Start
 
 - Clone the repo and open the solution
-- There is a sample/unit test app there called Trezor.Net.Sample
-- This sample is a .NET Core console app and shows you how to get addresses
+- There is a console sample, unit tests for UWP, and .NET
+- Compile one of the unit test apps
+- Go to Test->Windows->Text Explorer in Visual Studio
+- Run one of the unit tests in the pane.
+- Note that the UWP unit test has a UI for entering the pin. Please read instructions there. 
+
+These samples only show you how to get addresses, but samples for other messages will be added soon.
 
 Note: not all messages have a public method, but all messages exist. If you want to send a message to the Trezor you need to construct the message object and send it to the Trezor with the SendMessageAsync method. This requires that you know the result type before calling.
 
