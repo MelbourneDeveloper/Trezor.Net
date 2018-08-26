@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trezor.Net.Sample", "Trezor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trezor.Net.UWPUnitTest", "Trezor.Net.UWPUnitTest\Trezor.Net.UWPUnitTest.csproj", "{97924306-CC9E-4D40-B121-1040ECE2347E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trezor.Net.NETCoreUnitTest", "Trezor.Net.NETCoreUnitTest\Trezor.Net.NETCoreUnitTest.csproj", "{30B817B7-F9E5-4162-A0A8-B11112F3C96A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trezor.Net.NETCoreUnitTest", "Trezor.Net.NETCoreUnitTest\Trezor.Net.NETCoreUnitTest.csproj", "{30B817B7-F9E5-4162-A0A8-B11112F3C96A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +56,8 @@ Global
 		{488A29B9-D291-4733-BDBE-9FD1EE26B4E5}.Release|x86.ActiveCfg = Release|Any CPU
 		{488A29B9-D291-4733-BDBE-9FD1EE26B4E5}.Release|x86.Build.0 = Release|Any CPU
 		{97924306-CC9E-4D40-B121-1040ECE2347E}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{97924306-CC9E-4D40-B121-1040ECE2347E}.Debug|Any CPU.Build.0 = Debug|x86
+		{97924306-CC9E-4D40-B121-1040ECE2347E}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{97924306-CC9E-4D40-B121-1040ECE2347E}.Debug|ARM.ActiveCfg = Debug|ARM
 		{97924306-CC9E-4D40-B121-1040ECE2347E}.Debug|ARM.Build.0 = Debug|ARM
 		{97924306-CC9E-4D40-B121-1040ECE2347E}.Debug|ARM.Deploy.0 = Debug|ARM

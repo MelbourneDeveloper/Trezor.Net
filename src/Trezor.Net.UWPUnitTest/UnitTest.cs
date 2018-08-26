@@ -10,6 +10,7 @@ namespace Trezor.Net.UWPUnitTest
         [TestMethod]
         public void TestMethod1()
         {
+            var text = App.PinTextBox.Text;
         }
     }
 }
