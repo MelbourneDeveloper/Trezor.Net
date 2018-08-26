@@ -12,9 +12,13 @@ namespace Trezor.Net.UWPUnitTest
     /// </summary>
     internal sealed partial class App : Application
     {
+        #region Events
+        public static event EventHandler PinSelected;
+        #endregion  
+
         #region Public Static Properties
         public static string Pin { get; private set; }
-        #endregion
+        #endregion        
 
         #region Fields
         private TextBox PinTextBox = new TextBox { Margin = new Thickness(2), Width = 200, Height = 50, FontSize = 30 };
@@ -40,6 +44,7 @@ namespace Trezor.Net.UWPUnitTest
         private void PinButton_Click(object sender, RoutedEventArgs e)
         {
             Pin = PinTextBox.Text;
+            PinSelected?.Invoke(this, new EventArgs());
         }
 
         /// <summary>

@@ -1,7 +1,5 @@
-﻿
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Trezor.Net.UWPUnitTest
 {
@@ -9,8 +7,15 @@ namespace Trezor.Net.UWPUnitTest
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public async Task GetPin()
         {
+            var pinCompletionSource = new TaskCompletionSource<string>();
+            App.PinSelected += (a, b) =>
+            {
+                pinCompletionSource.SetResult(App.Pin);
+            };
+            var pin = await pinCompletionSource.Task;
+            System.Diagnostics.Debug.WriteLine(pin);
         }
     }
 }
