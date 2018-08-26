@@ -102,7 +102,7 @@ namespace Trezor.Net
             {
                 var response = await SendMessageAsync(message);
 
-                while (true)
+                for (var i = 0; i < 10; i++)
                 {
                     if (IsPinMatrixRequest(response))
                     {
@@ -129,6 +129,8 @@ namespace Trezor.Net
                         return readMessage;
                     }
                 }
+
+                throw new ManagerException("User did not accept the message or pin was entered incorrectly too many times (Note: this library does not have an incorrect pin safety mechanism.)");
             }
             finally
             {
