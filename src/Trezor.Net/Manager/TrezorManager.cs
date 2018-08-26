@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Hid.Net;
+using System;
 using System.Text;
 using System.Threading.Tasks;
-using Hid.Net;
 
 namespace Trezor.Net
 {
@@ -66,7 +66,7 @@ namespace Trezor.Net
 
             if (retVal is Failure failure)
             {
-                throw new FailureException<Failure>("PIN Attempt Failed.", failure);
+                throw new FailureException<Failure>("USer didn't push the button.", failure);
             }
 
             return retVal;
@@ -102,6 +102,8 @@ namespace Trezor.Net
         {
             try
             {
+                ValidateInitialization(null);
+
                 //ETH and ETC don't appear here so we have to hard code these not to be segwit
                 var coinType = Features.Coins.Find(c => string.Equals(c.CoinShortcut, coinShortcut, StringComparison.OrdinalIgnoreCase));
 
