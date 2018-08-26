@@ -1,6 +1,7 @@
 ﻿using Hid.Net;
 using Hid.Net.UWP;
 using System.Threading.Tasks;
+using Trezor.Net.UWPUnitTest;
 
 namespace Trezor.Net
 {
