@@ -3,11 +3,11 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Trezor.Net.NETCoreUnitTest
+namespace Trezor.Net
 {
-    class Helpers
+    public partial class UnitTest
     {
-        private static async Task<IHidDevice> Connect()
+        private async Task<IHidDevice> Connect()
         {
             DeviceInformation trezorDeviceInformation = null;
 

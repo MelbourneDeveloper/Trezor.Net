@@ -2,7 +2,7 @@
 using Hid.Net.UWP;
 using System.Threading.Tasks;
 
-namespace Trezor.Net.UWPUnitTest
+namespace Trezor.Net
 {
     public partial class UnitTest
     {

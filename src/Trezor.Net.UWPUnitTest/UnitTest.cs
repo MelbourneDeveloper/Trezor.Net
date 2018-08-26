@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 
-namespace Trezor.Net.UWPUnitTest
+namespace Trezor.Net
 {
     [TestClass]
     public partial class UnitTest
