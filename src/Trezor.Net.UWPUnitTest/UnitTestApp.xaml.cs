@@ -12,6 +12,16 @@ namespace Trezor.Net.UWPUnitTest
     /// </summary>
     internal sealed partial class App : Application
     {
+        #region Public Static Properties
+        public static string Pin { get; private set; }
+        #endregion
+
+        #region Fields
+        private TextBox PinTextBox = new TextBox { Margin = new Thickness(2), Width = 200, Height = 50, FontSize = 30 };
+        private Button PinButton = new Button { Content = "OK" };
+        private StackPanel StackPanel = new StackPanel { Orientation = Orientation.Vertical, HorizontalAlignment= HorizontalAlignment.Center, VerticalAlignment= VerticalAlignment.Center };
+        #endregion
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -20,9 +30,17 @@ namespace Trezor.Net.UWPUnitTest
         {
             InitializeComponent();
             Suspending += OnSuspending;
+
+            StackPanel.Children.Add(PinTextBox);
+            StackPanel.Children.Add(PinButton);
+
+            PinButton.Click += PinButton_Click;
         }
 
-        public static TextBox PinTextBox = new TextBox { Margin = new Thickness(2), Width = 200, Height = 50, FontSize = 30 };
+        private void PinButton_Click(object sender, RoutedEventArgs e)
+        {
+            Pin = PinTextBox.Text;
+        }
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
@@ -55,7 +73,7 @@ namespace Trezor.Net.UWPUnitTest
                     //TODO: Load state from previously suspended application
                 }
 
-                rootFrame.Content = PinTextBox;
+                rootFrame.Content = StackPanel;
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
