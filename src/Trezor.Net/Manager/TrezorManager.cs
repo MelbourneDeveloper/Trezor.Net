@@ -66,7 +66,7 @@ namespace Trezor.Net
 
             if (retVal is Failure failure)
             {
-                throw new FailureException<Failure>("PIN Attempt Failed.", failure);
+                throw new FailureException<Failure>("USer didn't push the button.", failure);
             }
 
             return retVal;

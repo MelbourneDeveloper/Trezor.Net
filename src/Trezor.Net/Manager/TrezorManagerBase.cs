@@ -102,35 +102,33 @@ namespace Trezor.Net
             {
                 var response = await SendMessageAsync(message);
 
-                if (IsPinMatrixRequest(response))
+                while (true)
                 {
-                    var pin = await _EnterPinCallback.Invoke();
-                    var result = await PinMatrixAckAsync(pin);
-                    if (result is TReadMessage readMessage)
+                    if (IsPinMatrixRequest(response))
+                    {
+                        var pin = await _EnterPinCallback.Invoke();
+                        response = await PinMatrixAckAsync(pin);
+                        if (response is TReadMessage readMessage)
+                        {
+                            return readMessage;
+                        }
+                    }
+
+                    else if (IsButtonRequest(response))
+                    {
+                        response = await ButtonAckAsync();
+
+                        if (response is TReadMessage readMessage)
+                        {
+                            return readMessage;
+                        }
+                    }
+
+                    else if (response is TReadMessage readMessage)
                     {
                         return readMessage;
                     }
                 }
-                else if (IsButtonRequest(response))
-                {
-                    var retVal = await ButtonAckAsync();
-
-                    while (IsButtonRequest(response))
-                    {
-                        retVal = ButtonAckAsync();
-                    }
-
-                    if (retVal is TReadMessage readMessage)
-                    {
-                        return readMessage;
-                    }
-                }
-                else if (response is TReadMessage readMessage)
-                {
-                    return readMessage;
-                }
-
-                throw new NotImplementedException();
             }
             finally
             {
