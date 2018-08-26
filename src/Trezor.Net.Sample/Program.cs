@@ -34,21 +34,34 @@ namespace TrezorTestApp
         #region Private  Methods
         private static async Task<IHidDevice> Connect()
         {
-            var devices = WindowsHidDevice.GetConnectedDeviceInformations();
-            var trezors = devices.Where(d => d.VendorId == TrezorManager.TrezorVendorId && TrezorManager.TrezorProductId == 1);
+            DeviceInformation trezorDeviceInformation = null;
 
-            DeviceInformation trezorDeviceInformation;
+            WindowsHidDevice retVal = null;
 
-            trezorDeviceInformation = trezors.FirstOrDefault(t => t.Product == TrezorManager.USBOneName);
+            retVal = new WindowsHidDevice();
 
-            if (trezorDeviceInformation == null)
+            Console.Write("Waiting for Trezor .");
+
+            while (trezorDeviceInformation == null)
             {
-                throw new Exception("No Trezor is not connected or USB access was not granted to this application.");
+                var devices = WindowsHidDevice.GetConnectedDeviceInformations();
+                var trezors = devices.Where(d => d.VendorId == TrezorManager.TrezorVendorId && TrezorManager.TrezorProductId == 1).ToList();
+                trezorDeviceInformation = trezors.FirstOrDefault(t => t.Product == TrezorManager.USBOneName);
+
+                if (trezorDeviceInformation != null)
+                {
+                    break;
+                }
+
+                await Task.Delay(1000);
+                Console.Write(".");
             }
 
-            var retVal = new WindowsHidDevice(trezorDeviceInformation);
+            retVal.DeviceInformation = trezorDeviceInformation;
 
             await retVal.InitializeAsync();
+
+            Console.WriteLine("Connected");
 
             return retVal;
         }

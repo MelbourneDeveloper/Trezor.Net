@@ -56,13 +56,13 @@ namespace Trezor.Net
         #region Constructor
         protected TrezorManagerBase(EnterPinArgs enterPinCallback, IHidDevice hidDevice)
         {
-            //TODO: Move this to the point when the device is connected
-            if (hidDevice != null)
+            if (hidDevice == null)
             {
-                hidDevice.Connected += HidDevice_Connected;
+                throw new ArgumentNullException(nameof(hidDevice));
             }
 
-            //USBType Two not currently supported...
+            hidDevice.Connected += HidDevice_Connected;
+
             USBType = USBTypeEnum.One;
             _EnterPinCallback = enterPinCallback;
             _HidDevice = hidDevice;
