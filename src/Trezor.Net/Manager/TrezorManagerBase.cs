@@ -94,10 +94,7 @@ namespace Trezor.Net
         /// <returns>The result</returns>
         public async Task<TReadMessage> SendMessageAsync<TReadMessage, TWriteMessage>(TWriteMessage message)
         {
-            if (!HasFeatures && !IsInitialize(message))
-            {
-                throw new Exception("The Trezor has not been successfully initialised.");
-            }
+            ValidateInitialization(message);
 
             await _Lock.WaitAsync();
 
@@ -144,7 +141,10 @@ namespace Trezor.Net
         /// <summary>
         /// Check to see if the Trezor is connected to the device
         /// </summary>
-        public Task<bool> GetIsConnectedAsync() => _HidDevice.GetIsConnectedAsync();
+        public Task<bool> GetIsConnectedAsync()
+        {
+            return _HidDevice.GetIsConnectedAsync();
+        }
 
         public Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType)
         {
@@ -169,6 +169,14 @@ namespace Trezor.Net
         #endregion
 
         #region Private Methods
+        protected void ValidateInitialization(object message)
+        {
+            if (!HasFeatures && !IsInitialize(message))
+            {
+                throw new ManagerException($"The device has not been successfully initialised. Please call {nameof(InitializeAsync)}.");
+            }
+        }
+
         private async Task WriteAsync(object msg)
         {
             Logger.Log($"Write: {msg}", null, LogSection);

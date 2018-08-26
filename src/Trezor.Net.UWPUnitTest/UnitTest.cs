@@ -10,7 +10,9 @@ namespace Trezor.Net.UWPUnitTest
         public async Task GetAddress()
         {
             var trezorHidDevice = await Connect();
-            string pin = await GetPin();
+            var trezorManager = new TrezorManager(GetPin, trezorHidDevice);
+            await trezorManager.InitializeAsync();
+            var address = await trezorManager.GetAddressAsync("BTC", 0, false, 0, true, AddressType.Bitcoin);
         }
     }
 }
