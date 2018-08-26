@@ -4,18 +4,13 @@ using System.Threading.Tasks;
 namespace Trezor.Net.UWPUnitTest
 {
     [TestClass]
-    public class UnitTest1
+    public partial class UnitTest
     {
         [TestMethod]
-        public async Task GetPin()
+        public async Task GetAddress()
         {
-            var pinCompletionSource = new TaskCompletionSource<string>();
-            App.PinSelected += (a, b) =>
-            {
-                pinCompletionSource.SetResult(App.Pin);
-            };
-            var pin = await pinCompletionSource.Task;
-            System.Diagnostics.Debug.WriteLine(pin);
+            var trezorHidDevice = await Connect();
+            string pin = await GetPin();
         }
     }
 }
