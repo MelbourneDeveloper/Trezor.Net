@@ -24,9 +24,9 @@ Install-Package Trezor.Net
 - Android
 - UWP 
 
-## More Samples
+## Live App
 
-More samples are coming. Meantime, you can see the library in action in the app Hardfolio:
+You can see the library in action in the app Hardfolio:
 
 Windows Store
 https://www.microsoft.com/en-au/p/hardfolio/9p8xx70n5d2j
