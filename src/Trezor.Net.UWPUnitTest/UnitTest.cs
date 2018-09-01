@@ -52,12 +52,14 @@ namespace Trezor.Net
 
             var txMessage = new EthereumSignTx
             {
-                Nonce = 0.ToHexBytes(),
-                GasPrice = 1000.ToHexBytes(),
-                GasLimit = 21000.ToHexBytes(),
+                //13D = 317
+                Nonce = "1".ToHexBytes(),
+                GasPrice = "3b9aca00".ToHexBytes(),
+                GasLimit = "5208".ToHexBytes(),
                 To = "689c56aef474df92d44a1b70850f808488f9769c".ToHexBytes(),
-                Value = 1000.ToHexBytes(),
+                Value = "1".ToHexBytes(),
                 AddressNs = ManagerHelpers.GetAddressPath(false, 0, false, 0, 60),
+                ChainId = 1
             };
 
             var transaction = await TrezorManager.SendMessageAsync<EthereumTxRequest, EthereumSignTx>(txMessage);
