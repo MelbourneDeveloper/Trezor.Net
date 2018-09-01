@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Xamarin.Forms.Xaml;
 
-namespace Hardfolio.Pages
+namespace Trezor.Net.XamarinFormsSample
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TrezorPinPad
@@ -20,8 +20,6 @@ namespace Hardfolio.Pages
             async void CompletedHandler(object s, EventArgs args)
             {
                 await App.MainNavigationPage.Navigation.PopAsync();
-
-                App.CurrentApp.NavigateBackToIndex();
 
                 taskCompletionSource.SetResult(trezorPinPad.Pin);
             }
