@@ -20,12 +20,13 @@ namespace Trezor.Net.XamarinFormsSample
             InitializeComponent();
             trezorHidDevice.Connected += TrezorHidDevice_Connected;
             _MainPage = new MainPage();
-            MainPage = _MainPage;
+            var mainNavigationPage = new NavigationPage(_MainPage);
+            MainPage = mainNavigationPage; 
         }
 
         private async void TrezorHidDevice_Connected(object sender, System.EventArgs e)
         {
-            _MainPage.DisplayAddressAsync();
+            await _MainPage.DisplayAddressAsync();
         }
 
         protected override void OnStart()
