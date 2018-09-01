@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Trezor.Net.XamarinFormsSample
@@ -12,6 +8,12 @@ namespace Trezor.Net.XamarinFormsSample
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        internal async Task DisplayAddressAsync()
+        {
+            var app = Application.Current as App;
+            TheLabel.Text = await app.TezorManager.GetAddressAsync("BTC", 0, false, 0, false, AddressType.Bitcoin);
         }
     }
 }

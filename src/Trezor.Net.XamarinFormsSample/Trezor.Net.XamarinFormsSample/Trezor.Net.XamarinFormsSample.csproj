@@ -17,4 +17,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Trezor.Net\Trezor.Net.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="TrezorPinPad.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

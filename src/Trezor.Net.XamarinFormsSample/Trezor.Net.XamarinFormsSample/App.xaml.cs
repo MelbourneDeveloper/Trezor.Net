@@ -7,13 +7,25 @@ namespace Trezor.Net.XamarinFormsSample
 {
     public partial class App : Application
     {
-        public IHidDevice TrezorHidDevice { get; set; }
+
+        private MainPage _MainPage;
+
+        public IHidDevice TrezorHidDevice { get; set; }       
+
+        public TrezorManager TezorManager { get; }
 
         public App(IHidDevice trezorHidDevice)
         {
-            TrezorHidDevice = trezorHidDevice;
+            TezorManager = new TrezorManager(null, trezorHidDevice);
             InitializeComponent();
-            MainPage = new MainPage();
+            TrezorHidDevice.Connected += TrezorHidDevice_Connected;
+            _MainPage = new MainPage();
+            MainPage = _MainPage;
+        }
+
+        private async void TrezorHidDevice_Connected(object sender, System.EventArgs e)
+        {
+            _MainPage.DisplayAddressAsync();
         }
 
         protected override void OnStart()
