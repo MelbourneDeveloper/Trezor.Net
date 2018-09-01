@@ -21,6 +21,10 @@ namespace Trezor.Net.XamarinFormsSample
             {
                 await App.MainNavigationPage.Navigation.PopAsync();
 
+                var currentApp = App.Current as App;
+
+                currentApp.NavigateBackToMainPage();
+
                 taskCompletionSource.SetResult(trezorPinPad.Pin);
             }
 
