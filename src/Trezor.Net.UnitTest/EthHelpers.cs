@@ -7,14 +7,14 @@ namespace Trezor.Net
     public static class EthHelpers
     {
         private const string Format = "X1";
-        private static Encoding Encoding = new UTF8Encoding();
+        private static readonly Encoding Encoding = new UTF8Encoding();
 
         public static string ToHexString(this IEnumerable<byte> bytes)
         {
             return bytes.Aggregate(string.Empty, (current, theByte) => current + theByte.ToString("X2"));
         }
 
-        public static byte[] ToEthBytes(this string ethString)
+        public static byte[] ToHexBytes(this string ethString)
         {
             var numberOfCharacters = ethString.Length / 2;
             var returnValue = new byte[numberOfCharacters];
@@ -29,7 +29,7 @@ namespace Trezor.Net
                 hexStringBuilder.Append(firstHexCharacter);
                 hexStringBuilder.Append(secondHexCharacter);
 
-                string hexString = hexStringBuilder.ToString();
+                var hexString = hexStringBuilder.ToString();
 
                 returnValue[i] = byte.Parse(hexString, System.Globalization.NumberStyles.HexNumber);
             }

@@ -56,11 +56,11 @@ namespace Trezor.Net
 
                 var txMessage = new EthereumSignTx
                 { 
-                    Nonce = 0.ToEthBytes(),
-                    GasPrice = ((long)2400000000).ToEthBytes(),
-                    GasLimit = 21000.ToEthBytes(),
-                    To = "689c56aef474df92d44a1b70850f808488f9769c".ToEthBytes(),
-                    Value = 1000.ToEthBytes(),
+                    Nonce = 0.ToHexBytes(),
+                    GasPrice = ((long)2400000000).ToHexBytes(),
+                    GasLimit = 21000.ToHexBytes(),
+                    To = "689c56aef474df92d44a1b70850f808488f9769c".ToHexBytes(),
+                    Value = 1000.ToHexBytes(),
                     AddressNs = ManagerHelpers.GetAddressPath(false, 0, false, 0, 60),
                 };
 
