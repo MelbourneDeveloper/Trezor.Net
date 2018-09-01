@@ -48,28 +48,22 @@ namespace Trezor.Net
         [TestMethod]
         public async Task SignEthereumTransaction()
         {
-            try
+            await GetAndInitialize();
+
+            var txMessage = new EthereumSignTx
             {
-                await GetAndInitialize();
+                Nonce = 0.ToHexBytes(),
+                GasPrice = 1000.ToHexBytes(),
+                GasLimit = 21000.ToHexBytes(),
+                To = "689c56aef474df92d44a1b70850f808488f9769c".ToHexBytes(),
+                Value = 1000.ToHexBytes(),
+                AddressNs = ManagerHelpers.GetAddressPath(false, 0, false, 0, 60),
+            };
 
-                var asdasd = "0x687422eEA2cB73B5d3e242bA5456b782919AFc85".Length;
+            var transaction = await TrezorManager.SendMessageAsync<EthereumTxRequest, EthereumSignTx>(txMessage);
 
-                var txMessage = new EthereumSignTx
-                { 
-                    Nonce = 0.ToHexBytes(),
-                    GasPrice = ((long)2400000000).ToHexBytes(),
-                    GasLimit = 21000.ToHexBytes(),
-                    To = "689c56aef474df92d44a1b70850f808488f9769c".ToHexBytes(),
-                    Value = 1000.ToHexBytes(),
-                    AddressNs = ManagerHelpers.GetAddressPath(false, 0, false, 0, 60),
-                };
-
-                var transaction = await TrezorManager.SendMessageAsync<EthereumTxRequest, EthereumSignTx>(txMessage);
-            }
-            catch (Exception ex)
-            {
-
-            }
+            Assert.AreEqual(transaction.SignatureR.Length, 32);
+            Assert.AreEqual(transaction.SignatureS.Length, 32);
         }
 
         private static async Task<string> GetAddress(int i, bool display)
