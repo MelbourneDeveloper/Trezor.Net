@@ -10,16 +10,15 @@ namespace Trezor.Net.XamarinFormsSample
 
         private MainPage _MainPage;
 
-        public IHidDevice TrezorHidDevice { get; set; }
         public static NavigationPage MainNavigationPage => Current.MainPage as NavigationPage;
 
-        public TrezorManager TezorManager { get; }
+        public TrezorManager TrezorManager { get; }
 
         public App(IHidDevice trezorHidDevice)
         {
-            TezorManager = new TrezorManager(TrezorPinPad.GetPin, trezorHidDevice);
+            TrezorManager = new TrezorManager(TrezorPinPad.GetPin, trezorHidDevice);
             InitializeComponent();
-            TrezorHidDevice.Connected += TrezorHidDevice_Connected;
+            trezorHidDevice.Connected += TrezorHidDevice_Connected;
             _MainPage = new MainPage();
             MainPage = _MainPage;
         }

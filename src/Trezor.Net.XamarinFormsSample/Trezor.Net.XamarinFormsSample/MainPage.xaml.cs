@@ -13,7 +13,7 @@ namespace Trezor.Net.XamarinFormsSample
         internal async Task DisplayAddressAsync()
         {
             var app = Application.Current as App;
-            TheLabel.Text = await app.TezorManager.GetAddressAsync("BTC", 0, false, 0, false, AddressType.Bitcoin);
+            TheLabel.Text = await app.TrezorManager.GetAddressAsync("BTC", 0, false, 0, false, AddressType.Bitcoin);
         }
     }
 }
