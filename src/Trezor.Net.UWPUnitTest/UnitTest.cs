@@ -64,7 +64,7 @@ namespace Trezor.Net
                     AddressNs = ManagerHelpers.GetAddressPath(false, 0, false, 0, 60),
                 };
 
-                var transaction = await TrezorManager.SendMessageAsync<EthereumSignMessage, EthereumSignTx>(txMessage);
+                var transaction = await TrezorManager.SendMessageAsync<EthereumTxRequest, EthereumSignTx>(txMessage);
             }
             catch (Exception ex)
             {
