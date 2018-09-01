@@ -4,11 +4,13 @@
              xmlns:local="clr-namespace:Trezor.Net.XamarinFormsSample"
              x:Class="Trezor.Net.XamarinFormsSample.MainPage">
 
-    <StackLayout>
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+
+        <ActivityIndicator x:Name="TheActivityIndicator" IsRunning="True" />
+
         <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+        <Label Text="Waiting For Trezor..." x:Name="TheLabel" />
+        
     </StackLayout>
 
 </ContentPage>
