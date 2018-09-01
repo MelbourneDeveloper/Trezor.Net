@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{C9E229B9-52B5-43AA-A6CE-211A9DD2434B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trezor.Net.XamarinFormsSample.Android", "Trezor.Net.XamarinFormsSample\Trezor.Net.XamarinFormsSample.Android\Trezor.Net.XamarinFormsSample.Android.csproj", "{4FCAC043-E704-4AED-A371-077E50A67DA4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trezor.Net.XamarinFormsSample.Android", "Trezor.Net.XamarinFormsSample\XFAS\Trezor.Net.XamarinFormsSample.Android.csproj", "{4FCAC043-E704-4AED-A371-077E50A67DA4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trezor.Net.XamarinFormsSample.UWP", "Trezor.Net.XamarinFormsSample\Trezor.Net.XamarinFormsSample.UWP\Trezor.Net.XamarinFormsSample.UWP.csproj", "{E228A094-964E-4CB1-9A35-4B52C20FEEA2}"
 EndProject
