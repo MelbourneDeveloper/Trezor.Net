@@ -1,27 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+﻿using Hid.Net;
+using Hid.Net.UWP;
+using System.Threading.Tasks;
+using app = Trezor.Net.XamarinFormsSample.App;
 
 namespace Trezor.Net.XamarinFormsSample.UWP
 {
     public sealed partial class MainPage
     {
+        UWPHidDevicePoller poller;
+
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            LoadApplication(new Trezor.Net.XamarinFormsSample.App());
+            var taskCompletionSource = new TaskCompletionSource<IHidDevice>();
+            var trezorHidDevice = new UWPHidDevice();
+            trezorHidDevice.Connected += TrezorHidDevice_Connected;
+            var poller = new UWPHidDevicePoller(TrezorManager.TrezorProductId, TrezorManager.TrezorVendorId, trezorHidDevice);
+            LoadApplication(new app(trezorHidDevice));
+        }
+
+        private void TrezorHidDevice_Connected(object sender, System.EventArgs e)
+        {
+            poller.Stop();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Hid.Net;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,10 +7,12 @@ namespace Trezor.Net.XamarinFormsSample
 {
     public partial class App : Application
     {
-        public App()
-        {
-            InitializeComponent();
+        public IHidDevice TrezorHidDevice { get; set; }
 
+        public App(IHidDevice trezorHidDevice)
+        {
+            TrezorHidDevice = trezorHidDevice;
+            InitializeComponent();
             MainPage = new MainPage();
         }
 

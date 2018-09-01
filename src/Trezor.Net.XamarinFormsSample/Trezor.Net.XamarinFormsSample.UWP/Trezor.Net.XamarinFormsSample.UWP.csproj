@@ -150,6 +150,10 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.7" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Trezor.Net\Trezor.Net.csproj">
+      <Project>{dda97f34-2e5e-481c-83dd-ee58e9e6aaf0}</Project>
+      <Name>Trezor.Net</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Trezor.Net.XamarinFormsSample\Trezor.Net.XamarinFormsSample.csproj">
       <Project>{BE89F552-DEE4-4851-B7D9-D4ACA7C24607}</Project>
       <Name>Trezor.Net.XamarinFormsSample</Name>
