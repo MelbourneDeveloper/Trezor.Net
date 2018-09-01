@@ -1,4 +1,5 @@
 ﻿using Hid.Net;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,6 +8,9 @@ namespace Trezor.Net.XamarinFormsSample
 {
     public partial class App : Application
     {
+        public static string Address;
+
+        public static event EventHandler GetAddress;
 
         private MainPage _MainPage;
 
@@ -24,18 +28,14 @@ namespace Trezor.Net.XamarinFormsSample
             MainPage = mainNavigationPage;
         }
 
-        internal void NavigateBackToMainPage()
+        private void TrezorHidDevice_Connected(object sender, System.EventArgs e)
         {
-            Device.BeginInvokeOnMainThread(() =>
+            Device.BeginInvokeOnMainThread(async () =>
             {
-                _MainPage = new MainPage();
-                MainNavigationPage.Navigation.PushModalAsync(_MainPage);
+                await TrezorManager.InitializeAsync();
+                Address = await TrezorManager.GetAddressAsync("BTC", 0, false, 0, false, AddressType.Bitcoin);
+                GetAddress?.Invoke(this, new EventArgs());
             });
-        }
-
-        private async void TrezorHidDevice_Connected(object sender, System.EventArgs e)
-        {
-            _MainPage.BeginGetAddress();
         }
 
         protected override void OnStart()

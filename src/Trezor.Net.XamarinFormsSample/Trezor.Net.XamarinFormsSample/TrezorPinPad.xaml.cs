@@ -19,11 +19,11 @@ namespace Trezor.Net.XamarinFormsSample
 
             async void CompletedHandler(object s, EventArgs args)
             {
-                await App.MainNavigationPage.Navigation.PopAsync();
+                await App.MainNavigationPage.Navigation.PopModalAsync();
 
                 var currentApp = App.Current as App;
 
-                currentApp.NavigateBackToMainPage();
+                //currentApp.NavigateBackToMainPage();
 
                 taskCompletionSource.SetResult(trezorPinPad.Pin);
             }

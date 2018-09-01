@@ -4,37 +4,31 @@ namespace Trezor.Net.XamarinFormsSample
 {
     public partial class MainPage : ContentPage
     {
-        private static string _Address;
 
         public MainPage()
         {
             InitializeComponent();
+            App.GetAddress += App_GetAddress;
+        }
+
+        private void App_GetAddress(object sender, System.EventArgs e)
+        {
+            DisplayAddress();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            if (!string.IsNullOrEmpty(_Address))
+            if (!string.IsNullOrEmpty(App.Address))
             {
                 DisplayAddress();
             }
         }
 
-        internal void BeginGetAddress()
-        {
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-                var app = Application.Current as App;
-                await app.TrezorManager.InitializeAsync();
-                _Address = await app.TrezorManager.GetAddressAsync("BTC", 0, false, 0, false, AddressType.Bitcoin);
-                DisplayAddress();
-            });
-        }
-
         private void DisplayAddress()
         {
-            TheLabel.Text = $"First Bitcoin Address: {_Address}";
+            TheLabel.Text = $"First Bitcoin Address: {App.Address}";
             TheActivityIndicator.IsRunning = false;
         }
     }
