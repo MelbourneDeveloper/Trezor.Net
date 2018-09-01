@@ -8,36 +8,43 @@ namespace Trezor.Net.XamarinFormsSample
 {
     public partial class App : Application
     {
+        #region Fields
+        private TrezorManager _TrezorManager;
+        #endregion
+
+        #region Public Static Propertoes
         public static string Address;
+        public static NavigationPage MainNavigationPage { get; private set; }
+        #endregion
 
+        #region Public Static Events
         public static event EventHandler GetAddress;
+        #endregion
 
-        private MainPage _MainPage;
-
-        public static NavigationPage MainNavigationPage => Current.MainPage as NavigationPage;
-
-        public TrezorManager TrezorManager { get; }
-
+        #region Constructor
         public App(IHidDevice trezorHidDevice)
         {
-            TrezorManager = new TrezorManager(TrezorPinPad.GetPin, trezorHidDevice);
+            _TrezorManager = new TrezorManager(TrezorPinPad.GetPin, trezorHidDevice);
             InitializeComponent();
             trezorHidDevice.Connected += TrezorHidDevice_Connected;
-            _MainPage = new MainPage();
-            var mainNavigationPage = new NavigationPage(_MainPage);
-            MainPage = mainNavigationPage;
+            MainNavigationPage = new NavigationPage(new MainPage());
+            MainPage = MainNavigationPage;
         }
+        #endregion
 
+        #region Event Handlers
         private void TrezorHidDevice_Connected(object sender, System.EventArgs e)
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
-                await TrezorManager.InitializeAsync();
-                Address = await TrezorManager.GetAddressAsync("BTC", 0, false, 0, false, AddressType.Bitcoin);
+                await _TrezorManager.InitializeAsync();
+                Address = await _TrezorManager.GetAddressAsync("BTC", 0, false, 0, false, AddressType.Bitcoin);
                 GetAddress?.Invoke(this, new EventArgs());
             });
         }
+        #endregion
 
+        #region Protected Overrides
         protected override void OnStart()
         {
             // Handle when your app starts
@@ -52,5 +59,6 @@ namespace Trezor.Net.XamarinFormsSample
         {
             // Handle when your app resumes
         }
+        #endregion
     }
 }

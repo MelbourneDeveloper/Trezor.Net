@@ -4,18 +4,15 @@ namespace Trezor.Net.XamarinFormsSample
 {
     public partial class MainPage : ContentPage
     {
-
+        #region Constructor
         public MainPage()
         {
             InitializeComponent();
             App.GetAddress += App_GetAddress;
         }
+        #endregion
 
-        private void App_GetAddress(object sender, System.EventArgs e)
-        {
-            DisplayAddress();
-        }
-
+        #region Protected Overrides
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -25,11 +22,22 @@ namespace Trezor.Net.XamarinFormsSample
                 DisplayAddress();
             }
         }
+        #endregion
+
+        #region Event Handlers
+        private void App_GetAddress(object sender, System.EventArgs e)
+        {
+            DisplayAddress();
+        }
+        #endregion
+
+        #region Private Methods
 
         private void DisplayAddress()
         {
             TheLabel.Text = $"First Bitcoin Address: {App.Address}";
             TheActivityIndicator.IsRunning = false;
         }
+        #endregion
     }
 }
