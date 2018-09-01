@@ -1,24 +1,41 @@
-﻿using System.Threading.Tasks;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Trezor.Net.XamarinFormsSample
 {
     public partial class MainPage : ContentPage
     {
+        private static string _Address;
+
         public MainPage()
         {
             InitializeComponent();
         }
 
-        internal async Task DisplayAddressAsync()
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (!string.IsNullOrEmpty(_Address))
+            {
+                DisplayAddress();
+            }
+        }
+
+        internal void BeginGetAddress()
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
                 var app = Application.Current as App;
                 await app.TrezorManager.InitializeAsync();
-                TheLabel.Text = $"First Bitcoin Address: {await app.TrezorManager.GetAddressAsync("BTC", 0, false, 0, false, AddressType.Bitcoin)}";
-                TheActivityIndicator.IsRunning = false;
+                _Address = await app.TrezorManager.GetAddressAsync("BTC", 0, false, 0, false, AddressType.Bitcoin);
+                DisplayAddress();
             });
+        }
+
+        private void DisplayAddress()
+        {
+            TheLabel.Text = $"First Bitcoin Address: {_Address}";
+            TheActivityIndicator.IsRunning = false;
         }
     }
 }

@@ -29,13 +29,13 @@ namespace Trezor.Net.XamarinFormsSample
             Device.BeginInvokeOnMainThread(() =>
             {
                 _MainPage = new MainPage();
-                MainNavigationPage.Navigation.PushModalAsync(MainPage);
+                MainNavigationPage.Navigation.PushModalAsync(_MainPage);
             });
         }
 
         private async void TrezorHidDevice_Connected(object sender, System.EventArgs e)
         {
-            await _MainPage.DisplayAddressAsync();
+            _MainPage.BeginGetAddress();
         }
 
         protected override void OnStart()
