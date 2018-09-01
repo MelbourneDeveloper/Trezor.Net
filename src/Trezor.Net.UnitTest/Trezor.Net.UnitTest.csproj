@@ -61,6 +61,7 @@
     <Compile Include="..\Trezor.Net.UWPUnitTest\UnitTest.cs">
       <Link>UnitTest.cs</Link>
     </Compile>
+    <Compile Include="EthHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTest - NET.cs" />
   </ItemGroup>

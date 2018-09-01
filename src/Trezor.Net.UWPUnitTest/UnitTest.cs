@@ -45,6 +45,33 @@ namespace Trezor.Net
             }
         }
 
+        [TestMethod]
+        public async Task SignEthereumTransaction()
+        {
+            try
+            {
+                await GetAndInitialize();
+
+                var asdasd = "0x687422eEA2cB73B5d3e242bA5456b782919AFc85".Length;
+
+                var txMessage = new EthereumSignTx
+                { 
+                    Nonce = 0.ToEthBytes(),
+                    GasPrice = ((long)2400000000).ToEthBytes(),
+                    GasLimit = 21000.ToEthBytes(),
+                    To = "689c56aef474df92d44a1b70850f808488f9769c".ToEthBytes(),
+                    Value = 1000.ToEthBytes(),
+                    AddressNs = ManagerHelpers.GetAddressPath(false, 0, false, 0, 60),
+                };
+
+                var transaction = await TrezorManager.SendMessageAsync<EthereumSignMessage, EthereumSignTx>(txMessage);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
         private static async Task<string> GetAddress(int i, bool display)
         {
             return await TrezorManager.GetAddressAsync("BTC", 0, false, (uint)i, display, AddressType.Bitcoin);
