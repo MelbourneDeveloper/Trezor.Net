@@ -23,8 +23,6 @@ namespace Trezor.Net.XamarinFormsSample
 
                 var currentApp = App.Current as App;
 
-                //currentApp.NavigateBackToMainPage();
-
                 taskCompletionSource.SetResult(trezorPinPad.Pin);
             }
 
