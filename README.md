@@ -3,8 +3,8 @@
 ## Quick Start
 
 - Clone the repo and open the solution
-- There is a console sample, unit tests for UWP, and .NET
-- Compile one of the unit test apps
+- There is a console sample, Xamarin Forms sample and unit tests for UWP, and .NET
+- Compile one of the unit test apps, run the UWP/Android Xamarin Forms apps or,
 - Go to Test->Windows->Text Explorer in Visual Studio
 - Run one of the unit tests in the pane.
 - Note that the UWP unit test has a UI for entering the pin. Please read instructions there. 
@@ -24,9 +24,9 @@ Install-Package Trezor.Net
 - Android
 - UWP 
 
-## More Samples
+## Live App
 
-More samples are coming. Meantime, you can see the library in action in the app Hardfolio:
+You can see the library in action in the app Hardfolio:
 
 Windows Store
 https://www.microsoft.com/en-au/p/hardfolio/9p8xx70n5d2j
