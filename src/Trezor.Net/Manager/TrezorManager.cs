@@ -91,6 +91,17 @@ namespace Trezor.Net
                 throw new FailureException<Failure>($"Error sending message to Trezor.\r\nCode: {failure.Code} Message: {failure.Message}", failure);
             }
         }
+
+        protected override object GetEnumValue(string messageTypeString)
+        {
+            var isValid = Enum.TryParse(messageTypeString, out MessageType messageType);
+            if (!isValid)
+            {
+                throw new Exception($"{messageTypeString} is not a valid MessageType");
+            }
+
+            return messageType;
+        }
         #endregion
 
         #region Public Methods
