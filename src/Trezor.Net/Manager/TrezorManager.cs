@@ -35,13 +35,37 @@ namespace Trezor.Net
         #endregion
 
         #region Private Methods
+
+        /// <summary>
+        /// TODO: Dependency injection
+        /// </summary>
         private CoinType GetCoinType(uint coinNumber)
         {
+            switch (coinNumber)
+            {
+                case 0:
+                    return new CoinType { CoinName = "Bitcoin", Segwit = true };
+                case 60:
+                    return new CoinType { CoinName = "Ethereum", Segwit = false };
+            }
+
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// TODO: Dependency injection
+        /// </summary>
         private CoinType GetCoinType(string coinShortcut)
         {
+            switch (coinShortcut)
+            {
+                case "BTC":
+                    return new CoinType { CoinName = "Bitcoin", Segwit = true };
+                case "ETH":
+                    return new CoinType { CoinName = "Ethereum", Segwit = false };
+
+            }
+
             throw new NotImplementedException();
         }
         #endregion
