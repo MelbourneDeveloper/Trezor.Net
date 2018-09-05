@@ -3,7 +3,7 @@
 // Input: messages-cardano.proto
 
 #pragma warning disable CS1591, CS0612, CS3021, IDE1006
-namespace hw.trezor.messages.cardano
+namespace Trezor.Net.Contracts
 {
 
     [global::ProtoBuf.ProtoContract()]
@@ -89,7 +89,7 @@ namespace hw.trezor.messages.cardano
         private string __pbn__Xpub;
 
         [global::ProtoBuf.ProtoMember(2, Name = @"node")]
-        public global::hw.trezor.messages.common.HDNodeType Node { get; set; }
+        public global::Trezor.Net.Contracts.HDNodeType Node { get; set; }
 
         [global::ProtoBuf.ProtoMember(3, Name = @"root_hd_passphrase")]
         [global::System.ComponentModel.DefaultValue("")]

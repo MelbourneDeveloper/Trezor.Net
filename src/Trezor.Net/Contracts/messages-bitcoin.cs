@@ -3,7 +3,7 @@
 // Input: messages-bitcoin.proto
 
 #pragma warning disable CS1591, CS0612, CS3021, IDE1006
-namespace hw.trezor.messages.bitcoin
+namespace Trezor.Net.Contracts
 {
 
     [global::ProtoBuf.ProtoContract()]
@@ -37,7 +37,7 @@ namespace hw.trezor.messages.bitcoin
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1, Name = @"node", IsRequired = true)]
-            public global::hw.trezor.messages.common.HDNodeType Node { get; set; }
+            public global::Trezor.Net.Contracts.HDNodeType Node { get; set; }
 
             [global::ProtoBuf.ProtoMember(2, Name = @"address_n")]
             public uint[] AddressNs { get; set; }
@@ -109,7 +109,7 @@ namespace hw.trezor.messages.bitcoin
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1, Name = @"node", IsRequired = true)]
-        public global::hw.trezor.messages.common.HDNodeType Node { get; set; }
+        public global::Trezor.Net.Contracts.HDNodeType Node { get; set; }
 
         [global::ProtoBuf.ProtoMember(2, Name = @"xpub")]
         [global::System.ComponentModel.DefaultValue("")]

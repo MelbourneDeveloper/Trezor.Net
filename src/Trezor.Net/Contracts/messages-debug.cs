@@ -3,7 +3,7 @@
 // Input: messages-debug.proto
 
 #pragma warning disable CS1591, CS0612, CS3021, IDE1006
-namespace hw.trezor.messages.debug
+namespace Trezor.Net.Contracts
 {
 
     [global::ProtoBuf.ProtoContract()]
@@ -106,7 +106,7 @@ namespace hw.trezor.messages.debug
         private string __pbn__Mnemonic;
 
         [global::ProtoBuf.ProtoMember(5, Name = @"node")]
-        public global::hw.trezor.messages.common.HDNodeType Node { get; set; }
+        public global::Trezor.Net.Contracts.HDNodeType Node { get; set; }
 
         [global::ProtoBuf.ProtoMember(6, Name = @"passphrase_protection")]
         public bool PassphraseProtection

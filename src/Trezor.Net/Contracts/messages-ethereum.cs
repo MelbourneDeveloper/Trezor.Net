@@ -3,7 +3,7 @@
 // Input: messages-ethereum.proto
 
 #pragma warning disable CS1591, CS0612, CS3021, IDE1006
-namespace hw.trezor.messages.ethereum
+namespace Trezor.Net.Contracts
 {
 
     [global::ProtoBuf.ProtoContract()]

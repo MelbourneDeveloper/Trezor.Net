@@ -34,6 +34,18 @@ namespace Trezor.Net
         }
         #endregion
 
+        #region Private Methods
+        private CoinType GetCoinType(uint coinNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        private CoinType GetCoinType(string coinShortcut)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
         #region Protected Override Methods
         protected override bool IsButtonRequest(object response)
         {
@@ -74,15 +86,15 @@ namespace Trezor.Net
             return retVal;
         }
 
-        protected CoinType GetCoinType(string coinShortcut)
-        {
-            if (!HasFeatures)
-            {
-                throw new Exception("The Trezor has not been successfully initialised.");
-            }
+        //protected CoinType GetCoinType(string coinShortcut)
+        //{
+        //    if (!HasFeatures)
+        //    {
+        //        throw new Exception("The Trezor has not been successfully initialised.");
+        //    }
 
-            return Features.Coins.Find(c => c.CoinShortcut == coinShortcut);
-        }
+        //    return Features.Coins.Find(c => c.CoinShortcut == coinShortcut);
+        //}
 
         protected override void CheckForFailure(object returnMessage)
         {
@@ -126,7 +138,9 @@ namespace Trezor.Net
                 ValidateInitialization(null);
 
                 //ETH and ETC don't appear here so we have to hard code these not to be segwit
-                var coinType = Features.Coins.Find(c => string.Equals(c.CoinShortcut, coinShortcut, StringComparison.OrdinalIgnoreCase));
+                //var coinType = Features.Coins.Find(c => string.Equals(c.CoinShortcut, coinShortcut, StringComparison.OrdinalIgnoreCase));
+
+                var coinType = GetCoinType(coinNumber);
 
                 if (isSegwit == null)
                 {

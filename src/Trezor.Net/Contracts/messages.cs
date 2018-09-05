@@ -3,7 +3,7 @@
 // Input: messages.proto
 
 #pragma warning disable CS1591, CS0612, CS3021, IDE1006
-namespace hw.trezor.messages
+namespace Trezor.Net.Contracts
 {
 
     [global::ProtoBuf.ProtoContract()]
@@ -329,47 +329,47 @@ namespace hw.trezor.messages
 
     public static class Extensions
     {
-        public static bool GetWireIn(this global::Google.Protobuf.Reflection.EnumValueOptions obj)
-            => obj == null ? default : global::ProtoBuf.Extensible.GetValue<bool>(obj, 50002);
+        //public static bool GetWireIn(this global::Google.Protobuf.Reflection.EnumValueOptions obj)
+        //    => obj == null ? default : global::ProtoBuf.Extensible.GetValue<bool>(obj, 50002);
 
-        public static void SetWireIn(this global::Google.Protobuf.Reflection.EnumValueOptions obj, bool value)
-            => global::ProtoBuf.Extensible.AppendValue<bool>(obj, 50002, value);
+        //public static void SetWireIn(this global::Google.Protobuf.Reflection.EnumValueOptions obj, bool value)
+        //    => global::ProtoBuf.Extensible.AppendValue<bool>(obj, 50002, value);
 
-        public static bool GetWireOut(this global::Google.Protobuf.Reflection.EnumValueOptions obj)
-            => obj == null ? default : global::ProtoBuf.Extensible.GetValue<bool>(obj, 50003);
+        //public static bool GetWireOut(this global::Google.Protobuf.Reflection.EnumValueOptions obj)
+        //    => obj == null ? default : global::ProtoBuf.Extensible.GetValue<bool>(obj, 50003);
 
-        public static void SetWireOut(this global::Google.Protobuf.Reflection.EnumValueOptions obj, bool value)
-            => global::ProtoBuf.Extensible.AppendValue<bool>(obj, 50003, value);
+        //public static void SetWireOut(this global::Google.Protobuf.Reflection.EnumValueOptions obj, bool value)
+        //    => global::ProtoBuf.Extensible.AppendValue<bool>(obj, 50003, value);
 
-        public static bool GetWireDebugIn(this global::Google.Protobuf.Reflection.EnumValueOptions obj)
-            => obj == null ? default : global::ProtoBuf.Extensible.GetValue<bool>(obj, 50004);
+        //public static bool GetWireDebugIn(this global::Google.Protobuf.Reflection.EnumValueOptions obj)
+        //    => obj == null ? default : global::ProtoBuf.Extensible.GetValue<bool>(obj, 50004);
 
-        public static void SetWireDebugIn(this global::Google.Protobuf.Reflection.EnumValueOptions obj, bool value)
-            => global::ProtoBuf.Extensible.AppendValue<bool>(obj, 50004, value);
+        //public static void SetWireDebugIn(this global::Google.Protobuf.Reflection.EnumValueOptions obj, bool value)
+        //    => global::ProtoBuf.Extensible.AppendValue<bool>(obj, 50004, value);
 
-        public static bool GetWireDebugOut(this global::Google.Protobuf.Reflection.EnumValueOptions obj)
-            => obj == null ? default : global::ProtoBuf.Extensible.GetValue<bool>(obj, 50005);
+        //public static bool GetWireDebugOut(this global::Google.Protobuf.Reflection.EnumValueOptions obj)
+        //    => obj == null ? default : global::ProtoBuf.Extensible.GetValue<bool>(obj, 50005);
 
-        public static void SetWireDebugOut(this global::Google.Protobuf.Reflection.EnumValueOptions obj, bool value)
-            => global::ProtoBuf.Extensible.AppendValue<bool>(obj, 50005, value);
+        //public static void SetWireDebugOut(this global::Google.Protobuf.Reflection.EnumValueOptions obj, bool value)
+        //    => global::ProtoBuf.Extensible.AppendValue<bool>(obj, 50005, value);
 
-        public static bool GetWireTiny(this global::Google.Protobuf.Reflection.EnumValueOptions obj)
-            => obj == null ? default : global::ProtoBuf.Extensible.GetValue<bool>(obj, 50006);
+        //public static bool GetWireTiny(this global::Google.Protobuf.Reflection.EnumValueOptions obj)
+        //    => obj == null ? default : global::ProtoBuf.Extensible.GetValue<bool>(obj, 50006);
 
-        public static void SetWireTiny(this global::Google.Protobuf.Reflection.EnumValueOptions obj, bool value)
-            => global::ProtoBuf.Extensible.AppendValue<bool>(obj, 50006, value);
+        //public static void SetWireTiny(this global::Google.Protobuf.Reflection.EnumValueOptions obj, bool value)
+        //    => global::ProtoBuf.Extensible.AppendValue<bool>(obj, 50006, value);
 
-        public static bool GetWireBootloader(this global::Google.Protobuf.Reflection.EnumValueOptions obj)
-            => obj == null ? default : global::ProtoBuf.Extensible.GetValue<bool>(obj, 50007);
+        //public static bool GetWireBootloader(this global::Google.Protobuf.Reflection.EnumValueOptions obj)
+        //    => obj == null ? default : global::ProtoBuf.Extensible.GetValue<bool>(obj, 50007);
 
-        public static void SetWireBootloader(this global::Google.Protobuf.Reflection.EnumValueOptions obj, bool value)
-            => global::ProtoBuf.Extensible.AppendValue<bool>(obj, 50007, value);
+        //public static void SetWireBootloader(this global::Google.Protobuf.Reflection.EnumValueOptions obj, bool value)
+        //    => global::ProtoBuf.Extensible.AppendValue<bool>(obj, 50007, value);
 
-        public static bool GetWireNoFsm(this global::Google.Protobuf.Reflection.EnumValueOptions obj)
-            => obj == null ? default : global::ProtoBuf.Extensible.GetValue<bool>(obj, 50008);
+        //public static bool GetWireNoFsm(this global::Google.Protobuf.Reflection.EnumValueOptions obj)
+        //    => obj == null ? default : global::ProtoBuf.Extensible.GetValue<bool>(obj, 50008);
 
-        public static void SetWireNoFsm(this global::Google.Protobuf.Reflection.EnumValueOptions obj, bool value)
-            => global::ProtoBuf.Extensible.AppendValue<bool>(obj, 50008, value);
+        //public static void SetWireNoFsm(this global::Google.Protobuf.Reflection.EnumValueOptions obj, bool value)
+        //    => global::ProtoBuf.Extensible.AppendValue<bool>(obj, 50008, value);
 
     }
 }

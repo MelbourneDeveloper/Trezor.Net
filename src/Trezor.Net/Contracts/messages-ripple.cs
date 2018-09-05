@@ -3,7 +3,7 @@
 // Input: messages-ripple.proto
 
 #pragma warning disable CS1591, CS0612, CS3021, IDE1006
-namespace hw.trezor.messages.ripple
+namespace Trezor.Net.Contracts
 {
 
     [global::ProtoBuf.ProtoContract()]

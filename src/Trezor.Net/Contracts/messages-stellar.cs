@@ -3,7 +3,7 @@
 // Input: messages-stellar.proto
 
 #pragma warning disable CS1591, CS0612, CS3021, IDE1006
-namespace hw.trezor.messages.stellar
+namespace Trezor.Net.Contracts
 {
 
     [global::ProtoBuf.ProtoContract()]

@@ -3,7 +3,7 @@
 // Input: messages-nem.proto
 
 #pragma warning disable CS1591, CS0612, CS3021, IDE1006
-namespace hw.trezor.messages.nem
+namespace Trezor.Net.Contracts
 {
 
     [global::ProtoBuf.ProtoContract()]

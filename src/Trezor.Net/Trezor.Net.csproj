@@ -20,6 +20,7 @@ Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for ot
     <AssemblyVersion>1.5.1.0</AssemblyVersion>
     <FileVersion>1.5.1.0</FileVersion>
     <PackageReleaseNotes></PackageReleaseNotes>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
