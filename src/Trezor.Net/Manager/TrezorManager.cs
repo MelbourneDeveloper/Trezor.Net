@@ -25,6 +25,7 @@ namespace Trezor.Net
         #region Protected Override Properties
         protected override bool HasFeatures => Features != null;
         protected override string ContractNamespace => "Trezor.Net.Contracts";
+        protected override Type MessageTypeType => typeof(MessageType);
         #endregion
 
         #region Constructor

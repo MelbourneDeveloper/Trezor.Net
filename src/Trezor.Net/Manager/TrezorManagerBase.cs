@@ -223,6 +223,8 @@ namespace Trezor.Net
             }
         }
 
+        protected abstract Type MessageTypeType { get; }
+
         private async Task<object> ReadAsync()
         {
             //Read a chunk
@@ -239,7 +241,7 @@ namespace Trezor.Net
             var messageTypeInt = readBuffer[4];
 
             //Get the message type
-            if (Enum.IsDefined(typeof(MessageType), (int)messageTypeInt))
+            if (Enum.IsDefined(MessageTypeType, (int)messageTypeInt))
             {
                 messageType = (MessageType)messageTypeInt;
             }
@@ -307,7 +309,7 @@ namespace Trezor.Net
             return msg;
         }
 
-        private object Deserialize(MessageType messageType, byte[] data)
+        private object Deserialize(Enum messageType, byte[] data)
         {
             try
             {
@@ -347,7 +349,7 @@ namespace Trezor.Net
         #endregion
 
         #region Private Static Methods
-        private static Type GetContractType(MessageType messageType, string typeName)
+        private static Type GetContractType(Enum messageType, string typeName)
         {
             Type contractType;
 
