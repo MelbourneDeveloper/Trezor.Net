@@ -334,16 +334,14 @@ namespace Trezor.Net
 
             var retVal = await ReadAsync();
 
-            if (retVal is Failure failure)
-            {
-                throw new FailureException<Failure>($"Error sending message to Trezor.\r\n{message.GetType().Name}", failure);
-            }
-
+            CheckForFailure(retVal);
+                      
             return retVal;
         }
         #endregion
 
         #region Protected Abstract Methods
+        protected abstract void CheckForFailure(object returnMessage);
         protected abstract Task<object> PinMatrixAckAsync(string pin);
         protected abstract Task<object> ButtonAckAsync();
         #endregion

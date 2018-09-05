@@ -82,6 +82,14 @@ namespace Trezor.Net
 
             return Features.Coins.Find(c => c.CoinShortcut == coinShortcut);
         }
+
+        protected override void CheckForFailure(object returnMessage)
+        {
+            if (returnMessage is Failure failure)
+            {
+                throw new FailureException<Failure>($"Error sending message to Trezor.\r\nCode: {failure.Code} Message: {failure.Message}", failure);
+            }
+        }
         #endregion
 
         #region Public Methods
