@@ -220,9 +220,12 @@ namespace Trezor.Net
             object messageType;
 
             //Check to see that this is a valid first chunk 
-            if (readBuffer[0] != (byte)'?' || readBuffer[1] != 35 || readBuffer[2] != 35)
+            bool firstByteNot63 = readBuffer[0] != (byte)'?';
+            bool secondByteNot35 = readBuffer[1] != 35;
+            bool thirdByteNot35 = readBuffer[2] != 35;
+            if (firstByteNot63 || secondByteNot35 || thirdByteNot35)
             {
-                throw new Exception("Bad read");
+                throw new ReadException("An error occurred while attempting to read the message from the device. In the first chunk of data.", readBuffer);
             }
 
             //Looks like the message type is at index 4
