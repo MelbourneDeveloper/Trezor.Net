@@ -228,15 +228,15 @@ namespace Trezor.Net
             //Looks like the message type is at index 4
             var messageTypeInt = readBuffer[4];
 
-            //Get the message type
-            if (Enum.IsDefined(MessageTypeType, (int)messageTypeInt))
-            {
-                messageType = messageTypeInt;
-            }
-            else
+            if (!Enum.IsDefined(MessageTypeType, (int)messageTypeInt))
             {
                 throw new Exception($"The number {messageTypeInt} is not a valid MessageType");
             }
+
+            //Get the message type
+            var messageTypeValueName = Enum.GetName(MessageTypeType, messageTypeInt);
+
+            messageType = Enum.Parse(MessageTypeType, messageTypeValueName);
 
             //msgLength:= int(binary.BigEndian.Uint32(buf[i + 4 : i + 8]))
             //TODO: Is this correct?
@@ -333,7 +333,7 @@ namespace Trezor.Net
             var retVal = await ReadAsync();
 
             CheckForFailure(retVal);
-                      
+
             return retVal;
         }
         #endregion
