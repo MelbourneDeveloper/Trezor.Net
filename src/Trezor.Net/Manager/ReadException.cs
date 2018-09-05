@@ -3,8 +3,9 @@
     public class ReadException : ManagerException
     {
         public byte[] ReadData;
+        public object LastWrittenMessage;
 
-        public ReadException(string message, byte[] readData) : base(message)
+        public ReadException(string message, byte[] readData, object lastWrittenMessage) : base(message)
         {
             ReadData = readData;
         }

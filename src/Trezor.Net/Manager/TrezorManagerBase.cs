@@ -37,6 +37,7 @@ namespace Trezor.Net
         private readonly EnterPinArgs _EnterPinCallback;
         protected SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
         private readonly string LogSection = nameof(TrezorManagerBase);
+        private object _LastWrittenMessage;
         #endregion
 
         #region Private Static Fields
@@ -51,6 +52,7 @@ namespace Trezor.Net
         #region Protected Abstract Properties
         protected abstract bool HasFeatures { get; }
         protected abstract string ContractNamespace { get; }
+        protected abstract Type MessageTypeType { get; }
         #endregion
 
         #region Constructor
@@ -209,9 +211,9 @@ namespace Trezor.Net
                 range[0] = (byte)'?';
                 await _HidDevice.WriteAsync(range);
             }
-        }
 
-        protected abstract Type MessageTypeType { get; }
+            _LastWrittenMessage = msg;
+        }
 
         private async Task<object> ReadAsync()
         {
@@ -225,7 +227,24 @@ namespace Trezor.Net
             bool thirdByteNot35 = readBuffer[2] != 35;
             if (firstByteNot63 || secondByteNot35 || thirdByteNot35)
             {
-                throw new ReadException("An error occurred while attempting to read the message from the device. In the first chunk of data.", readBuffer);
+                var message = $"An error occurred while attempting to read the message from the device. The last written message was a {_LastWrittenMessage?.GetType().Name}. In the first chunk of data ";
+
+                if (firstByteNot63)
+                {
+                    message += "the first byte was not 63";
+                }
+
+                if (secondByteNot35)
+                {
+                    message += "the second byte was not 35";
+                }
+
+                if (thirdByteNot35)
+                {
+                    message += "the third byte was not 35";
+                }
+
+                throw new ReadException(message, readBuffer, _LastWrittenMessage);
             }
 
             //Looks like the message type is at index 4
