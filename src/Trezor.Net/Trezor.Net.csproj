@@ -27,7 +27,7 @@ Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for ot
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hid.Net" Version="1.2.0" />
+    <PackageReference Include="Hid.Net" Version="1.2.2" />
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
     <PackageReference Include="protobuf-net" Version="2.3.17" />
   </ItemGroup>
