@@ -4,9 +4,9 @@
     <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
     <CodeAnalysisRuleSet>..\Hid.Net\CodeRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>1.5.1</Version>
+    <Version>1.5.2</Version>
     <Authors>Christian Findlay</Authors>
     <Company>Christian Findlay</Company>
     <Description>A cross platform library for communicating with the Satoshi Labs' Trezor Hardware Wallet
@@ -17,8 +17,8 @@ Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for ot
     <PackageProjectUrl>https://github.com/MelbourneDeveloper/Trezor.Net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MelbourneDeveloper/Trezor.Net</RepositoryUrl>
     <PackageTags>Hid Trezor Hardwarewallet Bitcoin Ethereum SatoshiLabs KeepKey Cryptocurrency security</PackageTags>
-    <AssemblyVersion>1.5.1.0</AssemblyVersion>
-    <FileVersion>1.5.1.0</FileVersion>
+    <AssemblyVersion>1.5.2.0</AssemblyVersion>
+    <FileVersion>1.5.2.0</FileVersion>
     <PackageReleaseNotes></PackageReleaseNotes>
   </PropertyGroup>
 
