@@ -22,8 +22,11 @@ namespace Trezor.Net
         public Features Features { get; private set; }
         #endregion
 
+        #region Public Override Properties
+        public override bool IsInitialized => Features != null;
+        #endregion
+
         #region Protected Override Properties
-        protected override bool HasFeatures => Features != null;
         protected override string ContractNamespace => "Trezor.Net.Contracts";
         protected override Type MessageTypeType => typeof(MessageType);
         #endregion
@@ -76,7 +79,7 @@ namespace Trezor.Net
 
         protected CoinType GetCoinType(string coinShortcut)
         {
-            if (!HasFeatures)
+            if (!IsInitialized)
             {
                 throw new Exception("The Trezor has not been successfully initialised.");
             }

@@ -49,8 +49,11 @@ namespace Trezor.Net
         public USBTypeEnum USBType { get; }
         #endregion
 
+        #region Public Abstract Properties
+        public abstract bool IsInitialized { get; }
+        #endregion
+
         #region Protected Abstract Properties
-        protected abstract bool HasFeatures { get; }
         protected abstract string ContractNamespace { get; }
         protected abstract Type MessageTypeType { get; }
         #endregion
@@ -339,7 +342,7 @@ namespace Trezor.Net
         #region Protected Methods
         protected void ValidateInitialization(object message)
         {
-            if (!HasFeatures && !IsInitialize(message))
+            if (!IsInitialized && !IsInitialize(message))
             {
                 throw new ManagerException($"The device has not been successfully initialised. Please call {nameof(InitializeAsync)}.");
             }
