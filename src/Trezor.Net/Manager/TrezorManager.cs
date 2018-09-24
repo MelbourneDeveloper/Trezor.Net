@@ -118,12 +118,6 @@ namespace Trezor.Net
         #endregion
 
         #region Public Overrides
-        public Task<string> GetAddressAsync(bool isSegwit, uint coinNumber, uint account, bool isChange, uint index, bool showDisplay, AddressType addressType)
-        {
-            return GetAddressAsync(null, coinNumber, account, isChange, index, showDisplay, addressType, isSegwit);
-        }
-
-        [Obsolete("Trezor does not use coinShortcut anymore. Please specify isSegwit.")]
         public Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType)
         {
             return GetAddressAsync(coinShortcut, coinNumber, 0, isChange, index, showDisplay, addressType, null);
@@ -133,7 +127,6 @@ namespace Trezor.Net
         /// Get an address from the Trezor
         /// //TODO: Move this back down to TrezorManagerBase
         /// </summary>
-        [Obsolete("Trezor does not use coinShortcut anymore. Please specify isSegwit.")]
         public async Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, uint account, bool isChange, uint index, bool showDisplay, AddressType addressType, bool? isSegwit)
         {
             try
