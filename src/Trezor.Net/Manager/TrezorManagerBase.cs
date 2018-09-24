@@ -151,11 +151,6 @@ namespace Trezor.Net
             return _HidDevice.GetIsConnectedAsync();
         }
 
-        public Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType)
-        {
-            return GetAddressAsync(coinShortcut, coinNumber, 0, isChange, index, showDisplay, addressType, null);
-        }
-
         /// <summary>
         /// Initialize the Trezor. Should only be called once.
         /// </summary>
@@ -165,11 +160,6 @@ namespace Trezor.Net
         {
             _HidDevice?.Dispose();
         }
-
-        #endregion
-
-        #region Public Abstract Methods
-        public abstract Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, uint account, bool isChange, uint index, bool showDisplay, AddressType addressType, bool? isSegwit);
 
         #endregion
 

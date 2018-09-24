@@ -12,10 +12,24 @@ namespace Trezor.Net
         private static readonly string[] _Addresses = new string[50];
 
         [TestMethod]
-        public async Task GetAddress()
+        public async Task GetBitcoinAddress()
         {
             await GetAndInitialize();
-            var address = await GetAddress(0, true);
+            var address = await GetAddress(0, 0, true);
+        }
+
+        [TestMethod]
+        public async Task GetBitcoinCashAddress()
+        {
+            await GetAndInitialize();
+            var address = await GetAddress(145, 0, true);
+        }
+
+        [TestMethod]
+        public async Task GetPublicKey()
+        {
+            await GetAndInitialize();
+            var address = await TrezorManager.GetPublicKeyAsync("BTC", 0);
         }
 
         [TestMethod]
@@ -25,16 +39,16 @@ namespace Trezor.Net
 
             var tasks = new List<Task>();
 
-            for (var i = 0; i < 50; i++)
+            for (uint i = 0; i < 50; i++)
             {
                 tasks.Add(DoGetAddress(TrezorManager, i));
             }
 
             await Task.WhenAll(tasks);
 
-            for (var i = 0; i < 50; i++)
+            for (uint i = 0; i < 50; i++)
             {
-                var address = await GetAddress(i, false);
+                var address = await GetAddress(0, i, false);
 
                 Console.WriteLine($"Index: {i} (No change) - Address: {address}");
 
@@ -45,9 +59,9 @@ namespace Trezor.Net
             }
         }
 
-        private static async Task<string> GetAddress(int i, bool display)
+        private static async Task<string> GetAddress(uint coinNumber, uint i, bool display)
         {
-            return await TrezorManager.GetAddressAsync("BTC", 0, false, (uint)i, display, AddressType.Bitcoin);
+            return await TrezorManager.GetAddressAsync(true, coinNumber, 0, false, i, display, AddressType.Bitcoin);
         }
 
         private async Task GetAndInitialize()
@@ -62,9 +76,9 @@ namespace Trezor.Net
             await TrezorManager.InitializeAsync();
         }
 
-        private static async Task DoGetAddress(TrezorManager trezorManager, int i)
+        private static async Task DoGetAddress(TrezorManager trezorManager, uint i)
         {
-            var address = await GetAddress(i, false);
+            var address = await GetAddress(0, i, false);
             _Addresses[i] = address;
         }
     }
