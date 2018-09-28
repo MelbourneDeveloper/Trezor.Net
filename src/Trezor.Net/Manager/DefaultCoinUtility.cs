@@ -10,6 +10,12 @@ namespace Trezor.Net
             {
                 case 0:
                     return new CoinInfo(coinNumber, "Bitcoin", true, AddressType.Bitcoin);
+                case 60:
+                    return new CoinInfo(coinNumber, null, false, AddressType.Ethereum);
+                case 61:
+                    return new CoinInfo(coinNumber, null, false, AddressType.Ethereum);
+                case 145:
+                    return new CoinInfo(coinNumber, "Bcash", false, AddressType.Bitcoin);
                 default:
                     throw new NotImplementedException();
             }

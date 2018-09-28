@@ -33,8 +33,12 @@ namespace Trezor.Net
         #endregion
 
         #region Private Static Fields
-        private static Assembly[] _Assemblies;
+        private static readonly Assembly[] _Assemblies;
         private static readonly Dictionary<string, Type> _ContractsByName = new Dictionary<string, Type>();
+        #endregion
+
+        #region Public Properties
+        ICoinUtility CoinUtility { get; }
         #endregion
 
         #region Public Abstract Properties
@@ -47,7 +51,12 @@ namespace Trezor.Net
         #endregion
 
         #region Constructor
-        protected TrezorManagerBase(EnterPinArgs enterPinCallback, IHidDevice hidDevice)
+        protected TrezorManagerBase(EnterPinArgs enterPinCallback, IHidDevice hidDevice) : this(enterPinCallback, hidDevice, null)
+        {
+
+        }
+
+        protected TrezorManagerBase(EnterPinArgs enterPinCallback, IHidDevice hidDevice, ICoinUtility coinUtility)
         {
             if (hidDevice == null)
             {

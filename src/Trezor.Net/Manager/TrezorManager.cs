@@ -1,4 +1,5 @@
-﻿using Hid.Net;
+﻿using Hardwarewallets.Net;
+using Hid.Net;
 using System;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ using Trezor.Net.Contracts.Tezos;
 
 namespace Trezor.Net
 {
-    public class TrezorManager : TrezorManagerBase<MessageType>
+    public class TrezorManager : TrezorManagerBase<MessageType>, IAddressDeriver
     {
         #region Private Constants
         private const string LogSection = "Trezor Manager";
@@ -446,6 +447,8 @@ namespace Trezor.Net
         /// </summary>
         public Task<PublicKey> GetPublicKeyAsync(string coinShortcut, uint addressNumber)
         {
+
+
             return SendMessageAsync<PublicKey, GetPublicKey>(new GetPublicKey { CoinName = GetCoinType(coinShortcut).CoinName, AddressNs = new[] { addressNumber } });
         }
         #endregion
