@@ -1,13 +1,13 @@
 namespace Trezor.Net.Contracts.Monero
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class DebugMoneroDiagRequest : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class DebugMoneroDiagRequest : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"ins")]
+        [ProtoBuf.ProtoMember(1, Name = @"ins")]
         public ulong Ins
         {
             get { return __pbn__Ins.GetValueOrDefault(); }
@@ -17,7 +17,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetIns() => __pbn__Ins = null;
         private ulong? __pbn__Ins;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"p1")]
+        [ProtoBuf.ProtoMember(2, Name = @"p1")]
         public ulong P1
         {
             get { return __pbn__P1.GetValueOrDefault(); }
@@ -27,7 +27,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetP1() => __pbn__P1 = null;
         private ulong? __pbn__P1;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"p2")]
+        [ProtoBuf.ProtoMember(3, Name = @"p2")]
         public ulong P2
         {
             get { return __pbn__P2.GetValueOrDefault(); }
@@ -37,10 +37,10 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetP2() => __pbn__P2 = null;
         private ulong? __pbn__P2;
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"pd")]
+        [ProtoBuf.ProtoMember(4, Name = @"pd")]
         public ulong[] Pds { get; set; }
 
-        [global::ProtoBuf.ProtoMember(5, Name = @"data1")]
+        [ProtoBuf.ProtoMember(5, Name = @"data1")]
         public byte[] Data1
         {
             get { return __pbn__Data1; }
@@ -50,7 +50,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetData1() => __pbn__Data1 = null;
         private byte[] __pbn__Data1;
 
-        [global::ProtoBuf.ProtoMember(6, Name = @"data2")]
+        [ProtoBuf.ProtoMember(6, Name = @"data2")]
         public byte[] Data2
         {
             get { return __pbn__Data2; }

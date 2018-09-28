@@ -1,13 +1,13 @@
 namespace Trezor.Net.Contracts.Monero
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class MoneroTransactionInitRequest : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class MoneroTransactionInitRequest : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"version")]
+        [ProtoBuf.ProtoMember(1, Name = @"version")]
         public uint Version
         {
             get { return __pbn__Version.GetValueOrDefault(); }
@@ -17,10 +17,10 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetVersion() => __pbn__Version = null;
         private uint? __pbn__Version;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"address_n")]
+        [ProtoBuf.ProtoMember(2, Name = @"address_n")]
         public uint[] AddressNs { get; set; }
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"network_type")]
+        [ProtoBuf.ProtoMember(3, Name = @"network_type")]
         public uint NetworkType
         {
             get { return __pbn__NetworkType.GetValueOrDefault(); }
@@ -30,17 +30,17 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetNetworkType() => __pbn__NetworkType = null;
         private uint? __pbn__NetworkType;
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"tsx_data")]
+        [ProtoBuf.ProtoMember(4, Name = @"tsx_data")]
         public MoneroTransactionData TsxData { get; set; }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class MoneroTransactionData : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class MoneroTransactionData : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"version")]
+            [ProtoBuf.ProtoMember(1, Name = @"version")]
             public uint Version
             {
                 get { return __pbn__Version.GetValueOrDefault(); }
@@ -50,7 +50,7 @@ namespace Trezor.Net.Contracts.Monero
             public void ResetVersion() => __pbn__Version = null;
             private uint? __pbn__Version;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"payment_id")]
+            [ProtoBuf.ProtoMember(2, Name = @"payment_id")]
             public byte[] PaymentId
             {
                 get { return __pbn__PaymentId; }
@@ -60,7 +60,7 @@ namespace Trezor.Net.Contracts.Monero
             public void ResetPaymentId() => __pbn__PaymentId = null;
             private byte[] __pbn__PaymentId;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"unlock_time")]
+            [ProtoBuf.ProtoMember(3, Name = @"unlock_time")]
             public ulong UnlockTime
             {
                 get { return __pbn__UnlockTime.GetValueOrDefault(); }
@@ -70,13 +70,13 @@ namespace Trezor.Net.Contracts.Monero
             public void ResetUnlockTime() => __pbn__UnlockTime = null;
             private ulong? __pbn__UnlockTime;
 
-            [global::ProtoBuf.ProtoMember(4, Name = @"outputs")]
-            public global::System.Collections.Generic.List<MoneroTransactionDestinationEntry> Outputs { get; } = new global::System.Collections.Generic.List<MoneroTransactionDestinationEntry>();
+            [ProtoBuf.ProtoMember(4, Name = @"outputs")]
+            public System.Collections.Generic.List<MoneroTransactionDestinationEntry> Outputs { get; } = new System.Collections.Generic.List<MoneroTransactionDestinationEntry>();
 
-            [global::ProtoBuf.ProtoMember(5, Name = @"change_dts")]
+            [ProtoBuf.ProtoMember(5, Name = @"change_dts")]
             public MoneroTransactionDestinationEntry ChangeDts { get; set; }
 
-            [global::ProtoBuf.ProtoMember(6, Name = @"num_inputs")]
+            [ProtoBuf.ProtoMember(6, Name = @"num_inputs")]
             public uint NumInputs
             {
                 get { return __pbn__NumInputs.GetValueOrDefault(); }
@@ -86,7 +86,7 @@ namespace Trezor.Net.Contracts.Monero
             public void ResetNumInputs() => __pbn__NumInputs = null;
             private uint? __pbn__NumInputs;
 
-            [global::ProtoBuf.ProtoMember(7, Name = @"mixin")]
+            [ProtoBuf.ProtoMember(7, Name = @"mixin")]
             public uint Mixin
             {
                 get { return __pbn__Mixin.GetValueOrDefault(); }
@@ -96,7 +96,7 @@ namespace Trezor.Net.Contracts.Monero
             public void ResetMixin() => __pbn__Mixin = null;
             private uint? __pbn__Mixin;
 
-            [global::ProtoBuf.ProtoMember(8, Name = @"fee")]
+            [ProtoBuf.ProtoMember(8, Name = @"fee")]
             public ulong Fee
             {
                 get { return __pbn__Fee.GetValueOrDefault(); }
@@ -106,7 +106,7 @@ namespace Trezor.Net.Contracts.Monero
             public void ResetFee() => __pbn__Fee = null;
             private ulong? __pbn__Fee;
 
-            [global::ProtoBuf.ProtoMember(9, Name = @"account")]
+            [ProtoBuf.ProtoMember(9, Name = @"account")]
             public uint Account
             {
                 get { return __pbn__Account.GetValueOrDefault(); }
@@ -116,10 +116,10 @@ namespace Trezor.Net.Contracts.Monero
             public void ResetAccount() => __pbn__Account = null;
             private uint? __pbn__Account;
 
-            [global::ProtoBuf.ProtoMember(10, Name = @"minor_indices")]
+            [ProtoBuf.ProtoMember(10, Name = @"minor_indices")]
             public uint[] MinorIndices { get; set; }
 
-            [global::ProtoBuf.ProtoMember(11, Name = @"is_multisig")]
+            [ProtoBuf.ProtoMember(11, Name = @"is_multisig")]
             public bool IsMultisig
             {
                 get { return __pbn__IsMultisig.GetValueOrDefault(); }
@@ -129,7 +129,7 @@ namespace Trezor.Net.Contracts.Monero
             public void ResetIsMultisig() => __pbn__IsMultisig = null;
             private bool? __pbn__IsMultisig;
 
-            [global::ProtoBuf.ProtoMember(12, Name = @"exp_tx_prefix_hash")]
+            [ProtoBuf.ProtoMember(12, Name = @"exp_tx_prefix_hash")]
             public byte[] ExpTxPrefixHash
             {
                 get { return __pbn__ExpTxPrefixHash; }
@@ -139,13 +139,13 @@ namespace Trezor.Net.Contracts.Monero
             public void ResetExpTxPrefixHash() => __pbn__ExpTxPrefixHash = null;
             private byte[] __pbn__ExpTxPrefixHash;
 
-            [global::ProtoBuf.ProtoMember(13, Name = @"use_tx_keys")]
-            public global::System.Collections.Generic.List<byte[]> UseTxKeys { get; } = new global::System.Collections.Generic.List<byte[]>();
+            [ProtoBuf.ProtoMember(13, Name = @"use_tx_keys")]
+            public System.Collections.Generic.List<byte[]> UseTxKeys { get; } = new System.Collections.Generic.List<byte[]>();
 
-            [global::ProtoBuf.ProtoMember(14, Name = @"rsig_data")]
+            [ProtoBuf.ProtoMember(14, Name = @"rsig_data")]
             public MoneroTransactionRsigData RsigData { get; set; }
 
-            [global::ProtoBuf.ProtoMember(15, Name = @"integrated_indices")]
+            [ProtoBuf.ProtoMember(15, Name = @"integrated_indices")]
             public uint[] IntegratedIndices { get; set; }
 
         }

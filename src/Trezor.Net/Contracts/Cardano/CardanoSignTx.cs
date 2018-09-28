@@ -1,19 +1,19 @@
 namespace Trezor.Net.Contracts.Cardano
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class CardanoSignTx : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class CardanoSignTx : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"inputs")]
-        public global::System.Collections.Generic.List<CardanoTxInputType> Inputs { get; } = new global::System.Collections.Generic.List<CardanoTxInputType>();
+        [ProtoBuf.ProtoMember(1, Name = @"inputs")]
+        public System.Collections.Generic.List<CardanoTxInputType> Inputs { get; } = new System.Collections.Generic.List<CardanoTxInputType>();
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"outputs")]
-        public global::System.Collections.Generic.List<CardanoTxOutputType> Outputs { get; } = new global::System.Collections.Generic.List<CardanoTxOutputType>();
+        [ProtoBuf.ProtoMember(2, Name = @"outputs")]
+        public System.Collections.Generic.List<CardanoTxOutputType> Outputs { get; } = new System.Collections.Generic.List<CardanoTxOutputType>();
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"transactions_count")]
+        [ProtoBuf.ProtoMember(3, Name = @"transactions_count")]
         public uint TransactionsCount
         {
             get { return __pbn__TransactionsCount.GetValueOrDefault(); }
@@ -23,17 +23,17 @@ namespace Trezor.Net.Contracts.Cardano
         public void ResetTransactionsCount() => __pbn__TransactionsCount = null;
         private uint? __pbn__TransactionsCount;
 
-        [global::ProtoBuf.ProtoContract()]
-        public class CardanoTxInputType : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class CardanoTxInputType : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"address_n")]
+            [ProtoBuf.ProtoMember(1, Name = @"address_n")]
             public uint[] AddressNs { get; set; }
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"prev_hash")]
+            [ProtoBuf.ProtoMember(2, Name = @"prev_hash")]
             public byte[] PrevHash
             {
                 get { return __pbn__PrevHash; }
@@ -43,7 +43,7 @@ namespace Trezor.Net.Contracts.Cardano
             public void ResetPrevHash() => __pbn__PrevHash = null;
             private byte[] __pbn__PrevHash;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"prev_index")]
+            [ProtoBuf.ProtoMember(3, Name = @"prev_index")]
             public uint PrevIndex
             {
                 get { return __pbn__PrevIndex.GetValueOrDefault(); }
@@ -53,7 +53,7 @@ namespace Trezor.Net.Contracts.Cardano
             public void ResetPrevIndex() => __pbn__PrevIndex = null;
             private uint? __pbn__PrevIndex;
 
-            [global::ProtoBuf.ProtoMember(4, Name = @"type")]
+            [ProtoBuf.ProtoMember(4, Name = @"type")]
             public uint Type
             {
                 get { return __pbn__Type.GetValueOrDefault(); }
@@ -65,15 +65,15 @@ namespace Trezor.Net.Contracts.Cardano
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class CardanoTxOutputType : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class CardanoTxOutputType : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"address")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(1, Name = @"address")]
+            [System.ComponentModel.DefaultValue("")]
             public string Address
             {
                 get { return __pbn__Address ?? ""; }
@@ -83,10 +83,10 @@ namespace Trezor.Net.Contracts.Cardano
             public void ResetAddress() => __pbn__Address = null;
             private string __pbn__Address;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"address_n")]
+            [ProtoBuf.ProtoMember(2, Name = @"address_n")]
             public uint[] AddressNs { get; set; }
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"amount")]
+            [ProtoBuf.ProtoMember(3, Name = @"amount")]
             public ulong Amount
             {
                 get { return __pbn__Amount.GetValueOrDefault(); }

@@ -1,14 +1,14 @@
 namespace Trezor.Net.Contracts.Common
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class PinMatrixRequest : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class PinMatrixRequest : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"type")]
-        [global::System.ComponentModel.DefaultValue(PinMatrixRequestType.PinMatrixRequestTypeCurrent)]
+        [ProtoBuf.ProtoMember(1, Name = @"type")]
+        [System.ComponentModel.DefaultValue(PinMatrixRequestType.PinMatrixRequestTypeCurrent)]
         public PinMatrixRequestType Type
         {
             get { return __pbn__Type ?? PinMatrixRequestType.PinMatrixRequestTypeCurrent; }
@@ -18,14 +18,14 @@ namespace Trezor.Net.Contracts.Common
         public void ResetType() => __pbn__Type = null;
         private PinMatrixRequestType? __pbn__Type;
 
-        [global::ProtoBuf.ProtoContract()]
+        [ProtoBuf.ProtoContract()]
         public enum PinMatrixRequestType
         {
-            [global::ProtoBuf.ProtoEnum(Name = @"PinMatrixRequestType_Current")]
+            [ProtoBuf.ProtoEnum(Name = @"PinMatrixRequestType_Current")]
             PinMatrixRequestTypeCurrent = 1,
-            [global::ProtoBuf.ProtoEnum(Name = @"PinMatrixRequestType_NewFirst")]
+            [ProtoBuf.ProtoEnum(Name = @"PinMatrixRequestType_NewFirst")]
             PinMatrixRequestTypeNewFirst = 2,
-            [global::ProtoBuf.ProtoEnum(Name = @"PinMatrixRequestType_NewSecond")]
+            [ProtoBuf.ProtoEnum(Name = @"PinMatrixRequestType_NewSecond")]
             PinMatrixRequestTypeNewSecond = 3,
         }
 

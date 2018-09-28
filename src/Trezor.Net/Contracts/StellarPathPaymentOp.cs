@@ -1,14 +1,14 @@
 namespace Trezor.Net.Contracts.Stellar
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class StellarPathPaymentOp : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class StellarPathPaymentOp : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"source_account")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(1, Name = @"source_account")]
+        [System.ComponentModel.DefaultValue("")]
         public string SourceAccount
         {
             get { return __pbn__SourceAccount ?? ""; }
@@ -18,10 +18,10 @@ namespace Trezor.Net.Contracts.Stellar
         public void ResetSourceAccount() => __pbn__SourceAccount = null;
         private string __pbn__SourceAccount;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"send_asset")]
+        [ProtoBuf.ProtoMember(2, Name = @"send_asset")]
         public StellarAssetType SendAsset { get; set; }
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"send_max", DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
+        [ProtoBuf.ProtoMember(3, Name = @"send_max", DataFormat = ProtoBuf.DataFormat.ZigZag)]
         public long SendMax
         {
             get { return __pbn__SendMax.GetValueOrDefault(); }
@@ -31,8 +31,8 @@ namespace Trezor.Net.Contracts.Stellar
         public void ResetSendMax() => __pbn__SendMax = null;
         private long? __pbn__SendMax;
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"destination_account")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(4, Name = @"destination_account")]
+        [System.ComponentModel.DefaultValue("")]
         public string DestinationAccount
         {
             get { return __pbn__DestinationAccount ?? ""; }
@@ -42,10 +42,10 @@ namespace Trezor.Net.Contracts.Stellar
         public void ResetDestinationAccount() => __pbn__DestinationAccount = null;
         private string __pbn__DestinationAccount;
 
-        [global::ProtoBuf.ProtoMember(5, Name = @"destination_asset")]
+        [ProtoBuf.ProtoMember(5, Name = @"destination_asset")]
         public StellarAssetType DestinationAsset { get; set; }
 
-        [global::ProtoBuf.ProtoMember(6, Name = @"destination_amount", DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
+        [ProtoBuf.ProtoMember(6, Name = @"destination_amount", DataFormat = ProtoBuf.DataFormat.ZigZag)]
         public long DestinationAmount
         {
             get { return __pbn__DestinationAmount.GetValueOrDefault(); }
@@ -55,8 +55,8 @@ namespace Trezor.Net.Contracts.Stellar
         public void ResetDestinationAmount() => __pbn__DestinationAmount = null;
         private long? __pbn__DestinationAmount;
 
-        [global::ProtoBuf.ProtoMember(7, Name = @"paths")]
-        public global::System.Collections.Generic.List<StellarAssetType> Paths { get; } = new global::System.Collections.Generic.List<StellarAssetType>();
+        [ProtoBuf.ProtoMember(7, Name = @"paths")]
+        public System.Collections.Generic.List<StellarAssetType> Paths { get; } = new System.Collections.Generic.List<StellarAssetType>();
 
     }
 }

@@ -1,14 +1,14 @@
 namespace Trezor.Net.Contracts.Management
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class WordRequest : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class WordRequest : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"type")]
-        [global::System.ComponentModel.DefaultValue(WordRequestType.WordRequestTypePlain)]
+        [ProtoBuf.ProtoMember(1, Name = @"type")]
+        [System.ComponentModel.DefaultValue(WordRequestType.WordRequestTypePlain)]
         public WordRequestType Type
         {
             get { return __pbn__Type ?? WordRequestType.WordRequestTypePlain; }
@@ -18,14 +18,14 @@ namespace Trezor.Net.Contracts.Management
         public void ResetType() => __pbn__Type = null;
         private WordRequestType? __pbn__Type;
 
-        [global::ProtoBuf.ProtoContract()]
+        [ProtoBuf.ProtoContract()]
         public enum WordRequestType
         {
-            [global::ProtoBuf.ProtoEnum(Name = @"WordRequestType_Plain")]
+            [ProtoBuf.ProtoEnum(Name = @"WordRequestType_Plain")]
             WordRequestTypePlain = 0,
-            [global::ProtoBuf.ProtoEnum(Name = @"WordRequestType_Matrix9")]
+            [ProtoBuf.ProtoEnum(Name = @"WordRequestType_Matrix9")]
             WordRequestTypeMatrix9 = 1,
-            [global::ProtoBuf.ProtoEnum(Name = @"WordRequestType_Matrix6")]
+            [ProtoBuf.ProtoEnum(Name = @"WordRequestType_Matrix6")]
             WordRequestTypeMatrix6 = 2,
         }
 

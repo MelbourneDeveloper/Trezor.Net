@@ -1,16 +1,16 @@
 namespace Trezor.Net.Contracts.Crypto
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class CosiSign : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class CosiSign : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"address_n")]
+        [ProtoBuf.ProtoMember(1, Name = @"address_n")]
         public uint[] AddressNs { get; set; }
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"data")]
+        [ProtoBuf.ProtoMember(2, Name = @"data")]
         public byte[] Data
         {
             get { return __pbn__Data; }
@@ -20,7 +20,7 @@ namespace Trezor.Net.Contracts.Crypto
         public void ResetData() => __pbn__Data = null;
         private byte[] __pbn__Data;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"global_commitment")]
+        [ProtoBuf.ProtoMember(3, Name = @"global_commitment")]
         public byte[] GlobalCommitment
         {
             get { return __pbn__GlobalCommitment; }
@@ -30,7 +30,7 @@ namespace Trezor.Net.Contracts.Crypto
         public void ResetGlobalCommitment() => __pbn__GlobalCommitment = null;
         private byte[] __pbn__GlobalCommitment;
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"global_pubkey")]
+        [ProtoBuf.ProtoMember(4, Name = @"global_pubkey")]
         public byte[] GlobalPubkey
         {
             get { return __pbn__GlobalPubkey; }

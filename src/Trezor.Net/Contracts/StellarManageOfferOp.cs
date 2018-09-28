@@ -1,14 +1,14 @@
 namespace Trezor.Net.Contracts.Stellar
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class StellarManageOfferOp : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class StellarManageOfferOp : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"source_account")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(1, Name = @"source_account")]
+        [System.ComponentModel.DefaultValue("")]
         public string SourceAccount
         {
             get { return __pbn__SourceAccount ?? ""; }
@@ -18,13 +18,13 @@ namespace Trezor.Net.Contracts.Stellar
         public void ResetSourceAccount() => __pbn__SourceAccount = null;
         private string __pbn__SourceAccount;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"selling_asset")]
+        [ProtoBuf.ProtoMember(2, Name = @"selling_asset")]
         public StellarAssetType SellingAsset { get; set; }
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"buying_asset")]
+        [ProtoBuf.ProtoMember(3, Name = @"buying_asset")]
         public StellarAssetType BuyingAsset { get; set; }
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"amount", DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
+        [ProtoBuf.ProtoMember(4, Name = @"amount", DataFormat = ProtoBuf.DataFormat.ZigZag)]
         public long Amount
         {
             get { return __pbn__Amount.GetValueOrDefault(); }
@@ -34,7 +34,7 @@ namespace Trezor.Net.Contracts.Stellar
         public void ResetAmount() => __pbn__Amount = null;
         private long? __pbn__Amount;
 
-        [global::ProtoBuf.ProtoMember(5, Name = @"price_n")]
+        [ProtoBuf.ProtoMember(5, Name = @"price_n")]
         public uint PriceN
         {
             get { return __pbn__PriceN.GetValueOrDefault(); }
@@ -44,7 +44,7 @@ namespace Trezor.Net.Contracts.Stellar
         public void ResetPriceN() => __pbn__PriceN = null;
         private uint? __pbn__PriceN;
 
-        [global::ProtoBuf.ProtoMember(6, Name = @"price_d")]
+        [ProtoBuf.ProtoMember(6, Name = @"price_d")]
         public uint PriceD
         {
             get { return __pbn__PriceD.GetValueOrDefault(); }
@@ -54,7 +54,7 @@ namespace Trezor.Net.Contracts.Stellar
         public void ResetPriceD() => __pbn__PriceD = null;
         private uint? __pbn__PriceD;
 
-        [global::ProtoBuf.ProtoMember(7, Name = @"offer_id")]
+        [ProtoBuf.ProtoMember(7, Name = @"offer_id")]
         public ulong OfferId
         {
             get { return __pbn__OfferId.GetValueOrDefault(); }

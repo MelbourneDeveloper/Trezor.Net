@@ -1,14 +1,14 @@
 namespace Trezor.Net.Contracts.Bitcoin
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class TxRequest : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class TxRequest : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(RequestType.Txinput)]
+        [ProtoBuf.ProtoMember(1)]
+        [System.ComponentModel.DefaultValue(RequestType.Txinput)]
         public RequestType request_type
         {
             get { return __pbn__request_type ?? RequestType.Txinput; }
@@ -18,20 +18,20 @@ namespace Trezor.Net.Contracts.Bitcoin
         public void Resetrequest_type() => __pbn__request_type = null;
         private RequestType? __pbn__request_type;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"details")]
+        [ProtoBuf.ProtoMember(2, Name = @"details")]
         public TxRequestDetailsType Details { get; set; }
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"serialized")]
+        [ProtoBuf.ProtoMember(3, Name = @"serialized")]
         public TxRequestSerializedType Serialized { get; set; }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class TxRequestDetailsType : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class TxRequestDetailsType : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"request_index")]
+            [ProtoBuf.ProtoMember(1, Name = @"request_index")]
             public uint RequestIndex
             {
                 get { return __pbn__RequestIndex.GetValueOrDefault(); }
@@ -41,7 +41,7 @@ namespace Trezor.Net.Contracts.Bitcoin
             public void ResetRequestIndex() => __pbn__RequestIndex = null;
             private uint? __pbn__RequestIndex;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"tx_hash")]
+            [ProtoBuf.ProtoMember(2, Name = @"tx_hash")]
             public byte[] TxHash
             {
                 get { return __pbn__TxHash; }
@@ -51,7 +51,7 @@ namespace Trezor.Net.Contracts.Bitcoin
             public void ResetTxHash() => __pbn__TxHash = null;
             private byte[] __pbn__TxHash;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"extra_data_len")]
+            [ProtoBuf.ProtoMember(3, Name = @"extra_data_len")]
             public uint ExtraDataLen
             {
                 get { return __pbn__ExtraDataLen.GetValueOrDefault(); }
@@ -61,7 +61,7 @@ namespace Trezor.Net.Contracts.Bitcoin
             public void ResetExtraDataLen() => __pbn__ExtraDataLen = null;
             private uint? __pbn__ExtraDataLen;
 
-            [global::ProtoBuf.ProtoMember(4, Name = @"extra_data_offset")]
+            [ProtoBuf.ProtoMember(4, Name = @"extra_data_offset")]
             public uint ExtraDataOffset
             {
                 get { return __pbn__ExtraDataOffset.GetValueOrDefault(); }
@@ -73,14 +73,14 @@ namespace Trezor.Net.Contracts.Bitcoin
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class TxRequestSerializedType : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class TxRequestSerializedType : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"signature_index")]
+            [ProtoBuf.ProtoMember(1, Name = @"signature_index")]
             public uint SignatureIndex
             {
                 get { return __pbn__SignatureIndex.GetValueOrDefault(); }
@@ -90,7 +90,7 @@ namespace Trezor.Net.Contracts.Bitcoin
             public void ResetSignatureIndex() => __pbn__SignatureIndex = null;
             private uint? __pbn__SignatureIndex;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"signature")]
+            [ProtoBuf.ProtoMember(2, Name = @"signature")]
             public byte[] Signature
             {
                 get { return __pbn__Signature; }
@@ -100,7 +100,7 @@ namespace Trezor.Net.Contracts.Bitcoin
             public void ResetSignature() => __pbn__Signature = null;
             private byte[] __pbn__Signature;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"serialized_tx")]
+            [ProtoBuf.ProtoMember(3, Name = @"serialized_tx")]
             public byte[] SerializedTx
             {
                 get { return __pbn__SerializedTx; }
@@ -112,18 +112,18 @@ namespace Trezor.Net.Contracts.Bitcoin
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
+        [ProtoBuf.ProtoContract()]
         public enum RequestType
         {
-            [global::ProtoBuf.ProtoEnum(Name = @"TXINPUT")]
+            [ProtoBuf.ProtoEnum(Name = @"TXINPUT")]
             Txinput = 0,
-            [global::ProtoBuf.ProtoEnum(Name = @"TXOUTPUT")]
+            [ProtoBuf.ProtoEnum(Name = @"TXOUTPUT")]
             Txoutput = 1,
-            [global::ProtoBuf.ProtoEnum(Name = @"TXMETA")]
+            [ProtoBuf.ProtoEnum(Name = @"TXMETA")]
             Txmeta = 2,
-            [global::ProtoBuf.ProtoEnum(Name = @"TXFINISHED")]
+            [ProtoBuf.ProtoEnum(Name = @"TXFINISHED")]
             Txfinished = 3,
-            [global::ProtoBuf.ProtoEnum(Name = @"TXEXTRADATA")]
+            [ProtoBuf.ProtoEnum(Name = @"TXEXTRADATA")]
             Txextradata = 4,
         }
 

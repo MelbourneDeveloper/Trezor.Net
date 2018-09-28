@@ -1,33 +1,33 @@
 namespace Trezor.Net.Contracts.Ontology
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class OntologySignWithdrawOng : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class OntologySignWithdrawOng : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
         {
-            return global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            return ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
         }
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"address_n")]
+        [ProtoBuf.ProtoMember(1, Name = @"address_n")]
         public uint[] AddressNs { get; set; }
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"transaction")]
+        [ProtoBuf.ProtoMember(2, Name = @"transaction")]
         public OntologyTransaction Transaction { get; set; }
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"withdraw_ong")]
+        [ProtoBuf.ProtoMember(3, Name = @"withdraw_ong")]
         public OntologyWithdrawOng WithdrawOng { get; set; }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class OntologyWithdrawOng : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class OntologyWithdrawOng : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             {
-                return global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+                return ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
             }
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"amount")]
+            [ProtoBuf.ProtoMember(1, Name = @"amount")]
             public ulong Amount
             {
                 get => __pbn__Amount.GetValueOrDefault();
@@ -45,8 +45,8 @@ namespace Trezor.Net.Contracts.Ontology
 
             private ulong? __pbn__Amount;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"from_address")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(2, Name = @"from_address")]
+            [System.ComponentModel.DefaultValue("")]
             public string FromAddress
             {
                 get => __pbn__FromAddress ?? "";
@@ -64,8 +64,8 @@ namespace Trezor.Net.Contracts.Ontology
 
             private string __pbn__FromAddress;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"to_address")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(3, Name = @"to_address")]
+            [System.ComponentModel.DefaultValue("")]
             public string ToAddress
             {
                 get => __pbn__ToAddress ?? "";

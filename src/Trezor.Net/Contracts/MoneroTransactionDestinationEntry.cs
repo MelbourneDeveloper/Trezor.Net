@@ -1,13 +1,13 @@
 namespace Trezor.Net.Contracts.Monero
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class MoneroTransactionDestinationEntry : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class MoneroTransactionDestinationEntry : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"amount")]
+        [ProtoBuf.ProtoMember(1, Name = @"amount")]
         public ulong Amount
         {
             get { return __pbn__Amount.GetValueOrDefault(); }
@@ -17,10 +17,10 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetAmount() => __pbn__Amount = null;
         private ulong? __pbn__Amount;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"addr")]
+        [ProtoBuf.ProtoMember(2, Name = @"addr")]
         public MoneroAccountPublicAddress Addr { get; set; }
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"is_subaddress")]
+        [ProtoBuf.ProtoMember(3, Name = @"is_subaddress")]
         public bool IsSubaddress
         {
             get { return __pbn__IsSubaddress.GetValueOrDefault(); }
@@ -30,14 +30,14 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetIsSubaddress() => __pbn__IsSubaddress = null;
         private bool? __pbn__IsSubaddress;
 
-        [global::ProtoBuf.ProtoContract()]
-        public class MoneroAccountPublicAddress : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class MoneroAccountPublicAddress : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"spend_public_key")]
+            [ProtoBuf.ProtoMember(1, Name = @"spend_public_key")]
             public byte[] SpendPublicKey
             {
                 get { return __pbn__SpendPublicKey; }
@@ -47,7 +47,7 @@ namespace Trezor.Net.Contracts.Monero
             public void ResetSpendPublicKey() => __pbn__SpendPublicKey = null;
             private byte[] __pbn__SpendPublicKey;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"view_public_key")]
+            [ProtoBuf.ProtoMember(2, Name = @"view_public_key")]
             public byte[] ViewPublicKey
             {
                 get { return __pbn__ViewPublicKey; }

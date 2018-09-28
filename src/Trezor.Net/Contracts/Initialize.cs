@@ -6,14 +6,14 @@
 namespace Trezor.Net.Contracts.Management
 {
 
-    [global::ProtoBuf.ProtoContract()]
-    public class Initialize : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class Initialize : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"state")]
+        [ProtoBuf.ProtoMember(1, Name = @"state")]
         public byte[] State
         {
             get { return __pbn__State; }
@@ -23,7 +23,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetState() => __pbn__State = null;
         private byte[] __pbn__State;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"skip_passphrase")]
+        [ProtoBuf.ProtoMember(2, Name = @"skip_passphrase")]
         public bool SkipPassphrase
         {
             get { return __pbn__SkipPassphrase.GetValueOrDefault(); }

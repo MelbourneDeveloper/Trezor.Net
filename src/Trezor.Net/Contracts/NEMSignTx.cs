@@ -1,22 +1,22 @@
 namespace Trezor.Net.Contracts.NEM
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class NEMSignTx : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class NEMSignTx : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"transaction")]
+        [ProtoBuf.ProtoMember(1, Name = @"transaction")]
         public NEMTransactionCommon Transaction { get; set; }
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"multisig")]
+        [ProtoBuf.ProtoMember(2, Name = @"multisig")]
         public NEMTransactionCommon Multisig { get; set; }
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"transfer")]
+        [ProtoBuf.ProtoMember(3, Name = @"transfer")]
         public NEMTransfer Transfer { get; set; }
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"cosigning")]
+        [ProtoBuf.ProtoMember(4, Name = @"cosigning")]
         public bool Cosigning
         {
             get { return __pbn__Cosigning.GetValueOrDefault(); }
@@ -26,32 +26,32 @@ namespace Trezor.Net.Contracts.NEM
         public void ResetCosigning() => __pbn__Cosigning = null;
         private bool? __pbn__Cosigning;
 
-        [global::ProtoBuf.ProtoMember(5, Name = @"provision_namespace")]
+        [ProtoBuf.ProtoMember(5, Name = @"provision_namespace")]
         public NEMProvisionNamespace ProvisionNamespace { get; set; }
 
-        [global::ProtoBuf.ProtoMember(6, Name = @"mosaic_creation")]
+        [ProtoBuf.ProtoMember(6, Name = @"mosaic_creation")]
         public NEMMosaicCreation MosaicCreation { get; set; }
 
-        [global::ProtoBuf.ProtoMember(7, Name = @"supply_change")]
+        [ProtoBuf.ProtoMember(7, Name = @"supply_change")]
         public NEMMosaicSupplyChange SupplyChange { get; set; }
 
-        [global::ProtoBuf.ProtoMember(8, Name = @"aggregate_modification")]
+        [ProtoBuf.ProtoMember(8, Name = @"aggregate_modification")]
         public NEMAggregateModification AggregateModification { get; set; }
 
-        [global::ProtoBuf.ProtoMember(9, Name = @"importance_transfer")]
+        [ProtoBuf.ProtoMember(9, Name = @"importance_transfer")]
         public NEMImportanceTransfer ImportanceTransfer { get; set; }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class NEMTransactionCommon : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class NEMTransactionCommon : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"address_n")]
+            [ProtoBuf.ProtoMember(1, Name = @"address_n")]
             public uint[] AddressNs { get; set; }
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"network")]
+            [ProtoBuf.ProtoMember(2, Name = @"network")]
             public uint Network
             {
                 get { return __pbn__Network.GetValueOrDefault(); }
@@ -61,7 +61,7 @@ namespace Trezor.Net.Contracts.NEM
             public void ResetNetwork() => __pbn__Network = null;
             private uint? __pbn__Network;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"timestamp")]
+            [ProtoBuf.ProtoMember(3, Name = @"timestamp")]
             public uint Timestamp
             {
                 get { return __pbn__Timestamp.GetValueOrDefault(); }
@@ -71,7 +71,7 @@ namespace Trezor.Net.Contracts.NEM
             public void ResetTimestamp() => __pbn__Timestamp = null;
             private uint? __pbn__Timestamp;
 
-            [global::ProtoBuf.ProtoMember(4, Name = @"fee")]
+            [ProtoBuf.ProtoMember(4, Name = @"fee")]
             public ulong Fee
             {
                 get { return __pbn__Fee.GetValueOrDefault(); }
@@ -81,7 +81,7 @@ namespace Trezor.Net.Contracts.NEM
             public void ResetFee() => __pbn__Fee = null;
             private ulong? __pbn__Fee;
 
-            [global::ProtoBuf.ProtoMember(5, Name = @"deadline")]
+            [ProtoBuf.ProtoMember(5, Name = @"deadline")]
             public uint Deadline
             {
                 get { return __pbn__Deadline.GetValueOrDefault(); }
@@ -91,7 +91,7 @@ namespace Trezor.Net.Contracts.NEM
             public void ResetDeadline() => __pbn__Deadline = null;
             private uint? __pbn__Deadline;
 
-            [global::ProtoBuf.ProtoMember(6, Name = @"signer")]
+            [ProtoBuf.ProtoMember(6, Name = @"signer")]
             public byte[] Signer
             {
                 get { return __pbn__Signer; }
@@ -103,15 +103,15 @@ namespace Trezor.Net.Contracts.NEM
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class NEMTransfer : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class NEMTransfer : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"recipient")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(1, Name = @"recipient")]
+            [System.ComponentModel.DefaultValue("")]
             public string Recipient
             {
                 get { return __pbn__Recipient ?? ""; }
@@ -121,7 +121,7 @@ namespace Trezor.Net.Contracts.NEM
             public void ResetRecipient() => __pbn__Recipient = null;
             private string __pbn__Recipient;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"amount")]
+            [ProtoBuf.ProtoMember(2, Name = @"amount")]
             public ulong Amount
             {
                 get { return __pbn__Amount.GetValueOrDefault(); }
@@ -131,7 +131,7 @@ namespace Trezor.Net.Contracts.NEM
             public void ResetAmount() => __pbn__Amount = null;
             private ulong? __pbn__Amount;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"payload")]
+            [ProtoBuf.ProtoMember(3, Name = @"payload")]
             public byte[] Payload
             {
                 get { return __pbn__Payload; }
@@ -141,7 +141,7 @@ namespace Trezor.Net.Contracts.NEM
             public void ResetPayload() => __pbn__Payload = null;
             private byte[] __pbn__Payload;
 
-            [global::ProtoBuf.ProtoMember(4, Name = @"public_key")]
+            [ProtoBuf.ProtoMember(4, Name = @"public_key")]
             public byte[] PublicKey
             {
                 get { return __pbn__PublicKey; }
@@ -151,18 +151,18 @@ namespace Trezor.Net.Contracts.NEM
             public void ResetPublicKey() => __pbn__PublicKey = null;
             private byte[] __pbn__PublicKey;
 
-            [global::ProtoBuf.ProtoMember(5, Name = @"mosaics")]
-            public global::System.Collections.Generic.List<NEMMosaic> Mosaics { get; } = new global::System.Collections.Generic.List<NEMMosaic>();
+            [ProtoBuf.ProtoMember(5, Name = @"mosaics")]
+            public System.Collections.Generic.List<NEMMosaic> Mosaics { get; } = new System.Collections.Generic.List<NEMMosaic>();
 
-            [global::ProtoBuf.ProtoContract()]
-            public class NEMMosaic : global::ProtoBuf.IExtensible
+            [ProtoBuf.ProtoContract()]
+            public class NEMMosaic : ProtoBuf.IExtensible
             {
-                private global::ProtoBuf.IExtension __pbn__extensionData;
-                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+                private ProtoBuf.IExtension __pbn__extensionData;
+                ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-                [global::ProtoBuf.ProtoMember(1, Name = @"namespace")]
-                [global::System.ComponentModel.DefaultValue("")]
+                [ProtoBuf.ProtoMember(1, Name = @"namespace")]
+                [System.ComponentModel.DefaultValue("")]
                 public string Namespace
                 {
                     get { return __pbn__Namespace ?? ""; }
@@ -172,8 +172,8 @@ namespace Trezor.Net.Contracts.NEM
                 public void ResetNamespace() => __pbn__Namespace = null;
                 private string __pbn__Namespace;
 
-                [global::ProtoBuf.ProtoMember(2, Name = @"mosaic")]
-                [global::System.ComponentModel.DefaultValue("")]
+                [ProtoBuf.ProtoMember(2, Name = @"mosaic")]
+                [System.ComponentModel.DefaultValue("")]
                 public string Mosaic
                 {
                     get { return __pbn__Mosaic ?? ""; }
@@ -183,7 +183,7 @@ namespace Trezor.Net.Contracts.NEM
                 public void ResetMosaic() => __pbn__Mosaic = null;
                 private string __pbn__Mosaic;
 
-                [global::ProtoBuf.ProtoMember(3, Name = @"quantity")]
+                [ProtoBuf.ProtoMember(3, Name = @"quantity")]
                 public ulong Quantity
                 {
                     get { return __pbn__Quantity.GetValueOrDefault(); }
@@ -197,15 +197,15 @@ namespace Trezor.Net.Contracts.NEM
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class NEMProvisionNamespace : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class NEMProvisionNamespace : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"namespace")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(1, Name = @"namespace")]
+            [System.ComponentModel.DefaultValue("")]
             public string Namespace
             {
                 get { return __pbn__Namespace ?? ""; }
@@ -215,8 +215,8 @@ namespace Trezor.Net.Contracts.NEM
             public void ResetNamespace() => __pbn__Namespace = null;
             private string __pbn__Namespace;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"parent")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(2, Name = @"parent")]
+            [System.ComponentModel.DefaultValue("")]
             public string Parent
             {
                 get { return __pbn__Parent ?? ""; }
@@ -226,8 +226,8 @@ namespace Trezor.Net.Contracts.NEM
             public void ResetParent() => __pbn__Parent = null;
             private string __pbn__Parent;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"sink")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(3, Name = @"sink")]
+            [System.ComponentModel.DefaultValue("")]
             public string Sink
             {
                 get { return __pbn__Sink ?? ""; }
@@ -237,7 +237,7 @@ namespace Trezor.Net.Contracts.NEM
             public void ResetSink() => __pbn__Sink = null;
             private string __pbn__Sink;
 
-            [global::ProtoBuf.ProtoMember(4, Name = @"fee")]
+            [ProtoBuf.ProtoMember(4, Name = @"fee")]
             public ulong Fee
             {
                 get { return __pbn__Fee.GetValueOrDefault(); }
@@ -249,18 +249,18 @@ namespace Trezor.Net.Contracts.NEM
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class NEMMosaicCreation : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class NEMMosaicCreation : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"definition")]
+            [ProtoBuf.ProtoMember(1, Name = @"definition")]
             public NEMMosaicDefinition Definition { get; set; }
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"sink")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(2, Name = @"sink")]
+            [System.ComponentModel.DefaultValue("")]
             public string Sink
             {
                 get { return __pbn__Sink ?? ""; }
@@ -270,7 +270,7 @@ namespace Trezor.Net.Contracts.NEM
             public void ResetSink() => __pbn__Sink = null;
             private string __pbn__Sink;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"fee")]
+            [ProtoBuf.ProtoMember(3, Name = @"fee")]
             public ulong Fee
             {
                 get { return __pbn__Fee.GetValueOrDefault(); }
@@ -280,15 +280,15 @@ namespace Trezor.Net.Contracts.NEM
             public void ResetFee() => __pbn__Fee = null;
             private ulong? __pbn__Fee;
 
-            [global::ProtoBuf.ProtoContract()]
-            public class NEMMosaicDefinition : global::ProtoBuf.IExtensible
+            [ProtoBuf.ProtoContract()]
+            public class NEMMosaicDefinition : ProtoBuf.IExtensible
             {
-                private global::ProtoBuf.IExtension __pbn__extensionData;
-                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+                private ProtoBuf.IExtension __pbn__extensionData;
+                ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-                [global::ProtoBuf.ProtoMember(1, Name = @"name")]
-                [global::System.ComponentModel.DefaultValue("")]
+                [ProtoBuf.ProtoMember(1, Name = @"name")]
+                [System.ComponentModel.DefaultValue("")]
                 public string Name
                 {
                     get { return __pbn__Name ?? ""; }
@@ -298,8 +298,8 @@ namespace Trezor.Net.Contracts.NEM
                 public void ResetName() => __pbn__Name = null;
                 private string __pbn__Name;
 
-                [global::ProtoBuf.ProtoMember(2, Name = @"ticker")]
-                [global::System.ComponentModel.DefaultValue("")]
+                [ProtoBuf.ProtoMember(2, Name = @"ticker")]
+                [System.ComponentModel.DefaultValue("")]
                 public string Ticker
                 {
                     get { return __pbn__Ticker ?? ""; }
@@ -309,8 +309,8 @@ namespace Trezor.Net.Contracts.NEM
                 public void ResetTicker() => __pbn__Ticker = null;
                 private string __pbn__Ticker;
 
-                [global::ProtoBuf.ProtoMember(3, Name = @"namespace")]
-                [global::System.ComponentModel.DefaultValue("")]
+                [ProtoBuf.ProtoMember(3, Name = @"namespace")]
+                [System.ComponentModel.DefaultValue("")]
                 public string Namespace
                 {
                     get { return __pbn__Namespace ?? ""; }
@@ -320,8 +320,8 @@ namespace Trezor.Net.Contracts.NEM
                 public void ResetNamespace() => __pbn__Namespace = null;
                 private string __pbn__Namespace;
 
-                [global::ProtoBuf.ProtoMember(4, Name = @"mosaic")]
-                [global::System.ComponentModel.DefaultValue("")]
+                [ProtoBuf.ProtoMember(4, Name = @"mosaic")]
+                [System.ComponentModel.DefaultValue("")]
                 public string Mosaic
                 {
                     get { return __pbn__Mosaic ?? ""; }
@@ -331,7 +331,7 @@ namespace Trezor.Net.Contracts.NEM
                 public void ResetMosaic() => __pbn__Mosaic = null;
                 private string __pbn__Mosaic;
 
-                [global::ProtoBuf.ProtoMember(5, Name = @"divisibility")]
+                [ProtoBuf.ProtoMember(5, Name = @"divisibility")]
                 public uint Divisibility
                 {
                     get { return __pbn__Divisibility.GetValueOrDefault(); }
@@ -341,8 +341,8 @@ namespace Trezor.Net.Contracts.NEM
                 public void ResetDivisibility() => __pbn__Divisibility = null;
                 private uint? __pbn__Divisibility;
 
-                [global::ProtoBuf.ProtoMember(6, Name = @"levy")]
-                [global::System.ComponentModel.DefaultValue(NEMMosaicLevy.MosaicLevyAbsolute)]
+                [ProtoBuf.ProtoMember(6, Name = @"levy")]
+                [System.ComponentModel.DefaultValue(NEMMosaicLevy.MosaicLevyAbsolute)]
                 public NEMMosaicLevy Levy
                 {
                     get { return __pbn__Levy ?? NEMMosaicLevy.MosaicLevyAbsolute; }
@@ -352,7 +352,7 @@ namespace Trezor.Net.Contracts.NEM
                 public void ResetLevy() => __pbn__Levy = null;
                 private NEMMosaicLevy? __pbn__Levy;
 
-                [global::ProtoBuf.ProtoMember(7, Name = @"fee")]
+                [ProtoBuf.ProtoMember(7, Name = @"fee")]
                 public ulong Fee
                 {
                     get { return __pbn__Fee.GetValueOrDefault(); }
@@ -362,8 +362,8 @@ namespace Trezor.Net.Contracts.NEM
                 public void ResetFee() => __pbn__Fee = null;
                 private ulong? __pbn__Fee;
 
-                [global::ProtoBuf.ProtoMember(8, Name = @"levy_address")]
-                [global::System.ComponentModel.DefaultValue("")]
+                [ProtoBuf.ProtoMember(8, Name = @"levy_address")]
+                [System.ComponentModel.DefaultValue("")]
                 public string LevyAddress
                 {
                     get { return __pbn__LevyAddress ?? ""; }
@@ -373,8 +373,8 @@ namespace Trezor.Net.Contracts.NEM
                 public void ResetLevyAddress() => __pbn__LevyAddress = null;
                 private string __pbn__LevyAddress;
 
-                [global::ProtoBuf.ProtoMember(9, Name = @"levy_namespace")]
-                [global::System.ComponentModel.DefaultValue("")]
+                [ProtoBuf.ProtoMember(9, Name = @"levy_namespace")]
+                [System.ComponentModel.DefaultValue("")]
                 public string LevyNamespace
                 {
                     get { return __pbn__LevyNamespace ?? ""; }
@@ -384,8 +384,8 @@ namespace Trezor.Net.Contracts.NEM
                 public void ResetLevyNamespace() => __pbn__LevyNamespace = null;
                 private string __pbn__LevyNamespace;
 
-                [global::ProtoBuf.ProtoMember(10, Name = @"levy_mosaic")]
-                [global::System.ComponentModel.DefaultValue("")]
+                [ProtoBuf.ProtoMember(10, Name = @"levy_mosaic")]
+                [System.ComponentModel.DefaultValue("")]
                 public string LevyMosaic
                 {
                     get { return __pbn__LevyMosaic ?? ""; }
@@ -395,7 +395,7 @@ namespace Trezor.Net.Contracts.NEM
                 public void ResetLevyMosaic() => __pbn__LevyMosaic = null;
                 private string __pbn__LevyMosaic;
 
-                [global::ProtoBuf.ProtoMember(11, Name = @"supply")]
+                [ProtoBuf.ProtoMember(11, Name = @"supply")]
                 public ulong Supply
                 {
                     get { return __pbn__Supply.GetValueOrDefault(); }
@@ -405,7 +405,7 @@ namespace Trezor.Net.Contracts.NEM
                 public void ResetSupply() => __pbn__Supply = null;
                 private ulong? __pbn__Supply;
 
-                [global::ProtoBuf.ProtoMember(12, Name = @"mutable_supply")]
+                [ProtoBuf.ProtoMember(12, Name = @"mutable_supply")]
                 public bool MutableSupply
                 {
                     get { return __pbn__MutableSupply.GetValueOrDefault(); }
@@ -415,7 +415,7 @@ namespace Trezor.Net.Contracts.NEM
                 public void ResetMutableSupply() => __pbn__MutableSupply = null;
                 private bool? __pbn__MutableSupply;
 
-                [global::ProtoBuf.ProtoMember(13, Name = @"transferable")]
+                [ProtoBuf.ProtoMember(13, Name = @"transferable")]
                 public bool Transferable
                 {
                     get { return __pbn__Transferable.GetValueOrDefault(); }
@@ -425,8 +425,8 @@ namespace Trezor.Net.Contracts.NEM
                 public void ResetTransferable() => __pbn__Transferable = null;
                 private bool? __pbn__Transferable;
 
-                [global::ProtoBuf.ProtoMember(14, Name = @"description")]
-                [global::System.ComponentModel.DefaultValue("")]
+                [ProtoBuf.ProtoMember(14, Name = @"description")]
+                [System.ComponentModel.DefaultValue("")]
                 public string Description
                 {
                     get { return __pbn__Description ?? ""; }
@@ -436,15 +436,15 @@ namespace Trezor.Net.Contracts.NEM
                 public void ResetDescription() => __pbn__Description = null;
                 private string __pbn__Description;
 
-                [global::ProtoBuf.ProtoMember(15, Name = @"networks")]
+                [ProtoBuf.ProtoMember(15, Name = @"networks")]
                 public uint[] Networks { get; set; }
 
-                [global::ProtoBuf.ProtoContract()]
+                [ProtoBuf.ProtoContract()]
                 public enum NEMMosaicLevy
                 {
-                    [global::ProtoBuf.ProtoEnum(Name = @"MosaicLevy_Absolute")]
+                    [ProtoBuf.ProtoEnum(Name = @"MosaicLevy_Absolute")]
                     MosaicLevyAbsolute = 1,
-                    [global::ProtoBuf.ProtoEnum(Name = @"MosaicLevy_Percentile")]
+                    [ProtoBuf.ProtoEnum(Name = @"MosaicLevy_Percentile")]
                     MosaicLevyPercentile = 2,
                 }
 
@@ -452,15 +452,15 @@ namespace Trezor.Net.Contracts.NEM
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class NEMMosaicSupplyChange : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class NEMMosaicSupplyChange : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"namespace")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(1, Name = @"namespace")]
+            [System.ComponentModel.DefaultValue("")]
             public string Namespace
             {
                 get { return __pbn__Namespace ?? ""; }
@@ -470,8 +470,8 @@ namespace Trezor.Net.Contracts.NEM
             public void ResetNamespace() => __pbn__Namespace = null;
             private string __pbn__Namespace;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"mosaic")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(2, Name = @"mosaic")]
+            [System.ComponentModel.DefaultValue("")]
             public string Mosaic
             {
                 get { return __pbn__Mosaic ?? ""; }
@@ -481,8 +481,8 @@ namespace Trezor.Net.Contracts.NEM
             public void ResetMosaic() => __pbn__Mosaic = null;
             private string __pbn__Mosaic;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"type")]
-            [global::System.ComponentModel.DefaultValue(NEMSupplyChangeType.SupplyChangeIncrease)]
+            [ProtoBuf.ProtoMember(3, Name = @"type")]
+            [System.ComponentModel.DefaultValue(NEMSupplyChangeType.SupplyChangeIncrease)]
             public NEMSupplyChangeType Type
             {
                 get { return __pbn__Type ?? NEMSupplyChangeType.SupplyChangeIncrease; }
@@ -492,7 +492,7 @@ namespace Trezor.Net.Contracts.NEM
             public void ResetType() => __pbn__Type = null;
             private NEMSupplyChangeType? __pbn__Type;
 
-            [global::ProtoBuf.ProtoMember(4, Name = @"delta")]
+            [ProtoBuf.ProtoMember(4, Name = @"delta")]
             public ulong Delta
             {
                 get { return __pbn__Delta.GetValueOrDefault(); }
@@ -502,28 +502,28 @@ namespace Trezor.Net.Contracts.NEM
             public void ResetDelta() => __pbn__Delta = null;
             private ulong? __pbn__Delta;
 
-            [global::ProtoBuf.ProtoContract()]
+            [ProtoBuf.ProtoContract()]
             public enum NEMSupplyChangeType
             {
-                [global::ProtoBuf.ProtoEnum(Name = @"SupplyChange_Increase")]
+                [ProtoBuf.ProtoEnum(Name = @"SupplyChange_Increase")]
                 SupplyChangeIncrease = 1,
-                [global::ProtoBuf.ProtoEnum(Name = @"SupplyChange_Decrease")]
+                [ProtoBuf.ProtoEnum(Name = @"SupplyChange_Decrease")]
                 SupplyChangeDecrease = 2,
             }
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class NEMAggregateModification : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class NEMAggregateModification : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"modifications")]
-            public global::System.Collections.Generic.List<NEMCosignatoryModification> Modifications { get; } = new global::System.Collections.Generic.List<NEMCosignatoryModification>();
+            [ProtoBuf.ProtoMember(1, Name = @"modifications")]
+            public System.Collections.Generic.List<NEMCosignatoryModification> Modifications { get; } = new System.Collections.Generic.List<NEMCosignatoryModification>();
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"relative_change", DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
+            [ProtoBuf.ProtoMember(2, Name = @"relative_change", DataFormat = ProtoBuf.DataFormat.ZigZag)]
             public int RelativeChange
             {
                 get { return __pbn__RelativeChange.GetValueOrDefault(); }
@@ -533,15 +533,15 @@ namespace Trezor.Net.Contracts.NEM
             public void ResetRelativeChange() => __pbn__RelativeChange = null;
             private int? __pbn__RelativeChange;
 
-            [global::ProtoBuf.ProtoContract()]
-            public class NEMCosignatoryModification : global::ProtoBuf.IExtensible
+            [ProtoBuf.ProtoContract()]
+            public class NEMCosignatoryModification : ProtoBuf.IExtensible
             {
-                private global::ProtoBuf.IExtension __pbn__extensionData;
-                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+                private ProtoBuf.IExtension __pbn__extensionData;
+                ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-                [global::ProtoBuf.ProtoMember(1, Name = @"type")]
-                [global::System.ComponentModel.DefaultValue(NEMModificationType.CosignatoryModificationAdd)]
+                [ProtoBuf.ProtoMember(1, Name = @"type")]
+                [System.ComponentModel.DefaultValue(NEMModificationType.CosignatoryModificationAdd)]
                 public NEMModificationType Type
                 {
                     get { return __pbn__Type ?? NEMModificationType.CosignatoryModificationAdd; }
@@ -551,7 +551,7 @@ namespace Trezor.Net.Contracts.NEM
                 public void ResetType() => __pbn__Type = null;
                 private NEMModificationType? __pbn__Type;
 
-                [global::ProtoBuf.ProtoMember(2, Name = @"public_key")]
+                [ProtoBuf.ProtoMember(2, Name = @"public_key")]
                 public byte[] PublicKey
                 {
                     get { return __pbn__PublicKey; }
@@ -561,12 +561,12 @@ namespace Trezor.Net.Contracts.NEM
                 public void ResetPublicKey() => __pbn__PublicKey = null;
                 private byte[] __pbn__PublicKey;
 
-                [global::ProtoBuf.ProtoContract()]
+                [ProtoBuf.ProtoContract()]
                 public enum NEMModificationType
                 {
-                    [global::ProtoBuf.ProtoEnum(Name = @"CosignatoryModification_Add")]
+                    [ProtoBuf.ProtoEnum(Name = @"CosignatoryModification_Add")]
                     CosignatoryModificationAdd = 1,
-                    [global::ProtoBuf.ProtoEnum(Name = @"CosignatoryModification_Delete")]
+                    [ProtoBuf.ProtoEnum(Name = @"CosignatoryModification_Delete")]
                     CosignatoryModificationDelete = 2,
                 }
 
@@ -574,15 +574,15 @@ namespace Trezor.Net.Contracts.NEM
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class NEMImportanceTransfer : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class NEMImportanceTransfer : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"mode")]
-            [global::System.ComponentModel.DefaultValue(NEMImportanceTransferMode.ImportanceTransferActivate)]
+            [ProtoBuf.ProtoMember(1, Name = @"mode")]
+            [System.ComponentModel.DefaultValue(NEMImportanceTransferMode.ImportanceTransferActivate)]
             public NEMImportanceTransferMode Mode
             {
                 get { return __pbn__Mode ?? NEMImportanceTransferMode.ImportanceTransferActivate; }
@@ -592,7 +592,7 @@ namespace Trezor.Net.Contracts.NEM
             public void ResetMode() => __pbn__Mode = null;
             private NEMImportanceTransferMode? __pbn__Mode;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"public_key")]
+            [ProtoBuf.ProtoMember(2, Name = @"public_key")]
             public byte[] PublicKey
             {
                 get { return __pbn__PublicKey; }
@@ -602,12 +602,12 @@ namespace Trezor.Net.Contracts.NEM
             public void ResetPublicKey() => __pbn__PublicKey = null;
             private byte[] __pbn__PublicKey;
 
-            [global::ProtoBuf.ProtoContract()]
+            [ProtoBuf.ProtoContract()]
             public enum NEMImportanceTransferMode
             {
-                [global::ProtoBuf.ProtoEnum(Name = @"ImportanceTransfer_Activate")]
+                [ProtoBuf.ProtoEnum(Name = @"ImportanceTransfer_Activate")]
                 ImportanceTransferActivate = 1,
-                [global::ProtoBuf.ProtoEnum(Name = @"ImportanceTransfer_Deactivate")]
+                [ProtoBuf.ProtoEnum(Name = @"ImportanceTransfer_Deactivate")]
                 ImportanceTransferDeactivate = 2,
             }
 

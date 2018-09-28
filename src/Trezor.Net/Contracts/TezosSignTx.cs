@@ -1,16 +1,16 @@
 namespace Trezor.Net.Contracts.Tezos
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class TezosSignTx : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class TezosSignTx : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"address_n")]
+        [ProtoBuf.ProtoMember(1, Name = @"address_n")]
         public uint[] AddressNs { get; set; }
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"branch")]
+        [ProtoBuf.ProtoMember(2, Name = @"branch")]
         public byte[] Branch
         {
             get { return __pbn__Branch; }
@@ -20,27 +20,27 @@ namespace Trezor.Net.Contracts.Tezos
         public void ResetBranch() => __pbn__Branch = null;
         private byte[] __pbn__Branch;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"reveal")]
+        [ProtoBuf.ProtoMember(3, Name = @"reveal")]
         public TezosRevealOp Reveal { get; set; }
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"transaction")]
+        [ProtoBuf.ProtoMember(4, Name = @"transaction")]
         public TezosTransactionOp Transaction { get; set; }
 
-        [global::ProtoBuf.ProtoMember(5, Name = @"origination")]
+        [ProtoBuf.ProtoMember(5, Name = @"origination")]
         public TezosOriginationOp Origination { get; set; }
 
-        [global::ProtoBuf.ProtoMember(6, Name = @"delegation")]
+        [ProtoBuf.ProtoMember(6, Name = @"delegation")]
         public TezosDelegationOp Delegation { get; set; }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class TezosContractID : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class TezosContractID : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"tag")]
-            [global::System.ComponentModel.DefaultValue(TezosContractType.Implicit)]
+            [ProtoBuf.ProtoMember(1, Name = @"tag")]
+            [System.ComponentModel.DefaultValue(TezosContractType.Implicit)]
             public TezosContractType Tag
             {
                 get { return __pbn__Tag ?? TezosContractType.Implicit; }
@@ -50,7 +50,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetTag() => __pbn__Tag = null;
             private TezosContractType? __pbn__Tag;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"hash")]
+            [ProtoBuf.ProtoMember(2, Name = @"hash")]
             public byte[] Hash
             {
                 get { return __pbn__Hash; }
@@ -60,7 +60,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetHash() => __pbn__Hash = null;
             private byte[] __pbn__Hash;
 
-            [global::ProtoBuf.ProtoContract()]
+            [ProtoBuf.ProtoContract()]
             public enum TezosContractType
             {
                 Implicit = 0,
@@ -69,17 +69,17 @@ namespace Trezor.Net.Contracts.Tezos
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class TezosRevealOp : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class TezosRevealOp : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"source")]
-            public TezosSignTx.TezosContractID Source { get; set; }
+            [ProtoBuf.ProtoMember(1, Name = @"source")]
+            public TezosContractID Source { get; set; }
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"fee")]
+            [ProtoBuf.ProtoMember(2, Name = @"fee")]
             public ulong Fee
             {
                 get { return __pbn__Fee.GetValueOrDefault(); }
@@ -89,7 +89,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetFee() => __pbn__Fee = null;
             private ulong? __pbn__Fee;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"counter")]
+            [ProtoBuf.ProtoMember(3, Name = @"counter")]
             public ulong Counter
             {
                 get { return __pbn__Counter.GetValueOrDefault(); }
@@ -99,7 +99,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetCounter() => __pbn__Counter = null;
             private ulong? __pbn__Counter;
 
-            [global::ProtoBuf.ProtoMember(4, Name = @"gas_limit")]
+            [ProtoBuf.ProtoMember(4, Name = @"gas_limit")]
             public ulong GasLimit
             {
                 get { return __pbn__GasLimit.GetValueOrDefault(); }
@@ -109,7 +109,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetGasLimit() => __pbn__GasLimit = null;
             private ulong? __pbn__GasLimit;
 
-            [global::ProtoBuf.ProtoMember(5, Name = @"storage_limit")]
+            [ProtoBuf.ProtoMember(5, Name = @"storage_limit")]
             public ulong StorageLimit
             {
                 get { return __pbn__StorageLimit.GetValueOrDefault(); }
@@ -119,7 +119,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetStorageLimit() => __pbn__StorageLimit = null;
             private ulong? __pbn__StorageLimit;
 
-            [global::ProtoBuf.ProtoMember(6, Name = @"public_key")]
+            [ProtoBuf.ProtoMember(6, Name = @"public_key")]
             public byte[] PublicKey
             {
                 get { return __pbn__PublicKey; }
@@ -131,17 +131,17 @@ namespace Trezor.Net.Contracts.Tezos
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class TezosTransactionOp : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class TezosTransactionOp : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"source")]
-            public TezosSignTx.TezosContractID Source { get; set; }
+            [ProtoBuf.ProtoMember(1, Name = @"source")]
+            public TezosContractID Source { get; set; }
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"fee")]
+            [ProtoBuf.ProtoMember(2, Name = @"fee")]
             public ulong Fee
             {
                 get { return __pbn__Fee.GetValueOrDefault(); }
@@ -151,7 +151,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetFee() => __pbn__Fee = null;
             private ulong? __pbn__Fee;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"counter")]
+            [ProtoBuf.ProtoMember(3, Name = @"counter")]
             public ulong Counter
             {
                 get { return __pbn__Counter.GetValueOrDefault(); }
@@ -161,7 +161,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetCounter() => __pbn__Counter = null;
             private ulong? __pbn__Counter;
 
-            [global::ProtoBuf.ProtoMember(4, Name = @"gas_limit")]
+            [ProtoBuf.ProtoMember(4, Name = @"gas_limit")]
             public ulong GasLimit
             {
                 get { return __pbn__GasLimit.GetValueOrDefault(); }
@@ -171,7 +171,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetGasLimit() => __pbn__GasLimit = null;
             private ulong? __pbn__GasLimit;
 
-            [global::ProtoBuf.ProtoMember(5, Name = @"storage_limit")]
+            [ProtoBuf.ProtoMember(5, Name = @"storage_limit")]
             public ulong StorageLimit
             {
                 get { return __pbn__StorageLimit.GetValueOrDefault(); }
@@ -181,7 +181,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetStorageLimit() => __pbn__StorageLimit = null;
             private ulong? __pbn__StorageLimit;
 
-            [global::ProtoBuf.ProtoMember(6, Name = @"amount")]
+            [ProtoBuf.ProtoMember(6, Name = @"amount")]
             public ulong Amount
             {
                 get { return __pbn__Amount.GetValueOrDefault(); }
@@ -191,10 +191,10 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetAmount() => __pbn__Amount = null;
             private ulong? __pbn__Amount;
 
-            [global::ProtoBuf.ProtoMember(7, Name = @"destination")]
-            public TezosSignTx.TezosContractID Destination { get; set; }
+            [ProtoBuf.ProtoMember(7, Name = @"destination")]
+            public TezosContractID Destination { get; set; }
 
-            [global::ProtoBuf.ProtoMember(8, Name = @"parameters")]
+            [ProtoBuf.ProtoMember(8, Name = @"parameters")]
             public byte[] Parameters
             {
                 get { return __pbn__Parameters; }
@@ -206,17 +206,17 @@ namespace Trezor.Net.Contracts.Tezos
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class TezosOriginationOp : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class TezosOriginationOp : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"source")]
-            public TezosSignTx.TezosContractID Source { get; set; }
+            [ProtoBuf.ProtoMember(1, Name = @"source")]
+            public TezosContractID Source { get; set; }
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"fee")]
+            [ProtoBuf.ProtoMember(2, Name = @"fee")]
             public ulong Fee
             {
                 get { return __pbn__Fee.GetValueOrDefault(); }
@@ -226,7 +226,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetFee() => __pbn__Fee = null;
             private ulong? __pbn__Fee;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"counter")]
+            [ProtoBuf.ProtoMember(3, Name = @"counter")]
             public ulong Counter
             {
                 get { return __pbn__Counter.GetValueOrDefault(); }
@@ -236,7 +236,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetCounter() => __pbn__Counter = null;
             private ulong? __pbn__Counter;
 
-            [global::ProtoBuf.ProtoMember(4, Name = @"gas_limit")]
+            [ProtoBuf.ProtoMember(4, Name = @"gas_limit")]
             public ulong GasLimit
             {
                 get { return __pbn__GasLimit.GetValueOrDefault(); }
@@ -246,7 +246,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetGasLimit() => __pbn__GasLimit = null;
             private ulong? __pbn__GasLimit;
 
-            [global::ProtoBuf.ProtoMember(5, Name = @"storage_limit")]
+            [ProtoBuf.ProtoMember(5, Name = @"storage_limit")]
             public ulong StorageLimit
             {
                 get { return __pbn__StorageLimit.GetValueOrDefault(); }
@@ -256,7 +256,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetStorageLimit() => __pbn__StorageLimit = null;
             private ulong? __pbn__StorageLimit;
 
-            [global::ProtoBuf.ProtoMember(6, Name = @"manager_pubkey")]
+            [ProtoBuf.ProtoMember(6, Name = @"manager_pubkey")]
             public byte[] ManagerPubkey
             {
                 get { return __pbn__ManagerPubkey; }
@@ -266,7 +266,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetManagerPubkey() => __pbn__ManagerPubkey = null;
             private byte[] __pbn__ManagerPubkey;
 
-            [global::ProtoBuf.ProtoMember(7, Name = @"balance")]
+            [ProtoBuf.ProtoMember(7, Name = @"balance")]
             public ulong Balance
             {
                 get { return __pbn__Balance.GetValueOrDefault(); }
@@ -276,7 +276,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetBalance() => __pbn__Balance = null;
             private ulong? __pbn__Balance;
 
-            [global::ProtoBuf.ProtoMember(8, Name = @"spendable")]
+            [ProtoBuf.ProtoMember(8, Name = @"spendable")]
             public bool Spendable
             {
                 get { return __pbn__Spendable.GetValueOrDefault(); }
@@ -286,7 +286,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetSpendable() => __pbn__Spendable = null;
             private bool? __pbn__Spendable;
 
-            [global::ProtoBuf.ProtoMember(9, Name = @"delegatable")]
+            [ProtoBuf.ProtoMember(9, Name = @"delegatable")]
             public bool Delegatable
             {
                 get { return __pbn__Delegatable.GetValueOrDefault(); }
@@ -296,7 +296,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetDelegatable() => __pbn__Delegatable = null;
             private bool? __pbn__Delegatable;
 
-            [global::ProtoBuf.ProtoMember(10, Name = @"delegate")]
+            [ProtoBuf.ProtoMember(10, Name = @"delegate")]
             public byte[] Delegate
             {
                 get { return __pbn__Delegate; }
@@ -306,7 +306,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetDelegate() => __pbn__Delegate = null;
             private byte[] __pbn__Delegate;
 
-            [global::ProtoBuf.ProtoMember(11, Name = @"script")]
+            [ProtoBuf.ProtoMember(11, Name = @"script")]
             public byte[] Script
             {
                 get { return __pbn__Script; }
@@ -318,17 +318,17 @@ namespace Trezor.Net.Contracts.Tezos
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class TezosDelegationOp : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class TezosDelegationOp : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"source")]
-            public TezosSignTx.TezosContractID Source { get; set; }
+            [ProtoBuf.ProtoMember(1, Name = @"source")]
+            public TezosContractID Source { get; set; }
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"fee")]
+            [ProtoBuf.ProtoMember(2, Name = @"fee")]
             public ulong Fee
             {
                 get { return __pbn__Fee.GetValueOrDefault(); }
@@ -338,7 +338,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetFee() => __pbn__Fee = null;
             private ulong? __pbn__Fee;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"counter")]
+            [ProtoBuf.ProtoMember(3, Name = @"counter")]
             public ulong Counter
             {
                 get { return __pbn__Counter.GetValueOrDefault(); }
@@ -348,7 +348,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetCounter() => __pbn__Counter = null;
             private ulong? __pbn__Counter;
 
-            [global::ProtoBuf.ProtoMember(4, Name = @"gas_limit")]
+            [ProtoBuf.ProtoMember(4, Name = @"gas_limit")]
             public ulong GasLimit
             {
                 get { return __pbn__GasLimit.GetValueOrDefault(); }
@@ -358,7 +358,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetGasLimit() => __pbn__GasLimit = null;
             private ulong? __pbn__GasLimit;
 
-            [global::ProtoBuf.ProtoMember(5, Name = @"storage_limit")]
+            [ProtoBuf.ProtoMember(5, Name = @"storage_limit")]
             public ulong StorageLimit
             {
                 get { return __pbn__StorageLimit.GetValueOrDefault(); }
@@ -368,7 +368,7 @@ namespace Trezor.Net.Contracts.Tezos
             public void ResetStorageLimit() => __pbn__StorageLimit = null;
             private ulong? __pbn__StorageLimit;
 
-            [global::ProtoBuf.ProtoMember(6, Name = @"delegate")]
+            [ProtoBuf.ProtoMember(6, Name = @"delegate")]
             public byte[] Delegate
             {
                 get { return __pbn__Delegate; }

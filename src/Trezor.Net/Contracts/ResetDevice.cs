@@ -1,13 +1,13 @@
 namespace Trezor.Net.Contracts.Management
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class ResetDevice : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class ResetDevice : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"display_random")]
+        [ProtoBuf.ProtoMember(1, Name = @"display_random")]
         public bool DisplayRandom
         {
             get { return __pbn__DisplayRandom.GetValueOrDefault(); }
@@ -17,8 +17,8 @@ namespace Trezor.Net.Contracts.Management
         public void ResetDisplayRandom() => __pbn__DisplayRandom = null;
         private bool? __pbn__DisplayRandom;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"strength")]
-        [global::System.ComponentModel.DefaultValue(256)]
+        [ProtoBuf.ProtoMember(2, Name = @"strength")]
+        [System.ComponentModel.DefaultValue(256)]
         public uint Strength
         {
             get { return __pbn__Strength ?? 256; }
@@ -28,7 +28,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetStrength() => __pbn__Strength = null;
         private uint? __pbn__Strength;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"passphrase_protection")]
+        [ProtoBuf.ProtoMember(3, Name = @"passphrase_protection")]
         public bool PassphraseProtection
         {
             get { return __pbn__PassphraseProtection.GetValueOrDefault(); }
@@ -38,7 +38,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetPassphraseProtection() => __pbn__PassphraseProtection = null;
         private bool? __pbn__PassphraseProtection;
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"pin_protection")]
+        [ProtoBuf.ProtoMember(4, Name = @"pin_protection")]
         public bool PinProtection
         {
             get { return __pbn__PinProtection.GetValueOrDefault(); }
@@ -48,8 +48,8 @@ namespace Trezor.Net.Contracts.Management
         public void ResetPinProtection() => __pbn__PinProtection = null;
         private bool? __pbn__PinProtection;
 
-        [global::ProtoBuf.ProtoMember(5, Name = @"language")]
-        [global::System.ComponentModel.DefaultValue(@"english")]
+        [ProtoBuf.ProtoMember(5, Name = @"language")]
+        [System.ComponentModel.DefaultValue(@"english")]
         public string Language
         {
             get { return __pbn__Language ?? @"english"; }
@@ -59,8 +59,8 @@ namespace Trezor.Net.Contracts.Management
         public void ResetLanguage() => __pbn__Language = null;
         private string __pbn__Language;
 
-        [global::ProtoBuf.ProtoMember(6, Name = @"label")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(6, Name = @"label")]
+        [System.ComponentModel.DefaultValue("")]
         public string Label
         {
             get { return __pbn__Label ?? ""; }
@@ -70,7 +70,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetLabel() => __pbn__Label = null;
         private string __pbn__Label;
 
-        [global::ProtoBuf.ProtoMember(7, Name = @"u2f_counter")]
+        [ProtoBuf.ProtoMember(7, Name = @"u2f_counter")]
         public uint U2fCounter
         {
             get { return __pbn__U2fCounter.GetValueOrDefault(); }
@@ -80,7 +80,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetU2fCounter() => __pbn__U2fCounter = null;
         private uint? __pbn__U2fCounter;
 
-        [global::ProtoBuf.ProtoMember(8, Name = @"skip_backup")]
+        [ProtoBuf.ProtoMember(8, Name = @"skip_backup")]
         public bool SkipBackup
         {
             get { return __pbn__SkipBackup.GetValueOrDefault(); }

@@ -6,14 +6,14 @@
 namespace Trezor.Net.Contracts.Debug
 {
 
-    [global::ProtoBuf.ProtoContract()]
-    public class DebugLinkDecision : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class DebugLinkDecision : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"yes_no")]
+        [ProtoBuf.ProtoMember(1, Name = @"yes_no")]
         public bool YesNo
         {
             get { return __pbn__YesNo.GetValueOrDefault(); }
@@ -23,7 +23,7 @@ namespace Trezor.Net.Contracts.Debug
         public void ResetYesNo() => __pbn__YesNo = null;
         private bool? __pbn__YesNo;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"up_down")]
+        [ProtoBuf.ProtoMember(2, Name = @"up_down")]
         public bool UpDown
         {
             get { return __pbn__UpDown.GetValueOrDefault(); }
@@ -33,8 +33,8 @@ namespace Trezor.Net.Contracts.Debug
         public void ResetUpDown() => __pbn__UpDown = null;
         private bool? __pbn__UpDown;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"input")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(3, Name = @"input")]
+        [System.ComponentModel.DefaultValue("")]
         public string Input
         {
             get { return __pbn__Input ?? ""; }

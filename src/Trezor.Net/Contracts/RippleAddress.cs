@@ -1,14 +1,14 @@
 namespace Trezor.Net.Contracts.Ripple
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class RippleAddress : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class RippleAddress : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"address")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(1, Name = @"address")]
+        [System.ComponentModel.DefaultValue("")]
         public string Address
         {
             get { return __pbn__Address ?? ""; }

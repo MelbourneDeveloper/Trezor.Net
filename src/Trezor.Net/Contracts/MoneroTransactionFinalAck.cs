@@ -1,13 +1,13 @@
 namespace Trezor.Net.Contracts.Monero
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class MoneroTransactionFinalAck : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class MoneroTransactionFinalAck : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"cout_key")]
+        [ProtoBuf.ProtoMember(1, Name = @"cout_key")]
         public byte[] CoutKey
         {
             get { return __pbn__CoutKey; }
@@ -17,7 +17,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetCoutKey() => __pbn__CoutKey = null;
         private byte[] __pbn__CoutKey;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"salt")]
+        [ProtoBuf.ProtoMember(2, Name = @"salt")]
         public byte[] Salt
         {
             get { return __pbn__Salt; }
@@ -27,7 +27,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetSalt() => __pbn__Salt = null;
         private byte[] __pbn__Salt;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"rand_mult")]
+        [ProtoBuf.ProtoMember(3, Name = @"rand_mult")]
         public byte[] RandMult
         {
             get { return __pbn__RandMult; }
@@ -37,7 +37,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetRandMult() => __pbn__RandMult = null;
         private byte[] __pbn__RandMult;
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"tx_enc_keys")]
+        [ProtoBuf.ProtoMember(4, Name = @"tx_enc_keys")]
         public byte[] TxEncKeys
         {
             get { return __pbn__TxEncKeys; }

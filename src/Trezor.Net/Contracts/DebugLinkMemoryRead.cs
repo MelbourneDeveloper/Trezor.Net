@@ -1,13 +1,13 @@
 namespace Trezor.Net.Contracts.Debug
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class DebugLinkMemoryRead : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class DebugLinkMemoryRead : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"address")]
+        [ProtoBuf.ProtoMember(1, Name = @"address")]
         public uint Address
         {
             get { return __pbn__Address.GetValueOrDefault(); }
@@ -17,7 +17,7 @@ namespace Trezor.Net.Contracts.Debug
         public void ResetAddress() => __pbn__Address = null;
         private uint? __pbn__Address;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"length")]
+        [ProtoBuf.ProtoMember(2, Name = @"length")]
         public uint Length
         {
             get { return __pbn__Length.GetValueOrDefault(); }

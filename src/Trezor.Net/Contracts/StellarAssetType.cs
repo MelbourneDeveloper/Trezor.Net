@@ -6,14 +6,14 @@
 namespace Trezor.Net.Contracts.Stellar
 {
 
-    [global::ProtoBuf.ProtoContract()]
-    public class StellarAssetType : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class StellarAssetType : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"type")]
+        [ProtoBuf.ProtoMember(1, Name = @"type")]
         public uint Type
         {
             get { return __pbn__Type.GetValueOrDefault(); }
@@ -23,8 +23,8 @@ namespace Trezor.Net.Contracts.Stellar
         public void ResetType() => __pbn__Type = null;
         private uint? __pbn__Type;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"code")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(2, Name = @"code")]
+        [System.ComponentModel.DefaultValue("")]
         public string Code
         {
             get { return __pbn__Code ?? ""; }
@@ -34,8 +34,8 @@ namespace Trezor.Net.Contracts.Stellar
         public void ResetCode() => __pbn__Code = null;
         private string __pbn__Code;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"issuer")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(3, Name = @"issuer")]
+        [System.ComponentModel.DefaultValue("")]
         public string Issuer
         {
             get { return __pbn__Issuer ?? ""; }

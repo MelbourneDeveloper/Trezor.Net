@@ -6,20 +6,20 @@
 namespace Trezor.Net.Contracts.Bitcoin
 {
 
-    [global::ProtoBuf.ProtoContract()]
-    public class MultisigRedeemScriptType : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class MultisigRedeemScriptType : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"pubkeys")]
-        public global::System.Collections.Generic.List<HDNodePathType> Pubkeys { get; } = new global::System.Collections.Generic.List<HDNodePathType>();
+        [ProtoBuf.ProtoMember(1, Name = @"pubkeys")]
+        public System.Collections.Generic.List<HDNodePathType> Pubkeys { get; } = new System.Collections.Generic.List<HDNodePathType>();
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"signatures")]
-        public global::System.Collections.Generic.List<byte[]> Signatures { get; } = new global::System.Collections.Generic.List<byte[]>();
+        [ProtoBuf.ProtoMember(2, Name = @"signatures")]
+        public System.Collections.Generic.List<byte[]> Signatures { get; } = new System.Collections.Generic.List<byte[]>();
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"m")]
+        [ProtoBuf.ProtoMember(3, Name = @"m")]
         public uint M
         {
             get { return __pbn__M.GetValueOrDefault(); }
@@ -29,17 +29,17 @@ namespace Trezor.Net.Contracts.Bitcoin
         public void ResetM() => __pbn__M = null;
         private uint? __pbn__M;
 
-        [global::ProtoBuf.ProtoContract()]
-        public class HDNodePathType : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class HDNodePathType : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"node", IsRequired = true)]
-            public global::Trezor.Net.Contracts.Common.HDNodeType Node { get; set; }
+            [ProtoBuf.ProtoMember(1, Name = @"node", IsRequired = true)]
+            public Common.HDNodeType Node { get; set; }
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"address_n")]
+            [ProtoBuf.ProtoMember(2, Name = @"address_n")]
             public uint[] AddressNs { get; set; }
 
         }

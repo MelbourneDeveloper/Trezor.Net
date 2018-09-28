@@ -1,14 +1,14 @@
 namespace Trezor.Net.Contracts.Tezos
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class TezosSignedTx : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class TezosSignedTx : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"signature")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(1, Name = @"signature")]
+        [System.ComponentModel.DefaultValue("")]
         public string Signature
         {
             get { return __pbn__Signature ?? ""; }
@@ -18,7 +18,7 @@ namespace Trezor.Net.Contracts.Tezos
         public void ResetSignature() => __pbn__Signature = null;
         private string __pbn__Signature;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"sig_op_contents")]
+        [ProtoBuf.ProtoMember(2, Name = @"sig_op_contents")]
         public byte[] SigOpContents
         {
             get { return __pbn__SigOpContents; }
@@ -28,8 +28,8 @@ namespace Trezor.Net.Contracts.Tezos
         public void ResetSigOpContents() => __pbn__SigOpContents = null;
         private byte[] __pbn__SigOpContents;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"operation_hash")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(3, Name = @"operation_hash")]
+        [System.ComponentModel.DefaultValue("")]
         public string OperationHash
         {
             get { return __pbn__OperationHash ?? ""; }

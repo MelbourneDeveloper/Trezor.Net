@@ -1,15 +1,15 @@
 namespace Trezor.Net.Contracts.Ontology
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class OntologyPublicKey : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class OntologyPublicKey : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
         {
-            return global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            return ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
         }
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"public_key")]
+        [ProtoBuf.ProtoMember(1, Name = @"public_key")]
         public byte[] PublicKey
         {
             get => __pbn__PublicKey;

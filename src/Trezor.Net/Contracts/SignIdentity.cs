@@ -1,16 +1,16 @@
 namespace Trezor.Net.Contracts.Crypto
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class SignIdentity : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class SignIdentity : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"identity")]
+        [ProtoBuf.ProtoMember(1, Name = @"identity")]
         public IdentityType Identity { get; set; }
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"challenge_hidden")]
+        [ProtoBuf.ProtoMember(2, Name = @"challenge_hidden")]
         public byte[] ChallengeHidden
         {
             get { return __pbn__ChallengeHidden; }
@@ -20,8 +20,8 @@ namespace Trezor.Net.Contracts.Crypto
         public void ResetChallengeHidden() => __pbn__ChallengeHidden = null;
         private byte[] __pbn__ChallengeHidden;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"challenge_visual")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(3, Name = @"challenge_visual")]
+        [System.ComponentModel.DefaultValue("")]
         public string ChallengeVisual
         {
             get { return __pbn__ChallengeVisual ?? ""; }
@@ -31,8 +31,8 @@ namespace Trezor.Net.Contracts.Crypto
         public void ResetChallengeVisual() => __pbn__ChallengeVisual = null;
         private string __pbn__ChallengeVisual;
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"ecdsa_curve_name")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(4, Name = @"ecdsa_curve_name")]
+        [System.ComponentModel.DefaultValue("")]
         public string EcdsaCurveName
         {
             get { return __pbn__EcdsaCurveName ?? ""; }

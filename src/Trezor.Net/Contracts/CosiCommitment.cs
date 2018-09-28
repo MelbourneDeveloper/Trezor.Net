@@ -1,13 +1,13 @@
 namespace Trezor.Net.Contracts.Crypto
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class CosiCommitment : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class CosiCommitment : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"commitment")]
+        [ProtoBuf.ProtoMember(1, Name = @"commitment")]
         public byte[] Commitment
         {
             get { return __pbn__Commitment; }
@@ -17,7 +17,7 @@ namespace Trezor.Net.Contracts.Crypto
         public void ResetCommitment() => __pbn__Commitment = null;
         private byte[] __pbn__Commitment;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"pubkey")]
+        [ProtoBuf.ProtoMember(2, Name = @"pubkey")]
         public byte[] Pubkey
         {
             get { return __pbn__Pubkey; }

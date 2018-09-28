@@ -1,13 +1,13 @@
 namespace Trezor.Net.Contracts.Management
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class RecoveryDevice : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class RecoveryDevice : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"word_count")]
+        [ProtoBuf.ProtoMember(1, Name = @"word_count")]
         public uint WordCount
         {
             get { return __pbn__WordCount.GetValueOrDefault(); }
@@ -17,7 +17,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetWordCount() => __pbn__WordCount = null;
         private uint? __pbn__WordCount;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"passphrase_protection")]
+        [ProtoBuf.ProtoMember(2, Name = @"passphrase_protection")]
         public bool PassphraseProtection
         {
             get { return __pbn__PassphraseProtection.GetValueOrDefault(); }
@@ -27,7 +27,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetPassphraseProtection() => __pbn__PassphraseProtection = null;
         private bool? __pbn__PassphraseProtection;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"pin_protection")]
+        [ProtoBuf.ProtoMember(3, Name = @"pin_protection")]
         public bool PinProtection
         {
             get { return __pbn__PinProtection.GetValueOrDefault(); }
@@ -37,8 +37,8 @@ namespace Trezor.Net.Contracts.Management
         public void ResetPinProtection() => __pbn__PinProtection = null;
         private bool? __pbn__PinProtection;
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"language")]
-        [global::System.ComponentModel.DefaultValue(@"english")]
+        [ProtoBuf.ProtoMember(4, Name = @"language")]
+        [System.ComponentModel.DefaultValue(@"english")]
         public string Language
         {
             get { return __pbn__Language ?? @"english"; }
@@ -48,8 +48,8 @@ namespace Trezor.Net.Contracts.Management
         public void ResetLanguage() => __pbn__Language = null;
         private string __pbn__Language;
 
-        [global::ProtoBuf.ProtoMember(5, Name = @"label")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(5, Name = @"label")]
+        [System.ComponentModel.DefaultValue("")]
         public string Label
         {
             get { return __pbn__Label ?? ""; }
@@ -59,7 +59,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetLabel() => __pbn__Label = null;
         private string __pbn__Label;
 
-        [global::ProtoBuf.ProtoMember(6, Name = @"enforce_wordlist")]
+        [ProtoBuf.ProtoMember(6, Name = @"enforce_wordlist")]
         public bool EnforceWordlist
         {
             get { return __pbn__EnforceWordlist.GetValueOrDefault(); }
@@ -69,8 +69,8 @@ namespace Trezor.Net.Contracts.Management
         public void ResetEnforceWordlist() => __pbn__EnforceWordlist = null;
         private bool? __pbn__EnforceWordlist;
 
-        [global::ProtoBuf.ProtoMember(8, Name = @"type")]
-        [global::System.ComponentModel.DefaultValue(RecoveryDeviceType.RecoveryDeviceTypeScrambledWords)]
+        [ProtoBuf.ProtoMember(8, Name = @"type")]
+        [System.ComponentModel.DefaultValue(RecoveryDeviceType.RecoveryDeviceTypeScrambledWords)]
         public RecoveryDeviceType Type
         {
             get { return __pbn__Type ?? RecoveryDeviceType.RecoveryDeviceTypeScrambledWords; }
@@ -80,7 +80,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetType() => __pbn__Type = null;
         private RecoveryDeviceType? __pbn__Type;
 
-        [global::ProtoBuf.ProtoMember(9, Name = @"u2f_counter")]
+        [ProtoBuf.ProtoMember(9, Name = @"u2f_counter")]
         public uint U2fCounter
         {
             get { return __pbn__U2fCounter.GetValueOrDefault(); }
@@ -90,7 +90,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetU2fCounter() => __pbn__U2fCounter = null;
         private uint? __pbn__U2fCounter;
 
-        [global::ProtoBuf.ProtoMember(10, Name = @"dry_run")]
+        [ProtoBuf.ProtoMember(10, Name = @"dry_run")]
         public bool DryRun
         {
             get { return __pbn__DryRun.GetValueOrDefault(); }
@@ -100,12 +100,12 @@ namespace Trezor.Net.Contracts.Management
         public void ResetDryRun() => __pbn__DryRun = null;
         private bool? __pbn__DryRun;
 
-        [global::ProtoBuf.ProtoContract()]
+        [ProtoBuf.ProtoContract()]
         public enum RecoveryDeviceType
         {
-            [global::ProtoBuf.ProtoEnum(Name = @"RecoveryDeviceType_ScrambledWords")]
+            [ProtoBuf.ProtoEnum(Name = @"RecoveryDeviceType_ScrambledWords")]
             RecoveryDeviceTypeScrambledWords = 0,
-            [global::ProtoBuf.ProtoEnum(Name = @"RecoveryDeviceType_Matrix")]
+            [ProtoBuf.ProtoEnum(Name = @"RecoveryDeviceType_Matrix")]
             RecoveryDeviceTypeMatrix = 1,
         }
 

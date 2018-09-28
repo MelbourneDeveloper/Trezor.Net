@@ -1,16 +1,16 @@
 namespace Trezor.Net.Contracts.Ethereum
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class EthereumSignTx : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class EthereumSignTx : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"address_n")]
+        [ProtoBuf.ProtoMember(1, Name = @"address_n")]
         public uint[] AddressNs { get; set; }
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"nonce")]
+        [ProtoBuf.ProtoMember(2, Name = @"nonce")]
         public byte[] Nonce
         {
             get { return __pbn__Nonce; }
@@ -20,7 +20,7 @@ namespace Trezor.Net.Contracts.Ethereum
         public void ResetNonce() => __pbn__Nonce = null;
         private byte[] __pbn__Nonce;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"gas_price")]
+        [ProtoBuf.ProtoMember(3, Name = @"gas_price")]
         public byte[] GasPrice
         {
             get { return __pbn__GasPrice; }
@@ -30,7 +30,7 @@ namespace Trezor.Net.Contracts.Ethereum
         public void ResetGasPrice() => __pbn__GasPrice = null;
         private byte[] __pbn__GasPrice;
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"gas_limit")]
+        [ProtoBuf.ProtoMember(4, Name = @"gas_limit")]
         public byte[] GasLimit
         {
             get { return __pbn__GasLimit; }
@@ -40,7 +40,7 @@ namespace Trezor.Net.Contracts.Ethereum
         public void ResetGasLimit() => __pbn__GasLimit = null;
         private byte[] __pbn__GasLimit;
 
-        [global::ProtoBuf.ProtoMember(5, Name = @"to")]
+        [ProtoBuf.ProtoMember(5, Name = @"to")]
         public byte[] To
         {
             get { return __pbn__To; }
@@ -50,7 +50,7 @@ namespace Trezor.Net.Contracts.Ethereum
         public void ResetTo() => __pbn__To = null;
         private byte[] __pbn__To;
 
-        [global::ProtoBuf.ProtoMember(6, Name = @"value")]
+        [ProtoBuf.ProtoMember(6, Name = @"value")]
         public byte[] Value
         {
             get { return __pbn__Value; }
@@ -60,7 +60,7 @@ namespace Trezor.Net.Contracts.Ethereum
         public void ResetValue() => __pbn__Value = null;
         private byte[] __pbn__Value;
 
-        [global::ProtoBuf.ProtoMember(7, Name = @"data_initial_chunk")]
+        [ProtoBuf.ProtoMember(7, Name = @"data_initial_chunk")]
         public byte[] DataInitialChunk
         {
             get { return __pbn__DataInitialChunk; }
@@ -70,7 +70,7 @@ namespace Trezor.Net.Contracts.Ethereum
         public void ResetDataInitialChunk() => __pbn__DataInitialChunk = null;
         private byte[] __pbn__DataInitialChunk;
 
-        [global::ProtoBuf.ProtoMember(8, Name = @"data_length")]
+        [ProtoBuf.ProtoMember(8, Name = @"data_length")]
         public uint DataLength
         {
             get { return __pbn__DataLength.GetValueOrDefault(); }
@@ -80,7 +80,7 @@ namespace Trezor.Net.Contracts.Ethereum
         public void ResetDataLength() => __pbn__DataLength = null;
         private uint? __pbn__DataLength;
 
-        [global::ProtoBuf.ProtoMember(9, Name = @"chain_id")]
+        [ProtoBuf.ProtoMember(9, Name = @"chain_id")]
         public uint ChainId
         {
             get { return __pbn__ChainId.GetValueOrDefault(); }
@@ -90,7 +90,7 @@ namespace Trezor.Net.Contracts.Ethereum
         public void ResetChainId() => __pbn__ChainId = null;
         private uint? __pbn__ChainId;
 
-        [global::ProtoBuf.ProtoMember(10, Name = @"tx_type")]
+        [ProtoBuf.ProtoMember(10, Name = @"tx_type")]
         public uint TxType
         {
             get { return __pbn__TxType.GetValueOrDefault(); }

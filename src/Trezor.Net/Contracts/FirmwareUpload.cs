@@ -1,16 +1,16 @@
 namespace Trezor.Net.Contracts.Bootloader
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class FirmwareUpload : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class FirmwareUpload : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"payload", IsRequired = true)]
+        [ProtoBuf.ProtoMember(1, Name = @"payload", IsRequired = true)]
         public byte[] Payload { get; set; }
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"hash")]
+        [ProtoBuf.ProtoMember(2, Name = @"hash")]
         public byte[] Hash
         {
             get { return __pbn__Hash; }

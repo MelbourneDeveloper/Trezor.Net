@@ -1,13 +1,13 @@
 namespace Trezor.Net.Contracts.Monero
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class MoneroKeyImageExportInitRequest : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class MoneroKeyImageExportInitRequest : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"num")]
+        [ProtoBuf.ProtoMember(1, Name = @"num")]
         public ulong Num
         {
             get { return __pbn__Num.GetValueOrDefault(); }
@@ -17,7 +17,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetNum() => __pbn__Num = null;
         private ulong? __pbn__Num;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"hash")]
+        [ProtoBuf.ProtoMember(2, Name = @"hash")]
         public byte[] Hash
         {
             get { return __pbn__Hash; }
@@ -27,10 +27,10 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetHash() => __pbn__Hash = null;
         private byte[] __pbn__Hash;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"address_n")]
+        [ProtoBuf.ProtoMember(3, Name = @"address_n")]
         public uint[] AddressNs { get; set; }
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"network_type")]
+        [ProtoBuf.ProtoMember(4, Name = @"network_type")]
         public uint NetworkType
         {
             get { return __pbn__NetworkType.GetValueOrDefault(); }
@@ -40,17 +40,17 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetNetworkType() => __pbn__NetworkType = null;
         private uint? __pbn__NetworkType;
 
-        [global::ProtoBuf.ProtoMember(5, Name = @"subs")]
-        public global::System.Collections.Generic.List<MoneroSubAddressIndicesList> Subs { get; } = new global::System.Collections.Generic.List<MoneroSubAddressIndicesList>();
+        [ProtoBuf.ProtoMember(5, Name = @"subs")]
+        public System.Collections.Generic.List<MoneroSubAddressIndicesList> Subs { get; } = new System.Collections.Generic.List<MoneroSubAddressIndicesList>();
 
-        [global::ProtoBuf.ProtoContract()]
-        public class MoneroSubAddressIndicesList : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class MoneroSubAddressIndicesList : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"account")]
+            [ProtoBuf.ProtoMember(1, Name = @"account")]
             public uint Account
             {
                 get { return __pbn__Account.GetValueOrDefault(); }
@@ -60,7 +60,7 @@ namespace Trezor.Net.Contracts.Monero
             public void ResetAccount() => __pbn__Account = null;
             private uint? __pbn__Account;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"minor_indices")]
+            [ProtoBuf.ProtoMember(2, Name = @"minor_indices")]
             public uint[] MinorIndices { get; set; }
 
         }

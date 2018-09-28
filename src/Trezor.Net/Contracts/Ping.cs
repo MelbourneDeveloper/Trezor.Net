@@ -1,14 +1,14 @@
 namespace Trezor.Net.Contracts.Management
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class Ping : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class Ping : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"message")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(1, Name = @"message")]
+        [System.ComponentModel.DefaultValue("")]
         public string Message
         {
             get { return __pbn__Message ?? ""; }
@@ -18,7 +18,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetMessage() => __pbn__Message = null;
         private string __pbn__Message;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"button_protection")]
+        [ProtoBuf.ProtoMember(2, Name = @"button_protection")]
         public bool ButtonProtection
         {
             get { return __pbn__ButtonProtection.GetValueOrDefault(); }
@@ -28,7 +28,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetButtonProtection() => __pbn__ButtonProtection = null;
         private bool? __pbn__ButtonProtection;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"pin_protection")]
+        [ProtoBuf.ProtoMember(3, Name = @"pin_protection")]
         public bool PinProtection
         {
             get { return __pbn__PinProtection.GetValueOrDefault(); }
@@ -38,7 +38,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetPinProtection() => __pbn__PinProtection = null;
         private bool? __pbn__PinProtection;
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"passphrase_protection")]
+        [ProtoBuf.ProtoMember(4, Name = @"passphrase_protection")]
         public bool PassphraseProtection
         {
             get { return __pbn__PassphraseProtection.GetValueOrDefault(); }

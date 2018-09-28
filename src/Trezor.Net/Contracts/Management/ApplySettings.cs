@@ -1,14 +1,14 @@
 namespace Trezor.Net.Contracts.Management
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class ApplySettings : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class ApplySettings : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"language")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(1, Name = @"language")]
+        [System.ComponentModel.DefaultValue("")]
         public string Language
         {
             get { return __pbn__Language ?? ""; }
@@ -18,8 +18,8 @@ namespace Trezor.Net.Contracts.Management
         public void ResetLanguage() => __pbn__Language = null;
         private string __pbn__Language;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"label")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(2, Name = @"label")]
+        [System.ComponentModel.DefaultValue("")]
         public string Label
         {
             get { return __pbn__Label ?? ""; }
@@ -29,7 +29,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetLabel() => __pbn__Label = null;
         private string __pbn__Label;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"use_passphrase")]
+        [ProtoBuf.ProtoMember(3, Name = @"use_passphrase")]
         public bool UsePassphrase
         {
             get { return __pbn__UsePassphrase.GetValueOrDefault(); }
@@ -39,7 +39,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetUsePassphrase() => __pbn__UsePassphrase = null;
         private bool? __pbn__UsePassphrase;
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"homescreen")]
+        [ProtoBuf.ProtoMember(4, Name = @"homescreen")]
         public byte[] Homescreen
         {
             get { return __pbn__Homescreen; }
@@ -49,8 +49,8 @@ namespace Trezor.Net.Contracts.Management
         public void ResetHomescreen() => __pbn__Homescreen = null;
         private byte[] __pbn__Homescreen;
 
-        [global::ProtoBuf.ProtoMember(5, Name = @"passphrase_source")]
-        [global::System.ComponentModel.DefaultValue(PassphraseSourceType.Ask)]
+        [ProtoBuf.ProtoMember(5, Name = @"passphrase_source")]
+        [System.ComponentModel.DefaultValue(PassphraseSourceType.Ask)]
         public PassphraseSourceType PassphraseSource
         {
             get { return __pbn__PassphraseSource ?? PassphraseSourceType.Ask; }
@@ -60,7 +60,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetPassphraseSource() => __pbn__PassphraseSource = null;
         private PassphraseSourceType? __pbn__PassphraseSource;
 
-        [global::ProtoBuf.ProtoMember(6, Name = @"auto_lock_delay_ms")]
+        [ProtoBuf.ProtoMember(6, Name = @"auto_lock_delay_ms")]
         public uint AutoLockDelayMs
         {
             get { return __pbn__AutoLockDelayMs.GetValueOrDefault(); }
@@ -70,14 +70,14 @@ namespace Trezor.Net.Contracts.Management
         public void ResetAutoLockDelayMs() => __pbn__AutoLockDelayMs = null;
         private uint? __pbn__AutoLockDelayMs;
 
-        [global::ProtoBuf.ProtoContract()]
+        [ProtoBuf.ProtoContract()]
         public enum PassphraseSourceType
         {
-            [global::ProtoBuf.ProtoEnum(Name = @"ASK")]
+            [ProtoBuf.ProtoEnum(Name = @"ASK")]
             Ask = 0,
-            [global::ProtoBuf.ProtoEnum(Name = @"DEVICE")]
+            [ProtoBuf.ProtoEnum(Name = @"DEVICE")]
             Device = 1,
-            [global::ProtoBuf.ProtoEnum(Name = @"HOST")]
+            [ProtoBuf.ProtoEnum(Name = @"HOST")]
             Host = 2,
         }
 

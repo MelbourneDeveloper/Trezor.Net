@@ -1,14 +1,14 @@
 namespace Trezor.Net.Contracts.Common
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class PassphraseAck : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class PassphraseAck : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"passphrase")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(1, Name = @"passphrase")]
+        [System.ComponentModel.DefaultValue("")]
         public string Passphrase
         {
             get { return __pbn__Passphrase ?? ""; }
@@ -18,7 +18,7 @@ namespace Trezor.Net.Contracts.Common
         public void ResetPassphrase() => __pbn__Passphrase = null;
         private string __pbn__Passphrase;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"state")]
+        [ProtoBuf.ProtoMember(2, Name = @"state")]
         public byte[] State
         {
             get { return __pbn__State; }

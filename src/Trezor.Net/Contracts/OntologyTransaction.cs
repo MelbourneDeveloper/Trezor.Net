@@ -6,16 +6,16 @@ namespace Trezor.Net.Contracts.Ontology
 {
 
 #pragma warning disable CS1591, CS0612, CS3021, IDE1006
-[global::ProtoBuf.ProtoContract()]
-public class OntologyTransaction : global::ProtoBuf.IExtensible
+[ProtoBuf.ProtoContract()]
+public class OntologyTransaction : ProtoBuf.IExtensible
 {
-    private global::ProtoBuf.IExtension __pbn__extensionData;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+    private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
     {
-        return global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        return ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
     }
 
-    [global::ProtoBuf.ProtoMember(1, Name = @"version")]
+    [ProtoBuf.ProtoMember(1, Name = @"version")]
     public uint Version
     {
         get => __pbn__Version.GetValueOrDefault();
@@ -33,7 +33,7 @@ public class OntologyTransaction : global::ProtoBuf.IExtensible
 
     private uint? __pbn__Version;
 
-    [global::ProtoBuf.ProtoMember(2, Name = @"type")]
+    [ProtoBuf.ProtoMember(2, Name = @"type")]
     public uint Type
     {
         get => __pbn__Type.GetValueOrDefault();
@@ -51,7 +51,7 @@ public class OntologyTransaction : global::ProtoBuf.IExtensible
 
     private uint? __pbn__Type;
 
-    [global::ProtoBuf.ProtoMember(3, Name = @"nonce")]
+    [ProtoBuf.ProtoMember(3, Name = @"nonce")]
     public uint Nonce
     {
         get => __pbn__Nonce.GetValueOrDefault();
@@ -69,7 +69,7 @@ public class OntologyTransaction : global::ProtoBuf.IExtensible
 
     private uint? __pbn__Nonce;
 
-    [global::ProtoBuf.ProtoMember(4, Name = @"gas_price")]
+    [ProtoBuf.ProtoMember(4, Name = @"gas_price")]
     public ulong GasPrice
     {
         get => __pbn__GasPrice.GetValueOrDefault();
@@ -87,7 +87,7 @@ public class OntologyTransaction : global::ProtoBuf.IExtensible
 
     private ulong? __pbn__GasPrice;
 
-    [global::ProtoBuf.ProtoMember(5, Name = @"gas_limit")]
+    [ProtoBuf.ProtoMember(5, Name = @"gas_limit")]
     public ulong GasLimit
     {
         get => __pbn__GasLimit.GetValueOrDefault();
@@ -105,8 +105,8 @@ public class OntologyTransaction : global::ProtoBuf.IExtensible
 
     private ulong? __pbn__GasLimit;
 
-    [global::ProtoBuf.ProtoMember(6, Name = @"payer")]
-    [global::System.ComponentModel.DefaultValue("")]
+    [ProtoBuf.ProtoMember(6, Name = @"payer")]
+    [System.ComponentModel.DefaultValue("")]
     public string Payer
     {
         get => __pbn__Payer ?? "";
@@ -124,19 +124,19 @@ public class OntologyTransaction : global::ProtoBuf.IExtensible
 
     private string __pbn__Payer;
 
-    [global::ProtoBuf.ProtoMember(7, Name = @"tx_attributes")]
-    public global::System.Collections.Generic.List<OntologyTxAttribute> TxAttributes { get; } = new global::System.Collections.Generic.List<OntologyTxAttribute>();
+    [ProtoBuf.ProtoMember(7, Name = @"tx_attributes")]
+    public System.Collections.Generic.List<OntologyTxAttribute> TxAttributes { get; } = new System.Collections.Generic.List<OntologyTxAttribute>();
 
-    [global::ProtoBuf.ProtoContract()]
-    public class OntologyTxAttribute : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class OntologyTxAttribute : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+        private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
         {
-            return global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            return ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
         }
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"usage")]
+        [ProtoBuf.ProtoMember(1, Name = @"usage")]
         public uint Usage
         {
             get => __pbn__Usage.GetValueOrDefault();
@@ -154,7 +154,7 @@ public class OntologyTransaction : global::ProtoBuf.IExtensible
 
         private uint? __pbn__Usage;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"data")]
+        [ProtoBuf.ProtoMember(2, Name = @"data")]
         public byte[] Data
         {
             get => __pbn__Data;

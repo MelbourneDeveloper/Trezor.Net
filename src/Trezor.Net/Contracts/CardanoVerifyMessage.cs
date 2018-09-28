@@ -1,13 +1,13 @@
 namespace Trezor.Net.Contracts.Cardano
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class CardanoVerifyMessage : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class CardanoVerifyMessage : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"public_key")]
+        [ProtoBuf.ProtoMember(1, Name = @"public_key")]
         public byte[] PublicKey
         {
             get { return __pbn__PublicKey; }
@@ -17,7 +17,7 @@ namespace Trezor.Net.Contracts.Cardano
         public void ResetPublicKey() => __pbn__PublicKey = null;
         private byte[] __pbn__PublicKey;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"signature")]
+        [ProtoBuf.ProtoMember(2, Name = @"signature")]
         public byte[] Signature
         {
             get { return __pbn__Signature; }
@@ -27,7 +27,7 @@ namespace Trezor.Net.Contracts.Cardano
         public void ResetSignature() => __pbn__Signature = null;
         private byte[] __pbn__Signature;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"message")]
+        [ProtoBuf.ProtoMember(3, Name = @"message")]
         public byte[] Message
         {
             get { return __pbn__Message; }

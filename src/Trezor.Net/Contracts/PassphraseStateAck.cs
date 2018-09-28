@@ -1,11 +1,11 @@
 namespace Trezor.Net.Contracts.Common
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class PassphraseStateAck : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class PassphraseStateAck : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
     }
 }

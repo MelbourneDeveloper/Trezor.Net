@@ -6,17 +6,17 @@
 namespace Trezor.Net.Contracts.Monero
 {
 
-    [global::ProtoBuf.ProtoContract()]
-    public class MoneroTransactionSourceEntry : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class MoneroTransactionSourceEntry : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"outputs")]
-        public global::System.Collections.Generic.List<MoneroOutputEntry> Outputs { get; } = new global::System.Collections.Generic.List<MoneroOutputEntry>();
+        [ProtoBuf.ProtoMember(1, Name = @"outputs")]
+        public System.Collections.Generic.List<MoneroOutputEntry> Outputs { get; } = new System.Collections.Generic.List<MoneroOutputEntry>();
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"real_output")]
+        [ProtoBuf.ProtoMember(2, Name = @"real_output")]
         public ulong RealOutput
         {
             get { return __pbn__RealOutput.GetValueOrDefault(); }
@@ -26,7 +26,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetRealOutput() => __pbn__RealOutput = null;
         private ulong? __pbn__RealOutput;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"real_out_tx_key")]
+        [ProtoBuf.ProtoMember(3, Name = @"real_out_tx_key")]
         public byte[] RealOutTxKey
         {
             get { return __pbn__RealOutTxKey; }
@@ -36,10 +36,10 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetRealOutTxKey() => __pbn__RealOutTxKey = null;
         private byte[] __pbn__RealOutTxKey;
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"real_out_additional_tx_keys")]
-        public global::System.Collections.Generic.List<byte[]> RealOutAdditionalTxKeys { get; } = new global::System.Collections.Generic.List<byte[]>();
+        [ProtoBuf.ProtoMember(4, Name = @"real_out_additional_tx_keys")]
+        public System.Collections.Generic.List<byte[]> RealOutAdditionalTxKeys { get; } = new System.Collections.Generic.List<byte[]>();
 
-        [global::ProtoBuf.ProtoMember(5, Name = @"real_output_in_tx_index")]
+        [ProtoBuf.ProtoMember(5, Name = @"real_output_in_tx_index")]
         public ulong RealOutputInTxIndex
         {
             get { return __pbn__RealOutputInTxIndex.GetValueOrDefault(); }
@@ -49,7 +49,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetRealOutputInTxIndex() => __pbn__RealOutputInTxIndex = null;
         private ulong? __pbn__RealOutputInTxIndex;
 
-        [global::ProtoBuf.ProtoMember(6, Name = @"amount")]
+        [ProtoBuf.ProtoMember(6, Name = @"amount")]
         public ulong Amount
         {
             get { return __pbn__Amount.GetValueOrDefault(); }
@@ -59,7 +59,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetAmount() => __pbn__Amount = null;
         private ulong? __pbn__Amount;
 
-        [global::ProtoBuf.ProtoMember(7, Name = @"rct")]
+        [ProtoBuf.ProtoMember(7, Name = @"rct")]
         public bool Rct
         {
             get { return __pbn__Rct.GetValueOrDefault(); }
@@ -69,7 +69,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetRct() => __pbn__Rct = null;
         private bool? __pbn__Rct;
 
-        [global::ProtoBuf.ProtoMember(8, Name = @"mask")]
+        [ProtoBuf.ProtoMember(8, Name = @"mask")]
         public byte[] Mask
         {
             get { return __pbn__Mask; }
@@ -79,17 +79,17 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetMask() => __pbn__Mask = null;
         private byte[] __pbn__Mask;
 
-        [global::ProtoBuf.ProtoMember(9, Name = @"multisig_kLRki")]
+        [ProtoBuf.ProtoMember(9, Name = @"multisig_kLRki")]
         public MoneroMultisigKLRki multisigkLRki { get; set; }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class MoneroOutputEntry : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class MoneroOutputEntry : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"idx")]
+            [ProtoBuf.ProtoMember(1, Name = @"idx")]
             public ulong Idx
             {
                 get { return __pbn__Idx.GetValueOrDefault(); }
@@ -99,17 +99,17 @@ namespace Trezor.Net.Contracts.Monero
             public void ResetIdx() => __pbn__Idx = null;
             private ulong? __pbn__Idx;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"key")]
+            [ProtoBuf.ProtoMember(2, Name = @"key")]
             public MoneroRctKey Key { get; set; }
 
-            [global::ProtoBuf.ProtoContract()]
-            public class MoneroRctKey : global::ProtoBuf.IExtensible
+            [ProtoBuf.ProtoContract()]
+            public class MoneroRctKey : ProtoBuf.IExtensible
             {
-                private global::ProtoBuf.IExtension __pbn__extensionData;
-                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+                private ProtoBuf.IExtension __pbn__extensionData;
+                ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-                [global::ProtoBuf.ProtoMember(1, Name = @"dest")]
+                [ProtoBuf.ProtoMember(1, Name = @"dest")]
                 public byte[] Dest
                 {
                     get { return __pbn__Dest; }
@@ -119,7 +119,7 @@ namespace Trezor.Net.Contracts.Monero
                 public void ResetDest() => __pbn__Dest = null;
                 private byte[] __pbn__Dest;
 
-                [global::ProtoBuf.ProtoMember(2, Name = @"mask")]
+                [ProtoBuf.ProtoMember(2, Name = @"mask")]
                 public byte[] Mask
                 {
                     get { return __pbn__Mask; }
@@ -133,14 +133,14 @@ namespace Trezor.Net.Contracts.Monero
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class MoneroMultisigKLRki : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class MoneroMultisigKLRki : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1)]
+            [ProtoBuf.ProtoMember(1)]
             public byte[] K
             {
                 get { return __pbn__K; }
@@ -150,7 +150,7 @@ namespace Trezor.Net.Contracts.Monero
             public void ResetK() => __pbn__K = null;
             private byte[] __pbn__K;
 
-            [global::ProtoBuf.ProtoMember(2)]
+            [ProtoBuf.ProtoMember(2)]
             public byte[] L
             {
                 get { return __pbn__L; }
@@ -160,7 +160,7 @@ namespace Trezor.Net.Contracts.Monero
             public void ResetL() => __pbn__L = null;
             private byte[] __pbn__L;
 
-            [global::ProtoBuf.ProtoMember(3)]
+            [ProtoBuf.ProtoMember(3)]
             public byte[] R
             {
                 get { return __pbn__R; }
@@ -170,7 +170,7 @@ namespace Trezor.Net.Contracts.Monero
             public void ResetR() => __pbn__R = null;
             private byte[] __pbn__R;
 
-            [global::ProtoBuf.ProtoMember(4, Name = @"ki")]
+            [ProtoBuf.ProtoMember(4, Name = @"ki")]
             public byte[] Ki
             {
                 get { return __pbn__Ki; }

@@ -1,13 +1,13 @@
 namespace Trezor.Net.Contracts.NEM
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class NEMSignedTx : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class NEMSignedTx : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"data")]
+        [ProtoBuf.ProtoMember(1, Name = @"data")]
         public byte[] Data
         {
             get { return __pbn__Data; }
@@ -17,7 +17,7 @@ namespace Trezor.Net.Contracts.NEM
         public void ResetData() => __pbn__Data = null;
         private byte[] __pbn__Data;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"signature")]
+        [ProtoBuf.ProtoMember(2, Name = @"signature")]
         public byte[] Signature
         {
             get { return __pbn__Signature; }

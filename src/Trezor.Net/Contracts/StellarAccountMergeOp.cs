@@ -1,14 +1,14 @@
 namespace Trezor.Net.Contracts.Stellar
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class StellarAccountMergeOp : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class StellarAccountMergeOp : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"source_account")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(1, Name = @"source_account")]
+        [System.ComponentModel.DefaultValue("")]
         public string SourceAccount
         {
             get { return __pbn__SourceAccount ?? ""; }
@@ -18,8 +18,8 @@ namespace Trezor.Net.Contracts.Stellar
         public void ResetSourceAccount() => __pbn__SourceAccount = null;
         private string __pbn__SourceAccount;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"destination_account")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(2, Name = @"destination_account")]
+        [System.ComponentModel.DefaultValue("")]
         public string DestinationAccount
         {
             get { return __pbn__DestinationAccount ?? ""; }

@@ -6,18 +6,18 @@
 namespace Trezor.Net.Contracts.Crypto
 {
 
-    [global::ProtoBuf.ProtoContract()]
-    public class CipherKeyValue : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class CipherKeyValue : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"address_n")]
+        [ProtoBuf.ProtoMember(1, Name = @"address_n")]
         public uint[] AddressNs { get; set; }
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"key")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(2, Name = @"key")]
+        [System.ComponentModel.DefaultValue("")]
         public string Key
         {
             get { return __pbn__Key ?? ""; }
@@ -27,7 +27,7 @@ namespace Trezor.Net.Contracts.Crypto
         public void ResetKey() => __pbn__Key = null;
         private string __pbn__Key;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"value")]
+        [ProtoBuf.ProtoMember(3, Name = @"value")]
         public byte[] Value
         {
             get { return __pbn__Value; }
@@ -37,7 +37,7 @@ namespace Trezor.Net.Contracts.Crypto
         public void ResetValue() => __pbn__Value = null;
         private byte[] __pbn__Value;
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"encrypt")]
+        [ProtoBuf.ProtoMember(4, Name = @"encrypt")]
         public bool Encrypt
         {
             get { return __pbn__Encrypt.GetValueOrDefault(); }
@@ -47,7 +47,7 @@ namespace Trezor.Net.Contracts.Crypto
         public void ResetEncrypt() => __pbn__Encrypt = null;
         private bool? __pbn__Encrypt;
 
-        [global::ProtoBuf.ProtoMember(5, Name = @"ask_on_encrypt")]
+        [ProtoBuf.ProtoMember(5, Name = @"ask_on_encrypt")]
         public bool AskOnEncrypt
         {
             get { return __pbn__AskOnEncrypt.GetValueOrDefault(); }
@@ -57,7 +57,7 @@ namespace Trezor.Net.Contracts.Crypto
         public void ResetAskOnEncrypt() => __pbn__AskOnEncrypt = null;
         private bool? __pbn__AskOnEncrypt;
 
-        [global::ProtoBuf.ProtoMember(6, Name = @"ask_on_decrypt")]
+        [ProtoBuf.ProtoMember(6, Name = @"ask_on_decrypt")]
         public bool AskOnDecrypt
         {
             get { return __pbn__AskOnDecrypt.GetValueOrDefault(); }
@@ -67,7 +67,7 @@ namespace Trezor.Net.Contracts.Crypto
         public void ResetAskOnDecrypt() => __pbn__AskOnDecrypt = null;
         private bool? __pbn__AskOnDecrypt;
 
-        [global::ProtoBuf.ProtoMember(7, Name = @"iv")]
+        [ProtoBuf.ProtoMember(7, Name = @"iv")]
         public byte[] Iv
         {
             get { return __pbn__Iv; }

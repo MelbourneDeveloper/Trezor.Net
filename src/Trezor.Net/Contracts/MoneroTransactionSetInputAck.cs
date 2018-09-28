@@ -1,13 +1,13 @@
 namespace Trezor.Net.Contracts.Monero
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class MoneroTransactionSetInputAck : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class MoneroTransactionSetInputAck : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"vini")]
+        [ProtoBuf.ProtoMember(1, Name = @"vini")]
         public byte[] Vini
         {
             get { return __pbn__Vini; }
@@ -17,7 +17,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetVini() => __pbn__Vini = null;
         private byte[] __pbn__Vini;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"vini_hmac")]
+        [ProtoBuf.ProtoMember(2, Name = @"vini_hmac")]
         public byte[] ViniHmac
         {
             get { return __pbn__ViniHmac; }
@@ -27,7 +27,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetViniHmac() => __pbn__ViniHmac = null;
         private byte[] __pbn__ViniHmac;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"pseudo_out")]
+        [ProtoBuf.ProtoMember(3, Name = @"pseudo_out")]
         public byte[] PseudoOut
         {
             get { return __pbn__PseudoOut; }
@@ -37,7 +37,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetPseudoOut() => __pbn__PseudoOut = null;
         private byte[] __pbn__PseudoOut;
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"pseudo_out_hmac")]
+        [ProtoBuf.ProtoMember(4, Name = @"pseudo_out_hmac")]
         public byte[] PseudoOutHmac
         {
             get { return __pbn__PseudoOutHmac; }
@@ -47,7 +47,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetPseudoOutHmac() => __pbn__PseudoOutHmac = null;
         private byte[] __pbn__PseudoOutHmac;
 
-        [global::ProtoBuf.ProtoMember(5, Name = @"alpha_enc")]
+        [ProtoBuf.ProtoMember(5, Name = @"alpha_enc")]
         public byte[] AlphaEnc
         {
             get { return __pbn__AlphaEnc; }
@@ -57,7 +57,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetAlphaEnc() => __pbn__AlphaEnc = null;
         private byte[] __pbn__AlphaEnc;
 
-        [global::ProtoBuf.ProtoMember(6, Name = @"spend_enc")]
+        [ProtoBuf.ProtoMember(6, Name = @"spend_enc")]
         public byte[] SpendEnc
         {
             get { return __pbn__SpendEnc; }

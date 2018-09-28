@@ -1,14 +1,14 @@
 namespace Trezor.Net.Contracts.Management
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class Features : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class Features : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"vendor")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(1, Name = @"vendor")]
+        [System.ComponentModel.DefaultValue("")]
         public string Vendor
         {
             get { return __pbn__Vendor ?? ""; }
@@ -18,7 +18,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetVendor() => __pbn__Vendor = null;
         private string __pbn__Vendor;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"major_version")]
+        [ProtoBuf.ProtoMember(2, Name = @"major_version")]
         public uint MajorVersion
         {
             get { return __pbn__MajorVersion.GetValueOrDefault(); }
@@ -28,7 +28,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetMajorVersion() => __pbn__MajorVersion = null;
         private uint? __pbn__MajorVersion;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"minor_version")]
+        [ProtoBuf.ProtoMember(3, Name = @"minor_version")]
         public uint MinorVersion
         {
             get { return __pbn__MinorVersion.GetValueOrDefault(); }
@@ -38,7 +38,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetMinorVersion() => __pbn__MinorVersion = null;
         private uint? __pbn__MinorVersion;
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"patch_version")]
+        [ProtoBuf.ProtoMember(4, Name = @"patch_version")]
         public uint PatchVersion
         {
             get { return __pbn__PatchVersion.GetValueOrDefault(); }
@@ -48,7 +48,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetPatchVersion() => __pbn__PatchVersion = null;
         private uint? __pbn__PatchVersion;
 
-        [global::ProtoBuf.ProtoMember(5, Name = @"bootloader_mode")]
+        [ProtoBuf.ProtoMember(5, Name = @"bootloader_mode")]
         public bool BootloaderMode
         {
             get { return __pbn__BootloaderMode.GetValueOrDefault(); }
@@ -58,8 +58,8 @@ namespace Trezor.Net.Contracts.Management
         public void ResetBootloaderMode() => __pbn__BootloaderMode = null;
         private bool? __pbn__BootloaderMode;
 
-        [global::ProtoBuf.ProtoMember(6, Name = @"device_id")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(6, Name = @"device_id")]
+        [System.ComponentModel.DefaultValue("")]
         public string DeviceId
         {
             get { return __pbn__DeviceId ?? ""; }
@@ -69,7 +69,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetDeviceId() => __pbn__DeviceId = null;
         private string __pbn__DeviceId;
 
-        [global::ProtoBuf.ProtoMember(7, Name = @"pin_protection")]
+        [ProtoBuf.ProtoMember(7, Name = @"pin_protection")]
         public bool PinProtection
         {
             get { return __pbn__PinProtection.GetValueOrDefault(); }
@@ -79,7 +79,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetPinProtection() => __pbn__PinProtection = null;
         private bool? __pbn__PinProtection;
 
-        [global::ProtoBuf.ProtoMember(8, Name = @"passphrase_protection")]
+        [ProtoBuf.ProtoMember(8, Name = @"passphrase_protection")]
         public bool PassphraseProtection
         {
             get { return __pbn__PassphraseProtection.GetValueOrDefault(); }
@@ -89,8 +89,8 @@ namespace Trezor.Net.Contracts.Management
         public void ResetPassphraseProtection() => __pbn__PassphraseProtection = null;
         private bool? __pbn__PassphraseProtection;
 
-        [global::ProtoBuf.ProtoMember(9, Name = @"language")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(9, Name = @"language")]
+        [System.ComponentModel.DefaultValue("")]
         public string Language
         {
             get { return __pbn__Language ?? ""; }
@@ -100,8 +100,8 @@ namespace Trezor.Net.Contracts.Management
         public void ResetLanguage() => __pbn__Language = null;
         private string __pbn__Language;
 
-        [global::ProtoBuf.ProtoMember(10, Name = @"label")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(10, Name = @"label")]
+        [System.ComponentModel.DefaultValue("")]
         public string Label
         {
             get { return __pbn__Label ?? ""; }
@@ -111,7 +111,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetLabel() => __pbn__Label = null;
         private string __pbn__Label;
 
-        [global::ProtoBuf.ProtoMember(12, Name = @"initialized")]
+        [ProtoBuf.ProtoMember(12, Name = @"initialized")]
         public bool Initialized
         {
             get { return __pbn__Initialized.GetValueOrDefault(); }
@@ -121,7 +121,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetInitialized() => __pbn__Initialized = null;
         private bool? __pbn__Initialized;
 
-        [global::ProtoBuf.ProtoMember(13, Name = @"revision")]
+        [ProtoBuf.ProtoMember(13, Name = @"revision")]
         public byte[] Revision
         {
             get { return __pbn__Revision; }
@@ -131,7 +131,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetRevision() => __pbn__Revision = null;
         private byte[] __pbn__Revision;
 
-        [global::ProtoBuf.ProtoMember(14, Name = @"bootloader_hash")]
+        [ProtoBuf.ProtoMember(14, Name = @"bootloader_hash")]
         public byte[] BootloaderHash
         {
             get { return __pbn__BootloaderHash; }
@@ -141,7 +141,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetBootloaderHash() => __pbn__BootloaderHash = null;
         private byte[] __pbn__BootloaderHash;
 
-        [global::ProtoBuf.ProtoMember(15, Name = @"imported")]
+        [ProtoBuf.ProtoMember(15, Name = @"imported")]
         public bool Imported
         {
             get { return __pbn__Imported.GetValueOrDefault(); }
@@ -151,7 +151,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetImported() => __pbn__Imported = null;
         private bool? __pbn__Imported;
 
-        [global::ProtoBuf.ProtoMember(16, Name = @"pin_cached")]
+        [ProtoBuf.ProtoMember(16, Name = @"pin_cached")]
         public bool PinCached
         {
             get { return __pbn__PinCached.GetValueOrDefault(); }
@@ -161,7 +161,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetPinCached() => __pbn__PinCached = null;
         private bool? __pbn__PinCached;
 
-        [global::ProtoBuf.ProtoMember(17, Name = @"passphrase_cached")]
+        [ProtoBuf.ProtoMember(17, Name = @"passphrase_cached")]
         public bool PassphraseCached
         {
             get { return __pbn__PassphraseCached.GetValueOrDefault(); }
@@ -171,7 +171,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetPassphraseCached() => __pbn__PassphraseCached = null;
         private bool? __pbn__PassphraseCached;
 
-        [global::ProtoBuf.ProtoMember(18, Name = @"firmware_present")]
+        [ProtoBuf.ProtoMember(18, Name = @"firmware_present")]
         public bool FirmwarePresent
         {
             get { return __pbn__FirmwarePresent.GetValueOrDefault(); }
@@ -181,7 +181,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetFirmwarePresent() => __pbn__FirmwarePresent = null;
         private bool? __pbn__FirmwarePresent;
 
-        [global::ProtoBuf.ProtoMember(19, Name = @"needs_backup")]
+        [ProtoBuf.ProtoMember(19, Name = @"needs_backup")]
         public bool NeedsBackup
         {
             get { return __pbn__NeedsBackup.GetValueOrDefault(); }
@@ -191,7 +191,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetNeedsBackup() => __pbn__NeedsBackup = null;
         private bool? __pbn__NeedsBackup;
 
-        [global::ProtoBuf.ProtoMember(20, Name = @"flags")]
+        [ProtoBuf.ProtoMember(20, Name = @"flags")]
         public uint Flags
         {
             get { return __pbn__Flags.GetValueOrDefault(); }
@@ -201,8 +201,8 @@ namespace Trezor.Net.Contracts.Management
         public void ResetFlags() => __pbn__Flags = null;
         private uint? __pbn__Flags;
 
-        [global::ProtoBuf.ProtoMember(21, Name = @"model")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(21, Name = @"model")]
+        [System.ComponentModel.DefaultValue("")]
         public string Model
         {
             get { return __pbn__Model ?? ""; }
@@ -212,7 +212,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetModel() => __pbn__Model = null;
         private string __pbn__Model;
 
-        [global::ProtoBuf.ProtoMember(22, Name = @"fw_major")]
+        [ProtoBuf.ProtoMember(22, Name = @"fw_major")]
         public uint FwMajor
         {
             get { return __pbn__FwMajor.GetValueOrDefault(); }
@@ -222,7 +222,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetFwMajor() => __pbn__FwMajor = null;
         private uint? __pbn__FwMajor;
 
-        [global::ProtoBuf.ProtoMember(23, Name = @"fw_minor")]
+        [ProtoBuf.ProtoMember(23, Name = @"fw_minor")]
         public uint FwMinor
         {
             get { return __pbn__FwMinor.GetValueOrDefault(); }
@@ -232,7 +232,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetFwMinor() => __pbn__FwMinor = null;
         private uint? __pbn__FwMinor;
 
-        [global::ProtoBuf.ProtoMember(24, Name = @"fw_patch")]
+        [ProtoBuf.ProtoMember(24, Name = @"fw_patch")]
         public uint FwPatch
         {
             get { return __pbn__FwPatch.GetValueOrDefault(); }
@@ -242,8 +242,8 @@ namespace Trezor.Net.Contracts.Management
         public void ResetFwPatch() => __pbn__FwPatch = null;
         private uint? __pbn__FwPatch;
 
-        [global::ProtoBuf.ProtoMember(25, Name = @"fw_vendor")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(25, Name = @"fw_vendor")]
+        [System.ComponentModel.DefaultValue("")]
         public string FwVendor
         {
             get { return __pbn__FwVendor ?? ""; }
@@ -253,7 +253,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetFwVendor() => __pbn__FwVendor = null;
         private string __pbn__FwVendor;
 
-        [global::ProtoBuf.ProtoMember(26, Name = @"fw_vendor_keys")]
+        [ProtoBuf.ProtoMember(26, Name = @"fw_vendor_keys")]
         public byte[] FwVendorKeys
         {
             get { return __pbn__FwVendorKeys; }
@@ -263,7 +263,7 @@ namespace Trezor.Net.Contracts.Management
         public void ResetFwVendorKeys() => __pbn__FwVendorKeys = null;
         private byte[] __pbn__FwVendorKeys;
 
-        [global::ProtoBuf.ProtoMember(27, Name = @"unfinished_backup")]
+        [ProtoBuf.ProtoMember(27, Name = @"unfinished_backup")]
         public bool UnfinishedBackup
         {
             get { return __pbn__UnfinishedBackup.GetValueOrDefault(); }

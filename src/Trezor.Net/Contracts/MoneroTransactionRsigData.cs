@@ -1,13 +1,13 @@
 namespace Trezor.Net.Contracts.Monero
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class MoneroTransactionRsigData : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class MoneroTransactionRsigData : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"version")]
+        [ProtoBuf.ProtoMember(1, Name = @"version")]
         public uint Version
         {
             get { return __pbn__Version.GetValueOrDefault(); }
@@ -17,7 +17,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetVersion() => __pbn__Version = null;
         private uint? __pbn__Version;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"rsig_type")]
+        [ProtoBuf.ProtoMember(2, Name = @"rsig_type")]
         public uint RsigType
         {
             get { return __pbn__RsigType.GetValueOrDefault(); }
@@ -27,7 +27,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetRsigType() => __pbn__RsigType = null;
         private uint? __pbn__RsigType;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"offload_type")]
+        [ProtoBuf.ProtoMember(3, Name = @"offload_type")]
         public uint OffloadType
         {
             get { return __pbn__OffloadType.GetValueOrDefault(); }
@@ -37,10 +37,10 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetOffloadType() => __pbn__OffloadType = null;
         private uint? __pbn__OffloadType;
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"grouping")]
+        [ProtoBuf.ProtoMember(4, Name = @"grouping")]
         public ulong[] Groupings { get; set; }
 
-        [global::ProtoBuf.ProtoMember(5, Name = @"step")]
+        [ProtoBuf.ProtoMember(5, Name = @"step")]
         public uint Step
         {
             get { return __pbn__Step.GetValueOrDefault(); }
@@ -50,7 +50,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetStep() => __pbn__Step = null;
         private uint? __pbn__Step;
 
-        [global::ProtoBuf.ProtoMember(6, Name = @"operation")]
+        [ProtoBuf.ProtoMember(6, Name = @"operation")]
         public ulong Operation
         {
             get { return __pbn__Operation.GetValueOrDefault(); }
@@ -60,7 +60,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetOperation() => __pbn__Operation = null;
         private ulong? __pbn__Operation;
 
-        [global::ProtoBuf.ProtoMember(7, Name = @"seed")]
+        [ProtoBuf.ProtoMember(7, Name = @"seed")]
         public byte[] Seed
         {
             get { return __pbn__Seed; }
@@ -70,7 +70,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetSeed() => __pbn__Seed = null;
         private byte[] __pbn__Seed;
 
-        [global::ProtoBuf.ProtoMember(8, Name = @"mask")]
+        [ProtoBuf.ProtoMember(8, Name = @"mask")]
         public byte[] Mask
         {
             get { return __pbn__Mask; }
@@ -80,7 +80,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetMask() => __pbn__Mask = null;
         private byte[] __pbn__Mask;
 
-        [global::ProtoBuf.ProtoMember(9, Name = @"amount")]
+        [ProtoBuf.ProtoMember(9, Name = @"amount")]
         public byte[] Amount
         {
             get { return __pbn__Amount; }
@@ -90,7 +90,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetAmount() => __pbn__Amount = null;
         private byte[] __pbn__Amount;
 
-        [global::ProtoBuf.ProtoMember(10, Name = @"rsig")]
+        [ProtoBuf.ProtoMember(10, Name = @"rsig")]
         public byte[] Rsig
         {
             get { return __pbn__Rsig; }
@@ -100,8 +100,8 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetRsig() => __pbn__Rsig = null;
         private byte[] __pbn__Rsig;
 
-        [global::ProtoBuf.ProtoMember(11, Name = @"outputs")]
-        public global::System.Collections.Generic.List<MoneroTransactionDestinationEntry> Outputs { get; } = new global::System.Collections.Generic.List<MoneroTransactionDestinationEntry>();
+        [ProtoBuf.ProtoMember(11, Name = @"outputs")]
+        public System.Collections.Generic.List<MoneroTransactionDestinationEntry> Outputs { get; } = new System.Collections.Generic.List<MoneroTransactionDestinationEntry>();
 
     }
 }

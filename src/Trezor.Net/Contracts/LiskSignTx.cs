@@ -1,27 +1,27 @@
 namespace Trezor.Net.Contracts.Lisk
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class LiskSignTx : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class LiskSignTx : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"address_n")]
+        [ProtoBuf.ProtoMember(1, Name = @"address_n")]
         public uint[] AddressNs { get; set; }
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"transaction")]
+        [ProtoBuf.ProtoMember(2, Name = @"transaction")]
         public LiskTransactionCommon Transaction { get; set; }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class LiskTransactionCommon : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class LiskTransactionCommon : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"type")]
-            [global::System.ComponentModel.DefaultValue(LiskTransactionType.Transfer)]
+            [ProtoBuf.ProtoMember(1, Name = @"type")]
+            [System.ComponentModel.DefaultValue(LiskTransactionType.Transfer)]
             public LiskTransactionType Type
             {
                 get { return __pbn__Type ?? LiskTransactionType.Transfer; }
@@ -31,8 +31,8 @@ namespace Trezor.Net.Contracts.Lisk
             public void ResetType() => __pbn__Type = null;
             private LiskTransactionType? __pbn__Type;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"amount")]
-            [global::System.ComponentModel.DefaultValue(0)]
+            [ProtoBuf.ProtoMember(2, Name = @"amount")]
+            [System.ComponentModel.DefaultValue(0)]
             public ulong Amount
             {
                 get { return __pbn__Amount ?? 0; }
@@ -42,7 +42,7 @@ namespace Trezor.Net.Contracts.Lisk
             public void ResetAmount() => __pbn__Amount = null;
             private ulong? __pbn__Amount;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"fee")]
+            [ProtoBuf.ProtoMember(3, Name = @"fee")]
             public ulong Fee
             {
                 get { return __pbn__Fee.GetValueOrDefault(); }
@@ -52,8 +52,8 @@ namespace Trezor.Net.Contracts.Lisk
             public void ResetFee() => __pbn__Fee = null;
             private ulong? __pbn__Fee;
 
-            [global::ProtoBuf.ProtoMember(4, Name = @"recipient_id")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(4, Name = @"recipient_id")]
+            [System.ComponentModel.DefaultValue("")]
             public string RecipientId
             {
                 get { return __pbn__RecipientId ?? ""; }
@@ -63,7 +63,7 @@ namespace Trezor.Net.Contracts.Lisk
             public void ResetRecipientId() => __pbn__RecipientId = null;
             private string __pbn__RecipientId;
 
-            [global::ProtoBuf.ProtoMember(5, Name = @"sender_public_key")]
+            [ProtoBuf.ProtoMember(5, Name = @"sender_public_key")]
             public byte[] SenderPublicKey
             {
                 get { return __pbn__SenderPublicKey; }
@@ -73,7 +73,7 @@ namespace Trezor.Net.Contracts.Lisk
             public void ResetSenderPublicKey() => __pbn__SenderPublicKey = null;
             private byte[] __pbn__SenderPublicKey;
 
-            [global::ProtoBuf.ProtoMember(6, Name = @"requester_public_key")]
+            [ProtoBuf.ProtoMember(6, Name = @"requester_public_key")]
             public byte[] RequesterPublicKey
             {
                 get { return __pbn__RequesterPublicKey; }
@@ -83,7 +83,7 @@ namespace Trezor.Net.Contracts.Lisk
             public void ResetRequesterPublicKey() => __pbn__RequesterPublicKey = null;
             private byte[] __pbn__RequesterPublicKey;
 
-            [global::ProtoBuf.ProtoMember(7, Name = @"signature")]
+            [ProtoBuf.ProtoMember(7, Name = @"signature")]
             public byte[] Signature
             {
                 get { return __pbn__Signature; }
@@ -93,7 +93,7 @@ namespace Trezor.Net.Contracts.Lisk
             public void ResetSignature() => __pbn__Signature = null;
             private byte[] __pbn__Signature;
 
-            [global::ProtoBuf.ProtoMember(8, Name = @"timestamp")]
+            [ProtoBuf.ProtoMember(8, Name = @"timestamp")]
             public uint Timestamp
             {
                 get { return __pbn__Timestamp.GetValueOrDefault(); }
@@ -103,30 +103,30 @@ namespace Trezor.Net.Contracts.Lisk
             public void ResetTimestamp() => __pbn__Timestamp = null;
             private uint? __pbn__Timestamp;
 
-            [global::ProtoBuf.ProtoMember(9, Name = @"asset")]
+            [ProtoBuf.ProtoMember(9, Name = @"asset")]
             public LiskTransactionAsset Asset { get; set; }
 
-            [global::ProtoBuf.ProtoContract()]
-            public class LiskTransactionAsset : global::ProtoBuf.IExtensible
+            [ProtoBuf.ProtoContract()]
+            public class LiskTransactionAsset : ProtoBuf.IExtensible
             {
-                private global::ProtoBuf.IExtension __pbn__extensionData;
-                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+                private ProtoBuf.IExtension __pbn__extensionData;
+                ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-                [global::ProtoBuf.ProtoMember(1, Name = @"signature")]
+                [ProtoBuf.ProtoMember(1, Name = @"signature")]
                 public LiskSignatureType Signature { get; set; }
 
-                [global::ProtoBuf.ProtoMember(2, Name = @"delegate")]
+                [ProtoBuf.ProtoMember(2, Name = @"delegate")]
                 public LiskDelegateType Delegate { get; set; }
 
-                [global::ProtoBuf.ProtoMember(3, Name = @"votes")]
-                public global::System.Collections.Generic.List<string> Votes { get; } = new global::System.Collections.Generic.List<string>();
+                [ProtoBuf.ProtoMember(3, Name = @"votes")]
+                public System.Collections.Generic.List<string> Votes { get; } = new System.Collections.Generic.List<string>();
 
-                [global::ProtoBuf.ProtoMember(4, Name = @"multisignature")]
+                [ProtoBuf.ProtoMember(4, Name = @"multisignature")]
                 public LiskMultisignatureType Multisignature { get; set; }
 
-                [global::ProtoBuf.ProtoMember(5, Name = @"data")]
-                [global::System.ComponentModel.DefaultValue("")]
+                [ProtoBuf.ProtoMember(5, Name = @"data")]
+                [System.ComponentModel.DefaultValue("")]
                 public string Data
                 {
                     get { return __pbn__Data ?? ""; }
@@ -136,14 +136,14 @@ namespace Trezor.Net.Contracts.Lisk
                 public void ResetData() => __pbn__Data = null;
                 private string __pbn__Data;
 
-                [global::ProtoBuf.ProtoContract()]
-                public class LiskSignatureType : global::ProtoBuf.IExtensible
+                [ProtoBuf.ProtoContract()]
+                public class LiskSignatureType : ProtoBuf.IExtensible
                 {
-                    private global::ProtoBuf.IExtension __pbn__extensionData;
-                    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                        => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+                    private ProtoBuf.IExtension __pbn__extensionData;
+                    ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                        => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-                    [global::ProtoBuf.ProtoMember(1, Name = @"public_key")]
+                    [ProtoBuf.ProtoMember(1, Name = @"public_key")]
                     public byte[] PublicKey
                     {
                         get { return __pbn__PublicKey; }
@@ -155,15 +155,15 @@ namespace Trezor.Net.Contracts.Lisk
 
                 }
 
-                [global::ProtoBuf.ProtoContract()]
-                public class LiskDelegateType : global::ProtoBuf.IExtensible
+                [ProtoBuf.ProtoContract()]
+                public class LiskDelegateType : ProtoBuf.IExtensible
                 {
-                    private global::ProtoBuf.IExtension __pbn__extensionData;
-                    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                        => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+                    private ProtoBuf.IExtension __pbn__extensionData;
+                    ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                        => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-                    [global::ProtoBuf.ProtoMember(1, Name = @"username")]
-                    [global::System.ComponentModel.DefaultValue("")]
+                    [ProtoBuf.ProtoMember(1, Name = @"username")]
+                    [System.ComponentModel.DefaultValue("")]
                     public string Username
                     {
                         get { return __pbn__Username ?? ""; }
@@ -175,14 +175,14 @@ namespace Trezor.Net.Contracts.Lisk
 
                 }
 
-                [global::ProtoBuf.ProtoContract()]
-                public class LiskMultisignatureType : global::ProtoBuf.IExtensible
+                [ProtoBuf.ProtoContract()]
+                public class LiskMultisignatureType : ProtoBuf.IExtensible
                 {
-                    private global::ProtoBuf.IExtension __pbn__extensionData;
-                    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                        => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+                    private ProtoBuf.IExtension __pbn__extensionData;
+                    ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                        => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-                    [global::ProtoBuf.ProtoMember(1, Name = @"min")]
+                    [ProtoBuf.ProtoMember(1, Name = @"min")]
                     public uint Min
                     {
                         get { return __pbn__Min.GetValueOrDefault(); }
@@ -192,7 +192,7 @@ namespace Trezor.Net.Contracts.Lisk
                     public void ResetMin() => __pbn__Min = null;
                     private uint? __pbn__Min;
 
-                    [global::ProtoBuf.ProtoMember(2, Name = @"life_time")]
+                    [ProtoBuf.ProtoMember(2, Name = @"life_time")]
                     public uint LifeTime
                     {
                         get { return __pbn__LifeTime.GetValueOrDefault(); }
@@ -202,14 +202,14 @@ namespace Trezor.Net.Contracts.Lisk
                     public void ResetLifeTime() => __pbn__LifeTime = null;
                     private uint? __pbn__LifeTime;
 
-                    [global::ProtoBuf.ProtoMember(3, Name = @"keys_group")]
-                    public global::System.Collections.Generic.List<string> KeysGroups { get; } = new global::System.Collections.Generic.List<string>();
+                    [ProtoBuf.ProtoMember(3, Name = @"keys_group")]
+                    public System.Collections.Generic.List<string> KeysGroups { get; } = new System.Collections.Generic.List<string>();
 
                 }
 
             }
 
-            [global::ProtoBuf.ProtoContract()]
+            [ProtoBuf.ProtoContract()]
             public enum LiskTransactionType
             {
                 Transfer = 0,

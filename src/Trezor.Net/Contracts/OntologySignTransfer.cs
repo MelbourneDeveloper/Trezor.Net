@@ -1,34 +1,34 @@
 namespace Trezor.Net.Contracts.Ontology
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class OntologySignTransfer : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class OntologySignTransfer : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
         {
-            return global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            return ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
         }
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"address_n")]
+        [ProtoBuf.ProtoMember(1, Name = @"address_n")]
         public uint[] AddressNs { get; set; }
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"transaction")]
+        [ProtoBuf.ProtoMember(2, Name = @"transaction")]
         public OntologyTransaction Transaction { get; set; }
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"transfer")]
+        [ProtoBuf.ProtoMember(3, Name = @"transfer")]
         public OntologyTransfer Transfer { get; set; }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class OntologyTransfer : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class OntologyTransfer : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             {
-                return global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+                return ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
             }
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"asset")]
-            [global::System.ComponentModel.DefaultValue(OntologyAsset.Ont)]
+            [ProtoBuf.ProtoMember(1, Name = @"asset")]
+            [System.ComponentModel.DefaultValue(OntologyAsset.Ont)]
             public OntologyAsset Asset
             {
                 get => __pbn__Asset ?? OntologyAsset.Ont;
@@ -46,7 +46,7 @@ namespace Trezor.Net.Contracts.Ontology
 
             private OntologyAsset? __pbn__Asset;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"amount")]
+            [ProtoBuf.ProtoMember(2, Name = @"amount")]
             public ulong Amount
             {
                 get => __pbn__Amount.GetValueOrDefault();
@@ -64,8 +64,8 @@ namespace Trezor.Net.Contracts.Ontology
 
             private ulong? __pbn__Amount;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"from_address")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(3, Name = @"from_address")]
+            [System.ComponentModel.DefaultValue("")]
             public string FromAddress
             {
                 get => __pbn__FromAddress ?? "";
@@ -83,8 +83,8 @@ namespace Trezor.Net.Contracts.Ontology
 
             private string __pbn__FromAddress;
 
-            [global::ProtoBuf.ProtoMember(4, Name = @"to_address")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(4, Name = @"to_address")]
+            [System.ComponentModel.DefaultValue("")]
             public string ToAddress
             {
                 get => __pbn__ToAddress ?? "";
@@ -102,12 +102,12 @@ namespace Trezor.Net.Contracts.Ontology
 
             private string __pbn__ToAddress;
 
-            [global::ProtoBuf.ProtoContract()]
+            [ProtoBuf.ProtoContract()]
             public enum OntologyAsset
             {
-                [global::ProtoBuf.ProtoEnum(Name = @"ONT")]
+                [ProtoBuf.ProtoEnum(Name = @"ONT")]
                 Ont = 1,
-                [global::ProtoBuf.ProtoEnum(Name = @"ONG")]
+                [ProtoBuf.ProtoEnum(Name = @"ONG")]
                 Ong = 2,
             }
 

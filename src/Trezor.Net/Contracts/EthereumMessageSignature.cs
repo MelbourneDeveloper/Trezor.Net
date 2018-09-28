@@ -1,13 +1,13 @@
 namespace Trezor.Net.Contracts.Ethereum
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class EthereumMessageSignature : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class EthereumMessageSignature : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"address")]
+        [ProtoBuf.ProtoMember(1, Name = @"address")]
         public byte[] Address
         {
             get { return __pbn__Address; }
@@ -17,7 +17,7 @@ namespace Trezor.Net.Contracts.Ethereum
         public void ResetAddress() => __pbn__Address = null;
         private byte[] __pbn__Address;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"signature")]
+        [ProtoBuf.ProtoMember(2, Name = @"signature")]
         public byte[] Signature
         {
             get { return __pbn__Signature; }

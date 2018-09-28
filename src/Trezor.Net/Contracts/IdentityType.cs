@@ -1,14 +1,14 @@
 namespace Trezor.Net.Contracts.Crypto
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class IdentityType : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class IdentityType : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"proto")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(1, Name = @"proto")]
+        [System.ComponentModel.DefaultValue("")]
         public string Proto
         {
             get { return __pbn__Proto ?? ""; }
@@ -18,8 +18,8 @@ namespace Trezor.Net.Contracts.Crypto
         public void ResetProto() => __pbn__Proto = null;
         private string __pbn__Proto;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"user")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(2, Name = @"user")]
+        [System.ComponentModel.DefaultValue("")]
         public string User
         {
             get { return __pbn__User ?? ""; }
@@ -29,8 +29,8 @@ namespace Trezor.Net.Contracts.Crypto
         public void ResetUser() => __pbn__User = null;
         private string __pbn__User;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"host")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(3, Name = @"host")]
+        [System.ComponentModel.DefaultValue("")]
         public string Host
         {
             get { return __pbn__Host ?? ""; }
@@ -40,8 +40,8 @@ namespace Trezor.Net.Contracts.Crypto
         public void ResetHost() => __pbn__Host = null;
         private string __pbn__Host;
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"port")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(4, Name = @"port")]
+        [System.ComponentModel.DefaultValue("")]
         public string Port
         {
             get { return __pbn__Port ?? ""; }
@@ -51,8 +51,8 @@ namespace Trezor.Net.Contracts.Crypto
         public void ResetPort() => __pbn__Port = null;
         private string __pbn__Port;
 
-        [global::ProtoBuf.ProtoMember(5, Name = @"path")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(5, Name = @"path")]
+        [System.ComponentModel.DefaultValue("")]
         public string Path
         {
             get { return __pbn__Path ?? ""; }
@@ -62,8 +62,8 @@ namespace Trezor.Net.Contracts.Crypto
         public void ResetPath() => __pbn__Path = null;
         private string __pbn__Path;
 
-        [global::ProtoBuf.ProtoMember(6, Name = @"index")]
-        [global::System.ComponentModel.DefaultValue(0)]
+        [ProtoBuf.ProtoMember(6, Name = @"index")]
+        [System.ComponentModel.DefaultValue(0)]
         public uint Index
         {
             get { return __pbn__Index ?? 0; }

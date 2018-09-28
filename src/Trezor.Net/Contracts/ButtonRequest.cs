@@ -1,14 +1,14 @@
 namespace Trezor.Net.Contracts.Common
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class ButtonRequest : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class ButtonRequest : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"code")]
-        [global::System.ComponentModel.DefaultValue(ButtonRequestType.ButtonRequestOther)]
+        [ProtoBuf.ProtoMember(1, Name = @"code")]
+        [System.ComponentModel.DefaultValue(ButtonRequestType.ButtonRequestOther)]
         public ButtonRequestType Code
         {
             get { return __pbn__Code ?? ButtonRequestType.ButtonRequestOther; }
@@ -18,8 +18,8 @@ namespace Trezor.Net.Contracts.Common
         public void ResetCode() => __pbn__Code = null;
         private ButtonRequestType? __pbn__Code;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"data")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(2, Name = @"data")]
+        [System.ComponentModel.DefaultValue("")]
         public string Data
         {
             get { return __pbn__Data ?? ""; }
@@ -29,38 +29,38 @@ namespace Trezor.Net.Contracts.Common
         public void ResetData() => __pbn__Data = null;
         private string __pbn__Data;
 
-        [global::ProtoBuf.ProtoContract()]
+        [ProtoBuf.ProtoContract()]
         public enum ButtonRequestType
         {
-            [global::ProtoBuf.ProtoEnum(Name = @"ButtonRequest_Other")]
+            [ProtoBuf.ProtoEnum(Name = @"ButtonRequest_Other")]
             ButtonRequestOther = 1,
-            [global::ProtoBuf.ProtoEnum(Name = @"ButtonRequest_FeeOverThreshold")]
+            [ProtoBuf.ProtoEnum(Name = @"ButtonRequest_FeeOverThreshold")]
             ButtonRequestFeeOverThreshold = 2,
-            [global::ProtoBuf.ProtoEnum(Name = @"ButtonRequest_ConfirmOutput")]
+            [ProtoBuf.ProtoEnum(Name = @"ButtonRequest_ConfirmOutput")]
             ButtonRequestConfirmOutput = 3,
-            [global::ProtoBuf.ProtoEnum(Name = @"ButtonRequest_ResetDevice")]
+            [ProtoBuf.ProtoEnum(Name = @"ButtonRequest_ResetDevice")]
             ButtonRequestResetDevice = 4,
-            [global::ProtoBuf.ProtoEnum(Name = @"ButtonRequest_ConfirmWord")]
+            [ProtoBuf.ProtoEnum(Name = @"ButtonRequest_ConfirmWord")]
             ButtonRequestConfirmWord = 5,
-            [global::ProtoBuf.ProtoEnum(Name = @"ButtonRequest_WipeDevice")]
+            [ProtoBuf.ProtoEnum(Name = @"ButtonRequest_WipeDevice")]
             ButtonRequestWipeDevice = 6,
-            [global::ProtoBuf.ProtoEnum(Name = @"ButtonRequest_ProtectCall")]
+            [ProtoBuf.ProtoEnum(Name = @"ButtonRequest_ProtectCall")]
             ButtonRequestProtectCall = 7,
-            [global::ProtoBuf.ProtoEnum(Name = @"ButtonRequest_SignTx")]
+            [ProtoBuf.ProtoEnum(Name = @"ButtonRequest_SignTx")]
             ButtonRequestSignTx = 8,
-            [global::ProtoBuf.ProtoEnum(Name = @"ButtonRequest_FirmwareCheck")]
+            [ProtoBuf.ProtoEnum(Name = @"ButtonRequest_FirmwareCheck")]
             ButtonRequestFirmwareCheck = 9,
-            [global::ProtoBuf.ProtoEnum(Name = @"ButtonRequest_Address")]
+            [ProtoBuf.ProtoEnum(Name = @"ButtonRequest_Address")]
             ButtonRequestAddress = 10,
-            [global::ProtoBuf.ProtoEnum(Name = @"ButtonRequest_PublicKey")]
+            [ProtoBuf.ProtoEnum(Name = @"ButtonRequest_PublicKey")]
             ButtonRequestPublicKey = 11,
-            [global::ProtoBuf.ProtoEnum(Name = @"ButtonRequest_MnemonicWordCount")]
+            [ProtoBuf.ProtoEnum(Name = @"ButtonRequest_MnemonicWordCount")]
             ButtonRequestMnemonicWordCount = 12,
-            [global::ProtoBuf.ProtoEnum(Name = @"ButtonRequest_MnemonicInput")]
+            [ProtoBuf.ProtoEnum(Name = @"ButtonRequest_MnemonicInput")]
             ButtonRequestMnemonicInput = 13,
-            [global::ProtoBuf.ProtoEnum(Name = @"ButtonRequest_PassphraseType")]
+            [ProtoBuf.ProtoEnum(Name = @"ButtonRequest_PassphraseType")]
             ButtonRequestPassphraseType = 14,
-            [global::ProtoBuf.ProtoEnum(Name = @"ButtonRequest_UnknownDerivationPath")]
+            [ProtoBuf.ProtoEnum(Name = @"ButtonRequest_UnknownDerivationPath")]
             ButtonRequestUnknownDerivationPath = 15,
         }
 

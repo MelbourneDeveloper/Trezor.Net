@@ -1,13 +1,13 @@
 namespace Trezor.Net.Contracts.Cardano
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class CardanoTxRequest : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class CardanoTxRequest : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"tx_index")]
+        [ProtoBuf.ProtoMember(1, Name = @"tx_index")]
         public uint TxIndex
         {
             get { return __pbn__TxIndex.GetValueOrDefault(); }
@@ -17,7 +17,7 @@ namespace Trezor.Net.Contracts.Cardano
         public void ResetTxIndex() => __pbn__TxIndex = null;
         private uint? __pbn__TxIndex;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"tx_hash")]
+        [ProtoBuf.ProtoMember(2, Name = @"tx_hash")]
         public byte[] TxHash
         {
             get { return __pbn__TxHash; }
@@ -27,7 +27,7 @@ namespace Trezor.Net.Contracts.Cardano
         public void ResetTxHash() => __pbn__TxHash = null;
         private byte[] __pbn__TxHash;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"tx_body")]
+        [ProtoBuf.ProtoMember(3, Name = @"tx_body")]
         public byte[] TxBody
         {
             get { return __pbn__TxBody; }

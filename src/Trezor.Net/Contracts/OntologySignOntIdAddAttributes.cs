@@ -1,34 +1,34 @@
 namespace Trezor.Net.Contracts.Ontology
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class OntologySignOntIdAddAttributes : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class OntologySignOntIdAddAttributes : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
         {
-            return global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            return ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
         }
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"address_n")]
+        [ProtoBuf.ProtoMember(1, Name = @"address_n")]
         public uint[] AddressNs { get; set; }
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"transaction")]
+        [ProtoBuf.ProtoMember(2, Name = @"transaction")]
         public OntologyTransaction Transaction { get; set; }
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"ont_id_add_attributes")]
+        [ProtoBuf.ProtoMember(3, Name = @"ont_id_add_attributes")]
         public OntologyOntIdAddAttributes OntIdAddAttributes { get; set; }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class OntologyOntIdAddAttributes : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class OntologyOntIdAddAttributes : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             {
-                return global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+                return ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
             }
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"ont_id")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(1, Name = @"ont_id")]
+            [System.ComponentModel.DefaultValue("")]
             public string OntId
             {
                 get => __pbn__OntId ?? "";
@@ -46,7 +46,7 @@ namespace Trezor.Net.Contracts.Ontology
 
             private string __pbn__OntId;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"public_key")]
+            [ProtoBuf.ProtoMember(2, Name = @"public_key")]
             public byte[] PublicKey
             {
                 get => __pbn__PublicKey;
@@ -64,20 +64,20 @@ namespace Trezor.Net.Contracts.Ontology
 
             private byte[] __pbn__PublicKey;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"ont_id_attributes")]
-            public global::System.Collections.Generic.List<OntologyOntIdAttribute> OntIdAttributes { get; } = new global::System.Collections.Generic.List<OntologyOntIdAttribute>();
+            [ProtoBuf.ProtoMember(3, Name = @"ont_id_attributes")]
+            public System.Collections.Generic.List<OntologyOntIdAttribute> OntIdAttributes { get; } = new System.Collections.Generic.List<OntologyOntIdAttribute>();
 
-            [global::ProtoBuf.ProtoContract()]
-            public class OntologyOntIdAttribute : global::ProtoBuf.IExtensible
+            [ProtoBuf.ProtoContract()]
+            public class OntologyOntIdAttribute : ProtoBuf.IExtensible
             {
-                private global::ProtoBuf.IExtension __pbn__extensionData;
-                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                private ProtoBuf.IExtension __pbn__extensionData;
+                ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
                 {
-                    return global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+                    return ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
                 }
 
-                [global::ProtoBuf.ProtoMember(1, Name = @"key")]
-                [global::System.ComponentModel.DefaultValue("")]
+                [ProtoBuf.ProtoMember(1, Name = @"key")]
+                [System.ComponentModel.DefaultValue("")]
                 public string Key
                 {
                     get => __pbn__Key ?? "";
@@ -95,8 +95,8 @@ namespace Trezor.Net.Contracts.Ontology
 
                 private string __pbn__Key;
 
-                [global::ProtoBuf.ProtoMember(2, Name = @"type")]
-                [global::System.ComponentModel.DefaultValue("")]
+                [ProtoBuf.ProtoMember(2, Name = @"type")]
+                [System.ComponentModel.DefaultValue("")]
                 public string Type
                 {
                     get => __pbn__Type ?? "";
@@ -114,8 +114,8 @@ namespace Trezor.Net.Contracts.Ontology
 
                 private string __pbn__Type;
 
-                [global::ProtoBuf.ProtoMember(3, Name = @"value")]
-                [global::System.ComponentModel.DefaultValue("")]
+                [ProtoBuf.ProtoMember(3, Name = @"value")]
+                [System.ComponentModel.DefaultValue("")]
                 public string Value
                 {
                     get => __pbn__Value ?? "";

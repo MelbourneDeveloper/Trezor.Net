@@ -1,13 +1,13 @@
 namespace Trezor.Net.Contracts.Crypto
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class CipheredKeyValue : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class CipheredKeyValue : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"value")]
+        [ProtoBuf.ProtoMember(1, Name = @"value")]
         public byte[] Value
         {
             get { return __pbn__Value; }

@@ -1,23 +1,23 @@
 namespace Trezor.Net.Contracts.Monero
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class MoneroKeyImageSyncStepAck : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class MoneroKeyImageSyncStepAck : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"kis")]
-        public global::System.Collections.Generic.List<MoneroExportedKeyImage> Kes { get; } = new global::System.Collections.Generic.List<MoneroExportedKeyImage>();
+        [ProtoBuf.ProtoMember(1, Name = @"kis")]
+        public System.Collections.Generic.List<MoneroExportedKeyImage> Kes { get; } = new System.Collections.Generic.List<MoneroExportedKeyImage>();
 
-        [global::ProtoBuf.ProtoContract()]
-        public class MoneroExportedKeyImage : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class MoneroExportedKeyImage : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"iv")]
+            [ProtoBuf.ProtoMember(1, Name = @"iv")]
             public byte[] Iv
             {
                 get { return __pbn__Iv; }
@@ -27,7 +27,7 @@ namespace Trezor.Net.Contracts.Monero
             public void ResetIv() => __pbn__Iv = null;
             private byte[] __pbn__Iv;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"tag")]
+            [ProtoBuf.ProtoMember(2, Name = @"tag")]
             public byte[] Tag
             {
                 get { return __pbn__Tag; }
@@ -37,7 +37,7 @@ namespace Trezor.Net.Contracts.Monero
             public void ResetTag() => __pbn__Tag = null;
             private byte[] __pbn__Tag;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"blob")]
+            [ProtoBuf.ProtoMember(3, Name = @"blob")]
             public byte[] Blob
             {
                 get { return __pbn__Blob; }

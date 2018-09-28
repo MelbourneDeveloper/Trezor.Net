@@ -1,16 +1,16 @@
 namespace Trezor.Net.Contracts.Ripple
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class RippleSignTx : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class RippleSignTx : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"address_n")]
+        [ProtoBuf.ProtoMember(1, Name = @"address_n")]
         public uint[] AddressNs { get; set; }
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"fee")]
+        [ProtoBuf.ProtoMember(2, Name = @"fee")]
         public ulong Fee
         {
             get { return __pbn__Fee.GetValueOrDefault(); }
@@ -20,7 +20,7 @@ namespace Trezor.Net.Contracts.Ripple
         public void ResetFee() => __pbn__Fee = null;
         private ulong? __pbn__Fee;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"flags")]
+        [ProtoBuf.ProtoMember(3, Name = @"flags")]
         public uint Flags
         {
             get { return __pbn__Flags.GetValueOrDefault(); }
@@ -30,7 +30,7 @@ namespace Trezor.Net.Contracts.Ripple
         public void ResetFlags() => __pbn__Flags = null;
         private uint? __pbn__Flags;
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"sequence")]
+        [ProtoBuf.ProtoMember(4, Name = @"sequence")]
         public uint Sequence
         {
             get { return __pbn__Sequence.GetValueOrDefault(); }
@@ -40,7 +40,7 @@ namespace Trezor.Net.Contracts.Ripple
         public void ResetSequence() => __pbn__Sequence = null;
         private uint? __pbn__Sequence;
 
-        [global::ProtoBuf.ProtoMember(5, Name = @"last_ledger_sequence")]
+        [ProtoBuf.ProtoMember(5, Name = @"last_ledger_sequence")]
         public uint LastLedgerSequence
         {
             get { return __pbn__LastLedgerSequence.GetValueOrDefault(); }
@@ -50,17 +50,17 @@ namespace Trezor.Net.Contracts.Ripple
         public void ResetLastLedgerSequence() => __pbn__LastLedgerSequence = null;
         private uint? __pbn__LastLedgerSequence;
 
-        [global::ProtoBuf.ProtoMember(6, Name = @"payment")]
+        [ProtoBuf.ProtoMember(6, Name = @"payment")]
         public RipplePayment Payment { get; set; }
 
-        [global::ProtoBuf.ProtoContract()]
-        public class RipplePayment : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public class RipplePayment : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"amount")]
+            [ProtoBuf.ProtoMember(1, Name = @"amount")]
             public ulong Amount
             {
                 get { return __pbn__Amount.GetValueOrDefault(); }
@@ -70,8 +70,8 @@ namespace Trezor.Net.Contracts.Ripple
             public void ResetAmount() => __pbn__Amount = null;
             private ulong? __pbn__Amount;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"destination")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(2, Name = @"destination")]
+            [System.ComponentModel.DefaultValue("")]
             public string Destination
             {
                 get { return __pbn__Destination ?? ""; }

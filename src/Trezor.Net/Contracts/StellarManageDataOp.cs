@@ -1,14 +1,14 @@
 namespace Trezor.Net.Contracts.Stellar
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class StellarManageDataOp : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class StellarManageDataOp : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"source_account")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(1, Name = @"source_account")]
+        [System.ComponentModel.DefaultValue("")]
         public string SourceAccount
         {
             get { return __pbn__SourceAccount ?? ""; }
@@ -18,8 +18,8 @@ namespace Trezor.Net.Contracts.Stellar
         public void ResetSourceAccount() => __pbn__SourceAccount = null;
         private string __pbn__SourceAccount;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"key")]
-        [global::System.ComponentModel.DefaultValue("")]
+        [ProtoBuf.ProtoMember(2, Name = @"key")]
+        [System.ComponentModel.DefaultValue("")]
         public string Key
         {
             get { return __pbn__Key ?? ""; }
@@ -29,7 +29,7 @@ namespace Trezor.Net.Contracts.Stellar
         public void ResetKey() => __pbn__Key = null;
         private string __pbn__Key;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"value")]
+        [ProtoBuf.ProtoMember(3, Name = @"value")]
         public byte[] Value
         {
             get { return __pbn__Value; }

@@ -1,13 +1,13 @@
 namespace Trezor.Net.Contracts.Ethereum
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class EthereumTxRequest : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class EthereumTxRequest : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"data_length")]
+        [ProtoBuf.ProtoMember(1, Name = @"data_length")]
         public uint DataLength
         {
             get { return __pbn__DataLength.GetValueOrDefault(); }
@@ -17,7 +17,7 @@ namespace Trezor.Net.Contracts.Ethereum
         public void ResetDataLength() => __pbn__DataLength = null;
         private uint? __pbn__DataLength;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"signature_v")]
+        [ProtoBuf.ProtoMember(2, Name = @"signature_v")]
         public uint SignatureV
         {
             get { return __pbn__SignatureV.GetValueOrDefault(); }
@@ -27,7 +27,7 @@ namespace Trezor.Net.Contracts.Ethereum
         public void ResetSignatureV() => __pbn__SignatureV = null;
         private uint? __pbn__SignatureV;
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"signature_r")]
+        [ProtoBuf.ProtoMember(3, Name = @"signature_r")]
         public byte[] SignatureR
         {
             get { return __pbn__SignatureR; }
@@ -37,7 +37,7 @@ namespace Trezor.Net.Contracts.Ethereum
         public void ResetSignatureR() => __pbn__SignatureR = null;
         private byte[] __pbn__SignatureR;
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"signature_s")]
+        [ProtoBuf.ProtoMember(4, Name = @"signature_s")]
         public byte[] SignatureS
         {
             get { return __pbn__SignatureS; }

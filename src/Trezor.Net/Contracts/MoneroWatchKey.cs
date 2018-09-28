@@ -1,13 +1,13 @@
 namespace Trezor.Net.Contracts.Monero
 {
-    [global::ProtoBuf.ProtoContract()]
-    public class MoneroWatchKey : global::ProtoBuf.IExtensible
+    [ProtoBuf.ProtoContract()]
+    public class MoneroWatchKey : ProtoBuf.IExtensible
     {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+        private ProtoBuf.IExtension __pbn__extensionData;
+        ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"watch_key")]
+        [ProtoBuf.ProtoMember(1, Name = @"watch_key")]
         public byte[] WatchKey
         {
             get { return __pbn__WatchKey; }
@@ -17,7 +17,7 @@ namespace Trezor.Net.Contracts.Monero
         public void ResetWatchKey() => __pbn__WatchKey = null;
         private byte[] __pbn__WatchKey;
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"address")]
+        [ProtoBuf.ProtoMember(2, Name = @"address")]
         public byte[] Address
         {
             get { return __pbn__Address; }
