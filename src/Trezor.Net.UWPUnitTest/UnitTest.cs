@@ -51,13 +51,14 @@ namespace Trezor.Net
         {
             await GetAndInitialize();
 
+            //Note: these are not reasonable values. They should not be used for a transaction. Looking for a better example here...
             var txMessage = new EthereumSignTx
             {
                 Nonce = "0".ToHexBytes(),
-                GasPrice = 1000000000.ToHexBytes(), // 3b9aca00 is 1000000000 wei, which is equal to 1 gwei as the gas price.
-                GasLimit = 21000.ToHexBytes(), // 5208 is equal to 21000 as the gas limit.
+                GasPrice = 1000000000.ToHexBytes(),
+                GasLimit = 21000.ToHexBytes(),
                 To = "689c56aef474df92d44a1b70850f808488f9769c".ToHexBytes(),
-                Value = "de0b6b3a7640000".ToHexBytes(), // de0b6b3a7640000 is equal to 1 Ether
+                Value = "de0b6b3a7640000".ToHexBytes(),
                 AddressNs = ManagerHelpers.GetAddressPath(false, 0, false, 0, 60),
                 ChainId = 1
             };
