@@ -13,7 +13,7 @@ namespace Trezor.Net
     /// <summary>
     /// An interface for dealing with the Trezor that works across all platforms
     /// </summary>
-    public abstract partial class TrezorManagerBase : IDisposable
+    public abstract class TrezorManagerBase<TMessageType> : IDisposable
     {
         #region Events
         public event EventHandler Connected;
@@ -28,7 +28,7 @@ namespace Trezor.Net
         private int _InvalidChunksCounter;
         private readonly EnterPinArgs _EnterPinCallback;
         protected SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
-        private readonly string LogSection = nameof(TrezorManagerBase);
+        private readonly string LogSection = "TrezorManagerBase";
         private object _LastWrittenMessage;
         #endregion
 
@@ -74,6 +74,7 @@ namespace Trezor.Net
         protected abstract bool IsButtonRequest(object response);
         protected abstract bool IsPinMatrixRequest(object response);
         protected abstract bool IsInitialize(object response);
+        protected abstract Type GetContractType(TMessageType messageType, string typeName);
         #endregion
 
         #region Public Methods
@@ -199,12 +200,12 @@ namespace Trezor.Net
         {
             //Read a chunk
             var readBuffer = await _HidDevice.ReadAsync();
-            object messageType;
+            TMessageType messageType;
 
             //Check to see that this is a valid first chunk 
-            bool firstByteNot63 = readBuffer[0] != (byte)'?';
-            bool secondByteNot35 = readBuffer[1] != 35;
-            bool thirdByteNot35 = readBuffer[2] != 35;
+            var firstByteNot63 = readBuffer[0] != (byte)'?';
+            var secondByteNot35 = readBuffer[1] != 35;
+            var thirdByteNot35 = readBuffer[2] != 35;
             if (firstByteNot63 || secondByteNot35 || thirdByteNot35)
             {
                 var message = $"An error occurred while attempting to read the message from the device. The last written message was a {_LastWrittenMessage?.GetType().Name}. In the first chunk of data ";
@@ -238,7 +239,7 @@ namespace Trezor.Net
             //Get the message type
             var messageTypeValueName = Enum.GetName(MessageTypeType, messageTypeInt);
 
-            messageType = Enum.Parse(MessageTypeType, messageTypeValueName);
+            messageType = (TMessageType)Enum.Parse(MessageTypeType, messageTypeValueName);
 
             //msgLength:= int(binary.BigEndian.Uint32(buf[i + 4 : i + 8]))
             //TODO: Is this correct?
@@ -299,7 +300,7 @@ namespace Trezor.Net
             return msg;
         }
 
-        private object Deserialize(object messageType, byte[] data)
+        private object Deserialize(TMessageType messageType, byte[] data)
         {
             try
             {
@@ -347,50 +348,6 @@ namespace Trezor.Net
         #endregion
 
         #region Private Static Methods
-        private static Type GetContractType(object messageType, string typeName)
-        {
-            Type contractType;
-
-            lock (_ContractsByName)
-            {
-                if (!_ContractsByName.TryGetValue(typeName, out contractType))
-                {
-                    contractType = Type.GetType(typeName);
-
-                    if (contractType == null)
-                    {
-                        if (_Assemblies == null)
-                        {
-                            _Assemblies = AppDomain.CurrentDomain.GetAssemblies();
-                        }
-
-                        foreach (var assembly in _Assemblies)
-                        {
-                            foreach (var type in assembly.GetTypes())
-                            {
-                                if (type.FullName == typeName)
-                                {
-                                    contractType = type;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                    if (contractType == null)
-                    {
-                        throw new Exception($"The device returned a message of {messageType}. There was no corresponding contract type at {typeName}");
-                    }
-                    else
-                    {
-                        _ContractsByName.Add(typeName, contractType);
-                    }
-                }
-            }
-
-            return contractType;
-        }
-
         /// <summary>
         /// Horribly inefficient array thing
         /// </summary>
