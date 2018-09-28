@@ -2,6 +2,7 @@
 using System;
 using System.Text;
 using System.Threading.Tasks;
+using Trezor.Net.Contracts;
 
 namespace Trezor.Net
 {
@@ -21,9 +22,13 @@ namespace Trezor.Net
         public Features Features { get; private set; }
         #endregion
 
+        #region Public Override Properties
+        public override bool IsInitialized => Features != null;
+        #endregion
+
         #region Protected Override Properties
-        protected override bool HasFeatures => Features != null;
-        protected override string ContractNamespace => "Trezor";
+        protected override string ContractNamespace => "Trezor.Net.Contracts";
+        protected override Type MessageTypeType => typeof(MessageType);
         #endregion
 
         #region Constructor
@@ -74,12 +79,31 @@ namespace Trezor.Net
 
         protected CoinType GetCoinType(string coinShortcut)
         {
-            if (!HasFeatures)
+            if (!IsInitialized)
             {
                 throw new Exception("The Trezor has not been successfully initialised.");
             }
 
             return Features.Coins.Find(c => c.CoinShortcut == coinShortcut);
+        }
+
+        protected override void CheckForFailure(object returnMessage)
+        {
+            if (returnMessage is Failure failure)
+            {
+                throw new FailureException<Failure>($"Error sending message to Trezor.\r\nCode: {failure.Code} Message: {failure.Message}", failure);
+            }
+        }
+
+        protected override object GetEnumValue(string messageTypeString)
+        {
+            var isValid = Enum.TryParse(messageTypeString, out MessageType messageType);
+            if (!isValid)
+            {
+                throw new Exception($"{messageTypeString} is not a valid MessageType");
+            }
+
+            return messageType;
         }
         #endregion
 
@@ -94,11 +118,16 @@ namespace Trezor.Net
         #endregion
 
         #region Public Overrides
+        public Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType)
+        {
+            return GetAddressAsync(coinShortcut, coinNumber, 0, isChange, index, showDisplay, addressType, null);
+        }
+
         /// <summary>
         /// Get an address from the Trezor
         /// //TODO: Move this back down to TrezorManagerBase
         /// </summary>
-        public override async Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, uint account, bool isChange, uint index, bool showDisplay, AddressType addressType, bool? isSegwit)
+        public async Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, uint account, bool isChange, uint index, bool showDisplay, AddressType addressType, bool? isSegwit)
         {
             try
             {

@@ -37,6 +37,7 @@ namespace Trezor.Net
         private readonly EnterPinArgs _EnterPinCallback;
         protected SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
         private readonly string LogSection = nameof(TrezorManagerBase);
+        private object _LastWrittenMessage;
         #endregion
 
         #region Private Static Fields
@@ -48,9 +49,13 @@ namespace Trezor.Net
         public USBTypeEnum USBType { get; }
         #endregion
 
+        #region Public Abstract Properties
+        public abstract bool IsInitialized { get; }
+        #endregion
+
         #region Protected Abstract Properties
-        protected abstract bool HasFeatures { get; }
         protected abstract string ContractNamespace { get; }
+        protected abstract Type MessageTypeType { get; }
         #endregion
 
         #region Constructor
@@ -78,10 +83,10 @@ namespace Trezor.Net
         #endregion
 
         #region Protected Abstract Methods
+        protected abstract object GetEnumValue(string messageTypeString);
         protected abstract bool IsButtonRequest(object response);
         protected abstract bool IsPinMatrixRequest(object response);
         protected abstract bool IsInitialize(object response);
-
         #endregion
 
         #region Public Methods
@@ -146,11 +151,6 @@ namespace Trezor.Net
             return _HidDevice.GetIsConnectedAsync();
         }
 
-        public Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType)
-        {
-            return GetAddressAsync(coinShortcut, coinNumber, 0, isChange, index, showDisplay, addressType, null);
-        }
-
         /// <summary>
         /// Initialize the Trezor. Should only be called once.
         /// </summary>
@@ -163,20 +163,7 @@ namespace Trezor.Net
 
         #endregion
 
-        #region Public Abstract Methods
-        public abstract Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, uint account, bool isChange, uint index, bool showDisplay, AddressType addressType, bool? isSegwit);
-
-        #endregion
-
         #region Private Methods
-        protected void ValidateInitialization(object message)
-        {
-            if (!HasFeatures && !IsInitialize(message))
-            {
-                throw new ManagerException($"The device has not been successfully initialised. Please call {nameof(InitializeAsync)}.");
-            }
-        }
-
         private async Task WriteAsync(object msg)
         {
             Logger.Log($"Write: {msg}", null, LogSection);
@@ -190,12 +177,8 @@ namespace Trezor.Net
             var msgName = msg.GetType().Name;
 
             var messageTypeString = "MessageType" + msgName;
-            var isValid = Enum.TryParse(messageTypeString, out MessageType messageType);
 
-            if (!isValid)
-            {
-                throw new Exception($"{messageTypeString} is not a valid MessageType");
-            }
+            var messageType = GetEnumValue(messageTypeString);
 
             var msgId = (int)messageType;
             var data = new ByteBuffer(msgSize + 1024); // 32768);
@@ -221,32 +204,54 @@ namespace Trezor.Net
                 range[0] = (byte)'?';
                 await _HidDevice.WriteAsync(range);
             }
+
+            _LastWrittenMessage = msg;
         }
 
         private async Task<object> ReadAsync()
         {
             //Read a chunk
             var readBuffer = await _HidDevice.ReadAsync();
-            MessageType messageType;
+            object messageType;
 
             //Check to see that this is a valid first chunk 
-            if (readBuffer[0] != (byte)'?' || readBuffer[1] != 35 || readBuffer[2] != 35)
+            bool firstByteNot63 = readBuffer[0] != (byte)'?';
+            bool secondByteNot35 = readBuffer[1] != 35;
+            bool thirdByteNot35 = readBuffer[2] != 35;
+            if (firstByteNot63 || secondByteNot35 || thirdByteNot35)
             {
-                throw new Exception("Bad read");
+                var message = $"An error occurred while attempting to read the message from the device. The last written message was a {_LastWrittenMessage?.GetType().Name}. In the first chunk of data ";
+
+                if (firstByteNot63)
+                {
+                    message += "the first byte was not 63";
+                }
+
+                if (secondByteNot35)
+                {
+                    message += "the second byte was not 35";
+                }
+
+                if (thirdByteNot35)
+                {
+                    message += "the third byte was not 35";
+                }
+
+                throw new ReadException(message, readBuffer, _LastWrittenMessage);
             }
 
             //Looks like the message type is at index 4
             var messageTypeInt = readBuffer[4];
 
-            //Get the message type
-            if (Enum.IsDefined(typeof(MessageType), (int)messageTypeInt))
-            {
-                messageType = (MessageType)messageTypeInt;
-            }
-            else
+            if (!Enum.IsDefined(MessageTypeType, (int)messageTypeInt))
             {
                 throw new Exception($"The number {messageTypeInt} is not a valid MessageType");
             }
+
+            //Get the message type
+            var messageTypeValueName = Enum.GetName(MessageTypeType, messageTypeInt);
+
+            messageType = Enum.Parse(MessageTypeType, messageTypeValueName);
 
             //msgLength:= int(binary.BigEndian.Uint32(buf[i + 4 : i + 8]))
             //TODO: Is this correct?
@@ -307,7 +312,7 @@ namespace Trezor.Net
             return msg;
         }
 
-        private object Deserialize(MessageType messageType, byte[] data)
+        private object Deserialize(object messageType, byte[] data)
         {
             try
             {
@@ -325,6 +330,14 @@ namespace Trezor.Net
         #endregion
 
         #region Protected Methods
+        protected void ValidateInitialization(object message)
+        {
+            if (!IsInitialized && !IsInitialize(message))
+            {
+                throw new ManagerException($"The device has not been successfully initialised. Please call {nameof(InitializeAsync)}.");
+            }
+        }
+
         /// <summary>
         /// Warning: This is not thread safe. It should only be used inside the generic version of this method or to call pin related stuff
         /// </summary>
@@ -334,22 +347,20 @@ namespace Trezor.Net
 
             var retVal = await ReadAsync();
 
-            if (retVal is Failure failure)
-            {
-                throw new FailureException<Failure>($"Error sending message to Trezor.\r\n{message.GetType().Name}", failure);
-            }
+            CheckForFailure(retVal);
 
             return retVal;
         }
         #endregion
 
         #region Protected Abstract Methods
+        protected abstract void CheckForFailure(object returnMessage);
         protected abstract Task<object> PinMatrixAckAsync(string pin);
         protected abstract Task<object> ButtonAckAsync();
         #endregion
 
         #region Private Static Methods
-        private static Type GetContractType(MessageType messageType, string typeName)
+        private static Type GetContractType(object messageType, string typeName)
         {
             Type contractType;
 

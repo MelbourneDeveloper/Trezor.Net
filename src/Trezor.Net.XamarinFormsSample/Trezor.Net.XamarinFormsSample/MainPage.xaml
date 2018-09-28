@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Trezor.Net.XamarinFormsSample"
+             x:Class="Trezor.Net.XamarinFormsSample.MainPage">
+
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+
+        <ActivityIndicator x:Name="TheActivityIndicator" IsRunning="True" />
+
+        <!-- Place new controls here -->
+        <Label Text="Waiting For Trezor..." x:Name="TheLabel" />
+        
+    </StackLayout>
+
+</ContentPage>

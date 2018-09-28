@@ -1,0 +1,64 @@
+﻿using Hid.Net;
+using System;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
+namespace Trezor.Net.XamarinFormsSample
+{
+    public partial class App : Application
+    {
+        #region Fields
+        private TrezorManager _TrezorManager;
+        #endregion
+
+        #region Public Static Propertoes
+        public static string Address;
+        public static NavigationPage MainNavigationPage { get; private set; }
+        #endregion
+
+        #region Public Static Events
+        public static event EventHandler GetAddress;
+        #endregion
+
+        #region Constructor
+        public App(IHidDevice trezorHidDevice)
+        {
+            _TrezorManager = new TrezorManager(TrezorPinPad.GetPin, trezorHidDevice);
+            InitializeComponent();
+            trezorHidDevice.Connected += TrezorHidDevice_Connected;
+            MainNavigationPage = new NavigationPage(new MainPage());
+            MainPage = MainNavigationPage;
+        }
+        #endregion
+
+        #region Event Handlers
+        private void TrezorHidDevice_Connected(object sender, System.EventArgs e)
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                await _TrezorManager.InitializeAsync();
+                Address = await _TrezorManager.GetAddressAsync("BTC", 0, false, 0, false, AddressType.Bitcoin);
+                GetAddress?.Invoke(this, new EventArgs());
+            });
+        }
+        #endregion
+
+        #region Protected Overrides
+        protected override void OnStart()
+        {
+            // Handle when your app starts
+        }
+
+        protected override void OnSleep()
+        {
+            // Handle when your app sleeps
+        }
+
+        protected override void OnResume()
+        {
+            // Handle when your app resumes
+        }
+        #endregion
+    }
+}

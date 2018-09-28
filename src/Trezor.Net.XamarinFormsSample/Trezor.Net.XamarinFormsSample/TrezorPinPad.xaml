@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Trezor.Net.XamarinFormsSample.TrezorPinPad" Title="Enter TREZOR PIN">
+    <ContentPage.Content>
+        <Grid >
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label Text="The pin layout is displayed on your hardwarewallet." VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+
+            <Grid Grid.Row="1" >
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="100" />
+                </Grid.RowDefinitions>
+
+                <Button Text="•" Margin="6" x:Name="Button7" Clicked="Button7_Clicked" BackgroundColor="White"   />
+                <Button Text="•" Margin="6" x:Name="Button8" Grid.Column="1" Clicked="Button8_Clicked" BackgroundColor="White" />
+                <Button Text="•" Margin="6" x:Name="Button9" Grid.Column="2" Clicked="Button9_Clicked" BackgroundColor="White" />
+
+                <Button Text="•" Margin="6" x:Name="Button4" Grid.Row="1" Clicked="Button4_Clicked" BackgroundColor="White" />
+                <Button Text="•" Margin="6" x:Name="Button5" Grid.Row="1" Grid.Column="1" Clicked="Button5_Clicked" BackgroundColor="White" />
+                <Button Text="•" Margin="6" x:Name="Button6" Grid.Row="1" Grid.Column="2" Clicked="Button6_Clicked" BackgroundColor="White" />
+
+                <Button Text="•" Margin="6" x:Name="Button1" Grid.Row="2" Clicked="Button1_Clicked" BackgroundColor="White" />
+                <Button Text="•" Margin="6" x:Name="Button2" Grid.Row="2" Grid.Column="1" Clicked="Button2_Clicked" BackgroundColor="White" />
+                <Button Text="•" Margin="6" x:Name="Button3" Grid.Row="2" Grid.Column="2" Clicked="Button3_Clicked" BackgroundColor="White" />
+
+                <Entry IsEnabled="False" TextColor="{DynamicResource apppurple}"  Grid.Row="3" Margin="4,4,100,4" IsPassword="True" FontSize="22"  HorizontalOptions="FillAndExpand" x:Name="PinBox" Grid.ColumnSpan="3"  />
+
+                <Button Text="Back" Margin="6" Grid.Row="3" WidthRequest="80" HorizontalOptions="End" Clicked="Backspace_Clicked" Grid.ColumnSpan="3"  BackgroundColor="#5D0164" TextColor="White"  />
+
+                <Button Text="Enter"  Grid.Row="4" Margin="6" TextColor="White" Grid.ColumnSpan="3" Clicked="Enter_Clicked" BackgroundColor="#5D0164" />
+
+            </Grid>
+            
+        </Grid>
+
+
+    </ContentPage.Content>
+</ContentPage>
