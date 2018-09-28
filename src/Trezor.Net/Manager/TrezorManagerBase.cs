@@ -19,14 +19,6 @@ namespace Trezor.Net
         public event EventHandler Connected;
         #endregion
 
-        #region Enums
-        public enum USBTypeEnum
-        {
-            One,
-            Two
-        }
-        #endregion
-
         #region Constants
         private const int FirstChunkStartIndex = 9;
         #endregion
@@ -43,10 +35,6 @@ namespace Trezor.Net
         #region Private Static Fields
         private static Assembly[] _Assemblies;
         private static readonly Dictionary<string, Type> _ContractsByName = new Dictionary<string, Type>();
-        #endregion
-
-        #region Public Properties
-        public USBTypeEnum USBType { get; }
         #endregion
 
         #region Public Abstract Properties
@@ -68,7 +56,6 @@ namespace Trezor.Net
 
             hidDevice.Connected += HidDevice_Connected;
 
-            USBType = USBTypeEnum.One;
             _EnterPinCallback = enterPinCallback;
             _HidDevice = hidDevice;
         }
