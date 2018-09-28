@@ -54,8 +54,8 @@ namespace Trezor.Net
             var txMessage = new EthereumSignTx
             {
                 Nonce = "0".ToHexBytes(),
-                GasPrice = "3b9aca00".ToHexBytes(), // 3b9aca00 is 1000000000 wei, which is equal to 1 gwei as the gas price.
-                GasLimit = "5208".ToHexBytes(), // 5208 is equal to 21000 as the gas limit.
+                GasPrice = 1000000000.ToHexBytes(), // 3b9aca00 is 1000000000 wei, which is equal to 1 gwei as the gas price.
+                GasLimit = 21000.ToHexBytes(), // 5208 is equal to 21000 as the gas limit.
                 To = "689c56aef474df92d44a1b70850f808488f9769c".ToHexBytes(),
                 Value = "de0b6b3a7640000".ToHexBytes(), // de0b6b3a7640000 is equal to 1 Ether
                 AddressNs = ManagerHelpers.GetAddressPath(false, 0, false, 0, 60),
