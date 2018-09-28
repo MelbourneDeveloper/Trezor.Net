@@ -28,14 +28,9 @@ namespace Trezor.Net.Contracts.Crypto
         private string __pbn__Key;
 
         [ProtoBuf.ProtoMember(3, Name = @"value")]
-        public byte[] Value
-        {
-            get { return __pbn__Value; }
-            set { __pbn__Value = value; }
-        }
-        public bool ShouldSerializeValue() => __pbn__Value != null;
-        public void ResetValue() => __pbn__Value = null;
-        private byte[] __pbn__Value;
+        public byte[] Value { get; set; }
+        public bool ShouldSerializeValue() => Value != null;
+        public void ResetValue() => Value = null;
 
         [ProtoBuf.ProtoMember(4, Name = @"encrypt")]
         public bool Encrypt
@@ -68,15 +63,9 @@ namespace Trezor.Net.Contracts.Crypto
         private bool? __pbn__AskOnDecrypt;
 
         [ProtoBuf.ProtoMember(7, Name = @"iv")]
-        public byte[] Iv
-        {
-            get { return __pbn__Iv; }
-            set { __pbn__Iv = value; }
-        }
-        public bool ShouldSerializeIv() => __pbn__Iv != null;
-        public void ResetIv() => __pbn__Iv = null;
-        private byte[] __pbn__Iv;
-
+        public byte[] Iv { get; set; }
+        public bool ShouldSerializeIv() => Iv != null;
+        public void ResetIv() => Iv = null;
     }
 }
 

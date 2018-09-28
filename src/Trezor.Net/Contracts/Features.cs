@@ -122,24 +122,14 @@ namespace Trezor.Net.Contracts.Management
         private bool? __pbn__Initialized;
 
         [ProtoBuf.ProtoMember(13, Name = @"revision")]
-        public byte[] Revision
-        {
-            get { return __pbn__Revision; }
-            set { __pbn__Revision = value; }
-        }
-        public bool ShouldSerializeRevision() => __pbn__Revision != null;
-        public void ResetRevision() => __pbn__Revision = null;
-        private byte[] __pbn__Revision;
+        public byte[] Revision { get; set; }
+        public bool ShouldSerializeRevision() => Revision != null;
+        public void ResetRevision() => Revision = null;
 
         [ProtoBuf.ProtoMember(14, Name = @"bootloader_hash")]
-        public byte[] BootloaderHash
-        {
-            get { return __pbn__BootloaderHash; }
-            set { __pbn__BootloaderHash = value; }
-        }
-        public bool ShouldSerializeBootloaderHash() => __pbn__BootloaderHash != null;
-        public void ResetBootloaderHash() => __pbn__BootloaderHash = null;
-        private byte[] __pbn__BootloaderHash;
+        public byte[] BootloaderHash { get; set; }
+        public bool ShouldSerializeBootloaderHash() => BootloaderHash != null;
+        public void ResetBootloaderHash() => BootloaderHash = null;
 
         [ProtoBuf.ProtoMember(15, Name = @"imported")]
         public bool Imported
@@ -254,14 +244,9 @@ namespace Trezor.Net.Contracts.Management
         private string __pbn__FwVendor;
 
         [ProtoBuf.ProtoMember(26, Name = @"fw_vendor_keys")]
-        public byte[] FwVendorKeys
-        {
-            get { return __pbn__FwVendorKeys; }
-            set { __pbn__FwVendorKeys = value; }
-        }
-        public bool ShouldSerializeFwVendorKeys() => __pbn__FwVendorKeys != null;
-        public void ResetFwVendorKeys() => __pbn__FwVendorKeys = null;
-        private byte[] __pbn__FwVendorKeys;
+        public byte[] FwVendorKeys { get; set; }
+        public bool ShouldSerializeFwVendorKeys() => FwVendorKeys != null;
+        public void ResetFwVendorKeys() => FwVendorKeys = null;
 
         [ProtoBuf.ProtoMember(27, Name = @"unfinished_backup")]
         public bool UnfinishedBackup

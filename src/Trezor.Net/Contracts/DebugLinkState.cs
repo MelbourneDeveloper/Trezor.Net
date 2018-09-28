@@ -8,14 +8,9 @@ namespace Trezor.Net.Contracts.Debug
             => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [ProtoBuf.ProtoMember(1, Name = @"layout")]
-        public byte[] Layout
-        {
-            get { return __pbn__Layout; }
-            set { __pbn__Layout = value; }
-        }
-        public bool ShouldSerializeLayout() => __pbn__Layout != null;
-        public void ResetLayout() => __pbn__Layout = null;
-        private byte[] __pbn__Layout;
+        public byte[] Layout { get; set; }
+        public bool ShouldSerializeLayout() => Layout != null;
+        public void ResetLayout() => Layout = null;
 
         [ProtoBuf.ProtoMember(2, Name = @"pin")]
         [System.ComponentModel.DefaultValue("")]
@@ -75,14 +70,9 @@ namespace Trezor.Net.Contracts.Debug
         private string __pbn__ResetWord;
 
         [ProtoBuf.ProtoMember(8, Name = @"reset_entropy")]
-        public byte[] ResetEntropy
-        {
-            get { return __pbn__ResetEntropy; }
-            set { __pbn__ResetEntropy = value; }
-        }
-        public bool ShouldSerializeResetEntropy() => __pbn__ResetEntropy != null;
-        public void ResetResetEntropy() => __pbn__ResetEntropy = null;
-        private byte[] __pbn__ResetEntropy;
+        public byte[] ResetEntropy { get; set; }
+        public bool ShouldSerializeResetEntropy() => ResetEntropy != null;
+        public void ResetResetEntropy() => ResetEntropy = null;
 
         [ProtoBuf.ProtoMember(9, Name = @"recovery_fake_word")]
         [System.ComponentModel.DefaultValue("")]

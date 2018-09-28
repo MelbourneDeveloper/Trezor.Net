@@ -8,14 +8,8 @@ namespace Trezor.Net.Contracts.Management
             => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [ProtoBuf.ProtoMember(1, Name = @"entropy")]
-        public byte[] Entropy
-        {
-            get { return __pbn__Entropy; }
-            set { __pbn__Entropy = value; }
-        }
-        public bool ShouldSerializeEntropy() => __pbn__Entropy != null;
-        public void ResetEntropy() => __pbn__Entropy = null;
-        private byte[] __pbn__Entropy;
-
+        public byte[] Entropy { get; set; }
+        public bool ShouldSerializeEntropy() => Entropy != null;
+        public void ResetEntropy() => Entropy = null;
     }
 }

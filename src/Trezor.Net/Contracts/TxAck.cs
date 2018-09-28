@@ -67,14 +67,9 @@ namespace Trezor.Net.Contracts.Bitcoin
             private uint? __pbn__OutputsCnt;
 
             [ProtoBuf.ProtoMember(8, Name = @"extra_data")]
-            public byte[] ExtraData
-            {
-                get { return __pbn__ExtraData; }
-                set { __pbn__ExtraData = value; }
-            }
-            public bool ShouldSerializeExtraData() => __pbn__ExtraData != null;
-            public void ResetExtraData() => __pbn__ExtraData = null;
-            private byte[] __pbn__ExtraData;
+            public byte[] ExtraData { get; set; }
+            public bool ShouldSerializeExtraData() => ExtraData != null;
+            public void ResetExtraData() => ExtraData = null;
 
             [ProtoBuf.ProtoMember(9, Name = @"extra_data_len")]
             public uint ExtraDataLen
@@ -123,14 +118,9 @@ namespace Trezor.Net.Contracts.Bitcoin
                 public uint PrevIndex { get; set; }
 
                 [ProtoBuf.ProtoMember(4, Name = @"script_sig")]
-                public byte[] ScriptSig
-                {
-                    get { return __pbn__ScriptSig; }
-                    set { __pbn__ScriptSig = value; }
-                }
-                public bool ShouldSerializeScriptSig() => __pbn__ScriptSig != null;
-                public void ResetScriptSig() => __pbn__ScriptSig = null;
-                private byte[] __pbn__ScriptSig;
+                public byte[] ScriptSig { get; set; }
+                public bool ShouldSerializeScriptSig() => ScriptSig != null;
+                public void ResetScriptSig() => ScriptSig = null;
 
                 [ProtoBuf.ProtoMember(5, Name = @"sequence")]
                 [System.ComponentModel.DefaultValue(4294967295)]
@@ -188,14 +178,9 @@ namespace Trezor.Net.Contracts.Bitcoin
                 private uint? __pbn__DecredScriptVersion;
 
                 [ProtoBuf.ProtoMember(11, Name = @"prev_block_hash_bip115")]
-                public byte[] PrevBlockHashBip115
-                {
-                    get { return __pbn__PrevBlockHashBip115; }
-                    set { __pbn__PrevBlockHashBip115 = value; }
-                }
-                public bool ShouldSerializePrevBlockHashBip115() => __pbn__PrevBlockHashBip115 != null;
-                public void ResetPrevBlockHashBip115() => __pbn__PrevBlockHashBip115 = null;
-                private byte[] __pbn__PrevBlockHashBip115;
+                public byte[] PrevBlockHashBip115 { get; set; }
+                public bool ShouldSerializePrevBlockHashBip115() => PrevBlockHashBip115 != null;
+                public void ResetPrevBlockHashBip115() => PrevBlockHashBip115 = null;
 
                 [ProtoBuf.ProtoMember(12, Name = @"prev_block_height_bip115")]
                 public uint PrevBlockHeightBip115
@@ -265,14 +250,9 @@ namespace Trezor.Net.Contracts.Bitcoin
                 public MultisigRedeemScriptType Multisig { get; set; }
 
                 [ProtoBuf.ProtoMember(6, Name = @"op_return_data")]
-                public byte[] OpReturnData
-                {
-                    get { return __pbn__OpReturnData; }
-                    set { __pbn__OpReturnData = value; }
-                }
-                public bool ShouldSerializeOpReturnData() => __pbn__OpReturnData != null;
-                public void ResetOpReturnData() => __pbn__OpReturnData = null;
-                private byte[] __pbn__OpReturnData;
+                public byte[] OpReturnData { get; set; }
+                public bool ShouldSerializeOpReturnData() => OpReturnData != null;
+                public void ResetOpReturnData() => OpReturnData = null;
 
                 [ProtoBuf.ProtoMember(7, Name = @"decred_script_version")]
                 public uint DecredScriptVersion
@@ -285,14 +265,9 @@ namespace Trezor.Net.Contracts.Bitcoin
                 private uint? __pbn__DecredScriptVersion;
 
                 [ProtoBuf.ProtoMember(8, Name = @"block_hash_bip115")]
-                public byte[] BlockHashBip115
-                {
-                    get { return __pbn__BlockHashBip115; }
-                    set { __pbn__BlockHashBip115 = value; }
-                }
-                public bool ShouldSerializeBlockHashBip115() => __pbn__BlockHashBip115 != null;
-                public void ResetBlockHashBip115() => __pbn__BlockHashBip115 = null;
-                private byte[] __pbn__BlockHashBip115;
+                public byte[] BlockHashBip115 { get; set; }
+                public bool ShouldSerializeBlockHashBip115() => BlockHashBip115 != null;
+                public void ResetBlockHashBip115() => BlockHashBip115 = null;
 
                 [ProtoBuf.ProtoMember(9, Name = @"block_height_bip115")]
                 public uint BlockHeightBip115

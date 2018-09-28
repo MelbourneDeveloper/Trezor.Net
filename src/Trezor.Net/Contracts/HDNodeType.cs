@@ -20,24 +20,13 @@ namespace Trezor.Net.Contracts.Common
         public byte[] ChainCode { get; set; }
 
         [ProtoBuf.ProtoMember(5, Name = @"private_key")]
-        public byte[] PrivateKey
-        {
-            get { return __pbn__PrivateKey; }
-            set { __pbn__PrivateKey = value; }
-        }
-        public bool ShouldSerializePrivateKey() => __pbn__PrivateKey != null;
-        public void ResetPrivateKey() => __pbn__PrivateKey = null;
-        private byte[] __pbn__PrivateKey;
+        public byte[] PrivateKey { get; set; }
+        public bool ShouldSerializePrivateKey() => PrivateKey != null;
+        public void ResetPrivateKey() => PrivateKey = null;
 
         [ProtoBuf.ProtoMember(6, Name = @"public_key")]
-        public byte[] PublicKey
-        {
-            get { return __pbn__PublicKey; }
-            set { __pbn__PublicKey = value; }
-        }
-        public bool ShouldSerializePublicKey() => __pbn__PublicKey != null;
-        public void ResetPublicKey() => __pbn__PublicKey = null;
-        private byte[] __pbn__PublicKey;
-
+        public byte[] PublicKey { get; set; }
+        public bool ShouldSerializePublicKey() => PublicKey != null;
+        public void ResetPublicKey() => PublicKey = null;
     }
 }

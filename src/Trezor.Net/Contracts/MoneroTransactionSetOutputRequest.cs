@@ -11,14 +11,9 @@ namespace Trezor.Net.Contracts.Monero
         public MoneroTransactionDestinationEntry DstEntr { get; set; }
 
         [ProtoBuf.ProtoMember(2, Name = @"dst_entr_hmac")]
-        public byte[] DstEntrHmac
-        {
-            get { return __pbn__DstEntrHmac; }
-            set { __pbn__DstEntrHmac = value; }
-        }
-        public bool ShouldSerializeDstEntrHmac() => __pbn__DstEntrHmac != null;
-        public void ResetDstEntrHmac() => __pbn__DstEntrHmac = null;
-        private byte[] __pbn__DstEntrHmac;
+        public byte[] DstEntrHmac { get; set; }
+        public bool ShouldSerializeDstEntrHmac() => DstEntrHmac != null;
+        public void ResetDstEntrHmac() => DstEntrHmac = null;
 
         [ProtoBuf.ProtoMember(3, Name = @"rsig_data")]
         public MoneroTransactionRsigData RsigData { get; set; }

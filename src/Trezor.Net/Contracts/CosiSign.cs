@@ -11,34 +11,18 @@ namespace Trezor.Net.Contracts.Crypto
         public uint[] AddressNs { get; set; }
 
         [ProtoBuf.ProtoMember(2, Name = @"data")]
-        public byte[] Data
-        {
-            get { return __pbn__Data; }
-            set { __pbn__Data = value; }
-        }
-        public bool ShouldSerializeData() => __pbn__Data != null;
-        public void ResetData() => __pbn__Data = null;
-        private byte[] __pbn__Data;
+        public byte[] Data { get; set; }
+        public bool ShouldSerializeData() => Data != null;
+        public void ResetData() => Data = null;
 
         [ProtoBuf.ProtoMember(3, Name = @"global_commitment")]
-        public byte[] GlobalCommitment
-        {
-            get { return __pbn__GlobalCommitment; }
-            set { __pbn__GlobalCommitment = value; }
-        }
-        public bool ShouldSerializeGlobalCommitment() => __pbn__GlobalCommitment != null;
-        public void ResetGlobalCommitment() => __pbn__GlobalCommitment = null;
-        private byte[] __pbn__GlobalCommitment;
+        public byte[] GlobalCommitment { get; set; }
+        public bool ShouldSerializeGlobalCommitment() => GlobalCommitment != null;
+        public void ResetGlobalCommitment() => GlobalCommitment = null;
 
         [ProtoBuf.ProtoMember(4, Name = @"global_pubkey")]
-        public byte[] GlobalPubkey
-        {
-            get { return __pbn__GlobalPubkey; }
-            set { __pbn__GlobalPubkey = value; }
-        }
-        public bool ShouldSerializeGlobalPubkey() => __pbn__GlobalPubkey != null;
-        public void ResetGlobalPubkey() => __pbn__GlobalPubkey = null;
-        private byte[] __pbn__GlobalPubkey;
-
+        public byte[] GlobalPubkey { get; set; }
+        public bool ShouldSerializeGlobalPubkey() => GlobalPubkey != null;
+        public void ResetGlobalPubkey() => GlobalPubkey = null;
     }
 }

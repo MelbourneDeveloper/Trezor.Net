@@ -8,14 +8,8 @@ namespace Trezor.Net.Contracts.Monero
             => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [ProtoBuf.ProtoMember(1, Name = @"enc_key")]
-        public byte[] EncKey
-        {
-            get { return __pbn__EncKey; }
-            set { __pbn__EncKey = value; }
-        }
-        public bool ShouldSerializeEncKey() => __pbn__EncKey != null;
-        public void ResetEncKey() => __pbn__EncKey = null;
-        private byte[] __pbn__EncKey;
-
+        public byte[] EncKey { get; set; }
+        public bool ShouldSerializeEncKey() => EncKey != null;
+        public void ResetEncKey() => EncKey = null;
     }
 }

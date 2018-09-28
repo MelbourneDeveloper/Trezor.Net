@@ -18,24 +18,13 @@ namespace Trezor.Net.Contracts.Cardano
         private uint? __pbn__TxIndex;
 
         [ProtoBuf.ProtoMember(2, Name = @"tx_hash")]
-        public byte[] TxHash
-        {
-            get { return __pbn__TxHash; }
-            set { __pbn__TxHash = value; }
-        }
-        public bool ShouldSerializeTxHash() => __pbn__TxHash != null;
-        public void ResetTxHash() => __pbn__TxHash = null;
-        private byte[] __pbn__TxHash;
+        public byte[] TxHash { get; set; }
+        public bool ShouldSerializeTxHash() => TxHash != null;
+        public void ResetTxHash() => TxHash = null;
 
         [ProtoBuf.ProtoMember(3, Name = @"tx_body")]
-        public byte[] TxBody
-        {
-            get { return __pbn__TxBody; }
-            set { __pbn__TxBody = value; }
-        }
-        public bool ShouldSerializeTxBody() => __pbn__TxBody != null;
-        public void ResetTxBody() => __pbn__TxBody = null;
-        private byte[] __pbn__TxBody;
-
+        public byte[] TxBody { get; set; }
+        public bool ShouldSerializeTxBody() => TxBody != null;
+        public void ResetTxBody() => TxBody = null;
     }
 }

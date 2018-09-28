@@ -8,24 +8,13 @@ namespace Trezor.Net.Contracts.Monero
             => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [ProtoBuf.ProtoMember(1, Name = @"watch_key")]
-        public byte[] WatchKey
-        {
-            get { return __pbn__WatchKey; }
-            set { __pbn__WatchKey = value; }
-        }
-        public bool ShouldSerializeWatchKey() => __pbn__WatchKey != null;
-        public void ResetWatchKey() => __pbn__WatchKey = null;
-        private byte[] __pbn__WatchKey;
+        public byte[] WatchKey { get; set; }
+        public bool ShouldSerializeWatchKey() => WatchKey != null;
+        public void ResetWatchKey() => WatchKey = null;
 
         [ProtoBuf.ProtoMember(2, Name = @"address")]
-        public byte[] Address
-        {
-            get { return __pbn__Address; }
-            set { __pbn__Address = value; }
-        }
-        public bool ShouldSerializeAddress() => __pbn__Address != null;
-        public void ResetAddress() => __pbn__Address = null;
-        private byte[] __pbn__Address;
-
+        public byte[] Address { get; set; }
+        public bool ShouldSerializeAddress() => Address != null;
+        public void ResetAddress() => Address = null;
     }
 }

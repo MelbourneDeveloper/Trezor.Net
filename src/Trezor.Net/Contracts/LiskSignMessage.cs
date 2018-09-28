@@ -11,14 +11,8 @@ namespace Trezor.Net.Contracts.Lisk
         public uint[] AddressNs { get; set; }
 
         [ProtoBuf.ProtoMember(2, Name = @"message")]
-        public byte[] Message
-        {
-            get { return __pbn__Message; }
-            set { __pbn__Message = value; }
-        }
-        public bool ShouldSerializeMessage() => __pbn__Message != null;
-        public void ResetMessage() => __pbn__Message = null;
-        private byte[] __pbn__Message;
-
+        public byte[] Message { get; set; }
+        public bool ShouldSerializeMessage() => Message != null;
+        public void ResetMessage() => Message = null;
     }
 }

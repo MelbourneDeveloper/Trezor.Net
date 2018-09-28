@@ -8,14 +8,8 @@ namespace Trezor.Net.Contracts.Crypto
             => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [ProtoBuf.ProtoMember(1, Name = @"session_key")]
-        public byte[] SessionKey
-        {
-            get { return __pbn__SessionKey; }
-            set { __pbn__SessionKey = value; }
-        }
-        public bool ShouldSerializeSessionKey() => __pbn__SessionKey != null;
-        public void ResetSessionKey() => __pbn__SessionKey = null;
-        private byte[] __pbn__SessionKey;
-
+        public byte[] SessionKey { get; set; }
+        public bool ShouldSerializeSessionKey() => SessionKey != null;
+        public void ResetSessionKey() => SessionKey = null;
     }
 }

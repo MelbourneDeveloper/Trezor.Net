@@ -8,24 +8,13 @@ namespace Trezor.Net.Contracts.Monero
             => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [ProtoBuf.ProtoMember(1, Name = @"signature")]
-        public byte[] Signature
-        {
-            get { return __pbn__Signature; }
-            set { __pbn__Signature = value; }
-        }
-        public bool ShouldSerializeSignature() => __pbn__Signature != null;
-        public void ResetSignature() => __pbn__Signature = null;
-        private byte[] __pbn__Signature;
+        public byte[] Signature { get; set; }
+        public bool ShouldSerializeSignature() => Signature != null;
+        public void ResetSignature() => Signature = null;
 
         [ProtoBuf.ProtoMember(2, Name = @"cout")]
-        public byte[] Cout
-        {
-            get { return __pbn__Cout; }
-            set { __pbn__Cout = value; }
-        }
-        public bool ShouldSerializeCout() => __pbn__Cout != null;
-        public void ResetCout() => __pbn__Cout = null;
-        private byte[] __pbn__Cout;
-
+        public byte[] Cout { get; set; }
+        public bool ShouldSerializeCout() => Cout != null;
+        public void ResetCout() => Cout = null;
     }
 }

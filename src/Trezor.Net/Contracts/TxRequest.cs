@@ -42,14 +42,9 @@ namespace Trezor.Net.Contracts.Bitcoin
             private uint? __pbn__RequestIndex;
 
             [ProtoBuf.ProtoMember(2, Name = @"tx_hash")]
-            public byte[] TxHash
-            {
-                get { return __pbn__TxHash; }
-                set { __pbn__TxHash = value; }
-            }
-            public bool ShouldSerializeTxHash() => __pbn__TxHash != null;
-            public void ResetTxHash() => __pbn__TxHash = null;
-            private byte[] __pbn__TxHash;
+            public byte[] TxHash { get; set; }
+            public bool ShouldSerializeTxHash() => TxHash != null;
+            public void ResetTxHash() => TxHash = null;
 
             [ProtoBuf.ProtoMember(3, Name = @"extra_data_len")]
             public uint ExtraDataLen
@@ -91,25 +86,14 @@ namespace Trezor.Net.Contracts.Bitcoin
             private uint? __pbn__SignatureIndex;
 
             [ProtoBuf.ProtoMember(2, Name = @"signature")]
-            public byte[] Signature
-            {
-                get { return __pbn__Signature; }
-                set { __pbn__Signature = value; }
-            }
-            public bool ShouldSerializeSignature() => __pbn__Signature != null;
-            public void ResetSignature() => __pbn__Signature = null;
-            private byte[] __pbn__Signature;
+            public byte[] Signature { get; set; }
+            public bool ShouldSerializeSignature() => Signature != null;
+            public void ResetSignature() => Signature = null;
 
             [ProtoBuf.ProtoMember(3, Name = @"serialized_tx")]
-            public byte[] SerializedTx
-            {
-                get { return __pbn__SerializedTx; }
-                set { __pbn__SerializedTx = value; }
-            }
-            public bool ShouldSerializeSerializedTx() => __pbn__SerializedTx != null;
-            public void ResetSerializedTx() => __pbn__SerializedTx = null;
-            private byte[] __pbn__SerializedTx;
-
+            public byte[] SerializedTx { get; set; }
+            public bool ShouldSerializeSerializedTx() => SerializedTx != null;
+            public void ResetSerializedTx() => SerializedTx = null;
         }
 
         [ProtoBuf.ProtoContract()]

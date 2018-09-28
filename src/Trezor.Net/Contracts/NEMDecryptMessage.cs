@@ -21,24 +21,13 @@ namespace Trezor.Net.Contracts.NEM
         private uint? __pbn__Network;
 
         [ProtoBuf.ProtoMember(3, Name = @"public_key")]
-        public byte[] PublicKey
-        {
-            get { return __pbn__PublicKey; }
-            set { __pbn__PublicKey = value; }
-        }
-        public bool ShouldSerializePublicKey() => __pbn__PublicKey != null;
-        public void ResetPublicKey() => __pbn__PublicKey = null;
-        private byte[] __pbn__PublicKey;
+        public byte[] PublicKey { get; set; }
+        public bool ShouldSerializePublicKey() => PublicKey != null;
+        public void ResetPublicKey() => PublicKey = null;
 
         [ProtoBuf.ProtoMember(4, Name = @"payload")]
-        public byte[] Payload
-        {
-            get { return __pbn__Payload; }
-            set { __pbn__Payload = value; }
-        }
-        public bool ShouldSerializePayload() => __pbn__Payload != null;
-        public void ResetPayload() => __pbn__Payload = null;
-        private byte[] __pbn__Payload;
-
+        public byte[] Payload { get; set; }
+        public bool ShouldSerializePayload() => Payload != null;
+        public void ResetPayload() => Payload = null;
     }
 }

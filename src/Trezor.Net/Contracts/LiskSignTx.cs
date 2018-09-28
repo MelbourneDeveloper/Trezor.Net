@@ -64,34 +64,19 @@ namespace Trezor.Net.Contracts.Lisk
             private string __pbn__RecipientId;
 
             [ProtoBuf.ProtoMember(5, Name = @"sender_public_key")]
-            public byte[] SenderPublicKey
-            {
-                get { return __pbn__SenderPublicKey; }
-                set { __pbn__SenderPublicKey = value; }
-            }
-            public bool ShouldSerializeSenderPublicKey() => __pbn__SenderPublicKey != null;
-            public void ResetSenderPublicKey() => __pbn__SenderPublicKey = null;
-            private byte[] __pbn__SenderPublicKey;
+            public byte[] SenderPublicKey { get; set; }
+            public bool ShouldSerializeSenderPublicKey() => SenderPublicKey != null;
+            public void ResetSenderPublicKey() => SenderPublicKey = null;
 
             [ProtoBuf.ProtoMember(6, Name = @"requester_public_key")]
-            public byte[] RequesterPublicKey
-            {
-                get { return __pbn__RequesterPublicKey; }
-                set { __pbn__RequesterPublicKey = value; }
-            }
-            public bool ShouldSerializeRequesterPublicKey() => __pbn__RequesterPublicKey != null;
-            public void ResetRequesterPublicKey() => __pbn__RequesterPublicKey = null;
-            private byte[] __pbn__RequesterPublicKey;
+            public byte[] RequesterPublicKey { get; set; }
+            public bool ShouldSerializeRequesterPublicKey() => RequesterPublicKey != null;
+            public void ResetRequesterPublicKey() => RequesterPublicKey = null;
 
             [ProtoBuf.ProtoMember(7, Name = @"signature")]
-            public byte[] Signature
-            {
-                get { return __pbn__Signature; }
-                set { __pbn__Signature = value; }
-            }
-            public bool ShouldSerializeSignature() => __pbn__Signature != null;
-            public void ResetSignature() => __pbn__Signature = null;
-            private byte[] __pbn__Signature;
+            public byte[] Signature { get; set; }
+            public bool ShouldSerializeSignature() => Signature != null;
+            public void ResetSignature() => Signature = null;
 
             [ProtoBuf.ProtoMember(8, Name = @"timestamp")]
             public uint Timestamp
@@ -144,15 +129,9 @@ namespace Trezor.Net.Contracts.Lisk
                         => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
                     [ProtoBuf.ProtoMember(1, Name = @"public_key")]
-                    public byte[] PublicKey
-                    {
-                        get { return __pbn__PublicKey; }
-                        set { __pbn__PublicKey = value; }
-                    }
-                    public bool ShouldSerializePublicKey() => __pbn__PublicKey != null;
-                    public void ResetPublicKey() => __pbn__PublicKey = null;
-                    private byte[] __pbn__PublicKey;
-
+                    public byte[] PublicKey { get; set; }
+                    public bool ShouldSerializePublicKey() => PublicKey != null;
+                    public void ResetPublicKey() => PublicKey = null;
                 }
 
                 [ProtoBuf.ProtoContract()]

@@ -8,14 +8,8 @@ namespace Trezor.Net.Contracts.Common
             => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [ProtoBuf.ProtoMember(1, Name = @"state")]
-        public byte[] State
-        {
-            get { return __pbn__State; }
-            set { __pbn__State = value; }
-        }
-        public bool ShouldSerializeState() => __pbn__State != null;
-        public void ResetState() => __pbn__State = null;
-        private byte[] __pbn__State;
-
+        public byte[] State { get; set; }
+        public bool ShouldSerializeState() => State != null;
+        public void ResetState() => State = null;
     }
 }

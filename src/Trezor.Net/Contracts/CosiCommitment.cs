@@ -8,24 +8,13 @@ namespace Trezor.Net.Contracts.Crypto
             => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [ProtoBuf.ProtoMember(1, Name = @"commitment")]
-        public byte[] Commitment
-        {
-            get { return __pbn__Commitment; }
-            set { __pbn__Commitment = value; }
-        }
-        public bool ShouldSerializeCommitment() => __pbn__Commitment != null;
-        public void ResetCommitment() => __pbn__Commitment = null;
-        private byte[] __pbn__Commitment;
+        public byte[] Commitment { get; set; }
+        public bool ShouldSerializeCommitment() => Commitment != null;
+        public void ResetCommitment() => Commitment = null;
 
         [ProtoBuf.ProtoMember(2, Name = @"pubkey")]
-        public byte[] Pubkey
-        {
-            get { return __pbn__Pubkey; }
-            set { __pbn__Pubkey = value; }
-        }
-        public bool ShouldSerializePubkey() => __pbn__Pubkey != null;
-        public void ResetPubkey() => __pbn__Pubkey = null;
-        private byte[] __pbn__Pubkey;
-
+        public byte[] Pubkey { get; set; }
+        public bool ShouldSerializePubkey() => Pubkey != null;
+        public void ResetPubkey() => Pubkey = null;
     }
 }

@@ -18,14 +18,9 @@ namespace Trezor.Net.Contracts.Monero
         private ulong? __pbn__Num;
 
         [ProtoBuf.ProtoMember(2, Name = @"hash")]
-        public byte[] Hash
-        {
-            get { return __pbn__Hash; }
-            set { __pbn__Hash = value; }
-        }
-        public bool ShouldSerializeHash() => __pbn__Hash != null;
-        public void ResetHash() => __pbn__Hash = null;
-        private byte[] __pbn__Hash;
+        public byte[] Hash { get; set; }
+        public bool ShouldSerializeHash() => Hash != null;
+        public void ResetHash() => Hash = null;
 
         [ProtoBuf.ProtoMember(3, Name = @"address_n")]
         public uint[] AddressNs { get; set; }

@@ -8,14 +8,8 @@ namespace Trezor.Net.Contracts.Lisk
             => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [ProtoBuf.ProtoMember(1, Name = @"public_key")]
-        public byte[] PublicKey
-        {
-            get { return __pbn__PublicKey; }
-            set { __pbn__PublicKey = value; }
-        }
-        public bool ShouldSerializePublicKey() => __pbn__PublicKey != null;
-        public void ResetPublicKey() => __pbn__PublicKey = null;
-        private byte[] __pbn__PublicKey;
-
+        public byte[] PublicKey { get; set; }
+        public bool ShouldSerializePublicKey() => PublicKey != null;
+        public void ResetPublicKey() => PublicKey = null;
     }
 }

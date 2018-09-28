@@ -19,14 +19,9 @@ namespace Trezor.Net.Contracts.Tezos
         private string __pbn__Signature;
 
         [ProtoBuf.ProtoMember(2, Name = @"sig_op_contents")]
-        public byte[] SigOpContents
-        {
-            get { return __pbn__SigOpContents; }
-            set { __pbn__SigOpContents = value; }
-        }
-        public bool ShouldSerializeSigOpContents() => __pbn__SigOpContents != null;
-        public void ResetSigOpContents() => __pbn__SigOpContents = null;
-        private byte[] __pbn__SigOpContents;
+        public byte[] SigOpContents { get; set; }
+        public bool ShouldSerializeSigOpContents() => SigOpContents != null;
+        public void ResetSigOpContents() => SigOpContents = null;
 
         [ProtoBuf.ProtoMember(3, Name = @"operation_hash")]
         [System.ComponentModel.DefaultValue("")]

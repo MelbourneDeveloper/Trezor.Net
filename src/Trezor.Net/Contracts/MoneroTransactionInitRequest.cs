@@ -51,14 +51,9 @@ namespace Trezor.Net.Contracts.Monero
             private uint? __pbn__Version;
 
             [ProtoBuf.ProtoMember(2, Name = @"payment_id")]
-            public byte[] PaymentId
-            {
-                get { return __pbn__PaymentId; }
-                set { __pbn__PaymentId = value; }
-            }
-            public bool ShouldSerializePaymentId() => __pbn__PaymentId != null;
-            public void ResetPaymentId() => __pbn__PaymentId = null;
-            private byte[] __pbn__PaymentId;
+            public byte[] PaymentId { get; set; }
+            public bool ShouldSerializePaymentId() => PaymentId != null;
+            public void ResetPaymentId() => PaymentId = null;
 
             [ProtoBuf.ProtoMember(3, Name = @"unlock_time")]
             public ulong UnlockTime
@@ -130,14 +125,9 @@ namespace Trezor.Net.Contracts.Monero
             private bool? __pbn__IsMultisig;
 
             [ProtoBuf.ProtoMember(12, Name = @"exp_tx_prefix_hash")]
-            public byte[] ExpTxPrefixHash
-            {
-                get { return __pbn__ExpTxPrefixHash; }
-                set { __pbn__ExpTxPrefixHash = value; }
-            }
-            public bool ShouldSerializeExpTxPrefixHash() => __pbn__ExpTxPrefixHash != null;
-            public void ResetExpTxPrefixHash() => __pbn__ExpTxPrefixHash = null;
-            private byte[] __pbn__ExpTxPrefixHash;
+            public byte[] ExpTxPrefixHash { get; set; }
+            public bool ShouldSerializeExpTxPrefixHash() => ExpTxPrefixHash != null;
+            public void ResetExpTxPrefixHash() => ExpTxPrefixHash = null;
 
             [ProtoBuf.ProtoMember(13, Name = @"use_tx_keys")]
             public System.Collections.Generic.List<byte[]> UseTxKeys { get; } = new System.Collections.Generic.List<byte[]>();

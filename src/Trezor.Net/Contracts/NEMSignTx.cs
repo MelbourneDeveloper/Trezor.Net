@@ -92,15 +92,9 @@ namespace Trezor.Net.Contracts.NEM
             private uint? __pbn__Deadline;
 
             [ProtoBuf.ProtoMember(6, Name = @"signer")]
-            public byte[] Signer
-            {
-                get { return __pbn__Signer; }
-                set { __pbn__Signer = value; }
-            }
-            public bool ShouldSerializeSigner() => __pbn__Signer != null;
-            public void ResetSigner() => __pbn__Signer = null;
-            private byte[] __pbn__Signer;
-
+            public byte[] Signer { get; set; }
+            public bool ShouldSerializeSigner() => Signer != null;
+            public void ResetSigner() => Signer = null;
         }
 
         [ProtoBuf.ProtoContract()]
@@ -132,24 +126,14 @@ namespace Trezor.Net.Contracts.NEM
             private ulong? __pbn__Amount;
 
             [ProtoBuf.ProtoMember(3, Name = @"payload")]
-            public byte[] Payload
-            {
-                get { return __pbn__Payload; }
-                set { __pbn__Payload = value; }
-            }
-            public bool ShouldSerializePayload() => __pbn__Payload != null;
-            public void ResetPayload() => __pbn__Payload = null;
-            private byte[] __pbn__Payload;
+            public byte[] Payload { get; set; }
+            public bool ShouldSerializePayload() => Payload != null;
+            public void ResetPayload() => Payload = null;
 
             [ProtoBuf.ProtoMember(4, Name = @"public_key")]
-            public byte[] PublicKey
-            {
-                get { return __pbn__PublicKey; }
-                set { __pbn__PublicKey = value; }
-            }
-            public bool ShouldSerializePublicKey() => __pbn__PublicKey != null;
-            public void ResetPublicKey() => __pbn__PublicKey = null;
-            private byte[] __pbn__PublicKey;
+            public byte[] PublicKey { get; set; }
+            public bool ShouldSerializePublicKey() => PublicKey != null;
+            public void ResetPublicKey() => PublicKey = null;
 
             [ProtoBuf.ProtoMember(5, Name = @"mosaics")]
             public System.Collections.Generic.List<NEMMosaic> Mosaics { get; } = new System.Collections.Generic.List<NEMMosaic>();
@@ -552,14 +536,9 @@ namespace Trezor.Net.Contracts.NEM
                 private NEMModificationType? __pbn__Type;
 
                 [ProtoBuf.ProtoMember(2, Name = @"public_key")]
-                public byte[] PublicKey
-                {
-                    get { return __pbn__PublicKey; }
-                    set { __pbn__PublicKey = value; }
-                }
-                public bool ShouldSerializePublicKey() => __pbn__PublicKey != null;
-                public void ResetPublicKey() => __pbn__PublicKey = null;
-                private byte[] __pbn__PublicKey;
+                public byte[] PublicKey { get; set; }
+                public bool ShouldSerializePublicKey() => PublicKey != null;
+                public void ResetPublicKey() => PublicKey = null;
 
                 [ProtoBuf.ProtoContract()]
                 public enum NEMModificationType
@@ -593,14 +572,9 @@ namespace Trezor.Net.Contracts.NEM
             private NEMImportanceTransferMode? __pbn__Mode;
 
             [ProtoBuf.ProtoMember(2, Name = @"public_key")]
-            public byte[] PublicKey
-            {
-                get { return __pbn__PublicKey; }
-                set { __pbn__PublicKey = value; }
-            }
-            public bool ShouldSerializePublicKey() => __pbn__PublicKey != null;
-            public void ResetPublicKey() => __pbn__PublicKey = null;
-            private byte[] __pbn__PublicKey;
+            public byte[] PublicKey { get; set; }
+            public bool ShouldSerializePublicKey() => PublicKey != null;
+            public void ResetPublicKey() => PublicKey = null;
 
             [ProtoBuf.ProtoContract()]
             public enum NEMImportanceTransferMode

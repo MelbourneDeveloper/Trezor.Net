@@ -111,14 +111,9 @@ namespace Trezor.Net.Contracts.Stellar
         private uint? __pbn__SignerType;
 
         [ProtoBuf.ProtoMember(11, Name = @"signer_key")]
-        public byte[] SignerKey
-        {
-            get { return __pbn__SignerKey; }
-            set { __pbn__SignerKey = value; }
-        }
-        public bool ShouldSerializeSignerKey() => __pbn__SignerKey != null;
-        public void ResetSignerKey() => __pbn__SignerKey = null;
-        private byte[] __pbn__SignerKey;
+        public byte[] SignerKey { get; set; }
+        public bool ShouldSerializeSignerKey() => SignerKey != null;
+        public void ResetSignerKey() => SignerKey = null;
 
         [ProtoBuf.ProtoMember(12, Name = @"signer_weight")]
         public uint SignerWeight

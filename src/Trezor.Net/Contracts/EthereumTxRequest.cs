@@ -28,24 +28,13 @@ namespace Trezor.Net.Contracts.Ethereum
         private uint? __pbn__SignatureV;
 
         [ProtoBuf.ProtoMember(3, Name = @"signature_r")]
-        public byte[] SignatureR
-        {
-            get { return __pbn__SignatureR; }
-            set { __pbn__SignatureR = value; }
-        }
-        public bool ShouldSerializeSignatureR() => __pbn__SignatureR != null;
-        public void ResetSignatureR() => __pbn__SignatureR = null;
-        private byte[] __pbn__SignatureR;
+        public byte[] SignatureR { get; set; }
+        public bool ShouldSerializeSignatureR() => SignatureR != null;
+        public void ResetSignatureR() => SignatureR = null;
 
         [ProtoBuf.ProtoMember(4, Name = @"signature_s")]
-        public byte[] SignatureS
-        {
-            get { return __pbn__SignatureS; }
-            set { __pbn__SignatureS = value; }
-        }
-        public bool ShouldSerializeSignatureS() => __pbn__SignatureS != null;
-        public void ResetSignatureS() => __pbn__SignatureS = null;
-        private byte[] __pbn__SignatureS;
-
+        public byte[] SignatureS { get; set; }
+        public bool ShouldSerializeSignatureS() => SignatureS != null;
+        public void ResetSignatureS() => SignatureS = null;
     }
 }

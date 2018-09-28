@@ -38,25 +38,14 @@ namespace Trezor.Net.Contracts.Monero
                 => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [ProtoBuf.ProtoMember(1, Name = @"spend_public_key")]
-            public byte[] SpendPublicKey
-            {
-                get { return __pbn__SpendPublicKey; }
-                set { __pbn__SpendPublicKey = value; }
-            }
-            public bool ShouldSerializeSpendPublicKey() => __pbn__SpendPublicKey != null;
-            public void ResetSpendPublicKey() => __pbn__SpendPublicKey = null;
-            private byte[] __pbn__SpendPublicKey;
+            public byte[] SpendPublicKey { get; set; }
+            public bool ShouldSerializeSpendPublicKey() => SpendPublicKey != null;
+            public void ResetSpendPublicKey() => SpendPublicKey = null;
 
             [ProtoBuf.ProtoMember(2, Name = @"view_public_key")]
-            public byte[] ViewPublicKey
-            {
-                get { return __pbn__ViewPublicKey; }
-                set { __pbn__ViewPublicKey = value; }
-            }
-            public bool ShouldSerializeViewPublicKey() => __pbn__ViewPublicKey != null;
-            public void ResetViewPublicKey() => __pbn__ViewPublicKey = null;
-            private byte[] __pbn__ViewPublicKey;
-
+            public byte[] ViewPublicKey { get; set; }
+            public bool ShouldSerializeViewPublicKey() => ViewPublicKey != null;
+            public void ResetViewPublicKey() => ViewPublicKey = null;
         }
 
     }

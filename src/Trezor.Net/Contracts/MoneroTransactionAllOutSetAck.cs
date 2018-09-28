@@ -8,24 +8,14 @@ namespace Trezor.Net.Contracts.Monero
             => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [ProtoBuf.ProtoMember(1, Name = @"extra")]
-        public byte[] Extra
-        {
-            get { return __pbn__Extra; }
-            set { __pbn__Extra = value; }
-        }
-        public bool ShouldSerializeExtra() => __pbn__Extra != null;
-        public void ResetExtra() => __pbn__Extra = null;
-        private byte[] __pbn__Extra;
+        public byte[] Extra { get; set; }
+        public bool ShouldSerializeExtra() => Extra != null;
+        public void ResetExtra() => Extra = null;
 
         [ProtoBuf.ProtoMember(2, Name = @"tx_prefix_hash")]
-        public byte[] TxPrefixHash
-        {
-            get { return __pbn__TxPrefixHash; }
-            set { __pbn__TxPrefixHash = value; }
-        }
-        public bool ShouldSerializeTxPrefixHash() => __pbn__TxPrefixHash != null;
-        public void ResetTxPrefixHash() => __pbn__TxPrefixHash = null;
-        private byte[] __pbn__TxPrefixHash;
+        public byte[] TxPrefixHash { get; set; }
+        public bool ShouldSerializeTxPrefixHash() => TxPrefixHash != null;
+        public void ResetTxPrefixHash() => TxPrefixHash = null;
 
         [ProtoBuf.ProtoMember(3, Name = @"rsig_data")]
         public MoneroTransactionRsigData RsigData { get; set; }
@@ -51,14 +41,9 @@ namespace Trezor.Net.Contracts.Monero
             private ulong? __pbn__TxnFee;
 
             [ProtoBuf.ProtoMember(2, Name = @"message")]
-            public byte[] Message
-            {
-                get { return __pbn__Message; }
-                set { __pbn__Message = value; }
-            }
-            public bool ShouldSerializeMessage() => __pbn__Message != null;
-            public void ResetMessage() => __pbn__Message = null;
-            private byte[] __pbn__Message;
+            public byte[] Message { get; set; }
+            public bool ShouldSerializeMessage() => Message != null;
+            public void ResetMessage() => Message = null;
 
             [ProtoBuf.ProtoMember(3, Name = @"rv_type")]
             public uint RvType

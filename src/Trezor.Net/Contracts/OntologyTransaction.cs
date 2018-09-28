@@ -154,27 +154,20 @@ public class OntologyTransaction : ProtoBuf.IExtensible
 
         private uint? __pbn__Usage;
 
-        [ProtoBuf.ProtoMember(2, Name = @"data")]
-        public byte[] Data
+            [ProtoBuf.ProtoMember(2, Name = @"data")]
+            public byte[] Data { get; set; }
+            public bool ShouldSerializeData()
         {
-            get => __pbn__Data;
-            set => __pbn__Data = value;
-        }
-        public bool ShouldSerializeData()
-        {
-            return __pbn__Data != null;
+            return Data != null;
         }
 
         public void ResetData()
         {
-            __pbn__Data = null;
+            Data = null;
+        }
         }
 
-        private byte[] __pbn__Data;
-
     }
-
-}
 
 #pragma warning restore CS1591, CS0612, CS3021, IDE1006
 }

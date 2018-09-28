@@ -18,35 +18,19 @@ namespace Trezor.Net.Contracts.Monero
                 => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [ProtoBuf.ProtoMember(1, Name = @"iv")]
-            public byte[] Iv
-            {
-                get { return __pbn__Iv; }
-                set { __pbn__Iv = value; }
-            }
-            public bool ShouldSerializeIv() => __pbn__Iv != null;
-            public void ResetIv() => __pbn__Iv = null;
-            private byte[] __pbn__Iv;
+            public byte[] Iv { get; set; }
+            public bool ShouldSerializeIv() => Iv != null;
+            public void ResetIv() => Iv = null;
 
             [ProtoBuf.ProtoMember(2, Name = @"tag")]
-            public byte[] Tag
-            {
-                get { return __pbn__Tag; }
-                set { __pbn__Tag = value; }
-            }
-            public bool ShouldSerializeTag() => __pbn__Tag != null;
-            public void ResetTag() => __pbn__Tag = null;
-            private byte[] __pbn__Tag;
+            public byte[] Tag { get; set; }
+            public bool ShouldSerializeTag() => Tag != null;
+            public void ResetTag() => Tag = null;
 
             [ProtoBuf.ProtoMember(3, Name = @"blob")]
-            public byte[] Blob
-            {
-                get { return __pbn__Blob; }
-                set { __pbn__Blob = value; }
-            }
-            public bool ShouldSerializeBlob() => __pbn__Blob != null;
-            public void ResetBlob() => __pbn__Blob = null;
-            private byte[] __pbn__Blob;
-
+            public byte[] Blob { get; set; }
+            public bool ShouldSerializeBlob() => Blob != null;
+            public void ResetBlob() => Blob = null;
         }
 
     }

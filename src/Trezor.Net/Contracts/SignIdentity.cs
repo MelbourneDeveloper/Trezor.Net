@@ -11,14 +11,9 @@ namespace Trezor.Net.Contracts.Crypto
         public IdentityType Identity { get; set; }
 
         [ProtoBuf.ProtoMember(2, Name = @"challenge_hidden")]
-        public byte[] ChallengeHidden
-        {
-            get { return __pbn__ChallengeHidden; }
-            set { __pbn__ChallengeHidden = value; }
-        }
-        public bool ShouldSerializeChallengeHidden() => __pbn__ChallengeHidden != null;
-        public void ResetChallengeHidden() => __pbn__ChallengeHidden = null;
-        private byte[] __pbn__ChallengeHidden;
+        public byte[] ChallengeHidden { get; set; }
+        public bool ShouldSerializeChallengeHidden() => ChallengeHidden != null;
+        public void ResetChallengeHidden() => ChallengeHidden = null;
 
         [ProtoBuf.ProtoMember(3, Name = @"challenge_visual")]
         [System.ComponentModel.DefaultValue("")]

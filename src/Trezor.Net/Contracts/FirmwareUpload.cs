@@ -11,14 +11,8 @@ namespace Trezor.Net.Contracts.Bootloader
         public byte[] Payload { get; set; }
 
         [ProtoBuf.ProtoMember(2, Name = @"hash")]
-        public byte[] Hash
-        {
-            get { return __pbn__Hash; }
-            set { __pbn__Hash = value; }
-        }
-        public bool ShouldSerializeHash() => __pbn__Hash != null;
-        public void ResetHash() => __pbn__Hash = null;
-        private byte[] __pbn__Hash;
-
+        public byte[] Hash { get; set; }
+        public bool ShouldSerializeHash() => Hash != null;
+        public void ResetHash() => Hash = null;
     }
 }

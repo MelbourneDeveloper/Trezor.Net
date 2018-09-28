@@ -10,40 +10,27 @@ namespace Trezor.Net.Contracts.Ontology
         }
 
         [ProtoBuf.ProtoMember(1, Name = @"signature")]
-        public byte[] Signature
-        {
-            get => __pbn__Signature;
-            set => __pbn__Signature = value;
-        }
+        public byte[] Signature { get; set; }
         public bool ShouldSerializeSignature()
         {
-            return __pbn__Signature != null;
+            return Signature != null;
         }
 
         public void ResetSignature()
         {
-            __pbn__Signature = null;
+            Signature = null;
         }
-
-        private byte[] __pbn__Signature;
 
         [ProtoBuf.ProtoMember(2, Name = @"payload")]
-        public byte[] Payload
-        {
-            get => __pbn__Payload;
-            set => __pbn__Payload = value;
-        }
+        public byte[] Payload { get; set; }
         public bool ShouldSerializePayload()
         {
-            return __pbn__Payload != null;
+            return Payload != null;
         }
 
         public void ResetPayload()
         {
-            __pbn__Payload = null;
+            Payload = null;
         }
-
-        private byte[] __pbn__Payload;
-
     }
 }

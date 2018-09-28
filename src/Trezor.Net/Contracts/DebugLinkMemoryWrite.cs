@@ -18,14 +18,9 @@ namespace Trezor.Net.Contracts.Debug
         private uint? __pbn__Address;
 
         [ProtoBuf.ProtoMember(2, Name = @"memory")]
-        public byte[] Memory
-        {
-            get { return __pbn__Memory; }
-            set { __pbn__Memory = value; }
-        }
-        public bool ShouldSerializeMemory() => __pbn__Memory != null;
-        public void ResetMemory() => __pbn__Memory = null;
-        private byte[] __pbn__Memory;
+        public byte[] Memory { get; set; }
+        public bool ShouldSerializeMemory() => Memory != null;
+        public void ResetMemory() => Memory = null;
 
         [ProtoBuf.ProtoMember(3, Name = @"flash")]
         public bool Flash

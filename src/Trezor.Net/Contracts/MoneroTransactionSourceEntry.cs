@@ -27,14 +27,9 @@ namespace Trezor.Net.Contracts.Monero
         private ulong? __pbn__RealOutput;
 
         [ProtoBuf.ProtoMember(3, Name = @"real_out_tx_key")]
-        public byte[] RealOutTxKey
-        {
-            get { return __pbn__RealOutTxKey; }
-            set { __pbn__RealOutTxKey = value; }
-        }
-        public bool ShouldSerializeRealOutTxKey() => __pbn__RealOutTxKey != null;
-        public void ResetRealOutTxKey() => __pbn__RealOutTxKey = null;
-        private byte[] __pbn__RealOutTxKey;
+        public byte[] RealOutTxKey { get; set; }
+        public bool ShouldSerializeRealOutTxKey() => RealOutTxKey != null;
+        public void ResetRealOutTxKey() => RealOutTxKey = null;
 
         [ProtoBuf.ProtoMember(4, Name = @"real_out_additional_tx_keys")]
         public System.Collections.Generic.List<byte[]> RealOutAdditionalTxKeys { get; } = new System.Collections.Generic.List<byte[]>();
@@ -70,14 +65,9 @@ namespace Trezor.Net.Contracts.Monero
         private bool? __pbn__Rct;
 
         [ProtoBuf.ProtoMember(8, Name = @"mask")]
-        public byte[] Mask
-        {
-            get { return __pbn__Mask; }
-            set { __pbn__Mask = value; }
-        }
-        public bool ShouldSerializeMask() => __pbn__Mask != null;
-        public void ResetMask() => __pbn__Mask = null;
-        private byte[] __pbn__Mask;
+        public byte[] Mask { get; set; }
+        public bool ShouldSerializeMask() => Mask != null;
+        public void ResetMask() => Mask = null;
 
         [ProtoBuf.ProtoMember(9, Name = @"multisig_kLRki")]
         public MoneroMultisigKLRki multisigkLRki { get; set; }
@@ -110,25 +100,14 @@ namespace Trezor.Net.Contracts.Monero
                     => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
                 [ProtoBuf.ProtoMember(1, Name = @"dest")]
-                public byte[] Dest
-                {
-                    get { return __pbn__Dest; }
-                    set { __pbn__Dest = value; }
-                }
-                public bool ShouldSerializeDest() => __pbn__Dest != null;
-                public void ResetDest() => __pbn__Dest = null;
-                private byte[] __pbn__Dest;
+                public byte[] Dest { get; set; }
+                public bool ShouldSerializeDest() => Dest != null;
+                public void ResetDest() => Dest = null;
 
                 [ProtoBuf.ProtoMember(2, Name = @"mask")]
-                public byte[] Mask
-                {
-                    get { return __pbn__Mask; }
-                    set { __pbn__Mask = value; }
-                }
-                public bool ShouldSerializeMask() => __pbn__Mask != null;
-                public void ResetMask() => __pbn__Mask = null;
-                private byte[] __pbn__Mask;
-
+                public byte[] Mask { get; set; }
+                public bool ShouldSerializeMask() => Mask != null;
+                public void ResetMask() => Mask = null;
             }
 
         }
@@ -141,45 +120,24 @@ namespace Trezor.Net.Contracts.Monero
                 => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [ProtoBuf.ProtoMember(1)]
-            public byte[] K
-            {
-                get { return __pbn__K; }
-                set { __pbn__K = value; }
-            }
-            public bool ShouldSerializeK() => __pbn__K != null;
-            public void ResetK() => __pbn__K = null;
-            private byte[] __pbn__K;
+            public byte[] K { get; set; }
+            public bool ShouldSerializeK() => K != null;
+            public void ResetK() => K = null;
 
             [ProtoBuf.ProtoMember(2)]
-            public byte[] L
-            {
-                get { return __pbn__L; }
-                set { __pbn__L = value; }
-            }
-            public bool ShouldSerializeL() => __pbn__L != null;
-            public void ResetL() => __pbn__L = null;
-            private byte[] __pbn__L;
+            public byte[] L { get; set; }
+            public bool ShouldSerializeL() => L != null;
+            public void ResetL() => L = null;
 
             [ProtoBuf.ProtoMember(3)]
-            public byte[] R
-            {
-                get { return __pbn__R; }
-                set { __pbn__R = value; }
-            }
-            public bool ShouldSerializeR() => __pbn__R != null;
-            public void ResetR() => __pbn__R = null;
-            private byte[] __pbn__R;
+            public byte[] R { get; set; }
+            public bool ShouldSerializeR() => R != null;
+            public void ResetR() => R = null;
 
             [ProtoBuf.ProtoMember(4, Name = @"ki")]
-            public byte[] Ki
-            {
-                get { return __pbn__Ki; }
-                set { __pbn__Ki = value; }
-            }
-            public bool ShouldSerializeKi() => __pbn__Ki != null;
-            public void ResetKi() => __pbn__Ki = null;
-            private byte[] __pbn__Ki;
-
+            public byte[] Ki { get; set; }
+            public bool ShouldSerializeKi() => Ki != null;
+            public void ResetKi() => Ki = null;
         }
 
     }

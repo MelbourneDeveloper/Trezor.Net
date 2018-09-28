@@ -34,14 +34,9 @@ namespace Trezor.Net.Contracts.Cardano
             public uint[] AddressNs { get; set; }
 
             [ProtoBuf.ProtoMember(2, Name = @"prev_hash")]
-            public byte[] PrevHash
-            {
-                get { return __pbn__PrevHash; }
-                set { __pbn__PrevHash = value; }
-            }
-            public bool ShouldSerializePrevHash() => __pbn__PrevHash != null;
-            public void ResetPrevHash() => __pbn__PrevHash = null;
-            private byte[] __pbn__PrevHash;
+            public byte[] PrevHash { get; set; }
+            public bool ShouldSerializePrevHash() => PrevHash != null;
+            public void ResetPrevHash() => PrevHash = null;
 
             [ProtoBuf.ProtoMember(3, Name = @"prev_index")]
             public uint PrevIndex

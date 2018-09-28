@@ -11,14 +11,9 @@ namespace Trezor.Net.Contracts.Tezos
         public uint[] AddressNs { get; set; }
 
         [ProtoBuf.ProtoMember(2, Name = @"branch")]
-        public byte[] Branch
-        {
-            get { return __pbn__Branch; }
-            set { __pbn__Branch = value; }
-        }
-        public bool ShouldSerializeBranch() => __pbn__Branch != null;
-        public void ResetBranch() => __pbn__Branch = null;
-        private byte[] __pbn__Branch;
+        public byte[] Branch { get; set; }
+        public bool ShouldSerializeBranch() => Branch != null;
+        public void ResetBranch() => Branch = null;
 
         [ProtoBuf.ProtoMember(3, Name = @"reveal")]
         public TezosRevealOp Reveal { get; set; }
@@ -51,14 +46,9 @@ namespace Trezor.Net.Contracts.Tezos
             private TezosContractType? __pbn__Tag;
 
             [ProtoBuf.ProtoMember(2, Name = @"hash")]
-            public byte[] Hash
-            {
-                get { return __pbn__Hash; }
-                set { __pbn__Hash = value; }
-            }
-            public bool ShouldSerializeHash() => __pbn__Hash != null;
-            public void ResetHash() => __pbn__Hash = null;
-            private byte[] __pbn__Hash;
+            public byte[] Hash { get; set; }
+            public bool ShouldSerializeHash() => Hash != null;
+            public void ResetHash() => Hash = null;
 
             [ProtoBuf.ProtoContract()]
             public enum TezosContractType
@@ -120,15 +110,9 @@ namespace Trezor.Net.Contracts.Tezos
             private ulong? __pbn__StorageLimit;
 
             [ProtoBuf.ProtoMember(6, Name = @"public_key")]
-            public byte[] PublicKey
-            {
-                get { return __pbn__PublicKey; }
-                set { __pbn__PublicKey = value; }
-            }
-            public bool ShouldSerializePublicKey() => __pbn__PublicKey != null;
-            public void ResetPublicKey() => __pbn__PublicKey = null;
-            private byte[] __pbn__PublicKey;
-
+            public byte[] PublicKey { get; set; }
+            public bool ShouldSerializePublicKey() => PublicKey != null;
+            public void ResetPublicKey() => PublicKey = null;
         }
 
         [ProtoBuf.ProtoContract()]
@@ -195,15 +179,9 @@ namespace Trezor.Net.Contracts.Tezos
             public TezosContractID Destination { get; set; }
 
             [ProtoBuf.ProtoMember(8, Name = @"parameters")]
-            public byte[] Parameters
-            {
-                get { return __pbn__Parameters; }
-                set { __pbn__Parameters = value; }
-            }
-            public bool ShouldSerializeParameters() => __pbn__Parameters != null;
-            public void ResetParameters() => __pbn__Parameters = null;
-            private byte[] __pbn__Parameters;
-
+            public byte[] Parameters { get; set; }
+            public bool ShouldSerializeParameters() => Parameters != null;
+            public void ResetParameters() => Parameters = null;
         }
 
         [ProtoBuf.ProtoContract()]
@@ -257,14 +235,9 @@ namespace Trezor.Net.Contracts.Tezos
             private ulong? __pbn__StorageLimit;
 
             [ProtoBuf.ProtoMember(6, Name = @"manager_pubkey")]
-            public byte[] ManagerPubkey
-            {
-                get { return __pbn__ManagerPubkey; }
-                set { __pbn__ManagerPubkey = value; }
-            }
-            public bool ShouldSerializeManagerPubkey() => __pbn__ManagerPubkey != null;
-            public void ResetManagerPubkey() => __pbn__ManagerPubkey = null;
-            private byte[] __pbn__ManagerPubkey;
+            public byte[] ManagerPubkey { get; set; }
+            public bool ShouldSerializeManagerPubkey() => ManagerPubkey != null;
+            public void ResetManagerPubkey() => ManagerPubkey = null;
 
             [ProtoBuf.ProtoMember(7, Name = @"balance")]
             public ulong Balance
@@ -297,25 +270,14 @@ namespace Trezor.Net.Contracts.Tezos
             private bool? __pbn__Delegatable;
 
             [ProtoBuf.ProtoMember(10, Name = @"delegate")]
-            public byte[] Delegate
-            {
-                get { return __pbn__Delegate; }
-                set { __pbn__Delegate = value; }
-            }
-            public bool ShouldSerializeDelegate() => __pbn__Delegate != null;
-            public void ResetDelegate() => __pbn__Delegate = null;
-            private byte[] __pbn__Delegate;
+            public byte[] Delegate { get; set; }
+            public bool ShouldSerializeDelegate() => Delegate != null;
+            public void ResetDelegate() => Delegate = null;
 
             [ProtoBuf.ProtoMember(11, Name = @"script")]
-            public byte[] Script
-            {
-                get { return __pbn__Script; }
-                set { __pbn__Script = value; }
-            }
-            public bool ShouldSerializeScript() => __pbn__Script != null;
-            public void ResetScript() => __pbn__Script = null;
-            private byte[] __pbn__Script;
-
+            public byte[] Script { get; set; }
+            public bool ShouldSerializeScript() => Script != null;
+            public void ResetScript() => Script = null;
         }
 
         [ProtoBuf.ProtoContract()]
@@ -369,15 +331,9 @@ namespace Trezor.Net.Contracts.Tezos
             private ulong? __pbn__StorageLimit;
 
             [ProtoBuf.ProtoMember(6, Name = @"delegate")]
-            public byte[] Delegate
-            {
-                get { return __pbn__Delegate; }
-                set { __pbn__Delegate = value; }
-            }
-            public bool ShouldSerializeDelegate() => __pbn__Delegate != null;
-            public void ResetDelegate() => __pbn__Delegate = null;
-            private byte[] __pbn__Delegate;
-
+            public byte[] Delegate { get; set; }
+            public bool ShouldSerializeDelegate() => Delegate != null;
+            public void ResetDelegate() => Delegate = null;
         }
 
     }

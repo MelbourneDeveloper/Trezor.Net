@@ -11,14 +11,9 @@ namespace Trezor.Net.Contracts.Crypto
         public IdentityType Identity { get; set; }
 
         [ProtoBuf.ProtoMember(2, Name = @"peer_public_key")]
-        public byte[] PeerPublicKey
-        {
-            get { return __pbn__PeerPublicKey; }
-            set { __pbn__PeerPublicKey = value; }
-        }
-        public bool ShouldSerializePeerPublicKey() => __pbn__PeerPublicKey != null;
-        public void ResetPeerPublicKey() => __pbn__PeerPublicKey = null;
-        private byte[] __pbn__PeerPublicKey;
+        public byte[] PeerPublicKey { get; set; }
+        public bool ShouldSerializePeerPublicKey() => PeerPublicKey != null;
+        public void ResetPeerPublicKey() => PeerPublicKey = null;
 
         [ProtoBuf.ProtoMember(3, Name = @"ecdsa_curve_name")]
         [System.ComponentModel.DefaultValue("")]

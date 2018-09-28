@@ -40,14 +40,9 @@ namespace Trezor.Net.Contracts.Management
         private bool? __pbn__UsePassphrase;
 
         [ProtoBuf.ProtoMember(4, Name = @"homescreen")]
-        public byte[] Homescreen
-        {
-            get { return __pbn__Homescreen; }
-            set { __pbn__Homescreen = value; }
-        }
-        public bool ShouldSerializeHomescreen() => __pbn__Homescreen != null;
-        public void ResetHomescreen() => __pbn__Homescreen = null;
-        private byte[] __pbn__Homescreen;
+        public byte[] Homescreen { get; set; }
+        public bool ShouldSerializeHomescreen() => Homescreen != null;
+        public void ResetHomescreen() => Homescreen = null;
 
         [ProtoBuf.ProtoMember(5, Name = @"passphrase_source")]
         [System.ComponentModel.DefaultValue(PassphraseSourceType.Ask)]

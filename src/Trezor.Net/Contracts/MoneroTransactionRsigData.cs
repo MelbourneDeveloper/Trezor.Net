@@ -61,44 +61,24 @@ namespace Trezor.Net.Contracts.Monero
         private ulong? __pbn__Operation;
 
         [ProtoBuf.ProtoMember(7, Name = @"seed")]
-        public byte[] Seed
-        {
-            get { return __pbn__Seed; }
-            set { __pbn__Seed = value; }
-        }
-        public bool ShouldSerializeSeed() => __pbn__Seed != null;
-        public void ResetSeed() => __pbn__Seed = null;
-        private byte[] __pbn__Seed;
+        public byte[] Seed { get; set; }
+        public bool ShouldSerializeSeed() => Seed != null;
+        public void ResetSeed() => Seed = null;
 
         [ProtoBuf.ProtoMember(8, Name = @"mask")]
-        public byte[] Mask
-        {
-            get { return __pbn__Mask; }
-            set { __pbn__Mask = value; }
-        }
-        public bool ShouldSerializeMask() => __pbn__Mask != null;
-        public void ResetMask() => __pbn__Mask = null;
-        private byte[] __pbn__Mask;
+        public byte[] Mask { get; set; }
+        public bool ShouldSerializeMask() => Mask != null;
+        public void ResetMask() => Mask = null;
 
         [ProtoBuf.ProtoMember(9, Name = @"amount")]
-        public byte[] Amount
-        {
-            get { return __pbn__Amount; }
-            set { __pbn__Amount = value; }
-        }
-        public bool ShouldSerializeAmount() => __pbn__Amount != null;
-        public void ResetAmount() => __pbn__Amount = null;
-        private byte[] __pbn__Amount;
+        public byte[] Amount { get; set; }
+        public bool ShouldSerializeAmount() => Amount != null;
+        public void ResetAmount() => Amount = null;
 
         [ProtoBuf.ProtoMember(10, Name = @"rsig")]
-        public byte[] Rsig
-        {
-            get { return __pbn__Rsig; }
-            set { __pbn__Rsig = value; }
-        }
-        public bool ShouldSerializeRsig() => __pbn__Rsig != null;
-        public void ResetRsig() => __pbn__Rsig = null;
-        private byte[] __pbn__Rsig;
+        public byte[] Rsig { get; set; }
+        public bool ShouldSerializeRsig() => Rsig != null;
+        public void ResetRsig() => Rsig = null;
 
         [ProtoBuf.ProtoMember(11, Name = @"outputs")]
         public System.Collections.Generic.List<MoneroTransactionDestinationEntry> Outputs { get; } = new System.Collections.Generic.List<MoneroTransactionDestinationEntry>();

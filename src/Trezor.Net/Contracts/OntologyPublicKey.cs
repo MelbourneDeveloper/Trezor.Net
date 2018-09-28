@@ -10,22 +10,15 @@ namespace Trezor.Net.Contracts.Ontology
         }
 
         [ProtoBuf.ProtoMember(1, Name = @"public_key")]
-        public byte[] PublicKey
-        {
-            get => __pbn__PublicKey;
-            set => __pbn__PublicKey = value;
-        }
+        public byte[] PublicKey { get; set; }
         public bool ShouldSerializePublicKey()
         {
-            return __pbn__PublicKey != null;
+            return PublicKey != null;
         }
 
         public void ResetPublicKey()
         {
-            __pbn__PublicKey = null;
+            PublicKey = null;
         }
-
-        private byte[] __pbn__PublicKey;
-
     }
 }

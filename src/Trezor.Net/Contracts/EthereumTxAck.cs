@@ -8,14 +8,8 @@ namespace Trezor.Net.Contracts.Ethereum
             => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [ProtoBuf.ProtoMember(1, Name = @"data_chunk")]
-        public byte[] DataChunk
-        {
-            get { return __pbn__DataChunk; }
-            set { __pbn__DataChunk = value; }
-        }
-        public bool ShouldSerializeDataChunk() => __pbn__DataChunk != null;
-        public void ResetDataChunk() => __pbn__DataChunk = null;
-        private byte[] __pbn__DataChunk;
-
+        public byte[] DataChunk { get; set; }
+        public bool ShouldSerializeDataChunk() => DataChunk != null;
+        public void ResetDataChunk() => DataChunk = null;
     }
 }

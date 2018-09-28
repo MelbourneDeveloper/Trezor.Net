@@ -11,64 +11,34 @@ namespace Trezor.Net.Contracts.Ethereum
         public uint[] AddressNs { get; set; }
 
         [ProtoBuf.ProtoMember(2, Name = @"nonce")]
-        public byte[] Nonce
-        {
-            get { return __pbn__Nonce; }
-            set { __pbn__Nonce = value; }
-        }
-        public bool ShouldSerializeNonce() => __pbn__Nonce != null;
-        public void ResetNonce() => __pbn__Nonce = null;
-        private byte[] __pbn__Nonce;
+        public byte[] Nonce { get; set; }
+        public bool ShouldSerializeNonce() => Nonce != null;
+        public void ResetNonce() => Nonce = null;
 
         [ProtoBuf.ProtoMember(3, Name = @"gas_price")]
-        public byte[] GasPrice
-        {
-            get { return __pbn__GasPrice; }
-            set { __pbn__GasPrice = value; }
-        }
-        public bool ShouldSerializeGasPrice() => __pbn__GasPrice != null;
-        public void ResetGasPrice() => __pbn__GasPrice = null;
-        private byte[] __pbn__GasPrice;
+        public byte[] GasPrice { get; set; }
+        public bool ShouldSerializeGasPrice() => GasPrice != null;
+        public void ResetGasPrice() => GasPrice = null;
 
         [ProtoBuf.ProtoMember(4, Name = @"gas_limit")]
-        public byte[] GasLimit
-        {
-            get { return __pbn__GasLimit; }
-            set { __pbn__GasLimit = value; }
-        }
-        public bool ShouldSerializeGasLimit() => __pbn__GasLimit != null;
-        public void ResetGasLimit() => __pbn__GasLimit = null;
-        private byte[] __pbn__GasLimit;
+        public byte[] GasLimit { get; set; }
+        public bool ShouldSerializeGasLimit() => GasLimit != null;
+        public void ResetGasLimit() => GasLimit = null;
 
         [ProtoBuf.ProtoMember(5, Name = @"to")]
-        public byte[] To
-        {
-            get { return __pbn__To; }
-            set { __pbn__To = value; }
-        }
-        public bool ShouldSerializeTo() => __pbn__To != null;
-        public void ResetTo() => __pbn__To = null;
-        private byte[] __pbn__To;
+        public byte[] To { get; set; }
+        public bool ShouldSerializeTo() => To != null;
+        public void ResetTo() => To = null;
 
         [ProtoBuf.ProtoMember(6, Name = @"value")]
-        public byte[] Value
-        {
-            get { return __pbn__Value; }
-            set { __pbn__Value = value; }
-        }
-        public bool ShouldSerializeValue() => __pbn__Value != null;
-        public void ResetValue() => __pbn__Value = null;
-        private byte[] __pbn__Value;
+        public byte[] Value { get; set; }
+        public bool ShouldSerializeValue() => Value != null;
+        public void ResetValue() => Value = null;
 
         [ProtoBuf.ProtoMember(7, Name = @"data_initial_chunk")]
-        public byte[] DataInitialChunk
-        {
-            get { return __pbn__DataInitialChunk; }
-            set { __pbn__DataInitialChunk = value; }
-        }
-        public bool ShouldSerializeDataInitialChunk() => __pbn__DataInitialChunk != null;
-        public void ResetDataInitialChunk() => __pbn__DataInitialChunk = null;
-        private byte[] __pbn__DataInitialChunk;
+        public byte[] DataInitialChunk { get; set; }
+        public bool ShouldSerializeDataInitialChunk() => DataInitialChunk != null;
+        public void ResetDataInitialChunk() => DataInitialChunk = null;
 
         [ProtoBuf.ProtoMember(8, Name = @"data_length")]
         public uint DataLength

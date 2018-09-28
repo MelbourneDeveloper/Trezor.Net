@@ -41,24 +41,13 @@ namespace Trezor.Net.Contracts.Monero
         public ulong[] Pds { get; set; }
 
         [ProtoBuf.ProtoMember(5, Name = @"data1")]
-        public byte[] Data1
-        {
-            get { return __pbn__Data1; }
-            set { __pbn__Data1 = value; }
-        }
-        public bool ShouldSerializeData1() => __pbn__Data1 != null;
-        public void ResetData1() => __pbn__Data1 = null;
-        private byte[] __pbn__Data1;
+        public byte[] Data1 { get; set; }
+        public bool ShouldSerializeData1() => Data1 != null;
+        public void ResetData1() => Data1 = null;
 
         [ProtoBuf.ProtoMember(6, Name = @"data2")]
-        public byte[] Data2
-        {
-            get { return __pbn__Data2; }
-            set { __pbn__Data2 = value; }
-        }
-        public bool ShouldSerializeData2() => __pbn__Data2 != null;
-        public void ResetData2() => __pbn__Data2 = null;
-        private byte[] __pbn__Data2;
-
+        public byte[] Data2 { get; set; }
+        public bool ShouldSerializeData2() => Data2 != null;
+        public void ResetData2() => Data2 = null;
     }
 }

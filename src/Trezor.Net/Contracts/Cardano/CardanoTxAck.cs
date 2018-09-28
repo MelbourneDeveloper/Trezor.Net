@@ -8,14 +8,8 @@ namespace Trezor.Net.Contracts.Cardano
             => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [ProtoBuf.ProtoMember(1, Name = @"transaction")]
-        public byte[] Transaction
-        {
-            get { return __pbn__Transaction; }
-            set { __pbn__Transaction = value; }
-        }
-        public bool ShouldSerializeTransaction() => __pbn__Transaction != null;
-        public void ResetTransaction() => __pbn__Transaction = null;
-        private byte[] __pbn__Transaction;
-
+        public byte[] Transaction { get; set; }
+        public bool ShouldSerializeTransaction() => Transaction != null;
+        public void ResetTransaction() => Transaction = null;
     }
 }

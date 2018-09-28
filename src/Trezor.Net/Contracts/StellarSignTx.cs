@@ -104,14 +104,9 @@ namespace Trezor.Net.Contracts.Stellar
         private ulong? __pbn__MemoId;
 
         [ProtoBuf.ProtoMember(13, Name = @"memo_hash")]
-        public byte[] MemoHash
-        {
-            get { return __pbn__MemoHash; }
-            set { __pbn__MemoHash = value; }
-        }
-        public bool ShouldSerializeMemoHash() => __pbn__MemoHash != null;
-        public void ResetMemoHash() => __pbn__MemoHash = null;
-        private byte[] __pbn__MemoHash;
+        public byte[] MemoHash { get; set; }
+        public bool ShouldSerializeMemoHash() => MemoHash != null;
+        public void ResetMemoHash() => MemoHash = null;
 
         [ProtoBuf.ProtoMember(14, Name = @"num_operations")]
         public uint NumOperations

@@ -18,24 +18,14 @@ namespace Trezor.Net.Contracts.Monero
                 => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [ProtoBuf.ProtoMember(1, Name = @"out_key")]
-            public byte[] OutKey
-            {
-                get { return __pbn__OutKey; }
-                set { __pbn__OutKey = value; }
-            }
-            public bool ShouldSerializeOutKey() => __pbn__OutKey != null;
-            public void ResetOutKey() => __pbn__OutKey = null;
-            private byte[] __pbn__OutKey;
+            public byte[] OutKey { get; set; }
+            public bool ShouldSerializeOutKey() => OutKey != null;
+            public void ResetOutKey() => OutKey = null;
 
             [ProtoBuf.ProtoMember(2, Name = @"tx_pub_key")]
-            public byte[] TxPubKey
-            {
-                get { return __pbn__TxPubKey; }
-                set { __pbn__TxPubKey = value; }
-            }
-            public bool ShouldSerializeTxPubKey() => __pbn__TxPubKey != null;
-            public void ResetTxPubKey() => __pbn__TxPubKey = null;
-            private byte[] __pbn__TxPubKey;
+            public byte[] TxPubKey { get; set; }
+            public bool ShouldSerializeTxPubKey() => TxPubKey != null;
+            public void ResetTxPubKey() => TxPubKey = null;
 
             [ProtoBuf.ProtoMember(3, Name = @"additional_tx_pub_keys")]
             public System.Collections.Generic.List<byte[]> AdditionalTxPubKeys { get; } = new System.Collections.Generic.List<byte[]>();

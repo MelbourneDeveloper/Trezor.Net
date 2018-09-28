@@ -11,14 +11,8 @@ namespace Trezor.Net.Contracts.Crypto
         public uint[] AddressNs { get; set; }
 
         [ProtoBuf.ProtoMember(2, Name = @"data")]
-        public byte[] Data
-        {
-            get { return __pbn__Data; }
-            set { __pbn__Data = value; }
-        }
-        public bool ShouldSerializeData() => __pbn__Data != null;
-        public void ResetData() => __pbn__Data = null;
-        private byte[] __pbn__Data;
-
+        public byte[] Data { get; set; }
+        public bool ShouldSerializeData() => Data != null;
+        public void ResetData() => Data = null;
     }
 }
