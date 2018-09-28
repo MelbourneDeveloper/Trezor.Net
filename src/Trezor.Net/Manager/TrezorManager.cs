@@ -4,9 +4,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Trezor.Net.Contracts;
 using Trezor.Net.Contracts.Bitcoin;
+using Trezor.Net.Contracts.Cardano;
 using Trezor.Net.Contracts.Common;
 using Trezor.Net.Contracts.Ethereum;
 using Trezor.Net.Contracts.Management;
+using Trezor.Net.Contracts.Stellar;
+using Trezor.Net.Contracts.Tezos;
 
 namespace Trezor.Net
 {
@@ -156,6 +159,84 @@ namespace Trezor.Net
                     return typeof(PinMatrixAck);
                 case MessageType.MessageTypePinMatrixRequest:
                     return typeof(PinMatrixRequest);
+                case MessageType.MessageTypeApplyFlags:
+                    return typeof(ApplyFlags);
+                case MessageType.MessageTypeApplySettings:
+                    return typeof(ApplySettings);
+                case MessageType.MessageTypeBackupDevice:
+                    return typeof(BackupDevice);
+                case MessageType.MessageTypeCancel:
+                    return typeof(Cancel);
+                case MessageType.MessageTypeCardanoAddress:
+                    return typeof(CardanoAddress);
+                case MessageType.MessageTypeCardanoGetAddress:
+                    return typeof(CardanoGetAddress);
+                case MessageType.MessageTypeCardanoGetPublicKey:
+                    return typeof(CardanoGetPublicKey);
+                case MessageType.MessageTypeCardanoMessageSignature:
+                    return typeof(CardanoMessageSignature);
+                case MessageType.MessageTypeCardanoPublicKey:
+                    return typeof(CardanoPublicKey);
+                case MessageType.MessageTypeCardanoSignedTx:
+                    return typeof(CardanoSignedTx);
+                case MessageType.MessageTypeCardanoSignMessage:
+                    return typeof(CardanoSignMessage);
+                case MessageType.MessageTypeCardanoSignTx:
+                    return typeof(CardanoSignTx);
+                case MessageType.MessageTypeCardanoTxAck:
+                    return typeof(CardanoTxAck);
+                case MessageType.MessageTypeCardanoTxRequest:
+                    return typeof(CardanoTxRequest);
+                case MessageType.MessageTypeCardanoVerifyMessage:
+                    return typeof(CardanoVerifyMessage);
+                case MessageType.MessageTypeStellarCreateAccountOp:
+                    return typeof(StellarCreateAccountOp);
+                case MessageType.MessageTypeStellarCreatePassiveOfferOp:
+                    return typeof(StellarCreatePassiveOfferOp);
+                case MessageType.MessageTypeStellarGetAddress:
+                    return typeof(StellarGetAddress);
+                case MessageType.MessageTypeStellarManageDataOp:
+                    return typeof(StellarManageDataOp);
+                case MessageType.MessageTypeStellarManageOfferOp:
+                    return typeof(StellarManageOfferOp);
+                case MessageType.MessageTypeStellarPathPaymentOp:
+                    return typeof(StellarPathPaymentOp);
+                case MessageType.MessageTypeStellarPaymentOp:
+                    return typeof(StellarPaymentOp);
+                case MessageType.MessageTypeStellarSetOptionsOp:
+                    return typeof(StellarSetOptionsOp);
+                case MessageType.MessageTypeStellarSignedTx:
+                    return typeof(StellarSignedTx);
+                case MessageType.MessageTypeStellarSignTx:
+                    return typeof(StellarSignTx);
+                case MessageType.MessageTypeStellarTxOpRequest:
+                    return typeof(StellarTxOpRequest);
+                case MessageType.MessageTypeSuccess:
+                    return typeof(Success);
+                case MessageType.MessageTypeTezosAddress:
+                    return typeof(TezosAddress);
+                case MessageType.MessageTypeTezosGetAddress:
+                    return typeof(TezosGetAddress);
+                case MessageType.MessageTypeTezosGetPublicKey:
+                    return typeof(TezosGetPublicKey);
+                case MessageType.MessageTypeTezosPublicKey:
+                    return typeof(TezosPublicKey);
+                case MessageType.MessageTypeTezosSignedTx:
+                    return typeof(TezosSignedTx);
+                case MessageType.MessageTypeTezosSignTx:
+                    return typeof(TezosSignTx);
+                case MessageType.MessageTypeTxAck:
+                    return typeof(TxAck);
+                case MessageType.MessageTypeTxRequest:
+                    return typeof(TxRequest);
+                case MessageType.MessageTypeVerifyMessage:
+                    return typeof(VerifyMessage);
+                case MessageType.MessageTypeWipeDevice:
+                    return typeof(WipeDevice);
+                case MessageType.MessageTypeWordAck:
+                    return typeof(WordAck);
+                case MessageType.MessageTypeWordRequest:
+                    return typeof(WordRequest);
                 default:
                     throw new NotImplementedException();
             }
