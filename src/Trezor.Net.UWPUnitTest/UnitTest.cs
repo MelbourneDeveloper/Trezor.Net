@@ -129,5 +129,21 @@ namespace Trezor.Net
             var address = await GetAddress(i, false);
             _Addresses[i] = address;
         }
+
+        //private CoinType GetCoinType(uint coinNumber)
+        //{
+        //    switch (coinNumber)
+        //    {
+        //        case 0:
+        //            return new CoinType { CoinName = "Bitcoin", Segwit = true };
+        //        case 145:
+        //            return new CoinType { CoinName = "Bcash", Segwit = true };
+        //        case 60:
+        //        case 61:
+        //            return new CoinType { CoinName = "Ethereum", Segwit = false };
+        //    }
+
+        //    throw new NotImplementedException();
+        //}
     }
 }

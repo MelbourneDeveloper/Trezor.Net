@@ -33,4 +33,8 @@ Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for ot
     <PackageReference Include="protobuf-net" Version="2.3.17" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Hardwarewallets.Net\src\Hardwarewallets.Net\Hardwarewallets.Net.csproj" />
+  </ItemGroup>
+
 </Project>

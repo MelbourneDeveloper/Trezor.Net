@@ -4,7 +4,14 @@
     {
         Bitcoin,
         Ethereum,
-        NEM
+        NEM,
+        Cardano,
+        List,
+        Monero,
+        Ontology,
+        Ripple,
+        Stellar,
+        Tezoz
     }
 }
 
