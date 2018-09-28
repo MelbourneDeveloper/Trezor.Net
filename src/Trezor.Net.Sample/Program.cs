@@ -99,7 +99,7 @@ namespace TrezorTestApp
                             }
                         }
 
-                        var ethAddress = await trezorManager.GetAddressAsync("ETH", 60, false, 0, false, AddressType.Ethereum);
+                        var ethAddress = await trezorManager.GetAddressAsync(60, false, 0, false, AddressType.Ethereum);
                         Console.WriteLine($"First ETH address: {ethAddress}");
 
                         //This fails with 'Safety check failed'
@@ -140,7 +140,7 @@ namespace TrezorTestApp
 
         private static async Task<string> GetAddress(TrezorManager trezorManager, int i)
         {
-            return await trezorManager.GetAddressAsync("BTC", 0, false, (uint)i, false, AddressType.Bitcoin);
+            return await trezorManager.GetAddressAsync(0, false, (uint)i, false, AddressType.Bitcoin);
         }
 
         private async static Task<string> GetPin()

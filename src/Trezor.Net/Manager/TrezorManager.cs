@@ -487,40 +487,32 @@ namespace Trezor.Net
         #endregion
 
         #region Public Overrides
-        public Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType)
+        public Task<string> GetAddressAsync(bool isSegwit, uint coinNumber, bool isChange, uint index, bool showDisplay)
         {
-            return GetAddressAsync(coinShortcut, coinNumber, 0, isChange, index, showDisplay, addressType, null);
+            return GetAddressAsync(isSegwit, coinNumber, 0, isChange, index, showDisplay, null);
         }
 
         /// <summary>
         /// Get an address from the Trezor
         /// //TODO: Move this back down to TrezorManagerBase
         /// </summary>
-        public async Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, uint account, bool isChange, uint index, bool showDisplay, AddressType addressType, bool? isSegwit)
+        public async Task<string> GetAddressAsync(bool isSegwit, uint coinNumber, uint account, bool isChange, uint index, bool showDisplay, string coinName)
         {
             try
             {
                 ValidateInitialization(null);
 
-                //ETH and ETC don't appear here so we have to hard code these not to be segwit
-                //var coinType = Features.Coins.Find(c => string.Equals(c.CoinShortcut, coinShortcut, StringComparison.OrdinalIgnoreCase));
-
                 var coinType = GetCoinType(coinNumber);
 
-                if (isSegwit == null)
+                var path = ManagerHelpers.GetAddressPath(isSegwit, account, isChange, index, coinNumber);
+
+                switch (coinNumber)
                 {
-                    isSegwit = coinType?.Segwit == true;
-                }
+                    case 0:
 
-                var path = ManagerHelpers.GetAddressPath(isSegwit.Value, account, isChange, index, coinNumber);
+                        return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = showDisplay, AddressNs = path, CoinName = GetCoinType(coinNumber)?.CoinName, ScriptType = isSegwit ? InputScriptType.Spendp2shwitness : InputScriptType.Spendaddress })).address;
 
-                switch (addressType)
-                {
-                    case AddressType.Bitcoin:
-
-                        return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = showDisplay, AddressNs = path, CoinName = GetCoinType(coinShortcut)?.CoinName, ScriptType = isSegwit.Value ? InputScriptType.Spendp2shwitness : InputScriptType.Spendaddress })).address;
-
-                    case AddressType.Ethereum:
+                    case 60:
 
                         var ethereumAddress = await SendMessageAsync<EthereumAddress, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = showDisplay, AddressNs = path });
 
@@ -534,8 +526,8 @@ namespace Trezor.Net
 
                         return $"0x{hexString}";
 
-                    case AddressType.NEM:
-                        throw new NotImplementedException();
+                    //case AddressType.NEM:
+                    //    throw new NotImplementedException();
                     default:
                         throw new NotImplementedException();
                 }

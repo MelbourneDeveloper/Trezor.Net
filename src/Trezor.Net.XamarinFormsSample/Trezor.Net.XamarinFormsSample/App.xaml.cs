@@ -38,7 +38,7 @@ namespace Trezor.Net.XamarinFormsSample
             Device.BeginInvokeOnMainThread(async () =>
             {
                 await _TrezorManager.InitializeAsync();
-                Address = await _TrezorManager.GetAddressAsync("BTC", 0, false, 0, false, AddressType.Bitcoin);
+                Address = await _TrezorManager.GetAddressAsync(0, false, 0, false, AddressType.Bitcoin);
                 GetAddress?.Invoke(this, new EventArgs());
             });
         }

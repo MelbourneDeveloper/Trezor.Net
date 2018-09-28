@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Trezor.Net.Contracts;
 using Trezor.Net.Contracts.Ethereum;
 
 namespace Trezor.Net
@@ -27,14 +26,14 @@ namespace Trezor.Net
 
             var tasks = new List<Task>();
 
-            for (var i = 0; i < 50; i++)
+            for (uint i = 0; i < 50; i++)
             {
                 tasks.Add(DoGetAddress(TrezorManager, i));
             }
 
             await Task.WhenAll(tasks);
 
-            for (var i = 0; i < 50; i++)
+            for (uint i = 0; i < 50; i++)
             {
                 var address = await GetAddress(i, false);
 
@@ -70,9 +69,9 @@ namespace Trezor.Net
             Assert.AreEqual(transaction.SignatureS.Length, 32);
         }
 
-        private static async Task<string> GetAddress(int i, bool display)
+        private static async Task<string> GetAddress(uint i, bool display)
         {
-            return await TrezorManager.GetAddressAsync("BTC", 0, false, (uint)i, display, AddressType.Bitcoin);
+            return await TrezorManager.GetAddressAsync(true, 0, false, i, display);
         }
 
         private async Task GetAndInitialize()
@@ -87,7 +86,7 @@ namespace Trezor.Net
             await TrezorManager.InitializeAsync();
         }
 
-        private static async Task DoGetAddress(TrezorManager trezorManager, int i)
+        private static async Task DoGetAddress(TrezorManager trezorManager, uint i)
         {
             var address = await GetAddress(i, false);
             _Addresses[i] = address;
