@@ -37,6 +37,7 @@ namespace Trezor.Net
         public async Task DisplayBitcoinCashAddress()
         {
             await GetAndInitialize();
+            //Coin name must be specified when displaying the address for most coins
             var address = await TrezorManager.GetAddressAsync(false, 145, 0, false, 0, true, "Bcash");
         }
 
@@ -44,7 +45,16 @@ namespace Trezor.Net
         public async Task DisplayEthereumAddress()
         {
             await GetAndInitialize();
+            //Ethereum coins don't need the coin name
             var address = await TrezorManager.GetAddressAsync(false, 60, false, 0, true);
+        }
+
+        [TestMethod]
+        public async Task DisplayEthereumClassicAddress()
+        {
+            await GetAndInitialize();
+            //Ethereum coins don't need the coin name
+            var address = await TrezorManager.GetAddressAsync(false, 61, false, 0, true);
         }
 
         [TestMethod]

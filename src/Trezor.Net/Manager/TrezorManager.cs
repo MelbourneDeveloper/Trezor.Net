@@ -66,6 +66,7 @@ namespace Trezor.Net
                 case 145:
                     return new CoinType { CoinName = "Bcash", Segwit = true };
                 case 60:
+                case 61:
                     return new CoinType { CoinName = "Ethereum", Segwit = false };
             }
 
@@ -516,6 +517,7 @@ namespace Trezor.Net
                         return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = showDisplay, AddressNs = path, CoinName = coinName, ScriptType = isSegwit ? InputScriptType.Spendp2shwitness : InputScriptType.Spendaddress })).address;
 
                     case 60:
+                    case 61:
 
                         var ethereumAddress = await SendMessageAsync<EthereumAddress, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = showDisplay, AddressNs = path });
 
