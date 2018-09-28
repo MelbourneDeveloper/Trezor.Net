@@ -1,4 +1,5 @@
 ﻿using Hardwarewallets.Net;
+using Hardwarewallets.Net.Model;
 using Hid.Net;
 using System;
 using System.Text;
@@ -442,44 +443,33 @@ namespace Trezor.Net
         #endregion
 
         #region Public Methods
-        /// <summary>
-        /// Get the Trezor's public key at the specified index.
-        /// </summary>
-        public Task<PublicKey> GetPublicKeyAsync(string coinShortcut, uint addressNumber)
+        public override async Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display)
         {
+            if (CoinUtility == null)
+            {
+                throw new ManagerException($"A {nameof(CoinUtility)} must be specified if {nameof(AddressType)} is not specified.");
+            }
 
-
-            return SendMessageAsync<PublicKey, GetPublicKey>(new GetPublicKey { CoinName = GetCoinType(coinShortcut).CoinName, AddressNs = new[] { addressNumber } });
-        }
-        #endregion
-
-        #region Public Overrides
-        public Task<string> GetAddressAsync(bool isSegwit, uint coinNumber, bool isChange, uint index, bool showDisplay)
-        {
-            return GetAddressAsync(AddressType.Bitcoin, isSegwit, coinNumber, 0, isChange, index, showDisplay, null);
+            return GetAddressAsync(addressPath, isPublicKey, display, )
         }
 
-        /// <summary>
-        /// Get an address from the Trezor
-        /// //TODO: Move this back down to TrezorManagerBase
-        /// </summary>
-        public async Task<string> GetAddressAsync(AddressType addressType, bool isSegwit, uint coinNumber, uint account, bool isChange, uint index, bool showDisplay, string coinName)
+        public async Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display, AddressType addressType, string coinName)
         {
             try
             {
-                ValidateInitialization(null);
+                var path = addressPath.ToHardenedArray();
 
-                var path = ManagerHelpers.GetAddressPath(isSegwit, account, isChange, index, coinNumber);
+                var isSegwit = addressPath.Purpose == 49;
 
                 switch (addressType)
                 {
                     case AddressType.Bitcoin:
 
-                        return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = showDisplay, AddressNs = path, CoinName = coinName, ScriptType = isSegwit ? InputScriptType.Spendp2shwitness : InputScriptType.Spendaddress })).address;
+                        return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = display, AddressNs = path, CoinName = coinName, ScriptType = isSegwit ? InputScriptType.Spendp2shwitness : InputScriptType.Spendaddress })).address;
 
                     case AddressType.Ethereum:
 
-                        var ethereumAddress = await SendMessageAsync<EthereumAddress, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = showDisplay, AddressNs = path });
+                        var ethereumAddress = await SendMessageAsync<EthereumAddress, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = display, AddressNs = path });
 
                         var sb = new StringBuilder();
                         foreach (var b in ethereumAddress.Address)

@@ -1,4 +1,5 @@
-﻿using Hid.Net;
+﻿using Hardwarewallets.Net.Model;
+using Hid.Net;
 using ProtoBuf;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace Trezor.Net
         #endregion
 
         #region Public Properties
-        ICoinUtility CoinUtility { get; }
+        public ICoinUtility CoinUtility { get; }
         #endregion
 
         #region Public Abstract Properties
@@ -158,6 +159,10 @@ namespace Trezor.Net
             _HidDevice?.Dispose();
         }
 
+        #endregion
+
+        #region Public Abstract Methods
+        public abstract Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display);
         #endregion
 
         #region Private Methods
