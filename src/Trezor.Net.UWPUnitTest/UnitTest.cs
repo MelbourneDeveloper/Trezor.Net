@@ -20,6 +20,13 @@ namespace Trezor.Net
         }
 
         [TestMethod]
+        public async Task GetBitcoinAddress()
+        {
+            await GetAndInitialize();
+            var address = await TrezorManager.GetAddressAsync(true, 0, false, 0, false);
+        }
+
+        [TestMethod]
         public async Task GetBitcoinCashAddress()
         {
             await GetAndInitialize();
