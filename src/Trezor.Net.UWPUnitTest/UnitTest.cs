@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Trezor.Net.Contracts;
 
 namespace Trezor.Net
 {
@@ -43,6 +44,27 @@ namespace Trezor.Net
                     throw new Exception("The ordering got messed up");
                 }
             }
+        }
+
+        [TestMethod]
+        public async Task SignEthereumTransaction()
+        {
+            await GetAndInitialize();
+
+            var txMessage = new EthereumSignTx
+            {
+                Nonce = 0.ToHexBytes(),
+                GasPrice = 1000.ToHexBytes(),
+                GasLimit = 21000.ToHexBytes(),
+                To = "689c56aef474df92d44a1b70850f808488f9769c".ToHexBytes(),
+                Value = 1000.ToHexBytes(),
+                AddressNs = ManagerHelpers.GetAddressPath(false, 0, false, 0, 60),
+            };
+
+            var transaction = await TrezorManager.SendMessageAsync<EthereumTxRequest, EthereumSignTx>(txMessage);
+
+            Assert.AreEqual(transaction.SignatureR.Length, 32);
+            Assert.AreEqual(transaction.SignatureS.Length, 32);
         }
 
         private static async Task<string> GetAddress(int i, bool display)

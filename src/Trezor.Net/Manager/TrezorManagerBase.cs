@@ -135,7 +135,7 @@ namespace Trezor.Net
                     }
                 }
 
-                throw new ManagerException("User did not accept the message or pin was entered incorrectly too many times (Note: this library does not have an incorrect pin safety mechanism.)");
+                throw new ManagerException($"Returned response ({response.GetType().Name})  was of the wrong specified message type ({typeof(TReadMessage).Name}). The user did not accept the message, or pin was entered incorrectly too many times (Note: this library does not have an incorrect pin safety mechanism.)");
             }
             finally
             {
