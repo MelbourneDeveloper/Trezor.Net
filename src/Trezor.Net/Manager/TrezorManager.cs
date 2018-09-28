@@ -1,7 +1,5 @@
 ﻿using Hid.Net;
 using System;
-using System.Collections.Generic;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Trezor.Net.Contracts;
@@ -12,15 +10,10 @@ using Trezor.Net.Contracts.Management;
 
 namespace Trezor.Net
 {
-    public class TrezorManager : TrezorManagerBase
+    public class TrezorManager : TrezorManagerBase<MessageType>
     {
         #region Private Constants
         private const string LogSection = "Trezor Manager";
-        #endregion
-
-        #region Private Static Fields
-        private static Assembly[] _Assemblies;
-        private static readonly Dictionary<string, Type> _ContractsByName = new Dictionary<string, Type>();
         #endregion
 
         #region Public Constants
@@ -143,50 +136,17 @@ namespace Trezor.Net
             return messageType;
         }
 
-        protected override Type GetContractType(object messageType, string typeName)
+        protected override Type GetContractType(MessageType messageType, string typeName)
         {
-            Type contractType;
-
-            lock (_ContractsByName)
+            switch (messageType)
             {
-                if (!_ContractsByName.TryGetValue(typeName, out contractType))
-                {
-                    contractType = Type.GetType(typeName);
-
-                    if (contractType == null)
-                    {
-                        if (_Assemblies == null)
-                        {
-                            _Assemblies = AppDomain.CurrentDomain.GetAssemblies();
-                        }
-
-                        foreach (var assembly in _Assemblies)
-                        {
-                            foreach (var type in assembly.GetTypes())
-                            {
-                                if (type.FullName == typeName)
-                                {
-                                    contractType = type;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                    if (contractType == null)
-                    {
-                        throw new Exception($"The device returned a message of {messageType}. There was no corresponding contract type at {typeName}");
-                    }
-                    else
-                    {
-                        _ContractsByName.Add(typeName, contractType);
-                    }
-                }
+                case MessageType.MessageTypeAddress:
+                    return typeof(Address);
+                default:
+                    throw new NotImplementedException();
             }
 
-            return contractType;
         }
-
         #endregion
 
         #region Public Methods
