@@ -11,8 +11,8 @@ namespace Trezor.Net.Contracts.Management
         [System.ComponentModel.DefaultValue("")]
         public string Language
         {
-            get { return __pbn__Language ?? ""; }
-            set { __pbn__Language = value; }
+            get => __pbn__Language ?? "";
+            set => __pbn__Language = value;
         }
         public bool ShouldSerializeLanguage() => __pbn__Language != null;
         public void ResetLanguage() => __pbn__Language = null;
@@ -22,8 +22,8 @@ namespace Trezor.Net.Contracts.Management
         [System.ComponentModel.DefaultValue("")]
         public string Label
         {
-            get { return __pbn__Label ?? ""; }
-            set { __pbn__Label = value; }
+            get => __pbn__Label ?? "";
+            set => __pbn__Label = value;
         }
         public bool ShouldSerializeLabel() => __pbn__Label != null;
         public void ResetLabel() => __pbn__Label = null;
@@ -32,8 +32,8 @@ namespace Trezor.Net.Contracts.Management
         [ProtoBuf.ProtoMember(3, Name = @"use_passphrase")]
         public bool UsePassphrase
         {
-            get { return __pbn__UsePassphrase.GetValueOrDefault(); }
-            set { __pbn__UsePassphrase = value; }
+            get => __pbn__UsePassphrase.GetValueOrDefault();
+            set => __pbn__UsePassphrase = value;
         }
         public bool ShouldSerializeUsePassphrase() => __pbn__UsePassphrase != null;
         public void ResetUsePassphrase() => __pbn__UsePassphrase = null;
@@ -48,8 +48,8 @@ namespace Trezor.Net.Contracts.Management
         [System.ComponentModel.DefaultValue(PassphraseSourceType.Ask)]
         public PassphraseSourceType PassphraseSource
         {
-            get { return __pbn__PassphraseSource ?? PassphraseSourceType.Ask; }
-            set { __pbn__PassphraseSource = value; }
+            get => __pbn__PassphraseSource ?? PassphraseSourceType.Ask;
+            set => __pbn__PassphraseSource = value;
         }
         public bool ShouldSerializePassphraseSource() => __pbn__PassphraseSource != null;
         public void ResetPassphraseSource() => __pbn__PassphraseSource = null;
@@ -58,8 +58,8 @@ namespace Trezor.Net.Contracts.Management
         [ProtoBuf.ProtoMember(6, Name = @"auto_lock_delay_ms")]
         public uint AutoLockDelayMs
         {
-            get { return __pbn__AutoLockDelayMs.GetValueOrDefault(); }
-            set { __pbn__AutoLockDelayMs = value; }
+            get => __pbn__AutoLockDelayMs.GetValueOrDefault();
+            set => __pbn__AutoLockDelayMs = value;
         }
         public bool ShouldSerializeAutoLockDelayMs() => __pbn__AutoLockDelayMs != null;
         public void ResetAutoLockDelayMs() => __pbn__AutoLockDelayMs = null;

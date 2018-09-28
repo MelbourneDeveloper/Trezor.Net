@@ -10,8 +10,8 @@ namespace Trezor.Net.Contracts.Management
         [ProtoBuf.ProtoMember(1, Name = @"flags")]
         public uint Flags
         {
-            get { return __pbn__Flags.GetValueOrDefault(); }
-            set { __pbn__Flags = value; }
+            get => __pbn__Flags.GetValueOrDefault();
+            set => __pbn__Flags = value;
         }
         public bool ShouldSerializeFlags() => __pbn__Flags != null;
         public void ResetFlags() => __pbn__Flags = null;

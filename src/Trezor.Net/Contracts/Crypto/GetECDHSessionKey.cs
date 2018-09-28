@@ -19,8 +19,8 @@ namespace Trezor.Net.Contracts.Crypto
         [System.ComponentModel.DefaultValue("")]
         public string EcdsaCurveName
         {
-            get { return __pbn__EcdsaCurveName ?? ""; }
-            set { __pbn__EcdsaCurveName = value; }
+            get => __pbn__EcdsaCurveName ?? "";
+            set => __pbn__EcdsaCurveName = value;
         }
         public bool ShouldSerializeEcdsaCurveName() => __pbn__EcdsaCurveName != null;
         public void ResetEcdsaCurveName() => __pbn__EcdsaCurveName = null;

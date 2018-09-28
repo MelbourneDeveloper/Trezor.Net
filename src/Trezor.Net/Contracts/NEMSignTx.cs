@@ -19,8 +19,8 @@ namespace Trezor.Net.Contracts.NEM
         [ProtoBuf.ProtoMember(4, Name = @"cosigning")]
         public bool Cosigning
         {
-            get { return __pbn__Cosigning.GetValueOrDefault(); }
-            set { __pbn__Cosigning = value; }
+            get => __pbn__Cosigning.GetValueOrDefault();
+            set => __pbn__Cosigning = value;
         }
         public bool ShouldSerializeCosigning() => __pbn__Cosigning != null;
         public void ResetCosigning() => __pbn__Cosigning = null;
@@ -54,8 +54,8 @@ namespace Trezor.Net.Contracts.NEM
             [ProtoBuf.ProtoMember(2, Name = @"network")]
             public uint Network
             {
-                get { return __pbn__Network.GetValueOrDefault(); }
-                set { __pbn__Network = value; }
+                get => __pbn__Network.GetValueOrDefault();
+                set => __pbn__Network = value;
             }
             public bool ShouldSerializeNetwork() => __pbn__Network != null;
             public void ResetNetwork() => __pbn__Network = null;
@@ -64,8 +64,8 @@ namespace Trezor.Net.Contracts.NEM
             [ProtoBuf.ProtoMember(3, Name = @"timestamp")]
             public uint Timestamp
             {
-                get { return __pbn__Timestamp.GetValueOrDefault(); }
-                set { __pbn__Timestamp = value; }
+                get => __pbn__Timestamp.GetValueOrDefault();
+                set => __pbn__Timestamp = value;
             }
             public bool ShouldSerializeTimestamp() => __pbn__Timestamp != null;
             public void ResetTimestamp() => __pbn__Timestamp = null;
@@ -74,8 +74,8 @@ namespace Trezor.Net.Contracts.NEM
             [ProtoBuf.ProtoMember(4, Name = @"fee")]
             public ulong Fee
             {
-                get { return __pbn__Fee.GetValueOrDefault(); }
-                set { __pbn__Fee = value; }
+                get => __pbn__Fee.GetValueOrDefault();
+                set => __pbn__Fee = value;
             }
             public bool ShouldSerializeFee() => __pbn__Fee != null;
             public void ResetFee() => __pbn__Fee = null;
@@ -84,8 +84,8 @@ namespace Trezor.Net.Contracts.NEM
             [ProtoBuf.ProtoMember(5, Name = @"deadline")]
             public uint Deadline
             {
-                get { return __pbn__Deadline.GetValueOrDefault(); }
-                set { __pbn__Deadline = value; }
+                get => __pbn__Deadline.GetValueOrDefault();
+                set => __pbn__Deadline = value;
             }
             public bool ShouldSerializeDeadline() => __pbn__Deadline != null;
             public void ResetDeadline() => __pbn__Deadline = null;
@@ -108,8 +108,8 @@ namespace Trezor.Net.Contracts.NEM
             [System.ComponentModel.DefaultValue("")]
             public string Recipient
             {
-                get { return __pbn__Recipient ?? ""; }
-                set { __pbn__Recipient = value; }
+                get => __pbn__Recipient ?? "";
+                set => __pbn__Recipient = value;
             }
             public bool ShouldSerializeRecipient() => __pbn__Recipient != null;
             public void ResetRecipient() => __pbn__Recipient = null;
@@ -118,8 +118,8 @@ namespace Trezor.Net.Contracts.NEM
             [ProtoBuf.ProtoMember(2, Name = @"amount")]
             public ulong Amount
             {
-                get { return __pbn__Amount.GetValueOrDefault(); }
-                set { __pbn__Amount = value; }
+                get => __pbn__Amount.GetValueOrDefault();
+                set => __pbn__Amount = value;
             }
             public bool ShouldSerializeAmount() => __pbn__Amount != null;
             public void ResetAmount() => __pbn__Amount = null;
@@ -149,8 +149,8 @@ namespace Trezor.Net.Contracts.NEM
                 [System.ComponentModel.DefaultValue("")]
                 public string Namespace
                 {
-                    get { return __pbn__Namespace ?? ""; }
-                    set { __pbn__Namespace = value; }
+                    get => __pbn__Namespace ?? "";
+                    set => __pbn__Namespace = value;
                 }
                 public bool ShouldSerializeNamespace() => __pbn__Namespace != null;
                 public void ResetNamespace() => __pbn__Namespace = null;
@@ -160,8 +160,8 @@ namespace Trezor.Net.Contracts.NEM
                 [System.ComponentModel.DefaultValue("")]
                 public string Mosaic
                 {
-                    get { return __pbn__Mosaic ?? ""; }
-                    set { __pbn__Mosaic = value; }
+                    get => __pbn__Mosaic ?? "";
+                    set => __pbn__Mosaic = value;
                 }
                 public bool ShouldSerializeMosaic() => __pbn__Mosaic != null;
                 public void ResetMosaic() => __pbn__Mosaic = null;
@@ -170,8 +170,8 @@ namespace Trezor.Net.Contracts.NEM
                 [ProtoBuf.ProtoMember(3, Name = @"quantity")]
                 public ulong Quantity
                 {
-                    get { return __pbn__Quantity.GetValueOrDefault(); }
-                    set { __pbn__Quantity = value; }
+                    get => __pbn__Quantity.GetValueOrDefault();
+                    set => __pbn__Quantity = value;
                 }
                 public bool ShouldSerializeQuantity() => __pbn__Quantity != null;
                 public void ResetQuantity() => __pbn__Quantity = null;
@@ -192,8 +192,8 @@ namespace Trezor.Net.Contracts.NEM
             [System.ComponentModel.DefaultValue("")]
             public string Namespace
             {
-                get { return __pbn__Namespace ?? ""; }
-                set { __pbn__Namespace = value; }
+                get => __pbn__Namespace ?? "";
+                set => __pbn__Namespace = value;
             }
             public bool ShouldSerializeNamespace() => __pbn__Namespace != null;
             public void ResetNamespace() => __pbn__Namespace = null;
@@ -203,8 +203,8 @@ namespace Trezor.Net.Contracts.NEM
             [System.ComponentModel.DefaultValue("")]
             public string Parent
             {
-                get { return __pbn__Parent ?? ""; }
-                set { __pbn__Parent = value; }
+                get => __pbn__Parent ?? "";
+                set => __pbn__Parent = value;
             }
             public bool ShouldSerializeParent() => __pbn__Parent != null;
             public void ResetParent() => __pbn__Parent = null;
@@ -214,8 +214,8 @@ namespace Trezor.Net.Contracts.NEM
             [System.ComponentModel.DefaultValue("")]
             public string Sink
             {
-                get { return __pbn__Sink ?? ""; }
-                set { __pbn__Sink = value; }
+                get => __pbn__Sink ?? "";
+                set => __pbn__Sink = value;
             }
             public bool ShouldSerializeSink() => __pbn__Sink != null;
             public void ResetSink() => __pbn__Sink = null;
@@ -224,8 +224,8 @@ namespace Trezor.Net.Contracts.NEM
             [ProtoBuf.ProtoMember(4, Name = @"fee")]
             public ulong Fee
             {
-                get { return __pbn__Fee.GetValueOrDefault(); }
-                set { __pbn__Fee = value; }
+                get => __pbn__Fee.GetValueOrDefault();
+                set => __pbn__Fee = value;
             }
             public bool ShouldSerializeFee() => __pbn__Fee != null;
             public void ResetFee() => __pbn__Fee = null;
@@ -247,8 +247,8 @@ namespace Trezor.Net.Contracts.NEM
             [System.ComponentModel.DefaultValue("")]
             public string Sink
             {
-                get { return __pbn__Sink ?? ""; }
-                set { __pbn__Sink = value; }
+                get => __pbn__Sink ?? "";
+                set => __pbn__Sink = value;
             }
             public bool ShouldSerializeSink() => __pbn__Sink != null;
             public void ResetSink() => __pbn__Sink = null;
@@ -257,8 +257,8 @@ namespace Trezor.Net.Contracts.NEM
             [ProtoBuf.ProtoMember(3, Name = @"fee")]
             public ulong Fee
             {
-                get { return __pbn__Fee.GetValueOrDefault(); }
-                set { __pbn__Fee = value; }
+                get => __pbn__Fee.GetValueOrDefault();
+                set => __pbn__Fee = value;
             }
             public bool ShouldSerializeFee() => __pbn__Fee != null;
             public void ResetFee() => __pbn__Fee = null;
@@ -275,8 +275,8 @@ namespace Trezor.Net.Contracts.NEM
                 [System.ComponentModel.DefaultValue("")]
                 public string Name
                 {
-                    get { return __pbn__Name ?? ""; }
-                    set { __pbn__Name = value; }
+                    get => __pbn__Name ?? "";
+                    set => __pbn__Name = value;
                 }
                 public bool ShouldSerializeName() => __pbn__Name != null;
                 public void ResetName() => __pbn__Name = null;
@@ -286,8 +286,8 @@ namespace Trezor.Net.Contracts.NEM
                 [System.ComponentModel.DefaultValue("")]
                 public string Ticker
                 {
-                    get { return __pbn__Ticker ?? ""; }
-                    set { __pbn__Ticker = value; }
+                    get => __pbn__Ticker ?? "";
+                    set => __pbn__Ticker = value;
                 }
                 public bool ShouldSerializeTicker() => __pbn__Ticker != null;
                 public void ResetTicker() => __pbn__Ticker = null;
@@ -297,8 +297,8 @@ namespace Trezor.Net.Contracts.NEM
                 [System.ComponentModel.DefaultValue("")]
                 public string Namespace
                 {
-                    get { return __pbn__Namespace ?? ""; }
-                    set { __pbn__Namespace = value; }
+                    get => __pbn__Namespace ?? "";
+                    set => __pbn__Namespace = value;
                 }
                 public bool ShouldSerializeNamespace() => __pbn__Namespace != null;
                 public void ResetNamespace() => __pbn__Namespace = null;
@@ -308,8 +308,8 @@ namespace Trezor.Net.Contracts.NEM
                 [System.ComponentModel.DefaultValue("")]
                 public string Mosaic
                 {
-                    get { return __pbn__Mosaic ?? ""; }
-                    set { __pbn__Mosaic = value; }
+                    get => __pbn__Mosaic ?? "";
+                    set => __pbn__Mosaic = value;
                 }
                 public bool ShouldSerializeMosaic() => __pbn__Mosaic != null;
                 public void ResetMosaic() => __pbn__Mosaic = null;
@@ -318,8 +318,8 @@ namespace Trezor.Net.Contracts.NEM
                 [ProtoBuf.ProtoMember(5, Name = @"divisibility")]
                 public uint Divisibility
                 {
-                    get { return __pbn__Divisibility.GetValueOrDefault(); }
-                    set { __pbn__Divisibility = value; }
+                    get => __pbn__Divisibility.GetValueOrDefault();
+                    set => __pbn__Divisibility = value;
                 }
                 public bool ShouldSerializeDivisibility() => __pbn__Divisibility != null;
                 public void ResetDivisibility() => __pbn__Divisibility = null;
@@ -329,8 +329,8 @@ namespace Trezor.Net.Contracts.NEM
                 [System.ComponentModel.DefaultValue(NEMMosaicLevy.MosaicLevyAbsolute)]
                 public NEMMosaicLevy Levy
                 {
-                    get { return __pbn__Levy ?? NEMMosaicLevy.MosaicLevyAbsolute; }
-                    set { __pbn__Levy = value; }
+                    get => __pbn__Levy ?? NEMMosaicLevy.MosaicLevyAbsolute;
+                    set => __pbn__Levy = value;
                 }
                 public bool ShouldSerializeLevy() => __pbn__Levy != null;
                 public void ResetLevy() => __pbn__Levy = null;
@@ -339,8 +339,8 @@ namespace Trezor.Net.Contracts.NEM
                 [ProtoBuf.ProtoMember(7, Name = @"fee")]
                 public ulong Fee
                 {
-                    get { return __pbn__Fee.GetValueOrDefault(); }
-                    set { __pbn__Fee = value; }
+                    get => __pbn__Fee.GetValueOrDefault();
+                    set => __pbn__Fee = value;
                 }
                 public bool ShouldSerializeFee() => __pbn__Fee != null;
                 public void ResetFee() => __pbn__Fee = null;
@@ -350,8 +350,8 @@ namespace Trezor.Net.Contracts.NEM
                 [System.ComponentModel.DefaultValue("")]
                 public string LevyAddress
                 {
-                    get { return __pbn__LevyAddress ?? ""; }
-                    set { __pbn__LevyAddress = value; }
+                    get => __pbn__LevyAddress ?? "";
+                    set => __pbn__LevyAddress = value;
                 }
                 public bool ShouldSerializeLevyAddress() => __pbn__LevyAddress != null;
                 public void ResetLevyAddress() => __pbn__LevyAddress = null;
@@ -361,8 +361,8 @@ namespace Trezor.Net.Contracts.NEM
                 [System.ComponentModel.DefaultValue("")]
                 public string LevyNamespace
                 {
-                    get { return __pbn__LevyNamespace ?? ""; }
-                    set { __pbn__LevyNamespace = value; }
+                    get => __pbn__LevyNamespace ?? "";
+                    set => __pbn__LevyNamespace = value;
                 }
                 public bool ShouldSerializeLevyNamespace() => __pbn__LevyNamespace != null;
                 public void ResetLevyNamespace() => __pbn__LevyNamespace = null;
@@ -372,8 +372,8 @@ namespace Trezor.Net.Contracts.NEM
                 [System.ComponentModel.DefaultValue("")]
                 public string LevyMosaic
                 {
-                    get { return __pbn__LevyMosaic ?? ""; }
-                    set { __pbn__LevyMosaic = value; }
+                    get => __pbn__LevyMosaic ?? "";
+                    set => __pbn__LevyMosaic = value;
                 }
                 public bool ShouldSerializeLevyMosaic() => __pbn__LevyMosaic != null;
                 public void ResetLevyMosaic() => __pbn__LevyMosaic = null;
@@ -382,8 +382,8 @@ namespace Trezor.Net.Contracts.NEM
                 [ProtoBuf.ProtoMember(11, Name = @"supply")]
                 public ulong Supply
                 {
-                    get { return __pbn__Supply.GetValueOrDefault(); }
-                    set { __pbn__Supply = value; }
+                    get => __pbn__Supply.GetValueOrDefault();
+                    set => __pbn__Supply = value;
                 }
                 public bool ShouldSerializeSupply() => __pbn__Supply != null;
                 public void ResetSupply() => __pbn__Supply = null;
@@ -392,8 +392,8 @@ namespace Trezor.Net.Contracts.NEM
                 [ProtoBuf.ProtoMember(12, Name = @"mutable_supply")]
                 public bool MutableSupply
                 {
-                    get { return __pbn__MutableSupply.GetValueOrDefault(); }
-                    set { __pbn__MutableSupply = value; }
+                    get => __pbn__MutableSupply.GetValueOrDefault();
+                    set => __pbn__MutableSupply = value;
                 }
                 public bool ShouldSerializeMutableSupply() => __pbn__MutableSupply != null;
                 public void ResetMutableSupply() => __pbn__MutableSupply = null;
@@ -402,8 +402,8 @@ namespace Trezor.Net.Contracts.NEM
                 [ProtoBuf.ProtoMember(13, Name = @"transferable")]
                 public bool Transferable
                 {
-                    get { return __pbn__Transferable.GetValueOrDefault(); }
-                    set { __pbn__Transferable = value; }
+                    get => __pbn__Transferable.GetValueOrDefault();
+                    set => __pbn__Transferable = value;
                 }
                 public bool ShouldSerializeTransferable() => __pbn__Transferable != null;
                 public void ResetTransferable() => __pbn__Transferable = null;
@@ -413,8 +413,8 @@ namespace Trezor.Net.Contracts.NEM
                 [System.ComponentModel.DefaultValue("")]
                 public string Description
                 {
-                    get { return __pbn__Description ?? ""; }
-                    set { __pbn__Description = value; }
+                    get => __pbn__Description ?? "";
+                    set => __pbn__Description = value;
                 }
                 public bool ShouldSerializeDescription() => __pbn__Description != null;
                 public void ResetDescription() => __pbn__Description = null;
@@ -447,8 +447,8 @@ namespace Trezor.Net.Contracts.NEM
             [System.ComponentModel.DefaultValue("")]
             public string Namespace
             {
-                get { return __pbn__Namespace ?? ""; }
-                set { __pbn__Namespace = value; }
+                get => __pbn__Namespace ?? "";
+                set => __pbn__Namespace = value;
             }
             public bool ShouldSerializeNamespace() => __pbn__Namespace != null;
             public void ResetNamespace() => __pbn__Namespace = null;
@@ -458,8 +458,8 @@ namespace Trezor.Net.Contracts.NEM
             [System.ComponentModel.DefaultValue("")]
             public string Mosaic
             {
-                get { return __pbn__Mosaic ?? ""; }
-                set { __pbn__Mosaic = value; }
+                get => __pbn__Mosaic ?? "";
+                set => __pbn__Mosaic = value;
             }
             public bool ShouldSerializeMosaic() => __pbn__Mosaic != null;
             public void ResetMosaic() => __pbn__Mosaic = null;
@@ -469,8 +469,8 @@ namespace Trezor.Net.Contracts.NEM
             [System.ComponentModel.DefaultValue(NEMSupplyChangeType.SupplyChangeIncrease)]
             public NEMSupplyChangeType Type
             {
-                get { return __pbn__Type ?? NEMSupplyChangeType.SupplyChangeIncrease; }
-                set { __pbn__Type = value; }
+                get => __pbn__Type ?? NEMSupplyChangeType.SupplyChangeIncrease;
+                set => __pbn__Type = value;
             }
             public bool ShouldSerializeType() => __pbn__Type != null;
             public void ResetType() => __pbn__Type = null;
@@ -479,8 +479,8 @@ namespace Trezor.Net.Contracts.NEM
             [ProtoBuf.ProtoMember(4, Name = @"delta")]
             public ulong Delta
             {
-                get { return __pbn__Delta.GetValueOrDefault(); }
-                set { __pbn__Delta = value; }
+                get => __pbn__Delta.GetValueOrDefault();
+                set => __pbn__Delta = value;
             }
             public bool ShouldSerializeDelta() => __pbn__Delta != null;
             public void ResetDelta() => __pbn__Delta = null;
@@ -510,8 +510,8 @@ namespace Trezor.Net.Contracts.NEM
             [ProtoBuf.ProtoMember(2, Name = @"relative_change", DataFormat = ProtoBuf.DataFormat.ZigZag)]
             public int RelativeChange
             {
-                get { return __pbn__RelativeChange.GetValueOrDefault(); }
-                set { __pbn__RelativeChange = value; }
+                get => __pbn__RelativeChange.GetValueOrDefault();
+                set => __pbn__RelativeChange = value;
             }
             public bool ShouldSerializeRelativeChange() => __pbn__RelativeChange != null;
             public void ResetRelativeChange() => __pbn__RelativeChange = null;
@@ -528,8 +528,8 @@ namespace Trezor.Net.Contracts.NEM
                 [System.ComponentModel.DefaultValue(NEMModificationType.CosignatoryModificationAdd)]
                 public NEMModificationType Type
                 {
-                    get { return __pbn__Type ?? NEMModificationType.CosignatoryModificationAdd; }
-                    set { __pbn__Type = value; }
+                    get => __pbn__Type ?? NEMModificationType.CosignatoryModificationAdd;
+                    set => __pbn__Type = value;
                 }
                 public bool ShouldSerializeType() => __pbn__Type != null;
                 public void ResetType() => __pbn__Type = null;
@@ -564,8 +564,8 @@ namespace Trezor.Net.Contracts.NEM
             [System.ComponentModel.DefaultValue(NEMImportanceTransferMode.ImportanceTransferActivate)]
             public NEMImportanceTransferMode Mode
             {
-                get { return __pbn__Mode ?? NEMImportanceTransferMode.ImportanceTransferActivate; }
-                set { __pbn__Mode = value; }
+                get => __pbn__Mode ?? NEMImportanceTransferMode.ImportanceTransferActivate;
+                set => __pbn__Mode = value;
             }
             public bool ShouldSerializeMode() => __pbn__Mode != null;
             public void ResetMode() => __pbn__Mode = null;

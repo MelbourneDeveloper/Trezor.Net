@@ -11,8 +11,8 @@ namespace Trezor.Net.Contracts.Management
         [System.ComponentModel.DefaultValue("")]
         public string Mnemonic
         {
-            get { return __pbn__Mnemonic ?? ""; }
-            set { __pbn__Mnemonic = value; }
+            get => __pbn__Mnemonic ?? "";
+            set => __pbn__Mnemonic = value;
         }
         public bool ShouldSerializeMnemonic() => __pbn__Mnemonic != null;
         public void ResetMnemonic() => __pbn__Mnemonic = null;
@@ -25,8 +25,8 @@ namespace Trezor.Net.Contracts.Management
         [System.ComponentModel.DefaultValue("")]
         public string Pin
         {
-            get { return __pbn__Pin ?? ""; }
-            set { __pbn__Pin = value; }
+            get => __pbn__Pin ?? "";
+            set => __pbn__Pin = value;
         }
         public bool ShouldSerializePin() => __pbn__Pin != null;
         public void ResetPin() => __pbn__Pin = null;
@@ -35,8 +35,8 @@ namespace Trezor.Net.Contracts.Management
         [ProtoBuf.ProtoMember(4, Name = @"passphrase_protection")]
         public bool PassphraseProtection
         {
-            get { return __pbn__PassphraseProtection.GetValueOrDefault(); }
-            set { __pbn__PassphraseProtection = value; }
+            get => __pbn__PassphraseProtection.GetValueOrDefault();
+            set => __pbn__PassphraseProtection = value;
         }
         public bool ShouldSerializePassphraseProtection() => __pbn__PassphraseProtection != null;
         public void ResetPassphraseProtection() => __pbn__PassphraseProtection = null;
@@ -46,8 +46,8 @@ namespace Trezor.Net.Contracts.Management
         [System.ComponentModel.DefaultValue(@"english")]
         public string Language
         {
-            get { return __pbn__Language ?? @"english"; }
-            set { __pbn__Language = value; }
+            get => __pbn__Language ?? @"english";
+            set => __pbn__Language = value;
         }
         public bool ShouldSerializeLanguage() => __pbn__Language != null;
         public void ResetLanguage() => __pbn__Language = null;
@@ -57,8 +57,8 @@ namespace Trezor.Net.Contracts.Management
         [System.ComponentModel.DefaultValue("")]
         public string Label
         {
-            get { return __pbn__Label ?? ""; }
-            set { __pbn__Label = value; }
+            get => __pbn__Label ?? "";
+            set => __pbn__Label = value;
         }
         public bool ShouldSerializeLabel() => __pbn__Label != null;
         public void ResetLabel() => __pbn__Label = null;
@@ -67,8 +67,8 @@ namespace Trezor.Net.Contracts.Management
         [ProtoBuf.ProtoMember(7, Name = @"skip_checksum")]
         public bool SkipChecksum
         {
-            get { return __pbn__SkipChecksum.GetValueOrDefault(); }
-            set { __pbn__SkipChecksum = value; }
+            get => __pbn__SkipChecksum.GetValueOrDefault();
+            set => __pbn__SkipChecksum = value;
         }
         public bool ShouldSerializeSkipChecksum() => __pbn__SkipChecksum != null;
         public void ResetSkipChecksum() => __pbn__SkipChecksum = null;
@@ -77,8 +77,8 @@ namespace Trezor.Net.Contracts.Management
         [ProtoBuf.ProtoMember(8, Name = @"u2f_counter")]
         public uint U2fCounter
         {
-            get { return __pbn__U2fCounter.GetValueOrDefault(); }
-            set { __pbn__U2fCounter = value; }
+            get => __pbn__U2fCounter.GetValueOrDefault();
+            set => __pbn__U2fCounter = value;
         }
         public bool ShouldSerializeU2fCounter() => __pbn__U2fCounter != null;
         public void ResetU2fCounter() => __pbn__U2fCounter = null;

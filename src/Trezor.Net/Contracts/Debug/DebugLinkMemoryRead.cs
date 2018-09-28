@@ -10,8 +10,8 @@ namespace Trezor.Net.Contracts.Debug
         [ProtoBuf.ProtoMember(1, Name = @"address")]
         public uint Address
         {
-            get { return __pbn__Address.GetValueOrDefault(); }
-            set { __pbn__Address = value; }
+            get => __pbn__Address.GetValueOrDefault();
+            set => __pbn__Address = value;
         }
         public bool ShouldSerializeAddress() => __pbn__Address != null;
         public void ResetAddress() => __pbn__Address = null;
@@ -20,8 +20,8 @@ namespace Trezor.Net.Contracts.Debug
         [ProtoBuf.ProtoMember(2, Name = @"length")]
         public uint Length
         {
-            get { return __pbn__Length.GetValueOrDefault(); }
-            set { __pbn__Length = value; }
+            get => __pbn__Length.GetValueOrDefault();
+            set => __pbn__Length = value;
         }
         public bool ShouldSerializeLength() => __pbn__Length != null;
         public void ResetLength() => __pbn__Length = null;

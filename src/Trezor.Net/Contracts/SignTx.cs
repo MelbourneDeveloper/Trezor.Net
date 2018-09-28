@@ -17,8 +17,8 @@ namespace Trezor.Net.Contracts.Bitcoin
         [System.ComponentModel.DefaultValue(@"Bitcoin")]
         public string CoinName
         {
-            get { return __pbn__CoinName ?? @"Bitcoin"; }
-            set { __pbn__CoinName = value; }
+            get => __pbn__CoinName ?? @"Bitcoin";
+            set => __pbn__CoinName = value;
         }
         public bool ShouldSerializeCoinName() => __pbn__CoinName != null;
         public void ResetCoinName() => __pbn__CoinName = null;
@@ -28,8 +28,8 @@ namespace Trezor.Net.Contracts.Bitcoin
         [System.ComponentModel.DefaultValue(1)]
         public uint Version
         {
-            get { return __pbn__Version ?? 1; }
-            set { __pbn__Version = value; }
+            get => __pbn__Version ?? 1;
+            set => __pbn__Version = value;
         }
         public bool ShouldSerializeVersion() => __pbn__Version != null;
         public void ResetVersion() => __pbn__Version = null;
@@ -39,8 +39,8 @@ namespace Trezor.Net.Contracts.Bitcoin
         [System.ComponentModel.DefaultValue(0)]
         public uint LockTime
         {
-            get { return __pbn__LockTime ?? 0; }
-            set { __pbn__LockTime = value; }
+            get => __pbn__LockTime ?? 0;
+            set => __pbn__LockTime = value;
         }
         public bool ShouldSerializeLockTime() => __pbn__LockTime != null;
         public void ResetLockTime() => __pbn__LockTime = null;
@@ -49,8 +49,8 @@ namespace Trezor.Net.Contracts.Bitcoin
         [ProtoBuf.ProtoMember(6, Name = @"expiry")]
         public uint Expiry
         {
-            get { return __pbn__Expiry.GetValueOrDefault(); }
-            set { __pbn__Expiry = value; }
+            get => __pbn__Expiry.GetValueOrDefault();
+            set => __pbn__Expiry = value;
         }
         public bool ShouldSerializeExpiry() => __pbn__Expiry != null;
         public void ResetExpiry() => __pbn__Expiry = null;
@@ -59,8 +59,8 @@ namespace Trezor.Net.Contracts.Bitcoin
         [ProtoBuf.ProtoMember(7, Name = @"overwintered")]
         public bool Overwintered
         {
-            get { return __pbn__Overwintered.GetValueOrDefault(); }
-            set { __pbn__Overwintered = value; }
+            get => __pbn__Overwintered.GetValueOrDefault();
+            set => __pbn__Overwintered = value;
         }
         public bool ShouldSerializeOverwintered() => __pbn__Overwintered != null;
         public void ResetOverwintered() => __pbn__Overwintered = null;

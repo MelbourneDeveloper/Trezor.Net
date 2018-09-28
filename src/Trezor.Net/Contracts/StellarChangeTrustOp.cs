@@ -11,8 +11,8 @@ namespace Trezor.Net.Contracts.Stellar
         [System.ComponentModel.DefaultValue("")]
         public string SourceAccount
         {
-            get { return __pbn__SourceAccount ?? ""; }
-            set { __pbn__SourceAccount = value; }
+            get => __pbn__SourceAccount ?? "";
+            set => __pbn__SourceAccount = value;
         }
         public bool ShouldSerializeSourceAccount() => __pbn__SourceAccount != null;
         public void ResetSourceAccount() => __pbn__SourceAccount = null;
@@ -24,8 +24,8 @@ namespace Trezor.Net.Contracts.Stellar
         [ProtoBuf.ProtoMember(3, Name = @"limit")]
         public ulong Limit
         {
-            get { return __pbn__Limit.GetValueOrDefault(); }
-            set { __pbn__Limit = value; }
+            get => __pbn__Limit.GetValueOrDefault();
+            set => __pbn__Limit = value;
         }
         public bool ShouldSerializeLimit() => __pbn__Limit != null;
         public void ResetLimit() => __pbn__Limit = null;

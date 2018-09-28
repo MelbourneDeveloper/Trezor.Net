@@ -19,8 +19,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(2, Name = @"real_output")]
         public ulong RealOutput
         {
-            get { return __pbn__RealOutput.GetValueOrDefault(); }
-            set { __pbn__RealOutput = value; }
+            get => __pbn__RealOutput.GetValueOrDefault();
+            set => __pbn__RealOutput = value;
         }
         public bool ShouldSerializeRealOutput() => __pbn__RealOutput != null;
         public void ResetRealOutput() => __pbn__RealOutput = null;
@@ -37,8 +37,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(5, Name = @"real_output_in_tx_index")]
         public ulong RealOutputInTxIndex
         {
-            get { return __pbn__RealOutputInTxIndex.GetValueOrDefault(); }
-            set { __pbn__RealOutputInTxIndex = value; }
+            get => __pbn__RealOutputInTxIndex.GetValueOrDefault();
+            set => __pbn__RealOutputInTxIndex = value;
         }
         public bool ShouldSerializeRealOutputInTxIndex() => __pbn__RealOutputInTxIndex != null;
         public void ResetRealOutputInTxIndex() => __pbn__RealOutputInTxIndex = null;
@@ -47,8 +47,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(6, Name = @"amount")]
         public ulong Amount
         {
-            get { return __pbn__Amount.GetValueOrDefault(); }
-            set { __pbn__Amount = value; }
+            get => __pbn__Amount.GetValueOrDefault();
+            set => __pbn__Amount = value;
         }
         public bool ShouldSerializeAmount() => __pbn__Amount != null;
         public void ResetAmount() => __pbn__Amount = null;
@@ -57,8 +57,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(7, Name = @"rct")]
         public bool Rct
         {
-            get { return __pbn__Rct.GetValueOrDefault(); }
-            set { __pbn__Rct = value; }
+            get => __pbn__Rct.GetValueOrDefault();
+            set => __pbn__Rct = value;
         }
         public bool ShouldSerializeRct() => __pbn__Rct != null;
         public void ResetRct() => __pbn__Rct = null;
@@ -82,8 +82,8 @@ namespace Trezor.Net.Contracts.Monero
             [ProtoBuf.ProtoMember(1, Name = @"idx")]
             public ulong Idx
             {
-                get { return __pbn__Idx.GetValueOrDefault(); }
-                set { __pbn__Idx = value; }
+                get => __pbn__Idx.GetValueOrDefault();
+                set => __pbn__Idx = value;
             }
             public bool ShouldSerializeIdx() => __pbn__Idx != null;
             public void ResetIdx() => __pbn__Idx = null;

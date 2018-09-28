@@ -13,8 +13,8 @@ namespace Trezor.Net.Contracts.Ripple
         [ProtoBuf.ProtoMember(2, Name = @"fee")]
         public ulong Fee
         {
-            get { return __pbn__Fee.GetValueOrDefault(); }
-            set { __pbn__Fee = value; }
+            get => __pbn__Fee.GetValueOrDefault();
+            set => __pbn__Fee = value;
         }
         public bool ShouldSerializeFee() => __pbn__Fee != null;
         public void ResetFee() => __pbn__Fee = null;
@@ -23,8 +23,8 @@ namespace Trezor.Net.Contracts.Ripple
         [ProtoBuf.ProtoMember(3, Name = @"flags")]
         public uint Flags
         {
-            get { return __pbn__Flags.GetValueOrDefault(); }
-            set { __pbn__Flags = value; }
+            get => __pbn__Flags.GetValueOrDefault();
+            set => __pbn__Flags = value;
         }
         public bool ShouldSerializeFlags() => __pbn__Flags != null;
         public void ResetFlags() => __pbn__Flags = null;
@@ -33,8 +33,8 @@ namespace Trezor.Net.Contracts.Ripple
         [ProtoBuf.ProtoMember(4, Name = @"sequence")]
         public uint Sequence
         {
-            get { return __pbn__Sequence.GetValueOrDefault(); }
-            set { __pbn__Sequence = value; }
+            get => __pbn__Sequence.GetValueOrDefault();
+            set => __pbn__Sequence = value;
         }
         public bool ShouldSerializeSequence() => __pbn__Sequence != null;
         public void ResetSequence() => __pbn__Sequence = null;
@@ -43,8 +43,8 @@ namespace Trezor.Net.Contracts.Ripple
         [ProtoBuf.ProtoMember(5, Name = @"last_ledger_sequence")]
         public uint LastLedgerSequence
         {
-            get { return __pbn__LastLedgerSequence.GetValueOrDefault(); }
-            set { __pbn__LastLedgerSequence = value; }
+            get => __pbn__LastLedgerSequence.GetValueOrDefault();
+            set => __pbn__LastLedgerSequence = value;
         }
         public bool ShouldSerializeLastLedgerSequence() => __pbn__LastLedgerSequence != null;
         public void ResetLastLedgerSequence() => __pbn__LastLedgerSequence = null;
@@ -63,8 +63,8 @@ namespace Trezor.Net.Contracts.Ripple
             [ProtoBuf.ProtoMember(1, Name = @"amount")]
             public ulong Amount
             {
-                get { return __pbn__Amount.GetValueOrDefault(); }
-                set { __pbn__Amount = value; }
+                get => __pbn__Amount.GetValueOrDefault();
+                set => __pbn__Amount = value;
             }
             public bool ShouldSerializeAmount() => __pbn__Amount != null;
             public void ResetAmount() => __pbn__Amount = null;
@@ -74,8 +74,8 @@ namespace Trezor.Net.Contracts.Ripple
             [System.ComponentModel.DefaultValue("")]
             public string Destination
             {
-                get { return __pbn__Destination ?? ""; }
-                set { __pbn__Destination = value; }
+                get => __pbn__Destination ?? "";
+                set => __pbn__Destination = value;
             }
             public bool ShouldSerializeDestination() => __pbn__Destination != null;
             public void ResetDestination() => __pbn__Destination = null;

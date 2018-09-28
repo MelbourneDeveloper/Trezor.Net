@@ -10,8 +10,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(1, Name = @"version")]
         public uint Version
         {
-            get { return __pbn__Version.GetValueOrDefault(); }
-            set { __pbn__Version = value; }
+            get => __pbn__Version.GetValueOrDefault();
+            set => __pbn__Version = value;
         }
         public bool ShouldSerializeVersion() => __pbn__Version != null;
         public void ResetVersion() => __pbn__Version = null;

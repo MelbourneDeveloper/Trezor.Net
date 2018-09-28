@@ -11,8 +11,8 @@ namespace Trezor.Net.Contracts.Stellar
         [System.ComponentModel.DefaultValue("")]
         public string SourceAccount
         {
-            get { return __pbn__SourceAccount ?? ""; }
-            set { __pbn__SourceAccount = value; }
+            get => __pbn__SourceAccount ?? "";
+            set => __pbn__SourceAccount = value;
         }
         public bool ShouldSerializeSourceAccount() => __pbn__SourceAccount != null;
         public void ResetSourceAccount() => __pbn__SourceAccount = null;
@@ -27,8 +27,8 @@ namespace Trezor.Net.Contracts.Stellar
         [ProtoBuf.ProtoMember(4, Name = @"amount", DataFormat = ProtoBuf.DataFormat.ZigZag)]
         public long Amount
         {
-            get { return __pbn__Amount.GetValueOrDefault(); }
-            set { __pbn__Amount = value; }
+            get => __pbn__Amount.GetValueOrDefault();
+            set => __pbn__Amount = value;
         }
         public bool ShouldSerializeAmount() => __pbn__Amount != null;
         public void ResetAmount() => __pbn__Amount = null;
@@ -37,8 +37,8 @@ namespace Trezor.Net.Contracts.Stellar
         [ProtoBuf.ProtoMember(5, Name = @"price_n")]
         public uint PriceN
         {
-            get { return __pbn__PriceN.GetValueOrDefault(); }
-            set { __pbn__PriceN = value; }
+            get => __pbn__PriceN.GetValueOrDefault();
+            set => __pbn__PriceN = value;
         }
         public bool ShouldSerializePriceN() => __pbn__PriceN != null;
         public void ResetPriceN() => __pbn__PriceN = null;
@@ -47,8 +47,8 @@ namespace Trezor.Net.Contracts.Stellar
         [ProtoBuf.ProtoMember(6, Name = @"price_d")]
         public uint PriceD
         {
-            get { return __pbn__PriceD.GetValueOrDefault(); }
-            set { __pbn__PriceD = value; }
+            get => __pbn__PriceD.GetValueOrDefault();
+            set => __pbn__PriceD = value;
         }
         public bool ShouldSerializePriceD() => __pbn__PriceD != null;
         public void ResetPriceD() => __pbn__PriceD = null;
@@ -57,8 +57,8 @@ namespace Trezor.Net.Contracts.Stellar
         [ProtoBuf.ProtoMember(7, Name = @"offer_id")]
         public ulong OfferId
         {
-            get { return __pbn__OfferId.GetValueOrDefault(); }
-            set { __pbn__OfferId = value; }
+            get => __pbn__OfferId.GetValueOrDefault();
+            set => __pbn__OfferId = value;
         }
         public bool ShouldSerializeOfferId() => __pbn__OfferId != null;
         public void ResetOfferId() => __pbn__OfferId = null;

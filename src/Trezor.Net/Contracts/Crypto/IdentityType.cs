@@ -11,8 +11,8 @@ namespace Trezor.Net.Contracts.Crypto
         [System.ComponentModel.DefaultValue("")]
         public string Proto
         {
-            get { return __pbn__Proto ?? ""; }
-            set { __pbn__Proto = value; }
+            get => __pbn__Proto ?? "";
+            set => __pbn__Proto = value;
         }
         public bool ShouldSerializeProto() => __pbn__Proto != null;
         public void ResetProto() => __pbn__Proto = null;
@@ -22,8 +22,8 @@ namespace Trezor.Net.Contracts.Crypto
         [System.ComponentModel.DefaultValue("")]
         public string User
         {
-            get { return __pbn__User ?? ""; }
-            set { __pbn__User = value; }
+            get => __pbn__User ?? "";
+            set => __pbn__User = value;
         }
         public bool ShouldSerializeUser() => __pbn__User != null;
         public void ResetUser() => __pbn__User = null;
@@ -33,8 +33,8 @@ namespace Trezor.Net.Contracts.Crypto
         [System.ComponentModel.DefaultValue("")]
         public string Host
         {
-            get { return __pbn__Host ?? ""; }
-            set { __pbn__Host = value; }
+            get => __pbn__Host ?? "";
+            set => __pbn__Host = value;
         }
         public bool ShouldSerializeHost() => __pbn__Host != null;
         public void ResetHost() => __pbn__Host = null;
@@ -44,8 +44,8 @@ namespace Trezor.Net.Contracts.Crypto
         [System.ComponentModel.DefaultValue("")]
         public string Port
         {
-            get { return __pbn__Port ?? ""; }
-            set { __pbn__Port = value; }
+            get => __pbn__Port ?? "";
+            set => __pbn__Port = value;
         }
         public bool ShouldSerializePort() => __pbn__Port != null;
         public void ResetPort() => __pbn__Port = null;
@@ -55,8 +55,8 @@ namespace Trezor.Net.Contracts.Crypto
         [System.ComponentModel.DefaultValue("")]
         public string Path
         {
-            get { return __pbn__Path ?? ""; }
-            set { __pbn__Path = value; }
+            get => __pbn__Path ?? "";
+            set => __pbn__Path = value;
         }
         public bool ShouldSerializePath() => __pbn__Path != null;
         public void ResetPath() => __pbn__Path = null;
@@ -66,8 +66,8 @@ namespace Trezor.Net.Contracts.Crypto
         [System.ComponentModel.DefaultValue(0)]
         public uint Index
         {
-            get { return __pbn__Index ?? 0; }
-            set { __pbn__Index = value; }
+            get => __pbn__Index ?? 0;
+            set => __pbn__Index = value;
         }
         public bool ShouldSerializeIndex() => __pbn__Index != null;
         public void ResetIndex() => __pbn__Index = null;

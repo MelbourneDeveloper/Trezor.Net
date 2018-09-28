@@ -11,8 +11,8 @@ namespace Trezor.Net.Contracts.Stellar
         [System.ComponentModel.DefaultValue("")]
         public string SourceAccount
         {
-            get { return __pbn__SourceAccount ?? ""; }
-            set { __pbn__SourceAccount = value; }
+            get => __pbn__SourceAccount ?? "";
+            set => __pbn__SourceAccount = value;
         }
         public bool ShouldSerializeSourceAccount() => __pbn__SourceAccount != null;
         public void ResetSourceAccount() => __pbn__SourceAccount = null;
@@ -21,8 +21,8 @@ namespace Trezor.Net.Contracts.Stellar
         [ProtoBuf.ProtoMember(2, Name = @"bump_to")]
         public ulong BumpTo
         {
-            get { return __pbn__BumpTo.GetValueOrDefault(); }
-            set { __pbn__BumpTo = value; }
+            get => __pbn__BumpTo.GetValueOrDefault();
+            set => __pbn__BumpTo = value;
         }
         public bool ShouldSerializeBumpTo() => __pbn__BumpTo != null;
         public void ResetBumpTo() => __pbn__BumpTo = null;

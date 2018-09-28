@@ -11,8 +11,8 @@ namespace Trezor.Net.Contracts.Common
         [System.ComponentModel.DefaultValue("")]
         public string Passphrase
         {
-            get { return __pbn__Passphrase ?? ""; }
-            set { __pbn__Passphrase = value; }
+            get => __pbn__Passphrase ?? "";
+            set => __pbn__Passphrase = value;
         }
         public bool ShouldSerializePassphrase() => __pbn__Passphrase != null;
         public void ResetPassphrase() => __pbn__Passphrase = null;

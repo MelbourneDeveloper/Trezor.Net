@@ -38,8 +38,8 @@ namespace Trezor.Net.Contracts.Tezos
             [System.ComponentModel.DefaultValue(TezosContractType.Implicit)]
             public TezosContractType Tag
             {
-                get { return __pbn__Tag ?? TezosContractType.Implicit; }
-                set { __pbn__Tag = value; }
+                get => __pbn__Tag ?? TezosContractType.Implicit;
+                set => __pbn__Tag = value;
             }
             public bool ShouldSerializeTag() => __pbn__Tag != null;
             public void ResetTag() => __pbn__Tag = null;
@@ -72,8 +72,8 @@ namespace Trezor.Net.Contracts.Tezos
             [ProtoBuf.ProtoMember(2, Name = @"fee")]
             public ulong Fee
             {
-                get { return __pbn__Fee.GetValueOrDefault(); }
-                set { __pbn__Fee = value; }
+                get => __pbn__Fee.GetValueOrDefault();
+                set => __pbn__Fee = value;
             }
             public bool ShouldSerializeFee() => __pbn__Fee != null;
             public void ResetFee() => __pbn__Fee = null;
@@ -82,8 +82,8 @@ namespace Trezor.Net.Contracts.Tezos
             [ProtoBuf.ProtoMember(3, Name = @"counter")]
             public ulong Counter
             {
-                get { return __pbn__Counter.GetValueOrDefault(); }
-                set { __pbn__Counter = value; }
+                get => __pbn__Counter.GetValueOrDefault();
+                set => __pbn__Counter = value;
             }
             public bool ShouldSerializeCounter() => __pbn__Counter != null;
             public void ResetCounter() => __pbn__Counter = null;
@@ -92,8 +92,8 @@ namespace Trezor.Net.Contracts.Tezos
             [ProtoBuf.ProtoMember(4, Name = @"gas_limit")]
             public ulong GasLimit
             {
-                get { return __pbn__GasLimit.GetValueOrDefault(); }
-                set { __pbn__GasLimit = value; }
+                get => __pbn__GasLimit.GetValueOrDefault();
+                set => __pbn__GasLimit = value;
             }
             public bool ShouldSerializeGasLimit() => __pbn__GasLimit != null;
             public void ResetGasLimit() => __pbn__GasLimit = null;
@@ -102,8 +102,8 @@ namespace Trezor.Net.Contracts.Tezos
             [ProtoBuf.ProtoMember(5, Name = @"storage_limit")]
             public ulong StorageLimit
             {
-                get { return __pbn__StorageLimit.GetValueOrDefault(); }
-                set { __pbn__StorageLimit = value; }
+                get => __pbn__StorageLimit.GetValueOrDefault();
+                set => __pbn__StorageLimit = value;
             }
             public bool ShouldSerializeStorageLimit() => __pbn__StorageLimit != null;
             public void ResetStorageLimit() => __pbn__StorageLimit = null;
@@ -128,8 +128,8 @@ namespace Trezor.Net.Contracts.Tezos
             [ProtoBuf.ProtoMember(2, Name = @"fee")]
             public ulong Fee
             {
-                get { return __pbn__Fee.GetValueOrDefault(); }
-                set { __pbn__Fee = value; }
+                get => __pbn__Fee.GetValueOrDefault();
+                set => __pbn__Fee = value;
             }
             public bool ShouldSerializeFee() => __pbn__Fee != null;
             public void ResetFee() => __pbn__Fee = null;
@@ -138,8 +138,8 @@ namespace Trezor.Net.Contracts.Tezos
             [ProtoBuf.ProtoMember(3, Name = @"counter")]
             public ulong Counter
             {
-                get { return __pbn__Counter.GetValueOrDefault(); }
-                set { __pbn__Counter = value; }
+                get => __pbn__Counter.GetValueOrDefault();
+                set => __pbn__Counter = value;
             }
             public bool ShouldSerializeCounter() => __pbn__Counter != null;
             public void ResetCounter() => __pbn__Counter = null;
@@ -148,8 +148,8 @@ namespace Trezor.Net.Contracts.Tezos
             [ProtoBuf.ProtoMember(4, Name = @"gas_limit")]
             public ulong GasLimit
             {
-                get { return __pbn__GasLimit.GetValueOrDefault(); }
-                set { __pbn__GasLimit = value; }
+                get => __pbn__GasLimit.GetValueOrDefault();
+                set => __pbn__GasLimit = value;
             }
             public bool ShouldSerializeGasLimit() => __pbn__GasLimit != null;
             public void ResetGasLimit() => __pbn__GasLimit = null;
@@ -158,8 +158,8 @@ namespace Trezor.Net.Contracts.Tezos
             [ProtoBuf.ProtoMember(5, Name = @"storage_limit")]
             public ulong StorageLimit
             {
-                get { return __pbn__StorageLimit.GetValueOrDefault(); }
-                set { __pbn__StorageLimit = value; }
+                get => __pbn__StorageLimit.GetValueOrDefault();
+                set => __pbn__StorageLimit = value;
             }
             public bool ShouldSerializeStorageLimit() => __pbn__StorageLimit != null;
             public void ResetStorageLimit() => __pbn__StorageLimit = null;
@@ -168,8 +168,8 @@ namespace Trezor.Net.Contracts.Tezos
             [ProtoBuf.ProtoMember(6, Name = @"amount")]
             public ulong Amount
             {
-                get { return __pbn__Amount.GetValueOrDefault(); }
-                set { __pbn__Amount = value; }
+                get => __pbn__Amount.GetValueOrDefault();
+                set => __pbn__Amount = value;
             }
             public bool ShouldSerializeAmount() => __pbn__Amount != null;
             public void ResetAmount() => __pbn__Amount = null;
@@ -197,8 +197,8 @@ namespace Trezor.Net.Contracts.Tezos
             [ProtoBuf.ProtoMember(2, Name = @"fee")]
             public ulong Fee
             {
-                get { return __pbn__Fee.GetValueOrDefault(); }
-                set { __pbn__Fee = value; }
+                get => __pbn__Fee.GetValueOrDefault();
+                set => __pbn__Fee = value;
             }
             public bool ShouldSerializeFee() => __pbn__Fee != null;
             public void ResetFee() => __pbn__Fee = null;
@@ -207,8 +207,8 @@ namespace Trezor.Net.Contracts.Tezos
             [ProtoBuf.ProtoMember(3, Name = @"counter")]
             public ulong Counter
             {
-                get { return __pbn__Counter.GetValueOrDefault(); }
-                set { __pbn__Counter = value; }
+                get => __pbn__Counter.GetValueOrDefault();
+                set => __pbn__Counter = value;
             }
             public bool ShouldSerializeCounter() => __pbn__Counter != null;
             public void ResetCounter() => __pbn__Counter = null;
@@ -217,8 +217,8 @@ namespace Trezor.Net.Contracts.Tezos
             [ProtoBuf.ProtoMember(4, Name = @"gas_limit")]
             public ulong GasLimit
             {
-                get { return __pbn__GasLimit.GetValueOrDefault(); }
-                set { __pbn__GasLimit = value; }
+                get => __pbn__GasLimit.GetValueOrDefault();
+                set => __pbn__GasLimit = value;
             }
             public bool ShouldSerializeGasLimit() => __pbn__GasLimit != null;
             public void ResetGasLimit() => __pbn__GasLimit = null;
@@ -227,8 +227,8 @@ namespace Trezor.Net.Contracts.Tezos
             [ProtoBuf.ProtoMember(5, Name = @"storage_limit")]
             public ulong StorageLimit
             {
-                get { return __pbn__StorageLimit.GetValueOrDefault(); }
-                set { __pbn__StorageLimit = value; }
+                get => __pbn__StorageLimit.GetValueOrDefault();
+                set => __pbn__StorageLimit = value;
             }
             public bool ShouldSerializeStorageLimit() => __pbn__StorageLimit != null;
             public void ResetStorageLimit() => __pbn__StorageLimit = null;
@@ -242,8 +242,8 @@ namespace Trezor.Net.Contracts.Tezos
             [ProtoBuf.ProtoMember(7, Name = @"balance")]
             public ulong Balance
             {
-                get { return __pbn__Balance.GetValueOrDefault(); }
-                set { __pbn__Balance = value; }
+                get => __pbn__Balance.GetValueOrDefault();
+                set => __pbn__Balance = value;
             }
             public bool ShouldSerializeBalance() => __pbn__Balance != null;
             public void ResetBalance() => __pbn__Balance = null;
@@ -252,8 +252,8 @@ namespace Trezor.Net.Contracts.Tezos
             [ProtoBuf.ProtoMember(8, Name = @"spendable")]
             public bool Spendable
             {
-                get { return __pbn__Spendable.GetValueOrDefault(); }
-                set { __pbn__Spendable = value; }
+                get => __pbn__Spendable.GetValueOrDefault();
+                set => __pbn__Spendable = value;
             }
             public bool ShouldSerializeSpendable() => __pbn__Spendable != null;
             public void ResetSpendable() => __pbn__Spendable = null;
@@ -262,8 +262,8 @@ namespace Trezor.Net.Contracts.Tezos
             [ProtoBuf.ProtoMember(9, Name = @"delegatable")]
             public bool Delegatable
             {
-                get { return __pbn__Delegatable.GetValueOrDefault(); }
-                set { __pbn__Delegatable = value; }
+                get => __pbn__Delegatable.GetValueOrDefault();
+                set => __pbn__Delegatable = value;
             }
             public bool ShouldSerializeDelegatable() => __pbn__Delegatable != null;
             public void ResetDelegatable() => __pbn__Delegatable = null;
@@ -293,8 +293,8 @@ namespace Trezor.Net.Contracts.Tezos
             [ProtoBuf.ProtoMember(2, Name = @"fee")]
             public ulong Fee
             {
-                get { return __pbn__Fee.GetValueOrDefault(); }
-                set { __pbn__Fee = value; }
+                get => __pbn__Fee.GetValueOrDefault();
+                set => __pbn__Fee = value;
             }
             public bool ShouldSerializeFee() => __pbn__Fee != null;
             public void ResetFee() => __pbn__Fee = null;
@@ -303,8 +303,8 @@ namespace Trezor.Net.Contracts.Tezos
             [ProtoBuf.ProtoMember(3, Name = @"counter")]
             public ulong Counter
             {
-                get { return __pbn__Counter.GetValueOrDefault(); }
-                set { __pbn__Counter = value; }
+                get => __pbn__Counter.GetValueOrDefault();
+                set => __pbn__Counter = value;
             }
             public bool ShouldSerializeCounter() => __pbn__Counter != null;
             public void ResetCounter() => __pbn__Counter = null;
@@ -313,8 +313,8 @@ namespace Trezor.Net.Contracts.Tezos
             [ProtoBuf.ProtoMember(4, Name = @"gas_limit")]
             public ulong GasLimit
             {
-                get { return __pbn__GasLimit.GetValueOrDefault(); }
-                set { __pbn__GasLimit = value; }
+                get => __pbn__GasLimit.GetValueOrDefault();
+                set => __pbn__GasLimit = value;
             }
             public bool ShouldSerializeGasLimit() => __pbn__GasLimit != null;
             public void ResetGasLimit() => __pbn__GasLimit = null;
@@ -323,8 +323,8 @@ namespace Trezor.Net.Contracts.Tezos
             [ProtoBuf.ProtoMember(5, Name = @"storage_limit")]
             public ulong StorageLimit
             {
-                get { return __pbn__StorageLimit.GetValueOrDefault(); }
-                set { __pbn__StorageLimit = value; }
+                get => __pbn__StorageLimit.GetValueOrDefault();
+                set => __pbn__StorageLimit = value;
             }
             public bool ShouldSerializeStorageLimit() => __pbn__StorageLimit != null;
             public void ResetStorageLimit() => __pbn__StorageLimit = null;

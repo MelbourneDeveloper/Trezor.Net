@@ -20,8 +20,8 @@ namespace Trezor.Net.Contracts.Crypto
         [System.ComponentModel.DefaultValue("")]
         public string Key
         {
-            get { return __pbn__Key ?? ""; }
-            set { __pbn__Key = value; }
+            get => __pbn__Key ?? "";
+            set => __pbn__Key = value;
         }
         public bool ShouldSerializeKey() => __pbn__Key != null;
         public void ResetKey() => __pbn__Key = null;
@@ -35,8 +35,8 @@ namespace Trezor.Net.Contracts.Crypto
         [ProtoBuf.ProtoMember(4, Name = @"encrypt")]
         public bool Encrypt
         {
-            get { return __pbn__Encrypt.GetValueOrDefault(); }
-            set { __pbn__Encrypt = value; }
+            get => __pbn__Encrypt.GetValueOrDefault();
+            set => __pbn__Encrypt = value;
         }
         public bool ShouldSerializeEncrypt() => __pbn__Encrypt != null;
         public void ResetEncrypt() => __pbn__Encrypt = null;
@@ -45,8 +45,8 @@ namespace Trezor.Net.Contracts.Crypto
         [ProtoBuf.ProtoMember(5, Name = @"ask_on_encrypt")]
         public bool AskOnEncrypt
         {
-            get { return __pbn__AskOnEncrypt.GetValueOrDefault(); }
-            set { __pbn__AskOnEncrypt = value; }
+            get => __pbn__AskOnEncrypt.GetValueOrDefault();
+            set => __pbn__AskOnEncrypt = value;
         }
         public bool ShouldSerializeAskOnEncrypt() => __pbn__AskOnEncrypt != null;
         public void ResetAskOnEncrypt() => __pbn__AskOnEncrypt = null;
@@ -55,8 +55,8 @@ namespace Trezor.Net.Contracts.Crypto
         [ProtoBuf.ProtoMember(6, Name = @"ask_on_decrypt")]
         public bool AskOnDecrypt
         {
-            get { return __pbn__AskOnDecrypt.GetValueOrDefault(); }
-            set { __pbn__AskOnDecrypt = value; }
+            get => __pbn__AskOnDecrypt.GetValueOrDefault();
+            set => __pbn__AskOnDecrypt = value;
         }
         public bool ShouldSerializeAskOnDecrypt() => __pbn__AskOnDecrypt != null;
         public void ResetAskOnDecrypt() => __pbn__AskOnDecrypt = null;

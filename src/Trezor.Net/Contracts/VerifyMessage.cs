@@ -11,8 +11,8 @@ namespace Trezor.Net.Contracts.Bitcoin
         [System.ComponentModel.DefaultValue("")]
         public string Address
         {
-            get { return __pbn__Address ?? ""; }
-            set { __pbn__Address = value; }
+            get => __pbn__Address ?? "";
+            set => __pbn__Address = value;
         }
         public bool ShouldSerializeAddress() => __pbn__Address != null;
         public void ResetAddress() => __pbn__Address = null;
@@ -32,8 +32,8 @@ namespace Trezor.Net.Contracts.Bitcoin
         [System.ComponentModel.DefaultValue(@"Bitcoin")]
         public string CoinName
         {
-            get { return __pbn__CoinName ?? @"Bitcoin"; }
-            set { __pbn__CoinName = value; }
+            get => __pbn__CoinName ?? @"Bitcoin";
+            set => __pbn__CoinName = value;
         }
         public bool ShouldSerializeCoinName() => __pbn__CoinName != null;
         public void ResetCoinName() => __pbn__CoinName = null;

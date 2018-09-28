@@ -22,8 +22,8 @@ namespace Trezor.Net.Contracts.Bitcoin
         [ProtoBuf.ProtoMember(3, Name = @"m")]
         public uint M
         {
-            get { return __pbn__M.GetValueOrDefault(); }
-            set { __pbn__M = value; }
+            get => __pbn__M.GetValueOrDefault();
+            set => __pbn__M = value;
         }
         public bool ShouldSerializeM() => __pbn__M != null;
         public void ResetM() => __pbn__M = null;

@@ -11,8 +11,8 @@ namespace Trezor.Net.Contracts.Stellar
         [System.ComponentModel.DefaultValue("")]
         public string SourceAccount
         {
-            get { return __pbn__SourceAccount ?? ""; }
-            set { __pbn__SourceAccount = value; }
+            get => __pbn__SourceAccount ?? "";
+            set => __pbn__SourceAccount = value;
         }
         public bool ShouldSerializeSourceAccount() => __pbn__SourceAccount != null;
         public void ResetSourceAccount() => __pbn__SourceAccount = null;
@@ -22,8 +22,8 @@ namespace Trezor.Net.Contracts.Stellar
         [System.ComponentModel.DefaultValue("")]
         public string InflationDestinationAccount
         {
-            get { return __pbn__InflationDestinationAccount ?? ""; }
-            set { __pbn__InflationDestinationAccount = value; }
+            get => __pbn__InflationDestinationAccount ?? "";
+            set => __pbn__InflationDestinationAccount = value;
         }
         public bool ShouldSerializeInflationDestinationAccount() => __pbn__InflationDestinationAccount != null;
         public void ResetInflationDestinationAccount() => __pbn__InflationDestinationAccount = null;
@@ -32,8 +32,8 @@ namespace Trezor.Net.Contracts.Stellar
         [ProtoBuf.ProtoMember(3, Name = @"clear_flags")]
         public uint ClearFlags
         {
-            get { return __pbn__ClearFlags.GetValueOrDefault(); }
-            set { __pbn__ClearFlags = value; }
+            get => __pbn__ClearFlags.GetValueOrDefault();
+            set => __pbn__ClearFlags = value;
         }
         public bool ShouldSerializeClearFlags() => __pbn__ClearFlags != null;
         public void ResetClearFlags() => __pbn__ClearFlags = null;
@@ -42,8 +42,8 @@ namespace Trezor.Net.Contracts.Stellar
         [ProtoBuf.ProtoMember(4, Name = @"set_flags")]
         public uint SetFlags
         {
-            get { return __pbn__SetFlags.GetValueOrDefault(); }
-            set { __pbn__SetFlags = value; }
+            get => __pbn__SetFlags.GetValueOrDefault();
+            set => __pbn__SetFlags = value;
         }
         public bool ShouldSerializeSetFlags() => __pbn__SetFlags != null;
         public void ResetSetFlags() => __pbn__SetFlags = null;
@@ -52,8 +52,8 @@ namespace Trezor.Net.Contracts.Stellar
         [ProtoBuf.ProtoMember(5, Name = @"master_weight")]
         public uint MasterWeight
         {
-            get { return __pbn__MasterWeight.GetValueOrDefault(); }
-            set { __pbn__MasterWeight = value; }
+            get => __pbn__MasterWeight.GetValueOrDefault();
+            set => __pbn__MasterWeight = value;
         }
         public bool ShouldSerializeMasterWeight() => __pbn__MasterWeight != null;
         public void ResetMasterWeight() => __pbn__MasterWeight = null;
@@ -62,8 +62,8 @@ namespace Trezor.Net.Contracts.Stellar
         [ProtoBuf.ProtoMember(6, Name = @"low_threshold")]
         public uint LowThreshold
         {
-            get { return __pbn__LowThreshold.GetValueOrDefault(); }
-            set { __pbn__LowThreshold = value; }
+            get => __pbn__LowThreshold.GetValueOrDefault();
+            set => __pbn__LowThreshold = value;
         }
         public bool ShouldSerializeLowThreshold() => __pbn__LowThreshold != null;
         public void ResetLowThreshold() => __pbn__LowThreshold = null;
@@ -72,8 +72,8 @@ namespace Trezor.Net.Contracts.Stellar
         [ProtoBuf.ProtoMember(7, Name = @"medium_threshold")]
         public uint MediumThreshold
         {
-            get { return __pbn__MediumThreshold.GetValueOrDefault(); }
-            set { __pbn__MediumThreshold = value; }
+            get => __pbn__MediumThreshold.GetValueOrDefault();
+            set => __pbn__MediumThreshold = value;
         }
         public bool ShouldSerializeMediumThreshold() => __pbn__MediumThreshold != null;
         public void ResetMediumThreshold() => __pbn__MediumThreshold = null;
@@ -82,8 +82,8 @@ namespace Trezor.Net.Contracts.Stellar
         [ProtoBuf.ProtoMember(8, Name = @"high_threshold")]
         public uint HighThreshold
         {
-            get { return __pbn__HighThreshold.GetValueOrDefault(); }
-            set { __pbn__HighThreshold = value; }
+            get => __pbn__HighThreshold.GetValueOrDefault();
+            set => __pbn__HighThreshold = value;
         }
         public bool ShouldSerializeHighThreshold() => __pbn__HighThreshold != null;
         public void ResetHighThreshold() => __pbn__HighThreshold = null;
@@ -93,8 +93,8 @@ namespace Trezor.Net.Contracts.Stellar
         [System.ComponentModel.DefaultValue("")]
         public string HomeDomain
         {
-            get { return __pbn__HomeDomain ?? ""; }
-            set { __pbn__HomeDomain = value; }
+            get => __pbn__HomeDomain ?? "";
+            set => __pbn__HomeDomain = value;
         }
         public bool ShouldSerializeHomeDomain() => __pbn__HomeDomain != null;
         public void ResetHomeDomain() => __pbn__HomeDomain = null;
@@ -103,8 +103,8 @@ namespace Trezor.Net.Contracts.Stellar
         [ProtoBuf.ProtoMember(10, Name = @"signer_type")]
         public uint SignerType
         {
-            get { return __pbn__SignerType.GetValueOrDefault(); }
-            set { __pbn__SignerType = value; }
+            get => __pbn__SignerType.GetValueOrDefault();
+            set => __pbn__SignerType = value;
         }
         public bool ShouldSerializeSignerType() => __pbn__SignerType != null;
         public void ResetSignerType() => __pbn__SignerType = null;
@@ -118,8 +118,8 @@ namespace Trezor.Net.Contracts.Stellar
         [ProtoBuf.ProtoMember(12, Name = @"signer_weight")]
         public uint SignerWeight
         {
-            get { return __pbn__SignerWeight.GetValueOrDefault(); }
-            set { __pbn__SignerWeight = value; }
+            get => __pbn__SignerWeight.GetValueOrDefault();
+            set => __pbn__SignerWeight = value;
         }
         public bool ShouldSerializeSignerWeight() => __pbn__SignerWeight != null;
         public void ResetSignerWeight() => __pbn__SignerWeight = null;

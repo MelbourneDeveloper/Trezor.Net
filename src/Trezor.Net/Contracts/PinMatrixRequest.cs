@@ -11,8 +11,8 @@ namespace Trezor.Net.Contracts.Common
         [System.ComponentModel.DefaultValue(PinMatrixRequestType.PinMatrixRequestTypeCurrent)]
         public PinMatrixRequestType Type
         {
-            get { return __pbn__Type ?? PinMatrixRequestType.PinMatrixRequestTypeCurrent; }
-            set { __pbn__Type = value; }
+            get => __pbn__Type ?? PinMatrixRequestType.PinMatrixRequestTypeCurrent;
+            set => __pbn__Type = value;
         }
         public bool ShouldSerializeType() => __pbn__Type != null;
         public void ResetType() => __pbn__Type = null;

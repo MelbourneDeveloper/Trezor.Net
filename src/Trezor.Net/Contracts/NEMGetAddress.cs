@@ -19,8 +19,8 @@ namespace Trezor.Net.Contracts.NEM
         [ProtoBuf.ProtoMember(2, Name = @"network")]
         public uint Network
         {
-            get { return __pbn__Network.GetValueOrDefault(); }
-            set { __pbn__Network = value; }
+            get => __pbn__Network.GetValueOrDefault();
+            set => __pbn__Network = value;
         }
         public bool ShouldSerializeNetwork() => __pbn__Network != null;
         public void ResetNetwork() => __pbn__Network = null;
@@ -29,8 +29,8 @@ namespace Trezor.Net.Contracts.NEM
         [ProtoBuf.ProtoMember(3, Name = @"show_display")]
         public bool ShowDisplay
         {
-            get { return __pbn__ShowDisplay.GetValueOrDefault(); }
-            set { __pbn__ShowDisplay = value; }
+            get => __pbn__ShowDisplay.GetValueOrDefault();
+            set => __pbn__ShowDisplay = value;
         }
         public bool ShouldSerializeShowDisplay() => __pbn__ShowDisplay != null;
         public void ResetShowDisplay() => __pbn__ShowDisplay = null;

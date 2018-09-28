@@ -16,8 +16,8 @@ namespace Trezor.Net.Contracts.Debug
         [ProtoBuf.ProtoMember(1, Name = @"yes_no")]
         public bool YesNo
         {
-            get { return __pbn__YesNo.GetValueOrDefault(); }
-            set { __pbn__YesNo = value; }
+            get => __pbn__YesNo.GetValueOrDefault();
+            set => __pbn__YesNo = value;
         }
         public bool ShouldSerializeYesNo() => __pbn__YesNo != null;
         public void ResetYesNo() => __pbn__YesNo = null;
@@ -26,8 +26,8 @@ namespace Trezor.Net.Contracts.Debug
         [ProtoBuf.ProtoMember(2, Name = @"up_down")]
         public bool UpDown
         {
-            get { return __pbn__UpDown.GetValueOrDefault(); }
-            set { __pbn__UpDown = value; }
+            get => __pbn__UpDown.GetValueOrDefault();
+            set => __pbn__UpDown = value;
         }
         public bool ShouldSerializeUpDown() => __pbn__UpDown != null;
         public void ResetUpDown() => __pbn__UpDown = null;
@@ -37,8 +37,8 @@ namespace Trezor.Net.Contracts.Debug
         [System.ComponentModel.DefaultValue("")]
         public string Input
         {
-            get { return __pbn__Input ?? ""; }
-            set { __pbn__Input = value; }
+            get => __pbn__Input ?? "";
+            set => __pbn__Input = value;
         }
         public bool ShouldSerializeInput() => __pbn__Input != null;
         public void ResetInput() => __pbn__Input = null;

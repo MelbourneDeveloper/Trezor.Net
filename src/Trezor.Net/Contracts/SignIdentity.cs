@@ -19,8 +19,8 @@ namespace Trezor.Net.Contracts.Crypto
         [System.ComponentModel.DefaultValue("")]
         public string ChallengeVisual
         {
-            get { return __pbn__ChallengeVisual ?? ""; }
-            set { __pbn__ChallengeVisual = value; }
+            get => __pbn__ChallengeVisual ?? "";
+            set => __pbn__ChallengeVisual = value;
         }
         public bool ShouldSerializeChallengeVisual() => __pbn__ChallengeVisual != null;
         public void ResetChallengeVisual() => __pbn__ChallengeVisual = null;
@@ -30,8 +30,8 @@ namespace Trezor.Net.Contracts.Crypto
         [System.ComponentModel.DefaultValue("")]
         public string EcdsaCurveName
         {
-            get { return __pbn__EcdsaCurveName ?? ""; }
-            set { __pbn__EcdsaCurveName = value; }
+            get => __pbn__EcdsaCurveName ?? "";
+            set => __pbn__EcdsaCurveName = value;
         }
         public bool ShouldSerializeEcdsaCurveName() => __pbn__EcdsaCurveName != null;
         public void ResetEcdsaCurveName() => __pbn__EcdsaCurveName = null;

@@ -11,8 +11,8 @@ namespace Trezor.Net.Contracts.Tezos
         [System.ComponentModel.DefaultValue("")]
         public string PublicKey
         {
-            get { return __pbn__PublicKey ?? ""; }
-            set { __pbn__PublicKey = value; }
+            get => __pbn__PublicKey ?? "";
+            set => __pbn__PublicKey = value;
         }
         public bool ShouldSerializePublicKey() => __pbn__PublicKey != null;
         public void ResetPublicKey() => __pbn__PublicKey = null;

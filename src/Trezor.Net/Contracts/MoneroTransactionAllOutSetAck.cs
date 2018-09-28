@@ -33,8 +33,8 @@ namespace Trezor.Net.Contracts.Monero
             [ProtoBuf.ProtoMember(1, Name = @"txn_fee")]
             public ulong TxnFee
             {
-                get { return __pbn__TxnFee.GetValueOrDefault(); }
-                set { __pbn__TxnFee = value; }
+                get => __pbn__TxnFee.GetValueOrDefault();
+                set => __pbn__TxnFee = value;
             }
             public bool ShouldSerializeTxnFee() => __pbn__TxnFee != null;
             public void ResetTxnFee() => __pbn__TxnFee = null;
@@ -48,8 +48,8 @@ namespace Trezor.Net.Contracts.Monero
             [ProtoBuf.ProtoMember(3, Name = @"rv_type")]
             public uint RvType
             {
-                get { return __pbn__RvType.GetValueOrDefault(); }
-                set { __pbn__RvType = value; }
+                get => __pbn__RvType.GetValueOrDefault();
+                set => __pbn__RvType = value;
             }
             public bool ShouldSerializeRvType() => __pbn__RvType != null;
             public void ResetRvType() => __pbn__RvType = null;

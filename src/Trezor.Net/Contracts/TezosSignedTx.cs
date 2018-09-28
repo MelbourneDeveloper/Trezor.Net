@@ -11,8 +11,8 @@ namespace Trezor.Net.Contracts.Tezos
         [System.ComponentModel.DefaultValue("")]
         public string Signature
         {
-            get { return __pbn__Signature ?? ""; }
-            set { __pbn__Signature = value; }
+            get => __pbn__Signature ?? "";
+            set => __pbn__Signature = value;
         }
         public bool ShouldSerializeSignature() => __pbn__Signature != null;
         public void ResetSignature() => __pbn__Signature = null;
@@ -27,8 +27,8 @@ namespace Trezor.Net.Contracts.Tezos
         [System.ComponentModel.DefaultValue("")]
         public string OperationHash
         {
-            get { return __pbn__OperationHash ?? ""; }
-            set { __pbn__OperationHash = value; }
+            get => __pbn__OperationHash ?? "";
+            set => __pbn__OperationHash = value;
         }
         public bool ShouldSerializeOperationHash() => __pbn__OperationHash != null;
         public void ResetOperationHash() => __pbn__OperationHash = null;

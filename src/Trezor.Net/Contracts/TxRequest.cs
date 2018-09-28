@@ -11,8 +11,8 @@ namespace Trezor.Net.Contracts.Bitcoin
         [System.ComponentModel.DefaultValue(RequestType.Txinput)]
         public RequestType request_type
         {
-            get { return __pbn__request_type ?? RequestType.Txinput; }
-            set { __pbn__request_type = value; }
+            get => __pbn__request_type ?? RequestType.Txinput;
+            set => __pbn__request_type = value;
         }
         public bool ShouldSerializerequest_type() => __pbn__request_type != null;
         public void Resetrequest_type() => __pbn__request_type = null;
@@ -34,8 +34,8 @@ namespace Trezor.Net.Contracts.Bitcoin
             [ProtoBuf.ProtoMember(1, Name = @"request_index")]
             public uint RequestIndex
             {
-                get { return __pbn__RequestIndex.GetValueOrDefault(); }
-                set { __pbn__RequestIndex = value; }
+                get => __pbn__RequestIndex.GetValueOrDefault();
+                set => __pbn__RequestIndex = value;
             }
             public bool ShouldSerializeRequestIndex() => __pbn__RequestIndex != null;
             public void ResetRequestIndex() => __pbn__RequestIndex = null;
@@ -49,8 +49,8 @@ namespace Trezor.Net.Contracts.Bitcoin
             [ProtoBuf.ProtoMember(3, Name = @"extra_data_len")]
             public uint ExtraDataLen
             {
-                get { return __pbn__ExtraDataLen.GetValueOrDefault(); }
-                set { __pbn__ExtraDataLen = value; }
+                get => __pbn__ExtraDataLen.GetValueOrDefault();
+                set => __pbn__ExtraDataLen = value;
             }
             public bool ShouldSerializeExtraDataLen() => __pbn__ExtraDataLen != null;
             public void ResetExtraDataLen() => __pbn__ExtraDataLen = null;
@@ -59,8 +59,8 @@ namespace Trezor.Net.Contracts.Bitcoin
             [ProtoBuf.ProtoMember(4, Name = @"extra_data_offset")]
             public uint ExtraDataOffset
             {
-                get { return __pbn__ExtraDataOffset.GetValueOrDefault(); }
-                set { __pbn__ExtraDataOffset = value; }
+                get => __pbn__ExtraDataOffset.GetValueOrDefault();
+                set => __pbn__ExtraDataOffset = value;
             }
             public bool ShouldSerializeExtraDataOffset() => __pbn__ExtraDataOffset != null;
             public void ResetExtraDataOffset() => __pbn__ExtraDataOffset = null;
@@ -78,8 +78,8 @@ namespace Trezor.Net.Contracts.Bitcoin
             [ProtoBuf.ProtoMember(1, Name = @"signature_index")]
             public uint SignatureIndex
             {
-                get { return __pbn__SignatureIndex.GetValueOrDefault(); }
-                set { __pbn__SignatureIndex = value; }
+                get => __pbn__SignatureIndex.GetValueOrDefault();
+                set => __pbn__SignatureIndex = value;
             }
             public bool ShouldSerializeSignatureIndex() => __pbn__SignatureIndex != null;
             public void ResetSignatureIndex() => __pbn__SignatureIndex = null;

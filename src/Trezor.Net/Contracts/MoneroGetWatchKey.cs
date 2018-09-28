@@ -13,8 +13,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(2, Name = @"network_type")]
         public uint NetworkType
         {
-            get { return __pbn__NetworkType.GetValueOrDefault(); }
-            set { __pbn__NetworkType = value; }
+            get => __pbn__NetworkType.GetValueOrDefault();
+            set => __pbn__NetworkType = value;
         }
         public bool ShouldSerializeNetworkType() => __pbn__NetworkType != null;
         public void ResetNetworkType() => __pbn__NetworkType = null;

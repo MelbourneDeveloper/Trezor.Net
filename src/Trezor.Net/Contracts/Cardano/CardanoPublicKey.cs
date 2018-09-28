@@ -11,8 +11,8 @@ namespace Trezor.Net.Contracts.Cardano
         [System.ComponentModel.DefaultValue("")]
         public string Xpub
         {
-            get { return __pbn__Xpub ?? ""; }
-            set { __pbn__Xpub = value; }
+            get => __pbn__Xpub ?? "";
+            set => __pbn__Xpub = value;
         }
         public bool ShouldSerializeXpub() => __pbn__Xpub != null;
         public void ResetXpub() => __pbn__Xpub = null;
@@ -25,8 +25,8 @@ namespace Trezor.Net.Contracts.Cardano
         [System.ComponentModel.DefaultValue("")]
         public string RootHdPassphrase
         {
-            get { return __pbn__RootHdPassphrase ?? ""; }
-            set { __pbn__RootHdPassphrase = value; }
+            get => __pbn__RootHdPassphrase ?? "";
+            set => __pbn__RootHdPassphrase = value;
         }
         public bool ShouldSerializeRootHdPassphrase() => __pbn__RootHdPassphrase != null;
         public void ResetRootHdPassphrase() => __pbn__RootHdPassphrase = null;

@@ -16,8 +16,8 @@ namespace Trezor.Net.Contracts.Stellar
         [ProtoBuf.ProtoMember(1, Name = @"type")]
         public uint Type
         {
-            get { return __pbn__Type.GetValueOrDefault(); }
-            set { __pbn__Type = value; }
+            get => __pbn__Type.GetValueOrDefault();
+            set => __pbn__Type = value;
         }
         public bool ShouldSerializeType() => __pbn__Type != null;
         public void ResetType() => __pbn__Type = null;
@@ -27,8 +27,8 @@ namespace Trezor.Net.Contracts.Stellar
         [System.ComponentModel.DefaultValue("")]
         public string Code
         {
-            get { return __pbn__Code ?? ""; }
-            set { __pbn__Code = value; }
+            get => __pbn__Code ?? "";
+            set => __pbn__Code = value;
         }
         public bool ShouldSerializeCode() => __pbn__Code != null;
         public void ResetCode() => __pbn__Code = null;
@@ -38,8 +38,8 @@ namespace Trezor.Net.Contracts.Stellar
         [System.ComponentModel.DefaultValue("")]
         public string Issuer
         {
-            get { return __pbn__Issuer ?? ""; }
-            set { __pbn__Issuer = value; }
+            get => __pbn__Issuer ?? "";
+            set => __pbn__Issuer = value;
         }
         public bool ShouldSerializeIssuer() => __pbn__Issuer != null;
         public void ResetIssuer() => __pbn__Issuer = null;

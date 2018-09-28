@@ -10,8 +10,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(1, Name = @"ins")]
         public ulong Ins
         {
-            get { return __pbn__Ins.GetValueOrDefault(); }
-            set { __pbn__Ins = value; }
+            get => __pbn__Ins.GetValueOrDefault();
+            set => __pbn__Ins = value;
         }
         public bool ShouldSerializeIns() => __pbn__Ins != null;
         public void ResetIns() => __pbn__Ins = null;
@@ -20,8 +20,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(2, Name = @"p1")]
         public ulong P1
         {
-            get { return __pbn__P1.GetValueOrDefault(); }
-            set { __pbn__P1 = value; }
+            get => __pbn__P1.GetValueOrDefault();
+            set => __pbn__P1 = value;
         }
         public bool ShouldSerializeP1() => __pbn__P1 != null;
         public void ResetP1() => __pbn__P1 = null;
@@ -30,8 +30,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(3, Name = @"p2")]
         public ulong P2
         {
-            get { return __pbn__P2.GetValueOrDefault(); }
-            set { __pbn__P2 = value; }
+            get => __pbn__P2.GetValueOrDefault();
+            set => __pbn__P2 = value;
         }
         public bool ShouldSerializeP2() => __pbn__P2 != null;
         public void ResetP2() => __pbn__P2 = null;

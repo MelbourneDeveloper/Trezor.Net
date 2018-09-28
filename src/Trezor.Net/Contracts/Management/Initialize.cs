@@ -21,8 +21,8 @@ namespace Trezor.Net.Contracts.Management
         [ProtoBuf.ProtoMember(2, Name = @"skip_passphrase")]
         public bool SkipPassphrase
         {
-            get { return __pbn__SkipPassphrase.GetValueOrDefault(); }
-            set { __pbn__SkipPassphrase = value; }
+            get => __pbn__SkipPassphrase.GetValueOrDefault();
+            set => __pbn__SkipPassphrase = value;
         }
         public bool ShouldSerializeSkipPassphrase() => __pbn__SkipPassphrase != null;
         public void ResetSkipPassphrase() => __pbn__SkipPassphrase = null;

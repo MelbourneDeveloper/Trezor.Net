@@ -10,8 +10,8 @@ namespace Trezor.Net.Contracts.Debug
         [ProtoBuf.ProtoMember(1, Name = @"address")]
         public uint Address
         {
-            get { return __pbn__Address.GetValueOrDefault(); }
-            set { __pbn__Address = value; }
+            get => __pbn__Address.GetValueOrDefault();
+            set => __pbn__Address = value;
         }
         public bool ShouldSerializeAddress() => __pbn__Address != null;
         public void ResetAddress() => __pbn__Address = null;
@@ -25,8 +25,8 @@ namespace Trezor.Net.Contracts.Debug
         [ProtoBuf.ProtoMember(3, Name = @"flash")]
         public bool Flash
         {
-            get { return __pbn__Flash.GetValueOrDefault(); }
-            set { __pbn__Flash = value; }
+            get => __pbn__Flash.GetValueOrDefault();
+            set => __pbn__Flash = value;
         }
         public bool ShouldSerializeFlash() => __pbn__Flash != null;
         public void ResetFlash() => __pbn__Flash = null;

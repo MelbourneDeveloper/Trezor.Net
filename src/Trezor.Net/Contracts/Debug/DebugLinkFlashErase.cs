@@ -10,8 +10,8 @@ namespace Trezor.Net.Contracts.Debug
         [ProtoBuf.ProtoMember(1, Name = @"sector")]
         public uint Sector
         {
-            get { return __pbn__Sector.GetValueOrDefault(); }
-            set { __pbn__Sector = value; }
+            get => __pbn__Sector.GetValueOrDefault();
+            set => __pbn__Sector = value;
         }
         public bool ShouldSerializeSector() => __pbn__Sector != null;
         public void ResetSector() => __pbn__Sector = null;

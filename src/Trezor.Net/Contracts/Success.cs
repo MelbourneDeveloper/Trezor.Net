@@ -17,8 +17,8 @@ namespace Trezor.Net.Contracts.Common
         [System.ComponentModel.DefaultValue("")]
         public string Message
         {
-            get { return __pbn__Message ?? ""; }
-            set { __pbn__Message = value; }
+            get => __pbn__Message ?? "";
+            set => __pbn__Message = value;
         }
         public bool ShouldSerializeMessage() => __pbn__Message != null;
         public void ResetMessage() => __pbn__Message = null;

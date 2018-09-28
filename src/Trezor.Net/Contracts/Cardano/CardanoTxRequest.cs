@@ -10,8 +10,8 @@ namespace Trezor.Net.Contracts.Cardano
         [ProtoBuf.ProtoMember(1, Name = @"tx_index")]
         public uint TxIndex
         {
-            get { return __pbn__TxIndex.GetValueOrDefault(); }
-            set { __pbn__TxIndex = value; }
+            get => __pbn__TxIndex.GetValueOrDefault();
+            set => __pbn__TxIndex = value;
         }
         public bool ShouldSerializeTxIndex() => __pbn__TxIndex != null;
         public void ResetTxIndex() => __pbn__TxIndex = null;

@@ -11,8 +11,8 @@ namespace Trezor.Net.Contracts.Stellar
         [System.ComponentModel.DefaultValue("")]
         public string SourceAccount
         {
-            get { return __pbn__SourceAccount ?? ""; }
-            set { __pbn__SourceAccount = value; }
+            get => __pbn__SourceAccount ?? "";
+            set => __pbn__SourceAccount = value;
         }
         public bool ShouldSerializeSourceAccount() => __pbn__SourceAccount != null;
         public void ResetSourceAccount() => __pbn__SourceAccount = null;
@@ -22,8 +22,8 @@ namespace Trezor.Net.Contracts.Stellar
         [System.ComponentModel.DefaultValue("")]
         public string DestinationAccount
         {
-            get { return __pbn__DestinationAccount ?? ""; }
-            set { __pbn__DestinationAccount = value; }
+            get => __pbn__DestinationAccount ?? "";
+            set => __pbn__DestinationAccount = value;
         }
         public bool ShouldSerializeDestinationAccount() => __pbn__DestinationAccount != null;
         public void ResetDestinationAccount() => __pbn__DestinationAccount = null;

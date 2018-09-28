@@ -14,8 +14,8 @@ namespace Trezor.Net.Contracts.Bitcoin
         [System.ComponentModel.DefaultValue("")]
         public string EcdsaCurveName
         {
-            get { return __pbn__EcdsaCurveName ?? ""; }
-            set { __pbn__EcdsaCurveName = value; }
+            get => __pbn__EcdsaCurveName ?? "";
+            set => __pbn__EcdsaCurveName = value;
         }
         public bool ShouldSerializeEcdsaCurveName() => __pbn__EcdsaCurveName != null;
         public void ResetEcdsaCurveName() => __pbn__EcdsaCurveName = null;
@@ -24,8 +24,8 @@ namespace Trezor.Net.Contracts.Bitcoin
         [ProtoBuf.ProtoMember(3, Name = @"show_display")]
         public bool ShowDisplay
         {
-            get { return __pbn__ShowDisplay.GetValueOrDefault(); }
-            set { __pbn__ShowDisplay = value; }
+            get => __pbn__ShowDisplay.GetValueOrDefault();
+            set => __pbn__ShowDisplay = value;
         }
         public bool ShouldSerializeShowDisplay() => __pbn__ShowDisplay != null;
         public void ResetShowDisplay() => __pbn__ShowDisplay = null;
@@ -35,8 +35,8 @@ namespace Trezor.Net.Contracts.Bitcoin
         [System.ComponentModel.DefaultValue(@"Bitcoin")]
         public string CoinName
         {
-            get { return __pbn__CoinName ?? @"Bitcoin"; }
-            set { __pbn__CoinName = value; }
+            get => __pbn__CoinName ?? @"Bitcoin";
+            set => __pbn__CoinName = value;
         }
         public bool ShouldSerializeCoinName() => __pbn__CoinName != null;
         public void ResetCoinName() => __pbn__CoinName = null;
@@ -46,8 +46,8 @@ namespace Trezor.Net.Contracts.Bitcoin
         [System.ComponentModel.DefaultValue(InputScriptType.Spendaddress)]
         public InputScriptType ScriptType
         {
-            get { return __pbn__ScriptType ?? InputScriptType.Spendaddress; }
-            set { __pbn__ScriptType = value; }
+            get => __pbn__ScriptType ?? InputScriptType.Spendaddress;
+            set => __pbn__ScriptType = value;
         }
         public bool ShouldSerializeScriptType() => __pbn__ScriptType != null;
         public void ResetScriptType() => __pbn__ScriptType = null;

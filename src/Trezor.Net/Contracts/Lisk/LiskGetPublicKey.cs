@@ -13,8 +13,8 @@ namespace Trezor.Net.Contracts.Lisk
         [ProtoBuf.ProtoMember(2, Name = @"show_display")]
         public bool ShowDisplay
         {
-            get { return __pbn__ShowDisplay.GetValueOrDefault(); }
-            set { __pbn__ShowDisplay = value; }
+            get => __pbn__ShowDisplay.GetValueOrDefault();
+            set => __pbn__ShowDisplay = value;
         }
         public bool ShouldSerializeShowDisplay() => __pbn__ShowDisplay != null;
         public void ResetShowDisplay() => __pbn__ShowDisplay = null;

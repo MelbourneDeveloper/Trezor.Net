@@ -10,8 +10,8 @@ namespace Trezor.Net.Contracts.Common
         [ProtoBuf.ProtoMember(1, Name = @"on_device")]
         public bool OnDevice
         {
-            get { return __pbn__OnDevice.GetValueOrDefault(); }
-            set { __pbn__OnDevice = value; }
+            get => __pbn__OnDevice.GetValueOrDefault();
+            set => __pbn__OnDevice = value;
         }
         public bool ShouldSerializeOnDevice() => __pbn__OnDevice != null;
         public void ResetOnDevice() => __pbn__OnDevice = null;

@@ -20,8 +20,8 @@ namespace Trezor.Net.Contracts.Bitcoin
             [ProtoBuf.ProtoMember(1, Name = @"version")]
             public uint Version
             {
-                get { return __pbn__Version.GetValueOrDefault(); }
-                set { __pbn__Version = value; }
+                get => __pbn__Version.GetValueOrDefault();
+                set => __pbn__Version = value;
             }
             public bool ShouldSerializeVersion() => __pbn__Version != null;
             public void ResetVersion() => __pbn__Version = null;
@@ -36,8 +36,8 @@ namespace Trezor.Net.Contracts.Bitcoin
             [ProtoBuf.ProtoMember(4, Name = @"lock_time")]
             public uint LockTime
             {
-                get { return __pbn__LockTime.GetValueOrDefault(); }
-                set { __pbn__LockTime = value; }
+                get => __pbn__LockTime.GetValueOrDefault();
+                set => __pbn__LockTime = value;
             }
             public bool ShouldSerializeLockTime() => __pbn__LockTime != null;
             public void ResetLockTime() => __pbn__LockTime = null;
@@ -49,8 +49,8 @@ namespace Trezor.Net.Contracts.Bitcoin
             [ProtoBuf.ProtoMember(6, Name = @"inputs_cnt")]
             public uint InputsCnt
             {
-                get { return __pbn__InputsCnt.GetValueOrDefault(); }
-                set { __pbn__InputsCnt = value; }
+                get => __pbn__InputsCnt.GetValueOrDefault();
+                set => __pbn__InputsCnt = value;
             }
             public bool ShouldSerializeInputsCnt() => __pbn__InputsCnt != null;
             public void ResetInputsCnt() => __pbn__InputsCnt = null;
@@ -59,8 +59,8 @@ namespace Trezor.Net.Contracts.Bitcoin
             [ProtoBuf.ProtoMember(7, Name = @"outputs_cnt")]
             public uint OutputsCnt
             {
-                get { return __pbn__OutputsCnt.GetValueOrDefault(); }
-                set { __pbn__OutputsCnt = value; }
+                get => __pbn__OutputsCnt.GetValueOrDefault();
+                set => __pbn__OutputsCnt = value;
             }
             public bool ShouldSerializeOutputsCnt() => __pbn__OutputsCnt != null;
             public void ResetOutputsCnt() => __pbn__OutputsCnt = null;
@@ -74,8 +74,8 @@ namespace Trezor.Net.Contracts.Bitcoin
             [ProtoBuf.ProtoMember(9, Name = @"extra_data_len")]
             public uint ExtraDataLen
             {
-                get { return __pbn__ExtraDataLen.GetValueOrDefault(); }
-                set { __pbn__ExtraDataLen = value; }
+                get => __pbn__ExtraDataLen.GetValueOrDefault();
+                set => __pbn__ExtraDataLen = value;
             }
             public bool ShouldSerializeExtraDataLen() => __pbn__ExtraDataLen != null;
             public void ResetExtraDataLen() => __pbn__ExtraDataLen = null;
@@ -84,8 +84,8 @@ namespace Trezor.Net.Contracts.Bitcoin
             [ProtoBuf.ProtoMember(10, Name = @"expiry")]
             public uint Expiry
             {
-                get { return __pbn__Expiry.GetValueOrDefault(); }
-                set { __pbn__Expiry = value; }
+                get => __pbn__Expiry.GetValueOrDefault();
+                set => __pbn__Expiry = value;
             }
             public bool ShouldSerializeExpiry() => __pbn__Expiry != null;
             public void ResetExpiry() => __pbn__Expiry = null;
@@ -94,8 +94,8 @@ namespace Trezor.Net.Contracts.Bitcoin
             [ProtoBuf.ProtoMember(11, Name = @"overwintered")]
             public bool Overwintered
             {
-                get { return __pbn__Overwintered.GetValueOrDefault(); }
-                set { __pbn__Overwintered = value; }
+                get => __pbn__Overwintered.GetValueOrDefault();
+                set => __pbn__Overwintered = value;
             }
             public bool ShouldSerializeOverwintered() => __pbn__Overwintered != null;
             public void ResetOverwintered() => __pbn__Overwintered = null;
@@ -126,8 +126,8 @@ namespace Trezor.Net.Contracts.Bitcoin
                 [System.ComponentModel.DefaultValue(4294967295)]
                 public uint Sequence
                 {
-                    get { return __pbn__Sequence ?? 4294967295; }
-                    set { __pbn__Sequence = value; }
+                    get => __pbn__Sequence ?? 4294967295;
+                    set => __pbn__Sequence = value;
                 }
                 public bool ShouldSerializeSequence() => __pbn__Sequence != null;
                 public void ResetSequence() => __pbn__Sequence = null;
@@ -137,8 +137,8 @@ namespace Trezor.Net.Contracts.Bitcoin
                 [System.ComponentModel.DefaultValue(InputScriptType.Spendaddress)]
                 public InputScriptType ScriptType
                 {
-                    get { return __pbn__ScriptType ?? InputScriptType.Spendaddress; }
-                    set { __pbn__ScriptType = value; }
+                    get => __pbn__ScriptType ?? InputScriptType.Spendaddress;
+                    set => __pbn__ScriptType = value;
                 }
                 public bool ShouldSerializeScriptType() => __pbn__ScriptType != null;
                 public void ResetScriptType() => __pbn__ScriptType = null;
@@ -150,8 +150,8 @@ namespace Trezor.Net.Contracts.Bitcoin
                 [ProtoBuf.ProtoMember(8, Name = @"amount")]
                 public ulong Amount
                 {
-                    get { return __pbn__Amount.GetValueOrDefault(); }
-                    set { __pbn__Amount = value; }
+                    get => __pbn__Amount.GetValueOrDefault();
+                    set => __pbn__Amount = value;
                 }
                 public bool ShouldSerializeAmount() => __pbn__Amount != null;
                 public void ResetAmount() => __pbn__Amount = null;
@@ -160,8 +160,8 @@ namespace Trezor.Net.Contracts.Bitcoin
                 [ProtoBuf.ProtoMember(9, Name = @"decred_tree")]
                 public uint DecredTree
                 {
-                    get { return __pbn__DecredTree.GetValueOrDefault(); }
-                    set { __pbn__DecredTree = value; }
+                    get => __pbn__DecredTree.GetValueOrDefault();
+                    set => __pbn__DecredTree = value;
                 }
                 public bool ShouldSerializeDecredTree() => __pbn__DecredTree != null;
                 public void ResetDecredTree() => __pbn__DecredTree = null;
@@ -170,8 +170,8 @@ namespace Trezor.Net.Contracts.Bitcoin
                 [ProtoBuf.ProtoMember(10, Name = @"decred_script_version")]
                 public uint DecredScriptVersion
                 {
-                    get { return __pbn__DecredScriptVersion.GetValueOrDefault(); }
-                    set { __pbn__DecredScriptVersion = value; }
+                    get => __pbn__DecredScriptVersion.GetValueOrDefault();
+                    set => __pbn__DecredScriptVersion = value;
                 }
                 public bool ShouldSerializeDecredScriptVersion() => __pbn__DecredScriptVersion != null;
                 public void ResetDecredScriptVersion() => __pbn__DecredScriptVersion = null;
@@ -185,8 +185,8 @@ namespace Trezor.Net.Contracts.Bitcoin
                 [ProtoBuf.ProtoMember(12, Name = @"prev_block_height_bip115")]
                 public uint PrevBlockHeightBip115
                 {
-                    get { return __pbn__PrevBlockHeightBip115.GetValueOrDefault(); }
-                    set { __pbn__PrevBlockHeightBip115 = value; }
+                    get => __pbn__PrevBlockHeightBip115.GetValueOrDefault();
+                    set => __pbn__PrevBlockHeightBip115 = value;
                 }
                 public bool ShouldSerializePrevBlockHeightBip115() => __pbn__PrevBlockHeightBip115 != null;
                 public void ResetPrevBlockHeightBip115() => __pbn__PrevBlockHeightBip115 = null;
@@ -210,8 +210,8 @@ namespace Trezor.Net.Contracts.Bitcoin
                 [ProtoBuf.ProtoMember(3, Name = @"decred_script_version")]
                 public uint DecredScriptVersion
                 {
-                    get { return __pbn__DecredScriptVersion.GetValueOrDefault(); }
-                    set { __pbn__DecredScriptVersion = value; }
+                    get => __pbn__DecredScriptVersion.GetValueOrDefault();
+                    set => __pbn__DecredScriptVersion = value;
                 }
                 public bool ShouldSerializeDecredScriptVersion() => __pbn__DecredScriptVersion != null;
                 public void ResetDecredScriptVersion() => __pbn__DecredScriptVersion = null;
@@ -230,8 +230,8 @@ namespace Trezor.Net.Contracts.Bitcoin
                 [System.ComponentModel.DefaultValue("")]
                 public string Address
                 {
-                    get { return __pbn__Address ?? ""; }
-                    set { __pbn__Address = value; }
+                    get => __pbn__Address ?? "";
+                    set => __pbn__Address = value;
                 }
                 public bool ShouldSerializeAddress() => __pbn__Address != null;
                 public void ResetAddress() => __pbn__Address = null;
@@ -257,8 +257,8 @@ namespace Trezor.Net.Contracts.Bitcoin
                 [ProtoBuf.ProtoMember(7, Name = @"decred_script_version")]
                 public uint DecredScriptVersion
                 {
-                    get { return __pbn__DecredScriptVersion.GetValueOrDefault(); }
-                    set { __pbn__DecredScriptVersion = value; }
+                    get => __pbn__DecredScriptVersion.GetValueOrDefault();
+                    set => __pbn__DecredScriptVersion = value;
                 }
                 public bool ShouldSerializeDecredScriptVersion() => __pbn__DecredScriptVersion != null;
                 public void ResetDecredScriptVersion() => __pbn__DecredScriptVersion = null;
@@ -272,8 +272,8 @@ namespace Trezor.Net.Contracts.Bitcoin
                 [ProtoBuf.ProtoMember(9, Name = @"block_height_bip115")]
                 public uint BlockHeightBip115
                 {
-                    get { return __pbn__BlockHeightBip115.GetValueOrDefault(); }
-                    set { __pbn__BlockHeightBip115 = value; }
+                    get => __pbn__BlockHeightBip115.GetValueOrDefault();
+                    set => __pbn__BlockHeightBip115 = value;
                 }
                 public bool ShouldSerializeBlockHeightBip115() => __pbn__BlockHeightBip115 != null;
                 public void ResetBlockHeightBip115() => __pbn__BlockHeightBip115 = null;

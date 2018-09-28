@@ -10,8 +10,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(1, Name = @"version")]
         public uint Version
         {
-            get { return __pbn__Version.GetValueOrDefault(); }
-            set { __pbn__Version = value; }
+            get => __pbn__Version.GetValueOrDefault();
+            set => __pbn__Version = value;
         }
         public bool ShouldSerializeVersion() => __pbn__Version != null;
         public void ResetVersion() => __pbn__Version = null;
@@ -23,8 +23,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(3, Name = @"network_type")]
         public uint NetworkType
         {
-            get { return __pbn__NetworkType.GetValueOrDefault(); }
-            set { __pbn__NetworkType = value; }
+            get => __pbn__NetworkType.GetValueOrDefault();
+            set => __pbn__NetworkType = value;
         }
         public bool ShouldSerializeNetworkType() => __pbn__NetworkType != null;
         public void ResetNetworkType() => __pbn__NetworkType = null;
@@ -43,8 +43,8 @@ namespace Trezor.Net.Contracts.Monero
             [ProtoBuf.ProtoMember(1, Name = @"version")]
             public uint Version
             {
-                get { return __pbn__Version.GetValueOrDefault(); }
-                set { __pbn__Version = value; }
+                get => __pbn__Version.GetValueOrDefault();
+                set => __pbn__Version = value;
             }
             public bool ShouldSerializeVersion() => __pbn__Version != null;
             public void ResetVersion() => __pbn__Version = null;
@@ -58,8 +58,8 @@ namespace Trezor.Net.Contracts.Monero
             [ProtoBuf.ProtoMember(3, Name = @"unlock_time")]
             public ulong UnlockTime
             {
-                get { return __pbn__UnlockTime.GetValueOrDefault(); }
-                set { __pbn__UnlockTime = value; }
+                get => __pbn__UnlockTime.GetValueOrDefault();
+                set => __pbn__UnlockTime = value;
             }
             public bool ShouldSerializeUnlockTime() => __pbn__UnlockTime != null;
             public void ResetUnlockTime() => __pbn__UnlockTime = null;
@@ -74,8 +74,8 @@ namespace Trezor.Net.Contracts.Monero
             [ProtoBuf.ProtoMember(6, Name = @"num_inputs")]
             public uint NumInputs
             {
-                get { return __pbn__NumInputs.GetValueOrDefault(); }
-                set { __pbn__NumInputs = value; }
+                get => __pbn__NumInputs.GetValueOrDefault();
+                set => __pbn__NumInputs = value;
             }
             public bool ShouldSerializeNumInputs() => __pbn__NumInputs != null;
             public void ResetNumInputs() => __pbn__NumInputs = null;
@@ -84,8 +84,8 @@ namespace Trezor.Net.Contracts.Monero
             [ProtoBuf.ProtoMember(7, Name = @"mixin")]
             public uint Mixin
             {
-                get { return __pbn__Mixin.GetValueOrDefault(); }
-                set { __pbn__Mixin = value; }
+                get => __pbn__Mixin.GetValueOrDefault();
+                set => __pbn__Mixin = value;
             }
             public bool ShouldSerializeMixin() => __pbn__Mixin != null;
             public void ResetMixin() => __pbn__Mixin = null;
@@ -94,8 +94,8 @@ namespace Trezor.Net.Contracts.Monero
             [ProtoBuf.ProtoMember(8, Name = @"fee")]
             public ulong Fee
             {
-                get { return __pbn__Fee.GetValueOrDefault(); }
-                set { __pbn__Fee = value; }
+                get => __pbn__Fee.GetValueOrDefault();
+                set => __pbn__Fee = value;
             }
             public bool ShouldSerializeFee() => __pbn__Fee != null;
             public void ResetFee() => __pbn__Fee = null;
@@ -104,8 +104,8 @@ namespace Trezor.Net.Contracts.Monero
             [ProtoBuf.ProtoMember(9, Name = @"account")]
             public uint Account
             {
-                get { return __pbn__Account.GetValueOrDefault(); }
-                set { __pbn__Account = value; }
+                get => __pbn__Account.GetValueOrDefault();
+                set => __pbn__Account = value;
             }
             public bool ShouldSerializeAccount() => __pbn__Account != null;
             public void ResetAccount() => __pbn__Account = null;
@@ -117,8 +117,8 @@ namespace Trezor.Net.Contracts.Monero
             [ProtoBuf.ProtoMember(11, Name = @"is_multisig")]
             public bool IsMultisig
             {
-                get { return __pbn__IsMultisig.GetValueOrDefault(); }
-                set { __pbn__IsMultisig = value; }
+                get => __pbn__IsMultisig.GetValueOrDefault();
+                set => __pbn__IsMultisig = value;
             }
             public bool ShouldSerializeIsMultisig() => __pbn__IsMultisig != null;
             public void ResetIsMultisig() => __pbn__IsMultisig = null;

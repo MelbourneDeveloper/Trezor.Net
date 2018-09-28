@@ -11,8 +11,8 @@ namespace Trezor.Net.Contracts.Management
         [System.ComponentModel.DefaultValue("")]
         public string Message
         {
-            get { return __pbn__Message ?? ""; }
-            set { __pbn__Message = value; }
+            get => __pbn__Message ?? "";
+            set => __pbn__Message = value;
         }
         public bool ShouldSerializeMessage() => __pbn__Message != null;
         public void ResetMessage() => __pbn__Message = null;
@@ -21,8 +21,8 @@ namespace Trezor.Net.Contracts.Management
         [ProtoBuf.ProtoMember(2, Name = @"button_protection")]
         public bool ButtonProtection
         {
-            get { return __pbn__ButtonProtection.GetValueOrDefault(); }
-            set { __pbn__ButtonProtection = value; }
+            get => __pbn__ButtonProtection.GetValueOrDefault();
+            set => __pbn__ButtonProtection = value;
         }
         public bool ShouldSerializeButtonProtection() => __pbn__ButtonProtection != null;
         public void ResetButtonProtection() => __pbn__ButtonProtection = null;
@@ -31,8 +31,8 @@ namespace Trezor.Net.Contracts.Management
         [ProtoBuf.ProtoMember(3, Name = @"pin_protection")]
         public bool PinProtection
         {
-            get { return __pbn__PinProtection.GetValueOrDefault(); }
-            set { __pbn__PinProtection = value; }
+            get => __pbn__PinProtection.GetValueOrDefault();
+            set => __pbn__PinProtection = value;
         }
         public bool ShouldSerializePinProtection() => __pbn__PinProtection != null;
         public void ResetPinProtection() => __pbn__PinProtection = null;
@@ -41,8 +41,8 @@ namespace Trezor.Net.Contracts.Management
         [ProtoBuf.ProtoMember(4, Name = @"passphrase_protection")]
         public bool PassphraseProtection
         {
-            get { return __pbn__PassphraseProtection.GetValueOrDefault(); }
-            set { __pbn__PassphraseProtection = value; }
+            get => __pbn__PassphraseProtection.GetValueOrDefault();
+            set => __pbn__PassphraseProtection = value;
         }
         public bool ShouldSerializePassphraseProtection() => __pbn__PassphraseProtection != null;
         public void ResetPassphraseProtection() => __pbn__PassphraseProtection = null;

@@ -10,8 +10,8 @@ namespace Trezor.Net.Contracts.Debug
         [ProtoBuf.ProtoMember(1, Name = @"level")]
         public uint Level
         {
-            get { return __pbn__Level.GetValueOrDefault(); }
-            set { __pbn__Level = value; }
+            get => __pbn__Level.GetValueOrDefault();
+            set => __pbn__Level = value;
         }
         public bool ShouldSerializeLevel() => __pbn__Level != null;
         public void ResetLevel() => __pbn__Level = null;
@@ -21,8 +21,8 @@ namespace Trezor.Net.Contracts.Debug
         [System.ComponentModel.DefaultValue("")]
         public string Bucket
         {
-            get { return __pbn__Bucket ?? ""; }
-            set { __pbn__Bucket = value; }
+            get => __pbn__Bucket ?? "";
+            set => __pbn__Bucket = value;
         }
         public bool ShouldSerializeBucket() => __pbn__Bucket != null;
         public void ResetBucket() => __pbn__Bucket = null;
@@ -32,8 +32,8 @@ namespace Trezor.Net.Contracts.Debug
         [System.ComponentModel.DefaultValue("")]
         public string Text
         {
-            get { return __pbn__Text ?? ""; }
-            set { __pbn__Text = value; }
+            get => __pbn__Text ?? "";
+            set => __pbn__Text = value;
         }
         public bool ShouldSerializeText() => __pbn__Text != null;
         public void ResetText() => __pbn__Text = null;

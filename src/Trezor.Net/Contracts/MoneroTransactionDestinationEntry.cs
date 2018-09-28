@@ -10,8 +10,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(1, Name = @"amount")]
         public ulong Amount
         {
-            get { return __pbn__Amount.GetValueOrDefault(); }
-            set { __pbn__Amount = value; }
+            get => __pbn__Amount.GetValueOrDefault();
+            set => __pbn__Amount = value;
         }
         public bool ShouldSerializeAmount() => __pbn__Amount != null;
         public void ResetAmount() => __pbn__Amount = null;
@@ -23,8 +23,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(3, Name = @"is_subaddress")]
         public bool IsSubaddress
         {
-            get { return __pbn__IsSubaddress.GetValueOrDefault(); }
-            set { __pbn__IsSubaddress = value; }
+            get => __pbn__IsSubaddress.GetValueOrDefault();
+            set => __pbn__IsSubaddress = value;
         }
         public bool ShouldSerializeIsSubaddress() => __pbn__IsSubaddress != null;
         public void ResetIsSubaddress() => __pbn__IsSubaddress = null;

@@ -11,8 +11,8 @@ namespace Trezor.Net.Contracts.Common
         [System.ComponentModel.DefaultValue(ButtonRequestType.ButtonRequestOther)]
         public ButtonRequestType Code
         {
-            get { return __pbn__Code ?? ButtonRequestType.ButtonRequestOther; }
-            set { __pbn__Code = value; }
+            get => __pbn__Code ?? ButtonRequestType.ButtonRequestOther;
+            set => __pbn__Code = value;
         }
         public bool ShouldSerializeCode() => __pbn__Code != null;
         public void ResetCode() => __pbn__Code = null;
@@ -22,8 +22,8 @@ namespace Trezor.Net.Contracts.Common
         [System.ComponentModel.DefaultValue("")]
         public string Data
         {
-            get { return __pbn__Data ?? ""; }
-            set { __pbn__Data = value; }
+            get => __pbn__Data ?? "";
+            set => __pbn__Data = value;
         }
         public bool ShouldSerializeData() => __pbn__Data != null;
         public void ResetData() => __pbn__Data = null;

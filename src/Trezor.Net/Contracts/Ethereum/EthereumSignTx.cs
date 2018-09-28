@@ -43,8 +43,8 @@ namespace Trezor.Net.Contracts.Ethereum
         [ProtoBuf.ProtoMember(8, Name = @"data_length")]
         public uint DataLength
         {
-            get { return __pbn__DataLength.GetValueOrDefault(); }
-            set { __pbn__DataLength = value; }
+            get => __pbn__DataLength.GetValueOrDefault();
+            set => __pbn__DataLength = value;
         }
         public bool ShouldSerializeDataLength() => __pbn__DataLength != null;
         public void ResetDataLength() => __pbn__DataLength = null;
@@ -53,8 +53,8 @@ namespace Trezor.Net.Contracts.Ethereum
         [ProtoBuf.ProtoMember(9, Name = @"chain_id")]
         public uint ChainId
         {
-            get { return __pbn__ChainId.GetValueOrDefault(); }
-            set { __pbn__ChainId = value; }
+            get => __pbn__ChainId.GetValueOrDefault();
+            set => __pbn__ChainId = value;
         }
         public bool ShouldSerializeChainId() => __pbn__ChainId != null;
         public void ResetChainId() => __pbn__ChainId = null;
@@ -63,8 +63,8 @@ namespace Trezor.Net.Contracts.Ethereum
         [ProtoBuf.ProtoMember(10, Name = @"tx_type")]
         public uint TxType
         {
-            get { return __pbn__TxType.GetValueOrDefault(); }
-            set { __pbn__TxType = value; }
+            get => __pbn__TxType.GetValueOrDefault();
+            set => __pbn__TxType = value;
         }
         public bool ShouldSerializeTxType() => __pbn__TxType != null;
         public void ResetTxType() => __pbn__TxType = null;

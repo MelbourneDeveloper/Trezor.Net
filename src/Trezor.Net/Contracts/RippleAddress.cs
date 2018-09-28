@@ -11,8 +11,8 @@ namespace Trezor.Net.Contracts.Ripple
         [System.ComponentModel.DefaultValue("")]
         public string Address
         {
-            get { return __pbn__Address ?? ""; }
-            set { __pbn__Address = value; }
+            get => __pbn__Address ?? "";
+            set => __pbn__Address = value;
         }
         public bool ShouldSerializeAddress() => __pbn__Address != null;
         public void ResetAddress() => __pbn__Address = null;

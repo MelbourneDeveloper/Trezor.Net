@@ -10,8 +10,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(1, Name = @"num")]
         public ulong Num
         {
-            get { return __pbn__Num.GetValueOrDefault(); }
-            set { __pbn__Num = value; }
+            get => __pbn__Num.GetValueOrDefault();
+            set => __pbn__Num = value;
         }
         public bool ShouldSerializeNum() => __pbn__Num != null;
         public void ResetNum() => __pbn__Num = null;
@@ -28,8 +28,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(4, Name = @"network_type")]
         public uint NetworkType
         {
-            get { return __pbn__NetworkType.GetValueOrDefault(); }
-            set { __pbn__NetworkType = value; }
+            get => __pbn__NetworkType.GetValueOrDefault();
+            set => __pbn__NetworkType = value;
         }
         public bool ShouldSerializeNetworkType() => __pbn__NetworkType != null;
         public void ResetNetworkType() => __pbn__NetworkType = null;
@@ -48,8 +48,8 @@ namespace Trezor.Net.Contracts.Monero
             [ProtoBuf.ProtoMember(1, Name = @"account")]
             public uint Account
             {
-                get { return __pbn__Account.GetValueOrDefault(); }
-                set { __pbn__Account = value; }
+                get => __pbn__Account.GetValueOrDefault();
+                set => __pbn__Account = value;
             }
             public bool ShouldSerializeAccount() => __pbn__Account != null;
             public void ResetAccount() => __pbn__Account = null;

@@ -16,8 +16,8 @@ namespace Trezor.Net.Contracts.Cardano
         [ProtoBuf.ProtoMember(3, Name = @"transactions_count")]
         public uint TransactionsCount
         {
-            get { return __pbn__TransactionsCount.GetValueOrDefault(); }
-            set { __pbn__TransactionsCount = value; }
+            get => __pbn__TransactionsCount.GetValueOrDefault();
+            set => __pbn__TransactionsCount = value;
         }
         public bool ShouldSerializeTransactionsCount() => __pbn__TransactionsCount != null;
         public void ResetTransactionsCount() => __pbn__TransactionsCount = null;
@@ -41,8 +41,8 @@ namespace Trezor.Net.Contracts.Cardano
             [ProtoBuf.ProtoMember(3, Name = @"prev_index")]
             public uint PrevIndex
             {
-                get { return __pbn__PrevIndex.GetValueOrDefault(); }
-                set { __pbn__PrevIndex = value; }
+                get => __pbn__PrevIndex.GetValueOrDefault();
+                set => __pbn__PrevIndex = value;
             }
             public bool ShouldSerializePrevIndex() => __pbn__PrevIndex != null;
             public void ResetPrevIndex() => __pbn__PrevIndex = null;
@@ -51,8 +51,8 @@ namespace Trezor.Net.Contracts.Cardano
             [ProtoBuf.ProtoMember(4, Name = @"type")]
             public uint Type
             {
-                get { return __pbn__Type.GetValueOrDefault(); }
-                set { __pbn__Type = value; }
+                get => __pbn__Type.GetValueOrDefault();
+                set => __pbn__Type = value;
             }
             public bool ShouldSerializeType() => __pbn__Type != null;
             public void ResetType() => __pbn__Type = null;
@@ -71,8 +71,8 @@ namespace Trezor.Net.Contracts.Cardano
             [System.ComponentModel.DefaultValue("")]
             public string Address
             {
-                get { return __pbn__Address ?? ""; }
-                set { __pbn__Address = value; }
+                get => __pbn__Address ?? "";
+                set => __pbn__Address = value;
             }
             public bool ShouldSerializeAddress() => __pbn__Address != null;
             public void ResetAddress() => __pbn__Address = null;
@@ -84,8 +84,8 @@ namespace Trezor.Net.Contracts.Cardano
             [ProtoBuf.ProtoMember(3, Name = @"amount")]
             public ulong Amount
             {
-                get { return __pbn__Amount.GetValueOrDefault(); }
-                set { __pbn__Amount = value; }
+                get => __pbn__Amount.GetValueOrDefault();
+                set => __pbn__Amount = value;
             }
             public bool ShouldSerializeAmount() => __pbn__Amount != null;
             public void ResetAmount() => __pbn__Amount = null;

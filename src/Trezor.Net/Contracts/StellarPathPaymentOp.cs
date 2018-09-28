@@ -11,8 +11,8 @@ namespace Trezor.Net.Contracts.Stellar
         [System.ComponentModel.DefaultValue("")]
         public string SourceAccount
         {
-            get { return __pbn__SourceAccount ?? ""; }
-            set { __pbn__SourceAccount = value; }
+            get => __pbn__SourceAccount ?? "";
+            set => __pbn__SourceAccount = value;
         }
         public bool ShouldSerializeSourceAccount() => __pbn__SourceAccount != null;
         public void ResetSourceAccount() => __pbn__SourceAccount = null;
@@ -24,8 +24,8 @@ namespace Trezor.Net.Contracts.Stellar
         [ProtoBuf.ProtoMember(3, Name = @"send_max", DataFormat = ProtoBuf.DataFormat.ZigZag)]
         public long SendMax
         {
-            get { return __pbn__SendMax.GetValueOrDefault(); }
-            set { __pbn__SendMax = value; }
+            get => __pbn__SendMax.GetValueOrDefault();
+            set => __pbn__SendMax = value;
         }
         public bool ShouldSerializeSendMax() => __pbn__SendMax != null;
         public void ResetSendMax() => __pbn__SendMax = null;
@@ -35,8 +35,8 @@ namespace Trezor.Net.Contracts.Stellar
         [System.ComponentModel.DefaultValue("")]
         public string DestinationAccount
         {
-            get { return __pbn__DestinationAccount ?? ""; }
-            set { __pbn__DestinationAccount = value; }
+            get => __pbn__DestinationAccount ?? "";
+            set => __pbn__DestinationAccount = value;
         }
         public bool ShouldSerializeDestinationAccount() => __pbn__DestinationAccount != null;
         public void ResetDestinationAccount() => __pbn__DestinationAccount = null;
@@ -48,8 +48,8 @@ namespace Trezor.Net.Contracts.Stellar
         [ProtoBuf.ProtoMember(6, Name = @"destination_amount", DataFormat = ProtoBuf.DataFormat.ZigZag)]
         public long DestinationAmount
         {
-            get { return __pbn__DestinationAmount.GetValueOrDefault(); }
-            set { __pbn__DestinationAmount = value; }
+            get => __pbn__DestinationAmount.GetValueOrDefault();
+            set => __pbn__DestinationAmount = value;
         }
         public bool ShouldSerializeDestinationAmount() => __pbn__DestinationAmount != null;
         public void ResetDestinationAmount() => __pbn__DestinationAmount = null;

@@ -14,8 +14,8 @@ namespace Trezor.Net.Contracts.Bitcoin
         [System.ComponentModel.DefaultValue("")]
         public string Xpub
         {
-            get { return __pbn__Xpub ?? ""; }
-            set { __pbn__Xpub = value; }
+            get => __pbn__Xpub ?? "";
+            set => __pbn__Xpub = value;
         }
         public bool ShouldSerializeXpub() => __pbn__Xpub != null;
         public void ResetXpub() => __pbn__Xpub = null;

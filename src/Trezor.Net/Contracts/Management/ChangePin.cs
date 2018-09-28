@@ -10,8 +10,8 @@ namespace Trezor.Net.Contracts.Management
         [ProtoBuf.ProtoMember(1, Name = @"remove")]
         public bool Remove
         {
-            get { return __pbn__Remove.GetValueOrDefault(); }
-            set { __pbn__Remove = value; }
+            get => __pbn__Remove.GetValueOrDefault();
+            set => __pbn__Remove = value;
         }
         public bool ShouldSerializeRemove() => __pbn__Remove != null;
         public void ResetRemove() => __pbn__Remove = null;

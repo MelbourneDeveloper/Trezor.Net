@@ -11,8 +11,8 @@ namespace Trezor.Net.Contracts.Management
         [System.ComponentModel.DefaultValue(WordRequestType.WordRequestTypePlain)]
         public WordRequestType Type
         {
-            get { return __pbn__Type ?? WordRequestType.WordRequestTypePlain; }
-            set { __pbn__Type = value; }
+            get => __pbn__Type ?? WordRequestType.WordRequestTypePlain;
+            set => __pbn__Type = value;
         }
         public bool ShouldSerializeType() => __pbn__Type != null;
         public void ResetType() => __pbn__Type = null;

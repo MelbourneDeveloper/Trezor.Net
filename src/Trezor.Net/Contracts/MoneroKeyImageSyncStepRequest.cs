@@ -33,8 +33,8 @@ namespace Trezor.Net.Contracts.Monero
             [ProtoBuf.ProtoMember(4, Name = @"internal_output_index")]
             public ulong InternalOutputIndex
             {
-                get { return __pbn__InternalOutputIndex.GetValueOrDefault(); }
-                set { __pbn__InternalOutputIndex = value; }
+                get => __pbn__InternalOutputIndex.GetValueOrDefault();
+                set => __pbn__InternalOutputIndex = value;
             }
             public bool ShouldSerializeInternalOutputIndex() => __pbn__InternalOutputIndex != null;
             public void ResetInternalOutputIndex() => __pbn__InternalOutputIndex = null;

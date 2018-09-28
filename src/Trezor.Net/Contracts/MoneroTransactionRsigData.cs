@@ -10,8 +10,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(1, Name = @"version")]
         public uint Version
         {
-            get { return __pbn__Version.GetValueOrDefault(); }
-            set { __pbn__Version = value; }
+            get => __pbn__Version.GetValueOrDefault();
+            set => __pbn__Version = value;
         }
         public bool ShouldSerializeVersion() => __pbn__Version != null;
         public void ResetVersion() => __pbn__Version = null;
@@ -20,8 +20,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(2, Name = @"rsig_type")]
         public uint RsigType
         {
-            get { return __pbn__RsigType.GetValueOrDefault(); }
-            set { __pbn__RsigType = value; }
+            get => __pbn__RsigType.GetValueOrDefault();
+            set => __pbn__RsigType = value;
         }
         public bool ShouldSerializeRsigType() => __pbn__RsigType != null;
         public void ResetRsigType() => __pbn__RsigType = null;
@@ -30,8 +30,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(3, Name = @"offload_type")]
         public uint OffloadType
         {
-            get { return __pbn__OffloadType.GetValueOrDefault(); }
-            set { __pbn__OffloadType = value; }
+            get => __pbn__OffloadType.GetValueOrDefault();
+            set => __pbn__OffloadType = value;
         }
         public bool ShouldSerializeOffloadType() => __pbn__OffloadType != null;
         public void ResetOffloadType() => __pbn__OffloadType = null;
@@ -43,8 +43,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(5, Name = @"step")]
         public uint Step
         {
-            get { return __pbn__Step.GetValueOrDefault(); }
-            set { __pbn__Step = value; }
+            get => __pbn__Step.GetValueOrDefault();
+            set => __pbn__Step = value;
         }
         public bool ShouldSerializeStep() => __pbn__Step != null;
         public void ResetStep() => __pbn__Step = null;
@@ -53,8 +53,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(6, Name = @"operation")]
         public ulong Operation
         {
-            get { return __pbn__Operation.GetValueOrDefault(); }
-            set { __pbn__Operation = value; }
+            get => __pbn__Operation.GetValueOrDefault();
+            set => __pbn__Operation = value;
         }
         public bool ShouldSerializeOperation() => __pbn__Operation != null;
         public void ResetOperation() => __pbn__Operation = null;

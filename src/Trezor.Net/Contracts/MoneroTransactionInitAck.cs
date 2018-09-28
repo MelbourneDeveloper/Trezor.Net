@@ -10,8 +10,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(1, Name = @"version")]
         public uint Version
         {
-            get { return __pbn__Version.GetValueOrDefault(); }
-            set { __pbn__Version = value; }
+            get => __pbn__Version.GetValueOrDefault();
+            set => __pbn__Version = value;
         }
         public bool ShouldSerializeVersion() => __pbn__Version != null;
         public void ResetVersion() => __pbn__Version = null;
@@ -20,8 +20,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(2, Name = @"status")]
         public uint Status
         {
-            get { return __pbn__Status.GetValueOrDefault(); }
-            set { __pbn__Status = value; }
+            get => __pbn__Status.GetValueOrDefault();
+            set => __pbn__Status = value;
         }
         public bool ShouldSerializeStatus() => __pbn__Status != null;
         public void ResetStatus() => __pbn__Status = null;
@@ -30,8 +30,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(3, Name = @"in_memory")]
         public bool InMemory
         {
-            get { return __pbn__InMemory.GetValueOrDefault(); }
-            set { __pbn__InMemory = value; }
+            get => __pbn__InMemory.GetValueOrDefault();
+            set => __pbn__InMemory = value;
         }
         public bool ShouldSerializeInMemory() => __pbn__InMemory != null;
         public void ResetInMemory() => __pbn__InMemory = null;
@@ -43,8 +43,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(5, Name = @"many_inputs")]
         public bool ManyInputs
         {
-            get { return __pbn__ManyInputs.GetValueOrDefault(); }
-            set { __pbn__ManyInputs = value; }
+            get => __pbn__ManyInputs.GetValueOrDefault();
+            set => __pbn__ManyInputs = value;
         }
         public bool ShouldSerializeManyInputs() => __pbn__ManyInputs != null;
         public void ResetManyInputs() => __pbn__ManyInputs = null;
@@ -53,8 +53,8 @@ namespace Trezor.Net.Contracts.Monero
         [ProtoBuf.ProtoMember(6, Name = @"many_outputs")]
         public bool ManyOutputs
         {
-            get { return __pbn__ManyOutputs.GetValueOrDefault(); }
-            set { __pbn__ManyOutputs = value; }
+            get => __pbn__ManyOutputs.GetValueOrDefault();
+            set => __pbn__ManyOutputs = value;
         }
         public bool ShouldSerializeManyOutputs() => __pbn__ManyOutputs != null;
         public void ResetManyOutputs() => __pbn__ManyOutputs = null;
