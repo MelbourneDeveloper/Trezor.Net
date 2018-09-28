@@ -40,11 +40,6 @@ namespace Trezor.Net
         private object _LastWrittenMessage;
         #endregion
 
-        #region Private Static Fields
-        private static Assembly[] _Assemblies;
-        private static readonly Dictionary<string, Type> _ContractsByName = new Dictionary<string, Type>();
-        #endregion
-
         #region Public Properties
         public USBTypeEnum USBType { get; }
         #endregion
@@ -360,49 +355,9 @@ namespace Trezor.Net
         #endregion
 
         #region Private Static Methods
-        private static Type GetContractType(object messageType, string typeName)
-        {
-            Type contractType;
+        protected abstract Type GetContractType(object messageType, string typeName);
 
-            lock (_ContractsByName)
-            {
-                if (!_ContractsByName.TryGetValue(typeName, out contractType))
-                {
-                    contractType = Type.GetType(typeName);
-
-                    if (contractType == null)
-                    {
-                        if (_Assemblies == null)
-                        {
-                            _Assemblies = AppDomain.CurrentDomain.GetAssemblies();
-                        }
-
-                        foreach (var assembly in _Assemblies)
-                        {
-                            foreach (var type in assembly.GetTypes())
-                            {
-                                if (type.FullName == typeName)
-                                {
-                                    contractType = type;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                    if (contractType == null)
-                    {
-                        throw new Exception($"The device returned a message of {messageType}. There was no corresponding contract type at {typeName}");
-                    }
-                    else
-                    {
-                        _ContractsByName.Add(typeName, contractType);
-                    }
-                }
-            }
-
-            return contractType;
-        }
+   
 
         /// <summary>
         /// Horribly inefficient array thing
