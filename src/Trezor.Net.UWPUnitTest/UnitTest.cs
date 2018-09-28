@@ -27,6 +27,13 @@ namespace Trezor.Net
         }
 
         [TestMethod]
+        public async Task DisplayEthereumAddress()
+        {
+            await GetAndInitialize();
+            var address = await TrezorManager.GetAddressAsync(false, 60, 0, false, 0, true, null);
+        }
+
+        [TestMethod]
         public async Task TestThreadSafety()
         {
             await GetAndInitialize();
