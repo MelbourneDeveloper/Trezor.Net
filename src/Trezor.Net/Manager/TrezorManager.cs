@@ -22,8 +22,11 @@ namespace Trezor.Net
         public Features Features { get; private set; }
         #endregion
 
+        #region Public Override Properties
+        public override bool IsInitialized => Features != null;
+        #endregion
+
         #region Protected Override Properties
-        protected override bool HasFeatures => Features != null;
         protected override string ContractNamespace => "Trezor.Net.Contracts";
         protected override Type MessageTypeType => typeof(MessageType);
         #endregion
@@ -151,11 +154,16 @@ namespace Trezor.Net
         #endregion
 
         #region Public Overrides
+        public Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType)
+        {
+            return GetAddressAsync(coinShortcut, coinNumber, 0, isChange, index, showDisplay, addressType, null);
+        }
+
         /// <summary>
         /// Get an address from the Trezor
         /// //TODO: Move this back down to TrezorManagerBase
         /// </summary>
-        public override async Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, uint account, bool isChange, uint index, bool showDisplay, AddressType addressType, bool? isSegwit)
+        public async Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, uint account, bool isChange, uint index, bool showDisplay, AddressType addressType, bool? isSegwit)
         {
             try
             {

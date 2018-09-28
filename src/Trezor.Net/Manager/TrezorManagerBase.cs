@@ -49,8 +49,11 @@ namespace Trezor.Net
         public USBTypeEnum USBType { get; }
         #endregion
 
+        #region Public Abstract Properties
+        public abstract bool IsInitialized { get; }
+        #endregion
+
         #region Protected Abstract Properties
-        protected abstract bool HasFeatures { get; }
         protected abstract string ContractNamespace { get; }
         protected abstract Type MessageTypeType { get; }
         #endregion
@@ -132,7 +135,7 @@ namespace Trezor.Net
                     }
                 }
 
-                throw new ManagerException("User did not accept the message or pin was entered incorrectly too many times (Note: this library does not have an incorrect pin safety mechanism.)");
+                throw new ManagerException($"Returned response ({response.GetType().Name})  was of the wrong specified message type ({typeof(TReadMessage).Name}). The user did not accept the message, or pin was entered incorrectly too many times (Note: this library does not have an incorrect pin safety mechanism.)");
             }
             finally
             {
@@ -148,11 +151,6 @@ namespace Trezor.Net
             return _HidDevice.GetIsConnectedAsync();
         }
 
-        public Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, bool isChange, uint index, bool showDisplay, AddressType addressType)
-        {
-            return GetAddressAsync(coinShortcut, coinNumber, 0, isChange, index, showDisplay, addressType, null);
-        }
-
         /// <summary>
         /// Initialize the Trezor. Should only be called once.
         /// </summary>
@@ -162,11 +160,6 @@ namespace Trezor.Net
         {
             _HidDevice?.Dispose();
         }
-
-        #endregion
-
-        #region Public Abstract Methods
-        public abstract Task<string> GetAddressAsync(string coinShortcut, uint coinNumber, uint account, bool isChange, uint index, bool showDisplay, AddressType addressType, bool? isSegwit);
 
         #endregion
 
@@ -339,7 +332,7 @@ namespace Trezor.Net
         #region Protected Methods
         protected void ValidateInitialization(object message)
         {
-            if (!HasFeatures && !IsInitialize(message))
+            if (!IsInitialized && !IsInitialize(message))
             {
                 throw new ManagerException($"The device has not been successfully initialised. Please call {nameof(InitializeAsync)}.");
             }
