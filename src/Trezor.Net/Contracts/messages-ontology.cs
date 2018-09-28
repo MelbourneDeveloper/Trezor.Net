@@ -2,7 +2,7 @@
 // Consider using 'partial classes' to extend these types
 // Input: messages-ontology.proto
 
-namespace Trezor.Net.Contracts
+namespace Trezor.Net.Contracts.Ontology
 {
 
 #pragma warning disable CS1591, CS0612, CS3021, IDE1006

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Trezor.Net.Contracts;
+using Trezor.Net.Contracts.Ethereum;
 
 namespace Trezor.Net
 {

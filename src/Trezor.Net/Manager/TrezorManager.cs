@@ -3,6 +3,10 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 using Trezor.Net.Contracts;
+using Trezor.Net.Contracts.Bitcoin;
+using Trezor.Net.Contracts.Common;
+using Trezor.Net.Contracts.Ethereum;
+using Trezor.Net.Contracts.Management;
 
 namespace Trezor.Net
 {
