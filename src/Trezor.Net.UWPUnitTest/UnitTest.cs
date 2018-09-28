@@ -13,10 +13,17 @@ namespace Trezor.Net
         private static readonly string[] _Addresses = new string[50];
 
         [TestMethod]
-        public async Task GetAddress()
+        public async Task DisplayBitcoinAddress()
         {
             await GetAndInitialize();
-            var address = await GetAddress(0, true);
+            var address = await TrezorManager.GetAddressAsync(true, 0, false, 0, true);
+        }
+
+        [TestMethod]
+        public async Task DisplayBitcoinCashAddress()
+        {
+            await GetAndInitialize();
+            var address = await TrezorManager.GetAddressAsync(false, 145, 0, false, 0, true, "Bcash");
         }
 
         [TestMethod]
