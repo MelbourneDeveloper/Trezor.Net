@@ -74,6 +74,7 @@ namespace Trezor.Net
         protected abstract bool IsButtonRequest(object response);
         protected abstract bool IsPinMatrixRequest(object response);
         protected abstract bool IsInitialize(object response);
+        protected abstract Type GetContractType(object messageType, string typeName);
         #endregion
 
         #region Public Methods
@@ -347,10 +348,6 @@ namespace Trezor.Net
         #endregion
 
         #region Private Static Methods
-        protected abstract Type GetContractType(object messageType, string typeName);
-
-   
-
         /// <summary>
         /// Horribly inefficient array thing
         /// </summary>
