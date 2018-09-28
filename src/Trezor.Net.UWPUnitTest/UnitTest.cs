@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Trezor.Net.Contracts;
 
 namespace Trezor.Net
 {
