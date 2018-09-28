@@ -13,7 +13,7 @@ namespace Trezor.Net
     /// <summary>
     /// An interface for dealing with the Trezor that works across all platforms
     /// </summary>
-    public abstract partial class TrezorManagerBase<TMessageType> : IDisposable
+    public abstract class TrezorManagerBase<TMessageType> : IDisposable
     {
         #region Events
         public event EventHandler Connected;
