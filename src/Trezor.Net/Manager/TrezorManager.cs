@@ -142,10 +142,23 @@ namespace Trezor.Net
             {
                 case MessageType.MessageTypeAddress:
                     return typeof(Address);
+                case MessageType.MessageTypeGetAddress:
+                    return typeof(GetAddress);
+                case MessageType.MessageTypeButtonAck:
+                    return typeof(ButtonAck);
+                case MessageType.MessageTypeButtonRequest:
+                    return typeof(ButtonRequest);
+                case MessageType.MessageTypePublicKey:
+                    return typeof(PublicKey);
+                case MessageType.MessageTypeFeatures:
+                    return typeof(Features);
+                case MessageType.MessageTypePinMatrixAck:
+                    return typeof(PinMatrixAck);
+                case MessageType.MessageTypePinMatrixRequest:
+                    return typeof(PinMatrixRequest);
                 default:
                     throw new NotImplementedException();
             }
-
         }
         #endregion
 
