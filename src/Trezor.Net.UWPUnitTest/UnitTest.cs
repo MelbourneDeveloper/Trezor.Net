@@ -58,9 +58,7 @@ namespace Trezor.Net
             Assert.IsTrue(addresses.Accounts[1].Addresses.Count == numberOfAddresses);
             Assert.IsTrue(addresses.Accounts[0].ChangeAddresses.Count == numberOfAddresses);
             Assert.IsTrue(addresses.Accounts[1].ChangeAddresses.Count == numberOfAddresses);
-
-            System.Diagnostics.Debug.WriteLine(addresses.Accounts[0].Addresses[0].PublicKey);
-
+            Assert.IsTrue(addresses.Accounts[0].Addresses[0].PublicKey.Length > addresses.Accounts[0].Addresses[0].Address.Length);
         }
 
         [TestMethod]
