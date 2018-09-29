@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Hardwarewallets.Net.AddressManagement;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,25 +13,37 @@ namespace Trezor.Net
         private static TrezorManager TrezorManager;
         private static readonly string[] _Addresses = new string[50];
 
+        private static async Task<string> GetAddress(uint index)
+        {
+            return await GetAddressAsync(true, 0, false, index, false);
+        }
+
+        private static async Task<string> GetAddressAsync(bool isSegwit, uint coinNumber, bool isChange, uint index, bool display, string coinName = null)
+        {
+            var addressPath = new AddressPath(isSegwit, coinNumber, 0, isChange, index);
+
+            throw new NotImplementedException();
+        }
+
         [TestMethod]
         public async Task DisplayBitcoinAddress()
         {
             await GetAndInitialize();
-            var address = await TrezorManager.GetAddressAsync(true, 0, false, 0, true);
+            var address = await GetAddressAsync(true, 0, false, 0, true);
         }
 
         [TestMethod]
         public async Task GetBitcoinAddress()
         {
             await GetAndInitialize();
-            var address = await TrezorManager.GetAddressAsync(true, 0, false, 0, false);
+            var address = await GetAddressAsync(true, 0, false, 0, false);
         }
 
         [TestMethod]
         public async Task GetBitcoinCashAddress()
         {
             await GetAndInitialize();
-            var address = await TrezorManager.GetAddressAsync(false, 145, false, 0, false);
+            var address = await GetAddressAsync(false, 145, false, 0, false);
         }
 
         [TestMethod]
@@ -38,7 +51,7 @@ namespace Trezor.Net
         {
             await GetAndInitialize();
             //Coin name must be specified when displaying the address for most coins
-            var address = await TrezorManager.GetAddressAsync(false, 145, 0, false, 0, true, "Bcash");
+            var address = await GetAddressAsync(false, 145, 0, false, 0, true, "Bcash");
         }
 
         [TestMethod]
@@ -46,7 +59,7 @@ namespace Trezor.Net
         {
             await GetAndInitialize();
             //Ethereum coins don't need the coin name
-            var address = await TrezorManager.GetAddressAsync(false, 60, false, 0, true);
+            var address = await GetAddressAsync(false, 60, false, 0, true);
         }
 
         [TestMethod]
@@ -54,7 +67,7 @@ namespace Trezor.Net
         {
             await GetAndInitialize();
             //Ethereum coins don't need the coin name
-            var address = await TrezorManager.GetAddressAsync(false, 61, false, 0, true);
+            var address = await GetAddressAsync(false, 61, false, 0, true);
         }
 
         [TestMethod]
@@ -107,11 +120,6 @@ namespace Trezor.Net
             Assert.AreEqual(transaction.SignatureS.Length, 32);
         }
 
-        private static async Task<string> GetAddress(uint i, bool display)
-        {
-            return await TrezorManager.GetAddressAsync(true, 0, false, i, display);
-        }
-
         private async Task GetAndInitialize()
         {
             if (TrezorManager != null)
@@ -120,7 +128,7 @@ namespace Trezor.Net
             }
 
             var trezorHidDevice = await Connect();
-            TrezorManager = new TrezorManager(GetPin, trezorHidDevice);
+            TrezorManager = new TrezorManager(GetPin, trezorHidDevice, new DefaultCoinUtility());
             await TrezorManager.InitializeAsync();
         }
 
