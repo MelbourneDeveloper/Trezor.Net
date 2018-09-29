@@ -1,4 +1,5 @@
-﻿using Hardwarewallets.Net.Model;
+﻿using Hardwarewallets.Net;
+using Hardwarewallets.Net.Model;
 using Hid.Net;
 using ProtoBuf;
 using System;
@@ -14,7 +15,7 @@ namespace Trezor.Net
     /// <summary>
     /// An interface for dealing with the Trezor that works across all platforms
     /// </summary>
-    public abstract class TrezorManagerBase<TMessageType> : IDisposable
+    public abstract class TrezorManagerBase<TMessageType> : IDisposable, IAddressDeriver
     {
         #region Events
         public event EventHandler Connected;

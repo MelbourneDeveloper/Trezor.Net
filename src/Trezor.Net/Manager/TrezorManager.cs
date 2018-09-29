@@ -1,5 +1,4 @@
-﻿using Hardwarewallets.Net;
-using Hardwarewallets.Net.Model;
+﻿using Hardwarewallets.Net.Model;
 using Hid.Net;
 using System;
 using System.Text;
@@ -23,7 +22,7 @@ using Trezor.Net.Contracts.Tezos;
 
 namespace Trezor.Net
 {
-    public class TrezorManager : TrezorManagerBase<MessageType>, IAddressDeriver
+    public class TrezorManager : TrezorManagerBase<MessageType>
     {
         #region Private Constants
         private const string LogSection = "Trezor Manager";
@@ -460,6 +459,11 @@ namespace Trezor.Net
             var inputScriptType = addressPath.Purpose == 49 ? InputScriptType.Spendp2shwitness : InputScriptType.Spendaddress;
 
             return GetAddressAsync(addressPath, isPublicKey, display, coinInfo.AddressType, inputScriptType, coinInfo.CoinName);
+        }
+
+        public Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display, AddressType addressType, InputScriptType inputScriptType)
+        {
+            return GetAddressAsync(addressPath, isPublicKey, display, addressType, inputScriptType, null);
         }
 
         public async Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display, AddressType addressType, InputScriptType inputScriptType, string coinName)
