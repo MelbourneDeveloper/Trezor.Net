@@ -17,7 +17,7 @@ namespace Trezor.Net
                 case 145:
                     return new CoinInfo("Bcash", AddressType.Bitcoin);
                 default:
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"The coin number {coinNumber} has not been filled in for {nameof(DefaultCoinUtility)}. Please create a class that implements ICoinUtility, or call an overload that specifies coin information.");
             }
         }
     }
