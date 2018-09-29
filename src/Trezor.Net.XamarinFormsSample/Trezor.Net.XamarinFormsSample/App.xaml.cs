@@ -1,4 +1,5 @@
-﻿using Hid.Net;
+﻿using Hardwarewallets.Net.AddressManagement;
+using Hid.Net;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -24,7 +25,7 @@ namespace Trezor.Net.XamarinFormsSample
         #region Constructor
         public App(IHidDevice trezorHidDevice)
         {
-            _TrezorManager = new TrezorManager(TrezorPinPad.GetPin, trezorHidDevice);
+            _TrezorManager = new TrezorManager(TrezorPinPad.GetPin, trezorHidDevice, new DefaultCoinUtility());
             InitializeComponent();
             trezorHidDevice.Connected += TrezorHidDevice_Connected;
             MainNavigationPage = new NavigationPage(new MainPage());
@@ -38,7 +39,7 @@ namespace Trezor.Net.XamarinFormsSample
             Device.BeginInvokeOnMainThread(async () =>
             {
                 await _TrezorManager.InitializeAsync();
-                Address = await _TrezorManager.GetAddressAsync(0, false, 0, false, AddressType.Bitcoin);
+                Address = await _TrezorManager.GetAddressAsync(new AddressPath(true, 0, 0, false, 0), false, true);
                 GetAddress?.Invoke(this, new EventArgs());
             });
         }
