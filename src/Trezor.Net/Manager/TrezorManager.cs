@@ -450,12 +450,19 @@ namespace Trezor.Net
                 throw new ManagerException($"A {nameof(CoinUtility)} must be specified if {nameof(AddressType)} is not specified.");
             }
 
-            var asdasd = CoinUtility.GetCoinInfo(addressPath.CoinType);
+            var coinInfo = CoinUtility.GetCoinInfo(addressPath.CoinType);
 
-            return GetAddressAsync(addressPath, isPublicKey, display, asdasd.AddressType, asdasd.CoinName);
+            return GetAddressAsync(addressPath, isPublicKey, display, coinInfo);
         }
 
-        public async Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display, AddressType addressType, string coinName)
+        public Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display, CoinInfo coinInfo)
+        {
+            var inputScriptType = addressPath.Purpose == 49 ? InputScriptType.Spendp2shwitness : InputScriptType.Spendaddress;
+
+            return GetAddressAsync(addressPath, isPublicKey, display, coinInfo.AddressType, inputScriptType, coinInfo.CoinName);
+        }
+
+        public async Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display, AddressType addressType, InputScriptType inputScriptType, string coinName)
         {
             try
             {
@@ -467,7 +474,7 @@ namespace Trezor.Net
                 {
                     case AddressType.Bitcoin:
 
-                        return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = display, AddressNs = path, CoinName = coinName, ScriptType = isSegwit ? InputScriptType.Spendp2shwitness : InputScriptType.Spendaddress })).address;
+                        return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = display, AddressNs = path, CoinName = coinName, ScriptType = inputScriptType })).address;
 
                     case AddressType.Ethereum:
 
