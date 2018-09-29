@@ -1,4 +1,5 @@
-﻿using Hid.Net;
+﻿using Hardwarewallets.Net.AddressManagement;
+using Hid.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -99,7 +100,9 @@ namespace TrezorTestApp
                             }
                         }
 
-                        var ethAddress = await trezorManager.GetAddressAsync(60, false, 0, false, AddressType.Ethereum);
+                        var addressPath = new AddressPath(false, 60, 0, false, 0);
+
+                        var ethAddress = await trezorManager.GetAddressAsync(addressPath, false, false);
                         Console.WriteLine($"First ETH address: {ethAddress}");
 
                         //This fails with 'Safety check failed'
