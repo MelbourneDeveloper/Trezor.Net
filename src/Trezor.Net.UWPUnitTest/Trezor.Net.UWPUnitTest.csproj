@@ -142,6 +142,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Hardwarewallets.Net\src\Hardwarewallets.Net\Hardwarewallets.Net.csproj">
+      <Project>{57b6f194-be1b-4ba6-96c8-b00241c0f512}</Project>
+      <Name>Hardwarewallets.Net</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Trezor.Net\Trezor.Net.csproj">
       <Project>{dda97f34-2e5e-481c-83dd-ee58e9e6aaf0}</Project>
       <Name>Trezor.Net</Name>
