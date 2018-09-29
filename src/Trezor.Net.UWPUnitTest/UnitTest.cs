@@ -13,16 +13,15 @@ namespace Trezor.Net
         private static TrezorManager TrezorManager;
         private static readonly string[] _Addresses = new string[50];
 
-        private static async Task<string> GetAddress(uint index)
+        private static async Task<string> GetAddressAsync(uint index)
         {
             return await GetAddressAsync(true, 0, false, index, false);
         }
 
-        private static async Task<string> GetAddressAsync(bool isSegwit, uint coinNumber, bool isChange, uint index, bool display, string coinName = null)
+        private static Task<string> GetAddressAsync(bool isSegwit, uint coinNumber, bool isChange, uint index, bool display, string coinName = null, bool isPublicKey = false)
         {
             var addressPath = new AddressPath(isSegwit, coinNumber, 0, isChange, index);
-
-            throw new NotImplementedException();
+            return TrezorManager.GetAddressAsync(addressPath, isPublicKey, display);
         }
 
         [TestMethod]
@@ -51,7 +50,7 @@ namespace Trezor.Net
         {
             await GetAndInitialize();
             //Coin name must be specified when displaying the address for most coins
-            var address = await GetAddressAsync(false, 145, 0, false, 0, true, "Bcash");
+            var address = await GetAddressAsync(false, 145, false, 0, true, "Bcash");
         }
 
         [TestMethod]
@@ -86,7 +85,7 @@ namespace Trezor.Net
 
             for (uint i = 0; i < 50; i++)
             {
-                var address = await GetAddress(i, false);
+                var address = await GetAddressAsync(i);
 
                 Console.WriteLine($"Index: {i} (No change) - Address: {address}");
 
@@ -134,24 +133,8 @@ namespace Trezor.Net
 
         private static async Task DoGetAddress(TrezorManager trezorManager, uint i)
         {
-            var address = await GetAddress(i, false);
+            var address = await GetAddressAsync(i);
             _Addresses[i] = address;
         }
-
-        //private CoinType GetCoinType(uint coinNumber)
-        //{
-        //    switch (coinNumber)
-        //    {
-        //        case 0:
-        //            return new CoinType { CoinName = "Bitcoin", Segwit = true };
-        //        case 145:
-        //            return new CoinType { CoinName = "Bcash", Segwit = true };
-        //        case 60:
-        //        case 61:
-        //            return new CoinType { CoinName = "Ethereum", Segwit = false };
-        //    }
-
-        //    throw new NotImplementedException();
-        //}
     }
 }
