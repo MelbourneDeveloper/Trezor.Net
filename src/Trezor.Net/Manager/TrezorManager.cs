@@ -443,14 +443,16 @@ namespace Trezor.Net
         #endregion
 
         #region Public Methods
-        public override async Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display)
+        public override Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display)
         {
             if (CoinUtility == null)
             {
                 throw new ManagerException($"A {nameof(CoinUtility)} must be specified if {nameof(AddressType)} is not specified.");
             }
 
-            return GetAddressAsync(addressPath, isPublicKey, display, )
+            var asdasd = CoinUtility.GetCoinInfo(addressPath.CoinType);
+
+            return GetAddressAsync(addressPath, isPublicKey, display, asdasd.AddressType, asdasd.CoinName);
         }
 
         public async Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display, AddressType addressType, string coinName)

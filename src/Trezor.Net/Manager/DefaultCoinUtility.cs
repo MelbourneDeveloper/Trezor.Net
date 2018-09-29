@@ -9,7 +9,7 @@ namespace Trezor.Net
             switch (coinNumber)
             {
                 case 0:
-                    return new CoinInfo(coinNumber, "Bitcoin", true, AddressType.Bitcoin);
+                    return new CoinInfo(coinNumber, null, true, AddressType.Bitcoin);
                 case 60:
                     return new CoinInfo(coinNumber, null, false, AddressType.Ethereum);
                 case 61:
