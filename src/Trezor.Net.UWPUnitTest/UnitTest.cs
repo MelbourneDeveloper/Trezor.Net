@@ -1,4 +1,5 @@
-﻿using Hardwarewallets.Net.AddressManagement;
+﻿using Hardwarewallets.Net;
+using Hardwarewallets.Net.AddressManagement;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,30 @@ namespace Trezor.Net
         {
             await GetAndInitialize();
             var address = await GetAddressAsync(true, 0, false, 0, false);
+        }
+
+        [TestMethod]
+        public async Task GetBitcoinAddresses()
+        {
+            await GetAndInitialize();
+
+            var addressManager = new AddressManager(TrezorManager, new AddressPathFactory(true, 0));
+
+            //Get 10 addresses with all the trimming
+            const int numberOfAddresses = 3;
+            const int numberOfAccounts = 2;
+            var addresses = await addressManager.GetAddressesAsync(0, numberOfAddresses, numberOfAccounts, true, true);
+
+            Assert.IsTrue(addresses != null);
+            Assert.IsTrue(addresses.Accounts != null);
+            Assert.IsTrue(addresses.Accounts.Count == numberOfAccounts);
+            Assert.IsTrue(addresses.Accounts[0].Addresses.Count == numberOfAddresses);
+            Assert.IsTrue(addresses.Accounts[1].Addresses.Count == numberOfAddresses);
+            Assert.IsTrue(addresses.Accounts[0].ChangeAddresses.Count == numberOfAddresses);
+            Assert.IsTrue(addresses.Accounts[1].ChangeAddresses.Count == numberOfAddresses);
+
+            System.Diagnostics.Debug.WriteLine(addresses.Accounts[0].Addresses[0].PublicKey);
+
         }
 
         [TestMethod]
