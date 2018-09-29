@@ -476,29 +476,37 @@ namespace Trezor.Net
             {
                 var path = addressPath.ToHardenedArray();
 
-                var isSegwit = addressPath.Purpose == 49;
-
-                switch (addressType)
+                if (isPublicKey)
                 {
-                    case AddressType.Bitcoin:
+                    var publicKey = await SendMessageAsync<PublicKey, GetPublicKey>(new GetPublicKey { CoinName = coinName, AddressNs = path, ShowDisplay = display, ScriptType = inputScriptType });
+                    return publicKey.Xpub;
+                }
+                else
+                {
+                    var isSegwit = addressPath.Purpose == 49;
 
-                        return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = display, AddressNs = path, CoinName = coinName, ScriptType = inputScriptType })).address;
+                    switch (addressType)
+                    {
+                        case AddressType.Bitcoin:
 
-                    case AddressType.Ethereum:
+                            return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = display, AddressNs = path, CoinName = coinName, ScriptType = inputScriptType })).address;
 
-                        var ethereumAddress = await SendMessageAsync<EthereumAddress, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = display, AddressNs = path });
+                        case AddressType.Ethereum:
 
-                        var sb = new StringBuilder();
-                        foreach (var b in ethereumAddress.Address)
-                        {
-                            sb.Append(b.ToString("X2").ToLower());
-                        }
+                            var ethereumAddress = await SendMessageAsync<EthereumAddress, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = display, AddressNs = path });
 
-                        var hexString = sb.ToString();
+                            var sb = new StringBuilder();
+                            foreach (var b in ethereumAddress.Address)
+                            {
+                                sb.Append(b.ToString("X2").ToLower());
+                            }
 
-                        return $"0x{hexString}";
-                    default:
-                        throw new NotImplementedException();
+                            var hexString = sb.ToString();
+
+                            return $"0x{hexString}";
+                        default:
+                            throw new NotImplementedException();
+                    }
                 }
             }
             catch (Exception ex)
