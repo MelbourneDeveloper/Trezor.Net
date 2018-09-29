@@ -60,6 +60,8 @@ namespace Trezor.Net
 
         protected TrezorManagerBase(EnterPinArgs enterPinCallback, IHidDevice hidDevice, ICoinUtility coinUtility)
         {
+            CoinUtility = coinUtility;
+
             if (hidDevice == null)
             {
                 throw new ArgumentNullException(nameof(hidDevice));
