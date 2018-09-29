@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trezor.Net.XamarinFormsSamp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trezor.Net.XamarinFormsSample.UWP", "Trezor.Net.XamarinFormsSample\Trezor.Net.XamarinFormsSample.UWP\Trezor.Net.XamarinFormsSample.UWP.csproj", "{E228A094-964E-4CB1-9A35-4B52C20FEEA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trezor.Net.XamarinFormsSample", "Trezor.Net.XamarinFormsSample\Trezor.Net.XamarinFormsSample\Trezor.Net.XamarinFormsSample.csproj", "{6346BA17-991E-4682-9C70-34A2B65B73CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trezor.Net.XamarinFormsSample", "Trezor.Net.XamarinFormsSample\Trezor.Net.XamarinFormsSample\Trezor.Net.XamarinFormsSample.csproj", "{6346BA17-991E-4682-9C70-34A2B65B73CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

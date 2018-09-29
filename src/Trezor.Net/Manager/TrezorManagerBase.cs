@@ -1,4 +1,6 @@
-﻿using Hid.Net;
+﻿using Hardwarewallets.Net;
+using Hardwarewallets.Net.Model;
+using Hid.Net;
 using ProtoBuf;
 using System;
 using System.Collections.Generic;
@@ -13,7 +15,7 @@ namespace Trezor.Net
     /// <summary>
     /// An interface for dealing with the Trezor that works across all platforms
     /// </summary>
-    public abstract class TrezorManagerBase<TMessageType> : IDisposable
+    public abstract class TrezorManagerBase<TMessageType> : IDisposable, IAddressDeriver
     {
         #region Events
         public event EventHandler Connected;
@@ -33,8 +35,12 @@ namespace Trezor.Net
         #endregion
 
         #region Private Static Fields
-        private static Assembly[] _Assemblies;
+        private static readonly Assembly[] _Assemblies;
         private static readonly Dictionary<string, Type> _ContractsByName = new Dictionary<string, Type>();
+        #endregion
+
+        #region Public Properties
+        public ICoinUtility CoinUtility { get; }
         #endregion
 
         #region Public Abstract Properties
@@ -47,8 +53,15 @@ namespace Trezor.Net
         #endregion
 
         #region Constructor
-        protected TrezorManagerBase(EnterPinArgs enterPinCallback, IHidDevice hidDevice)
+        protected TrezorManagerBase(EnterPinArgs enterPinCallback, IHidDevice hidDevice) : this(enterPinCallback, hidDevice, null)
         {
+
+        }
+
+        protected TrezorManagerBase(EnterPinArgs enterPinCallback, IHidDevice hidDevice, ICoinUtility coinUtility)
+        {
+            CoinUtility = coinUtility;
+
             if (hidDevice == null)
             {
                 throw new ArgumentNullException(nameof(hidDevice));
@@ -149,6 +162,10 @@ namespace Trezor.Net
             _HidDevice?.Dispose();
         }
 
+        #endregion
+
+        #region Public Abstract Methods
+        public abstract Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display);
         #endregion
 
         #region Private Methods
