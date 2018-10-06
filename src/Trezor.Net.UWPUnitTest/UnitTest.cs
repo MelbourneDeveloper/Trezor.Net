@@ -101,7 +101,7 @@ namespace Trezor.Net
 
             for (uint i = 0; i < 50; i++)
             {
-                tasks.Add(DoGetAddress(TrezorManager, i));
+                tasks.Add(DoGetAddress(i));
             }
 
             await Task.WhenAll(tasks);
@@ -154,7 +154,7 @@ namespace Trezor.Net
             await TrezorManager.InitializeAsync();
         }
 
-        private static async Task DoGetAddress(TrezorManager trezorManager, uint i)
+        private static async Task DoGetAddress(uint i)
         {
             var address = await GetAddressAsync(i);
             _Addresses[i] = address;
