@@ -40,7 +40,7 @@ namespace Trezor.Net
         #endregion
 
         #region Public Properties
-        public ICoinUtility CoinUtility { get; }
+        public ICoinUtility CoinUtility { get; set; }
         #endregion
 
         #region Public Abstract Properties
