@@ -2,8 +2,8 @@
 {
     public class CoinInfo
     {
-        public string CoinName { get; }
-        public AddressType AddressType { get;  }
+        public string CoinName { get; set; }
+        public AddressType AddressType { get; set; }
 
         public CoinInfo(string coinName, AddressType addressType)
         {
