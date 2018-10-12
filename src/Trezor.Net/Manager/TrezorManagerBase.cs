@@ -217,7 +217,6 @@ namespace Trezor.Net
         {
             //Read a chunk
             var readBuffer = await _HidDevice.ReadAsync();
-            TMessageType messageType;
 
             //Check to see that this is a valid first chunk 
             var firstByteNot63 = readBuffer[0] != (byte)'?';
@@ -256,7 +255,7 @@ namespace Trezor.Net
             //Get the message type
             var messageTypeValueName = Enum.GetName(MessageTypeType, messageTypeInt);
 
-            messageType = (TMessageType)Enum.Parse(MessageTypeType, messageTypeValueName);
+            var messageType = (TMessageType)Enum.Parse(MessageTypeType, messageTypeValueName);
 
             //msgLength:= int(binary.BigEndian.Uint32(buf[i + 4 : i + 8]))
             //TODO: Is this correct?
@@ -306,7 +305,8 @@ namespace Trezor.Net
                 {
                     continue;
                 }
-                allData = Append(allData, GetRange(readBuffer, length - 1, 1));
+
+                allData = Append(allData, GetRange(readBuffer, length , 1));
                 remainingDataLength = 0;
             }
 
