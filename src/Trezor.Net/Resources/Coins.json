@@ -1,0 +1,236 @@
+[
+  {
+    "CoinType": 145,
+    "CoinName": "Bcash",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 1,
+    "CoinName": "Bcash Testnet",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 156,
+    "CoinName": "Bgold",
+    "AddressType": 0,
+    "IsSegwit": true
+  },
+  {
+    "CoinType": 156,
+    "CoinName": "Bgold Testnet",
+    "AddressType": 0,
+    "IsSegwit": true
+  },
+  {
+    "CoinType": 0,
+    "CoinName": "Bitcoin",
+    "AddressType": 0,
+    "IsSegwit": true
+  },
+  {
+    "CoinType": 1,
+    "CoinName": "Testnet",
+    "AddressType": 0,
+    "IsSegwit": true
+  },
+  {
+    "CoinType": 160,
+    "CoinName": "Bitcore",
+    "AddressType": 0,
+    "IsSegwit": true
+  },
+  {
+    "CoinType": 183,
+    "CoinName": "Bprivate",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 72,
+    "CoinName": "Crown",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 5,
+    "CoinName": "Dash",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 1,
+    "CoinName": "Dash Testnet",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 42,
+    "CoinName": "Decred",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 1,
+    "CoinName": "Decred Testnet",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 116,
+    "CoinName": "Denarius",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 20,
+    "CoinName": "DigiByte",
+    "AddressType": 0,
+    "IsSegwit": true
+  },
+  {
+    "CoinType": 3,
+    "CoinName": "Dogecoin",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 8,
+    "CoinName": "Feathercoin",
+    "AddressType": 0,
+    "IsSegwit": true
+  },
+  {
+    "CoinType": 120,
+    "CoinName": "Flashcoin",
+    "AddressType": 0,
+    "IsSegwit": true
+  },
+  {
+    "CoinType": 75,
+    "CoinName": "Fujicoin",
+    "AddressType": 0,
+    "IsSegwit": true
+  },
+  {
+    "CoinType": 17,
+    "CoinName": "Groestlcoin",
+    "AddressType": 0,
+    "IsSegwit": true
+  },
+  {
+    "CoinType": 1,
+    "CoinName": "Groestlcoin Testnet",
+    "AddressType": 0,
+    "IsSegwit": true
+  },
+  {
+    "CoinType": 510,
+    "CoinName": "Koto",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 2,
+    "CoinName": "Litecoin",
+    "AddressType": 0,
+    "IsSegwit": true
+  },
+  {
+    "CoinType": 1,
+    "CoinName": "Litecoin Testnet",
+    "AddressType": 0,
+    "IsSegwit": true
+  },
+  {
+    "CoinType": 22,
+    "CoinName": "Monacoin",
+    "AddressType": 0,
+    "IsSegwit": true
+  },
+  {
+    "CoinType": 31,
+    "CoinName": "MonetaryUnit",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 90,
+    "CoinName": "Myriad",
+    "AddressType": 0,
+    "IsSegwit": true
+  },
+  {
+    "CoinType": 7,
+    "CoinName": "Namecoin",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 109,
+    "CoinName": "Pesetacoin",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 224,
+    "CoinName": "SmartCash",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 224,
+    "CoinName": "SmartCash Testnet",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 83,
+    "CoinName": "Terracoin",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 28,
+    "CoinName": "Vertcoin",
+    "AddressType": 0,
+    "IsSegwit": true
+  },
+  {
+    "CoinType": 14,
+    "CoinName": "Viacoin",
+    "AddressType": 0,
+    "IsSegwit": true
+  },
+  {
+    "CoinType": 133,
+    "CoinName": "Zcash",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 1,
+    "CoinName": "Zcash Testnet",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 136,
+    "CoinName": "Zcoin",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 1,
+    "CoinName": "Zcoin Testnet",
+    "AddressType": 0,
+    "IsSegwit": false
+  },
+  {
+    "CoinType": 121,
+    "CoinName": "Zencash",
+    "AddressType": 0,
+    "IsSegwit": false
+  }
+]

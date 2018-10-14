@@ -33,7 +33,7 @@ namespace TrezorCoinInfoGenerator
         public object xpub_magic_segwit_native { get; set; }
         public object bech32_prefix { get; set; }
         public string cashaddr_prefix { get; set; }
-        public int slip44 { get; set; }
+        public uint slip44 { get; set; }
         public bool segwit { get; set; }
         public bool decred { get; set; }
         public int? fork_id { get; set; }
