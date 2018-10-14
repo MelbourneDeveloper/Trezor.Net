@@ -142,6 +142,14 @@ namespace Trezor.Net
             Assert.AreEqual(transaction.SignatureS.Length, 32);
         }
 
+        [TestMethod]
+        public async Task GetBitcoinCashCoinInfo()
+        {
+            var defaultCoinUtility = new DefaultCoinUtility();
+            var bitcoinCashCoinInfo = defaultCoinUtility.GetCoinInfo(145);
+            Assert.IsTrue(bitcoinCashCoinInfo.CoinName == "Bcash");
+        }
+
         private async Task GetAndInitialize()
         {
             if (TrezorManager != null)
