@@ -12,7 +12,7 @@ namespace TrezorCoinInfoGenerator
         public int High { get; set; }
     }
 
-    public class CoinInfo
+    public class RawCoinInfo
     {
         public string coin_name { get; set; }
         public string coin_shortcut { get; set; }
