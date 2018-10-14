@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Xml.Serialization;
 
@@ -9,7 +8,7 @@ namespace Trezor.Net
 {
     public class DefaultCoinUtility : ICoinUtility
     {
-        public List<CoinInfo> Coins { get; }
+        public Dictionary<uint, CoinInfo> Coins { get; } = new Dictionary<uint, CoinInfo>();
 
         public DefaultCoinUtility()
         {
@@ -20,15 +19,20 @@ namespace Trezor.Net
             {
                 xml = reader.ReadToEnd();
             }
-            Coins = DeserialiseObject<List<CoinInfo>>(xml);
-            Coins.Add(new CoinInfo("Ethereum", AddressType.Ethereum, false, 60));
-            Coins.Add(new CoinInfo("Ethereum Classic", AddressType.Ethereum, false, 61));
+            var coinsList = DeserialiseObject<List<CoinInfo>>(xml);
+
+            foreach (var coinInfo in coinsList)
+            {
+                Coins.Add(coinInfo.CoinType, new CoinInfo(coinInfo.CoinName, AddressType.Bitcoin, coinInfo.IsSegwit, coinInfo.CoinType));
+            }
+
+            Coins.Add(60, new CoinInfo("Ethereum", AddressType.Ethereum, false, 60));
+            Coins.Add(61, new CoinInfo("Ethereum Classic", AddressType.Ethereum, false, 61));
         }
 
         public CoinInfo GetCoinInfo(uint coinNumber)
         {
-            var coinInfo = Coins.FirstOrDefault(c => c.CoinType == coinNumber);
-            if (coinInfo != null)
+            if (Coins.TryGetValue(coinNumber, out var coinInfo))
             {
                 return coinInfo;
             }
