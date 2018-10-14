@@ -36,7 +36,7 @@ namespace TrezorCoinInfoGenerator
         public int slip44 { get; set; }
         public bool segwit { get; set; }
         public bool decred { get; set; }
-        public int fork_id { get; set; }
+        public int? fork_id { get; set; }
         public bool force_bip143 { get; set; }
         public bool bip115 { get; set; }
         public object version_group_id { get; set; }
