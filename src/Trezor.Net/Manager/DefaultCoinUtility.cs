@@ -1,9 +1,23 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 
 namespace Trezor.Net
 {
     public class DefaultCoinUtility : ICoinUtility
     {
+        public DefaultCoinUtility()
+        {
+            //var assembly = typeof(TrezorManager).GetTypeInfo().Assembly;
+            //var stream = assembly.GetManifestResourceStream("Trezor.Net.Resources.Coins.json");
+            //string json;
+            //using (var reader = new StreamReader(stream))
+            //{
+            //    json = reader.ReadToEnd();
+            //}
+            //return json;
+        }
+
         public CoinInfo GetCoinInfo(uint coinNumber)
         {
             switch (coinNumber)

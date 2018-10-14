@@ -7,6 +7,14 @@
         public AddressType AddressType { get; set; }
         public bool IsSegwit { get; }
 
+        /// <summary>
+        /// Serialization only constructor
+        /// </summary>
+        public CoinInfo()
+        {
+
+        }
+
         public CoinInfo(string coinName, AddressType addressType, bool isSegwit, uint cointType)
         {
             CoinName = coinName;
