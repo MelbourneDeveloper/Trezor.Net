@@ -28,11 +28,11 @@ Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for ot
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Coins.json" />
+    <None Remove="Resources\Coins.xml" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Coins.json" />
+    <EmbeddedResource Include="Resources\Coins.xml" />
   </ItemGroup>
 
   <ItemGroup>
