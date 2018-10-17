@@ -154,11 +154,12 @@ namespace Trezor.Net
             var txMessage = new EthereumSignTx
             {
                 Nonce = 10.ToBytesForRLPEncoding().ToHex().ToHexBytes(),
-                GasPrice = 10.ToBytesForRLPEncoding().ToHex().ToHexBytes(),
+                GasPrice = 1000000000.ToBytesForRLPEncoding().ToHex().ToHexBytes(),
                 GasLimit = 21000.ToBytesForRLPEncoding().ToHex().ToHexBytes(),
                 To = "689c56aef474df92d44a1b70850f808488f9769c".ToHexBytes(),
                 Value = BigInteger.Parse("10000000000000000000").ToBytesForRLPEncoding().ToHex().ToHexBytes(),
                 AddressNs = KeyPath.Parse("m/44'/60'/0'/0/0").Indexes,
+                ChainId = 1
             };
             var transaction = await TrezorManager.SendMessageAsync<EthereumTxRequest, EthereumSignTx>(txMessage);
 
