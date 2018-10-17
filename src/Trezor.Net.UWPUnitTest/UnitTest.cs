@@ -127,13 +127,13 @@ namespace Trezor.Net
             //Note: these are not reasonable values. They should not be used for a transaction. Looking for a better example here...
             var txMessage = new EthereumSignTx
             {
-                Nonce = "0".ToHexBytes(),
+                Nonce = 0.ToHexBytes(),
                 GasPrice = 1000000000.ToHexBytes(),
                 GasLimit = 21000.ToHexBytes(),
                 To = "689c56aef474df92d44a1b70850f808488f9769c".ToHexBytes(),
-                Value = "de0b6b3a7640000".ToHexBytes(),
+                Value = 100000000000000.ToHexBytes(),
                 AddressNs = ManagerHelpers.GetAddressPath(false, 0, false, 0, 60),
-                ChainId = 1
+                ChainId = 4
             };
 
             var transaction = await TrezorManager.SendMessageAsync<EthereumTxRequest, EthereumSignTx>(txMessage);
