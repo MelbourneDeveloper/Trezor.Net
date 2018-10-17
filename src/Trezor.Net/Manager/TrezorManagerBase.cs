@@ -213,7 +213,7 @@ namespace Trezor.Net
 
                 for (var x = 0; x < 63; x++)
                 {
-                    range[x + 1] = wholeArray[(i * 64) + x];
+                    range[x + 1] = wholeArray[(i * 63) + x];
                 }
 
                 await _HidDevice.WriteAsync(range);
