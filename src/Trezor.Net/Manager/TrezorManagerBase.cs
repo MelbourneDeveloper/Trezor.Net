@@ -203,10 +203,19 @@ namespace Trezor.Net
             }
 
             var chunks = data.Position / 63;
+
+            var wholeArray = data.ToArray();
+
             for (var i = 0; i < chunks; i++)
             {
-                var range = data.GetRange((i * 64) + 1, 64);
+                var range = new byte[64];
                 range[0] = (byte)'?';
+
+                for (var x = 0; x < 63; x++)
+                {
+                    range[x + 1] = wholeArray[(i * 64) + x];
+                }
+
                 await _HidDevice.WriteAsync(range);
             }
 
@@ -306,7 +315,7 @@ namespace Trezor.Net
                     continue;
                 }
 
-                allData = Append(allData, GetRange(readBuffer, length , 1));
+                allData = Append(allData, GetRange(readBuffer, length, 1));
                 remainingDataLength = 0;
             }
 

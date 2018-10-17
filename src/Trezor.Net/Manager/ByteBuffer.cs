@@ -22,26 +22,7 @@ namespace Trezor.Net
         #endregion
 
         #region Public Methods
-        /// <summary>
-        /// This looks nasty
-        /// </summary>
-        public byte[] GetRange(int targetIndex, int arraySize)
-        {
-            var retVal = new byte[arraySize];
-            for (var i = 0; i < arraySize; i++)
-            {
-                var index = targetIndex + i;
 
-                //TODO: this looks dodgy...
-                if (index >= retVal.Length)
-                {
-                    return retVal;
-                }
-
-                retVal[index] = _Bytes[i];
-            }
-            return retVal;
-        }
 
         public void Put(byte theByte)
         {
