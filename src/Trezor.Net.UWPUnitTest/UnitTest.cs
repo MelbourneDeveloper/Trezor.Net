@@ -1,8 +1,12 @@
 ﻿using Hardwarewallets.Net;
 using Hardwarewallets.Net.AddressManagement;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NBitcoin;
+using Nethereum.Hex.HexConvertors.Extensions;
+using Nethereum.RLP;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Threading.Tasks;
 using Trezor.Net.Contracts.Ethereum;
 
@@ -136,6 +140,26 @@ namespace Trezor.Net
                 ChainId = 4
             };
 
+            var transaction = await TrezorManager.SendMessageAsync<EthereumTxRequest, EthereumSignTx>(txMessage);
+
+            Assert.AreEqual(transaction.SignatureR.Length, 32);
+            Assert.AreEqual(transaction.SignatureS.Length, 32);
+        }
+
+        [TestMethod]
+        public async Task SignEthereumTransaction2()
+        {
+            await GetAndInitialize();
+
+            var txMessage = new EthereumSignTx
+            {
+                Nonce = 10.ToBytesForRLPEncoding().ToHex().ToHexBytes(),
+                GasPrice = 10.ToBytesForRLPEncoding().ToHex().ToHexBytes(),
+                GasLimit = 21000.ToBytesForRLPEncoding().ToHex().ToHexBytes(),
+                To = "689c56aef474df92d44a1b70850f808488f9769c".ToHexBytes(),
+                Value = BigInteger.Parse("10000000000000000000").ToBytesForRLPEncoding().ToHex().ToHexBytes(),
+                AddressNs = KeyPath.Parse("m/44'/60'/0'/0/0").Indexes,
+            };
             var transaction = await TrezorManager.SendMessageAsync<EthereumTxRequest, EthereumSignTx>(txMessage);
 
             Assert.AreEqual(transaction.SignatureR.Length, 32);
