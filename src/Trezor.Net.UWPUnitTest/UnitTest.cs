@@ -23,10 +23,11 @@ namespace Trezor.Net
             return await GetAddressAsync(true, 0, false, index, false);
         }
 
-        private static async Task GetAddress(uint coinNumber)
+        private static async Task<string> GetAddressAsync(uint coinNumber, bool display)
         {
             var coinInfo = TrezorManager.CoinUtility.GetCoinInfo(coinNumber);
-            var address = await GetAddressAsync(coinInfo.IsSegwit, coinInfo.CoinType, false, 0, true);
+            var address = await GetAddressAsync(coinInfo.IsSegwit, coinInfo.CoinType, false, 0, display);
+            return address;
         }
 
         private static Task<string> GetAddressAsync(bool isSegwit, uint coinNumber, bool isChange, uint index, bool display, string coinName = null, bool isPublicKey = false)
@@ -39,7 +40,7 @@ namespace Trezor.Net
         public async Task DisplayBitcoinAddress()
         {
             await GetAndInitialize();
-            var address = await GetAddressAsync(true, 0, false, 0, true);
+            var address = await GetAddressAsync(0, true);
         }
 
         [TestMethod]
@@ -89,7 +90,7 @@ namespace Trezor.Net
         public async Task DisplayBitcoinGoldAddress()
         {
             await GetAndInitialize();
-            await GetAddress(156);
+            var address = await GetAddressAsync(156, true);
         }
 
         [TestMethod]
