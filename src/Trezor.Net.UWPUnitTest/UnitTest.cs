@@ -23,6 +23,12 @@ namespace Trezor.Net
             return await GetAddressAsync(true, 0, false, index, false);
         }
 
+        private static async Task GetAddress(uint coinNumber)
+        {
+            var coinInfo = TrezorManager.CoinUtility.GetCoinInfo(coinNumber);
+            var address = await GetAddressAsync(coinInfo.IsSegwit, coinInfo.CoinType, false, 0, true);
+        }
+
         private static Task<string> GetAddressAsync(bool isSegwit, uint coinNumber, bool isChange, uint index, bool display, string coinName = null, bool isPublicKey = false)
         {
             var addressPath = new AddressPath(isSegwit, coinNumber, 0, isChange, index);
@@ -76,7 +82,6 @@ namespace Trezor.Net
         public async Task DisplayBitcoinCashAddress()
         {
             await GetAndInitialize();
-            //Coin name must be specified when displaying the address for most coins
             var address = await GetAddressAsync(false, 145, false, 0, true, "Bcash");
         }
 
@@ -84,11 +89,7 @@ namespace Trezor.Net
         public async Task DisplayBitcoinGoldAddress()
         {
             await GetAndInitialize();
-
-            var coinInfo = TrezorManager.CoinUtility.GetCoinInfo(156);
-
-            //Coin name must be specified when displaying the address for most coins
-            var address = await GetAddressAsync(coinInfo.IsSegwit, 156, false, 0, true);
+            await GetAddress(156);
         }
 
         [TestMethod]
