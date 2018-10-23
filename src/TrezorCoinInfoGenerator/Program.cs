@@ -21,6 +21,8 @@ namespace TrezorCoinInfoGenerator
                 coinInfos.Add(new CoinInfo(coinInfo.coin_name, AddressType.Bitcoin, coinInfo.segwit, coinInfo.slip44));
             }
 
+            coinInfos = coinInfos.OrderBy(ci => ci.CoinType).ToList();
+
             var contents = SerialiseObject(coinInfos);
 
             File.WriteAllText("Coins.xml", contents);

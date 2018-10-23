@@ -81,6 +81,17 @@ namespace Trezor.Net
         }
 
         [TestMethod]
+        public async Task DisplayBitcoinGoldAddress()
+        {
+            await GetAndInitialize();
+
+            var coinInfo = TrezorManager.CoinUtility.GetCoinInfo(156);
+
+            //Coin name must be specified when displaying the address for most coins
+            var address = await GetAddressAsync(coinInfo.IsSegwit, 156, false, 0, true);
+        }
+
+        [TestMethod]
         public async Task DisplayEthereumAddress()
         {
             await GetAndInitialize();

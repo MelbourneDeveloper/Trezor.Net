@@ -5,7 +5,7 @@
         public uint CoinType { get; set; }
         public string CoinName { get; set; }
         public AddressType AddressType { get; set; }
-        public bool IsSegwit { get; }
+        public bool IsSegwit { get; set; }
 
         /// <summary>
         /// Serialization only constructor
