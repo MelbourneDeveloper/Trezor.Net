@@ -489,6 +489,12 @@ namespace Trezor.Net
                     {
                         case AddressType.Bitcoin:
 
+                            //Ultra hack to deal with a coin name change in Firmware Version 1.6.2
+                            if (Features.MajorVersion <= 1 && (Features.MinorVersion < 6 || Features.PatchVersion <= 1) && coinName == "Bgold")
+                            {
+                                coinName = "Bitcoin Gold";
+                            }
+
                             return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = display, AddressNs = path, CoinName = coinName, ScriptType = inputScriptType })).address;
 
                         case AddressType.Ethereum:
@@ -522,6 +528,9 @@ namespace Trezor.Net
         public override async Task InitializeAsync()
         {
             Features = await SendMessageAsync<Features, Initialize>(new Initialize());
+
+            var asdasd = Features.MajorVersion;
+            var fas = Features.MinorVersion;
 
             if (Features == null)
             {
