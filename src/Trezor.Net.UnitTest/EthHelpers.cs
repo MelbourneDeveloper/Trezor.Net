@@ -49,12 +49,12 @@ namespace Trezor.Net
 
         public static byte[] ToHexBytes(this int number)
         {
-            return Encoding.GetBytes(number.ToHex());
+            return number.ToHex()?.ToHexBytes();
         }
 
         public static byte[] ToHexBytes(this long number)
         {
-            return Encoding.GetBytes(number.ToHex());
+            return number.ToHex()?.ToHexBytes();
         }
 
         public static byte[] ToEthBytes(this long number)
