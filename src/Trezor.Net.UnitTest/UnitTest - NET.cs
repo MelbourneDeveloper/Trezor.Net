@@ -24,7 +24,7 @@ namespace Trezor.Net
             {
                 var devices = WindowsHidDevice.GetConnectedDeviceInformations();
                 var trezors = devices.Where(d => d.VendorId == TrezorManager.TrezorVendorId && TrezorManager.TrezorProductId == 1).ToList();
-                trezorDeviceInformation = trezors.FirstOrDefault(t => t.Product == TrezorManager.USBOneName);
+                trezorDeviceInformation = trezors.FirstOrDefault(t => t.UsagePage == TrezorManager.AcceptedUsagePages[0]);
 
                 if (trezorDeviceInformation != null)
                 {
