@@ -1,6 +1,7 @@
 ﻿using Hardwarewallets.Net.Model;
 using Hid.Net;
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Trezor.Net.Contracts;
@@ -31,7 +32,7 @@ namespace Trezor.Net
         #region Public Constants
         public const ushort TrezorVendorId = 21324;
         public const int TrezorProductId = 1;
-        public const string USBOneName = "TREZOR Interface";
+        public static List<ushort> AcceptedUsagePages { get; } = new List<ushort> { 65280 };
         #endregion
 
         #region Public Properties
