@@ -529,9 +529,6 @@ namespace Trezor.Net
         {
             Features = await SendMessageAsync<Features, Initialize>(new Initialize());
 
-            var asdasd = Features.MajorVersion;
-            var fas = Features.MinorVersion;
-
             if (Features == null)
             {
                 throw new Exception("Error initializing Trezor. Features were not retrieved");
