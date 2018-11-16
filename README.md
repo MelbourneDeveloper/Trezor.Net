@@ -1,5 +1,8 @@
 # Trezor.Net
 
+Join us on Slack:
+https://hardwarewallets.slack.com
+
 ## Quick Start
 
 - Clone the repo and open the solution
