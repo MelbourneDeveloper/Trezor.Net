@@ -36,6 +36,12 @@ namespace Trezor.Net
             return TrezorManager.GetAddressAsync(addressPath, isPublicKey, display);
         }
 
+        private static Task<string> GetAddressAsync(string addressPath, bool display = false, string coinName = null, bool isPublicKey = false)
+        {
+            var bip44AddressPath = AddressPathBase.Parse<BIP44AddressPath>(addressPath);
+            return TrezorManager.GetAddressAsync(bip44AddressPath, isPublicKey, display);
+        }
+
         [TestMethod]
         public async Task DisplayBitcoinAddress()
         {
@@ -77,6 +83,13 @@ namespace Trezor.Net
         {
             await GetAndInitialize();
             var address = await GetAddressAsync(false, 145, false, 0, false);
+        }
+
+        [TestMethod]
+        public async Task GetBitcoinCashParsedAddress()
+        {
+            await GetAndInitialize();
+            var address = await GetAddressAsync("m/44'/145'/0'/0/0");
         }
 
         [TestMethod]
