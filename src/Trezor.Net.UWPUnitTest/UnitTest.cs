@@ -30,10 +30,16 @@ namespace Trezor.Net
             return address;
         }
 
-        private static Task<string> GetAddressAsync(bool isSegwit, uint coinNumber, bool isChange, uint index, bool display, string coinName = null, bool isPublicKey = false)
+        private static async Task<string> GetAddressAsync(bool isSegwit, uint coinNumber, bool isChange, uint index, bool display, string coinName = null, bool isPublicKey = false)
         {
             var addressPath = new BIP44AddressPath(isSegwit, coinNumber, 0, isChange, index);
-            return TrezorManager.GetAddressAsync(addressPath, isPublicKey, display);
+            var firstAddress = await TrezorManager.GetAddressAsync(addressPath, isPublicKey, display);
+            var addressPathString = $"m/{(isSegwit ? 49 : 44)}'/{coinNumber}'/{(isChange ? 1 : 0)}'/{0}/{index}";
+            var secondAddress = await GetAddressAsync(addressPathString);
+
+            Assert.IsTrue(firstAddress == secondAddress, "The parsed version of the address path yielded a different result to the non-parsed version");
+
+            return secondAddress;
         }
 
         private static Task<string> GetAddressAsync(string addressPath, bool display = false, string coinName = null, bool isPublicKey = false)
