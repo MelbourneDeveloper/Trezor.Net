@@ -461,7 +461,7 @@ namespace Trezor.Net
 
         public Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display, CoinInfo coinInfo)
         {
-            var inputScriptType = addressPath.Purpose == 49 ? InputScriptType.Spendp2shwitness : InputScriptType.Spendaddress;
+            var inputScriptType = coinInfo.IsSegwit ? InputScriptType.Spendp2shwitness : InputScriptType.Spendaddress;
 
             return GetAddressAsync(addressPath, isPublicKey, display, coinInfo.AddressType, inputScriptType, coinInfo.CoinName);
         }
@@ -475,7 +475,7 @@ namespace Trezor.Net
         {
             try
             {
-                var path = addressPath.ToHardenedArray();
+                var path = addressPath.ToArray();
 
                 if (isPublicKey)
                 {
@@ -484,8 +484,6 @@ namespace Trezor.Net
                 }
                 else
                 {
-                    var isSegwit = addressPath.Purpose == 49;
-
                     switch (addressType)
                     {
                         case AddressType.Bitcoin:
