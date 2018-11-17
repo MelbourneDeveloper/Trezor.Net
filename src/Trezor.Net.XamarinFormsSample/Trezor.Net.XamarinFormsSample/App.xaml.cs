@@ -39,7 +39,7 @@ namespace Trezor.Net.XamarinFormsSample
             Device.BeginInvokeOnMainThread(async () =>
             {
                 await _TrezorManager.InitializeAsync();
-                Address = await _TrezorManager.GetAddressAsync(new AddressPath(true, 0, 0, false, 0), false, true);
+                Address = await _TrezorManager.GetAddressAsync(new BIP44AddressPath(true, 0, 0, false, 0), false, true);
                 GetAddress?.Invoke(this, new EventArgs());
             });
         }

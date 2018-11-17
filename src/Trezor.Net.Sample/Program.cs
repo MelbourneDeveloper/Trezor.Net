@@ -100,7 +100,7 @@ namespace TrezorTestApp
                             }
                         }
 
-                        var addressPath = new AddressPath(false, 60, 0, false, 0);
+                        var addressPath = new BIP44AddressPath(false, 60, 0, false, 0);
 
                         var ethAddress = await trezorManager.GetAddressAsync(addressPath, false, false);
                         Console.WriteLine($"First ETH address: {ethAddress}");
@@ -126,7 +126,7 @@ namespace TrezorTestApp
 
         private static async Task<string> GetAddress(TrezorManager trezorManager, uint i)
         {
-            return await trezorManager.GetAddressAsync(new AddressPath(true, 0, 0, false, i), false, false);
+            return await trezorManager.GetAddressAsync(new BIP44AddressPath(true, 0, 0, false, i), false, false);
         }
 
         private static async Task<string> GetPin()

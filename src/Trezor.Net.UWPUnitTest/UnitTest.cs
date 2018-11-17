@@ -32,7 +32,7 @@ namespace Trezor.Net
 
         private static Task<string> GetAddressAsync(bool isSegwit, uint coinNumber, bool isChange, uint index, bool display, string coinName = null, bool isPublicKey = false)
         {
-            var addressPath = new AddressPath(isSegwit, coinNumber, 0, isChange, index);
+            var addressPath = new BIP44AddressPath(isSegwit, coinNumber, 0, isChange, index);
             return TrezorManager.GetAddressAsync(addressPath, isPublicKey, display);
         }
 
@@ -55,7 +55,7 @@ namespace Trezor.Net
         {
             await GetAndInitialize();
 
-            var addressManager = new AddressManager(TrezorManager, new AddressPathFactory(true, 0));
+            var addressManager = new AddressManager(TrezorManager, new BIP44AddressPathFactory(true, 0));
 
             //Get 10 addresses with all the trimming
             const int numberOfAddresses = 3;
