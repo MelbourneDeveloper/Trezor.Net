@@ -1,5 +1,5 @@
 # Trezor.Net
-Cross Platform C# Library for the Ledger Cryptocurrency Hardwarewallet
+Cross Platform C# Library for the Trezor Cryptocurrency Hardwarewallet
 
 Join us on Slack:
 https://hardwarewallets.slack.com
@@ -27,7 +27,7 @@ Note: not all messages have a public method, but all messages exist. If you want
 
 Install-Package Trezor.Net
 
-##Hardwarewallets.Net
+## Hardwarewallets.Net
 
 This library is part of the Hardwarewallets.Net suite of libraries. It is an ambitious project aimed toward putting a set of common C# interfaces across all hardwarewallets
 
