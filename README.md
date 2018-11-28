@@ -43,6 +43,8 @@ Please break pull requests up in to their smallest possible parts. If you have a
 
 ## Donate
 
+All Hardwarewallets.Net libraries are open source and free. Your donations will contribute to making sure that these libraries keep up with the latest hardwarewallet firmware, functions are implemented, and the quality is maintained.
+
 Bitcoin: 33LrG1p81kdzNUHoCnsYGj6EHRprTKWu3U
 
 Ethereum: 0x7ba0ea9975ac0efb5319886a287dcf5eecd3038e
