@@ -63,10 +63,6 @@ Trezor.Net communicates with the device via the Hid.Net library. You can see the
 
 https://github.com/MelbourneDeveloper/Hid.Net
 
-## Contribution
-
-Contribution is welcome. Please fork, tighten up the code (real tight), test, and submit a pull request.
-
 ## See Also
 
 These are the Trezor firmware open sources repos:
