@@ -7,6 +7,9 @@ https://hardwarewallets.slack.com
 Twitter:
 https://twitter.com/HardfolioApp
 
+Blog:
+https://christianfindlay.wordpress.com
+
 Currently supports:
 * .NET Framework
 * .NET Core
