@@ -33,11 +33,9 @@ Note: not all messages have a public method, but all messages exist. If you want
 
 Install-Package Trezor.Net
 
-## Hardwarewallets.Net
+## [Hardwarewallets.Net](https://github.com/MelbourneDeveloper/Hardwarewallets.Net)
 
 This library is part of the Hardwarewallets.Net suite of libraries. It is an ambitious project aimed toward putting a set of common C# interfaces across all hardwarewallets
-
-https://github.com/MelbourneDeveloper/Hardwarewallets.Net
 
 ## Contribution
 
@@ -65,13 +63,17 @@ https://play.google.com/store/apps/details?id=com.Hardfolio (Android)
 
 https://www.microsoft.com/en-au/p/hardfolio/9p8xx70n5d2j (UWP)
 
-## Hid.Net
+## [Hid.Net](https://github.com/MelbourneDeveloper/Hid.Net)
 
 Trezor.Net communicates with the device via the Hid.Net library. You can see the repo for this library here:
 
-https://github.com/MelbourneDeveloper/Hid.Net
-
 ## See Also
+
+[Hardwarewallets.Net](https://github.com/MelbourneDeveloper/Hardwarewallets.Net) - Base level Hardwarewallet Library
+
+[Ledger.Net](https://github.com/MelbourneDeveloper/Ledger.Net) - Ledger Hardwarewallet Library
+
+[KeepKey.Net](https://github.com/MelbourneDeveloper/KeepKey.Net) - KeepKey Hardwarewallet Library
 
 These are the Trezor firmware open sources repos:
 
