@@ -23,7 +23,7 @@ namespace Trezor.Net
             while (trezorDeviceInformation == null)
             {
                 var devices = WindowsHidDevice.GetConnectedDeviceInformations();
-                var trezors = devices.Where(d => d.VendorId == TrezorManager.TrezorVendorId && TrezorManager.TrezorProductId == 1).ToList();
+                var trezors = devices.Where(d => d.VendorId == TrezorManager.TrezorVendorId && TrezorManager.TrezorProductId == d.ProductId).ToList();
                 trezorDeviceInformation = trezors.FirstOrDefault(t => t.UsagePage == TrezorManager.AcceptedUsagePages[0]);
 
                 if (trezorDeviceInformation != null)
