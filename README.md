@@ -17,6 +17,7 @@ Currently supports:
 * .NET Core
 * Android
 * UWP 
+* Linux (Please use LibUsbDotNot as per the Unit Tests)
 
 * Trezor One
 * Trezor Model T
@@ -83,7 +84,7 @@ Trezor.Net communicates with the device via the Hid.Net library. You can see the
 
 [KeepKey.Net](https://github.com/MelbourneDeveloper/KeepKey.Net) - KeepKey Hardwarewallet Library
 
-[LibUsbDotNet](https://github.com/LibUsbDotNet/LibUsbDotNet) - The latest Windows Unit Tests use this library
+[LibUsbDotNet](https://github.com/LibUsbDotNet/LibUsbDotNet) - The latest Windows Unit Tests use this library. It can also be used to add Linux support.
 
 These are the Trezor firmware open sources repos:
 
