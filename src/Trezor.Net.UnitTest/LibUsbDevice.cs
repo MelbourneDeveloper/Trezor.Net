@@ -36,6 +36,7 @@ namespace Trezor.Net.UnitTest
         }
         #endregion
 
+        #region Implementation
         public void Dispose()
         {
             UsbDevice.Dispose();
@@ -52,19 +53,23 @@ namespace Trezor.Net.UnitTest
 
         public async Task<byte[]> ReadAsync()
         {
-           return await Task.Run(() =>
-           {
-               var buffer = new byte[ReadBufferSize];
+            return await Task.Run(() =>
+            {
+                var buffer = new byte[ReadBufferSize];
 
-               _UsbEndpointReader.Read(buffer, Timeout, out var bytesRead);
+                _UsbEndpointReader.Read(buffer, Timeout, out var bytesRead);
 
-               return buffer;
-           });
+                return buffer;
+            });
         }
 
-        public Task WriteAsync(byte[] data)
+        public async Task WriteAsync(byte[] data)
         {
-            throw new NotImplementedException();
+            await Task.Run(() =>
+            {
+               _UsbEndpointWriter.Write(data, Timeout, out var bytesWritten);
+            });
         }
+        #endregion
     }
 }
