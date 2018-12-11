@@ -28,12 +28,12 @@ Currently supports:
 - Run one of the unit tests in the pane.
 - Note that the UWP unit test has a UI for entering the pin. Please read instructions there. 
 
-### Model T
-There are now Model T Windows Unit Tests. These tests use LibUsb as the transport. Trezor One Firmware 1.7.x is also supported. The tests are in WindowsModelTAndOneTests. The same should also work on Android, but a working version in UWP is not yet available.
-
 These samples mostly show you how to get addresses and sign transactions, but samples for other messages are being added.
 
 Note: not all messages have a public method, but all messages exist. If you want to send a message to the Trezor you need to construct the message object and send it to the Trezor with the SendMessageAsync method. This requires that you know the result type before calling.
+
+### Model T
+There are now Model T Windows Unit Tests. These tests use LibUsb as the transport. Trezor One Firmware 1.7.x is also supported. The tests are in WindowsModelTAndOneTests. The same should also work on Android, but a working version in UWP is not yet available.
 
 ## NuGet
 
