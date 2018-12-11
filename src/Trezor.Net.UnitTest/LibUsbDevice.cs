@@ -1,5 +1,6 @@
 ﻿using Hid.Net;
 using LibUsbDotNet.LibUsb;
+using LibUsbDotNet.Main;
 using System;
 using System.Threading.Tasks;
 
@@ -49,6 +50,14 @@ namespace Trezor.Net
 
         public async Task InitializeAsync()
         {
+            await Task.Run(() =>
+            {
+                //TODO: Error handling etc.
+                UsbDevice.Open();
+                UsbDevice.ClaimInterface(UsbDevice.Configs[0].Interfaces[0].Number);
+                var writeEndpoint = UsbDevice.OpenEndpointWriter(WriteEndpointID.Ep01);
+                var readEnpoint = UsbDevice.OpenEndpointReader(ReadEndpointID.Ep01);
+            });
         }
 
         public async Task<byte[]> ReadAsync()

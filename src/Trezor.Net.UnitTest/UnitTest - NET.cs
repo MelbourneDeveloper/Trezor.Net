@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Trezor.Net
 {
-    public partial class UnitTesta
+    public partial class UnitTest
     {
         private async Task<IHidDevice> Connect()
         {
@@ -18,10 +18,11 @@ namespace Trezor.Net
             var trezorUsbDevice = context.List().FirstOrDefault(d => d.ProductId == 0x53C1 && d.VendorId == 0x1209);
 
             var libUsbDevice = new LibUsbDevice(trezorUsbDevice, 64, 64, 3000);
+            await libUsbDevice.InitializeAsync();
 
             Console.WriteLine("Connected");
 
-            return retVal;
+            return libUsbDevice;
         }
 
         private async Task<string> GetPin()
