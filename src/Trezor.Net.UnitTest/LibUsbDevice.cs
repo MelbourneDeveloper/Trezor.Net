@@ -11,14 +11,13 @@ namespace Trezor.Net
         #region Fields
         private UsbEndpointReader _UsbEndpointReader;
         private UsbEndpointWriter _UsbEndpointWriter;
+        private int ReadPacketSize;
         #endregion
 
         #region Public Properties
         public IUsbDevice UsbDevice { get; }
         public int VendorId => UsbDevice.VendorId;
         public int ProductId => UsbDevice.ProductId;
-        public int ReadBufferSize { get; }
-        public int WriteBufferSize { get; }
         public int Timeout { get; }
         #endregion
 
@@ -28,11 +27,9 @@ namespace Trezor.Net
         #endregion
 
         #region Constructor
-        public LibUsbDevice(IUsbDevice usbDevice, int readBufferSize, int writeBufferSize, int timeout)
+        public LibUsbDevice(IUsbDevice usbDevice, int timeout)
         {
             UsbDevice = usbDevice;
-            ReadBufferSize = readBufferSize;
-            WriteBufferSize = writeBufferSize;
             Timeout = timeout;
         }
         #endregion
@@ -57,6 +54,7 @@ namespace Trezor.Net
                 UsbDevice.ClaimInterface(UsbDevice.Configs[0].Interfaces[0].Number);
                 _UsbEndpointWriter = UsbDevice.OpenEndpointWriter(WriteEndpointID.Ep01);
                 _UsbEndpointReader = UsbDevice.OpenEndpointReader(ReadEndpointID.Ep01);
+                ReadPacketSize = _UsbEndpointReader.EndpointInfo.MaxPacketSize;
             });
         }
 
@@ -64,7 +62,7 @@ namespace Trezor.Net
         {
             return await Task.Run(() =>
             {
-                var buffer = new byte[ReadBufferSize];
+                var buffer = new byte[ReadPacketSize];
 
                 _UsbEndpointReader.Read(buffer, Timeout, out var bytesRead);
 
