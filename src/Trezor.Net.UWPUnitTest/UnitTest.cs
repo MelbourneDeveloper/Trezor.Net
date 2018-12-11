@@ -23,7 +23,7 @@ namespace Trezor.Net
 
         #region Protected Abstract Methods
         protected abstract Task<IHidDevice> Connect();
-        protected abstract Task<string> GetPin()
+        protected abstract Task<string> GetPin();
         #endregion
 
         #region Helpers
