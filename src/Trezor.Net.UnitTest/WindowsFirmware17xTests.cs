@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Trezor.Net
 {
     [TestClass]
-    public class Firmware17xTests : UnitTestBase
+    public class WindowsFirmware17xTests : UnitTestBase
     {
         #region Fields
         private UsbContext _UsbContext;
