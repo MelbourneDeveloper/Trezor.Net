@@ -491,7 +491,7 @@ namespace Trezor.Net
                         case AddressType.Bitcoin:
 
                             //Ultra hack to deal with a coin name change in Firmware Version 1.6.2
-                            if (Features.MajorVersion <= 1 && (Features.MinorVersion < 6 || Features.PatchVersion <= 1) && coinName == "Bgold")
+                            if ((Features.MajorVersion <= 1 && Features.MinorVersion < 6) && coinName == "Bgold")
                             {
                                 coinName = "Bitcoin Gold";
                             }
