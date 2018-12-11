@@ -83,6 +83,8 @@ Trezor.Net communicates with the device via the Hid.Net library. You can see the
 
 [KeepKey.Net](https://github.com/MelbourneDeveloper/KeepKey.Net) - KeepKey Hardwarewallet Library
 
+[LibUsbDotNet](https://github.com/LibUsbDotNet/LibUsbDotNet) - The latest Windows Unit Tests use this library
+
 These are the Trezor firmware open sources repos:
 
 ### Trezor One
