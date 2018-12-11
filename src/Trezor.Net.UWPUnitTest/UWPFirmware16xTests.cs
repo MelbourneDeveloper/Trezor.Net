@@ -1,13 +1,15 @@
 ﻿using Hid.Net;
 using Hid.Net.UWP;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using Trezor.Net.UWPUnitTest;
 
 namespace Trezor.Net
 {
-    public partial class UnitTestBase
+    [TestClass]
+    public class UWPFirmware16xTests : UnitTestBase
     {
-        private static async Task<string> GetPin()
+        protected override async Task<string> GetPin()
         {
             var pinCompletionSource = new TaskCompletionSource<string>();
             App.PinSelected += (a, b) =>
@@ -18,7 +20,7 @@ namespace Trezor.Net
             return pin;
         }
 
-        private static async Task<IHidDevice> Connect()
+        protected override async Task<IHidDevice> Connect()
         {
             var taskCompletionSource = new TaskCompletionSource<IHidDevice>();
             var trezorHidDevice = new UWPHidDevice();
