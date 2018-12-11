@@ -10,22 +10,24 @@ using System.Threading.Tasks;
 
 namespace Trezor.Net
 {
-    public partial class UnitTest
+    [TestClass]
+    public class Firmware17xTests : UnitTestBase
     {
         #region Fields
-        UsbContext _UsbContext;
-        LibUsbDevice _LibUsbDevice;
+        private UsbContext _UsbContext;
+        private LibUsbDevice _LibUsbDevice;
         #endregion
 
-        private async Task<IHidDevice> Connect()
+        #region Implementation
+        protected override async Task<IHidDevice> Connect()
         {
             _UsbContext = new UsbContext();
 
             var trezorUsbDevice = _UsbContext.List().FirstOrDefault
                 (
-                d => 
+                d =>
                 //Trezor One - 1.6.x
-                (d.ProductId == 0x1 && d.VendorId == 0x534C) || 
+                (d.ProductId == 0x1 && d.VendorId == 0x534C) ||
                 //Trezor One - 1.7.x
                 (d.ProductId == 0x53C1 && d.VendorId == 0x1209)
                 );
@@ -38,15 +40,7 @@ namespace Trezor.Net
             return _LibUsbDevice;
         }
 
-        [TestCleanup]
-        public void Teardown()
-        {
-            TrezorManager?.Dispose();
-            TrezorManager = null;
-            _UsbContext?.Dispose();
-        }
-
-        private async Task<string> GetPin()
+        protected override async Task<string> GetPin()
         {
             var passwordExePath = Path.Combine(GetExecutingAssemblyDirectoryPath(), "Misc", "GetPassword.exe");
             if (!File.Exists(passwordExePath))
@@ -60,7 +54,19 @@ namespace Trezor.Net
             var pin = File.ReadAllText(Path.Combine(GetExecutingAssemblyDirectoryPath(), "pin.txt"));
             return pin;
         }
+        #endregion
 
+        #region Setup / Tear Down
+        [TestCleanup]
+        public void Teardown()
+        {
+            TrezorManager?.Dispose();
+            TrezorManager = null;
+            _UsbContext?.Dispose();
+        }
+        #endregion
+
+        #region Helpers
         private static string GetExecutingAssemblyDirectoryPath()
         {
             var codeBase = Assembly.GetExecutingAssembly().CodeBase;
@@ -68,5 +74,6 @@ namespace Trezor.Net
             var executingAssemblyDirectoryPath = Path.GetDirectoryName(uri.Path);
             return executingAssemblyDirectoryPath;
         }
+        #endregion
     }
 }

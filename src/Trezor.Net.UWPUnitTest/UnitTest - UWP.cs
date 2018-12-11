@@ -5,7 +5,7 @@ using Trezor.Net.UWPUnitTest;
 
 namespace Trezor.Net
 {
-    public partial class UnitTest
+    public partial class UnitTestBase
     {
         private static async Task<string> GetPin()
         {

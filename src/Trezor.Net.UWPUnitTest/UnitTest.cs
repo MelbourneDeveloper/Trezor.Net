@@ -1,5 +1,6 @@
 ﻿using Hardwarewallets.Net;
 using Hardwarewallets.Net.AddressManagement;
+using Hid.Net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NBitcoin;
 using Nethereum.Hex.HexConvertors.Extensions;
@@ -13,24 +14,32 @@ using Trezor.Net.Contracts.Ethereum;
 namespace Trezor.Net
 {
     [TestClass]
-    public partial class UnitTest
+    public abstract partial class UnitTestBase
     {
-        private static TrezorManager TrezorManager;
-        private static readonly string[] _Addresses = new string[50];
+        #region Fields
+        protected TrezorManager TrezorManager;
+        private readonly string[] _Addresses = new string[50];
+        #endregion
 
-        private static async Task<string> GetAddressAsync(uint index)
+        #region Protected Abstract Methods
+        protected abstract Task<IHidDevice> Connect();
+        protected abstract Task<string> GetPin()
+        #endregion
+
+        #region Helpers
+        private async Task<string> GetAddressAsync(uint index)
         {
             return await GetAddressAsync(true, 0, false, index, false);
         }
 
-        private static async Task<string> GetAddressAsync(uint coinNumber, bool display)
+        private async Task<string> GetAddressAsync(uint coinNumber, bool display)
         {
             var coinInfo = TrezorManager.CoinUtility.GetCoinInfo(coinNumber);
             var address = await GetAddressAsync(coinInfo.IsSegwit, coinInfo.CoinType, false, 0, display);
             return address;
         }
 
-        private static async Task<string> GetAddressAsync(bool isSegwit, uint coinNumber, bool isChange, uint index, bool display, string coinName = null, bool isPublicKey = false)
+        private async Task<string> GetAddressAsync(bool isSegwit, uint coinNumber, bool isChange, uint index, bool display, string coinName = null, bool isPublicKey = false)
         {
             var addressPath = new BIP44AddressPath(isSegwit, coinNumber, 0, isChange, index);
             var firstAddress = await TrezorManager.GetAddressAsync(addressPath, isPublicKey, display);
@@ -42,12 +51,32 @@ namespace Trezor.Net
             return secondAddress;
         }
 
-        private static Task<string> GetAddressAsync(string addressPath, bool display = false, string coinName = null, bool isPublicKey = false)
+        private Task<string> GetAddressAsync(string addressPath, bool display = false, string coinName = null, bool isPublicKey = false)
         {
             var bip44AddressPath = AddressPathBase.Parse<BIP44AddressPath>(addressPath);
             return TrezorManager.GetAddressAsync(bip44AddressPath, isPublicKey, display);
         }
 
+        private async Task GetAndInitialize()
+        {
+            if (TrezorManager != null)
+            {
+                return;
+            }
+
+            var trezorHidDevice = await Connect();
+            TrezorManager = new TrezorManager(GetPin, trezorHidDevice, new DefaultCoinUtility());
+            await TrezorManager.InitializeAsync();
+        }
+
+        private async Task DoGetAddress(uint i)
+        {
+            var address = await GetAddressAsync(i);
+            _Addresses[i] = address;
+        }
+        #endregion
+
+        #region Tests
         [TestMethod]
         public async Task DisplayBitcoinAddress()
         {
@@ -206,23 +235,6 @@ namespace Trezor.Net
             var bitcoinCashCoinInfo = defaultCoinUtility.GetCoinInfo(145);
             Assert.IsTrue(bitcoinCashCoinInfo.CoinName == "Bcash");
         }
-
-        private async Task GetAndInitialize()
-        {
-            if (TrezorManager != null)
-            {
-                return;
-            }
-
-            var trezorHidDevice = await Connect();
-            TrezorManager = new TrezorManager(GetPin, trezorHidDevice, new DefaultCoinUtility());
-            await TrezorManager.InitializeAsync();
-        }
-
-        private static async Task DoGetAddress(uint i)
-        {
-            var address = await GetAddressAsync(i);
-            _Addresses[i] = address;
-        }
+        #endregion
     }
 }
