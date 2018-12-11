@@ -7,7 +7,7 @@ using Trezor.Net.UWPUnitTest;
 namespace Trezor.Net
 {
     [TestClass]
-    public class UWPFirmware16xTests : UnitTestBase
+    public class UWPTrezorOneOldTests : UnitTestBase
     {
         protected override async Task<string> GetPin()
         {

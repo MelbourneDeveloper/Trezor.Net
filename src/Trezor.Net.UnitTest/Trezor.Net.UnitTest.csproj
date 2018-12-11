@@ -137,8 +137,8 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Trezor.Net.UWPUnitTest\UnitTest.cs">
-      <Link>UnitTest.cs</Link>
+    <Compile Include="..\Trezor.Net.UWPUnitTest\UnitTestBase.cs">
+      <Link>UnitTestBase.cs</Link>
     </Compile>
     <Compile Include="EthHelpers.cs" />
     <Compile Include="LibUsbDevice.cs" />
