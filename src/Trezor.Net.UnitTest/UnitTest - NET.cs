@@ -41,8 +41,9 @@ namespace Trezor.Net
         [TestCleanup]
         public void Teardown()
         {
-            _LibUsbDevice.Dispose();
-            _UsbContext.Dispose();
+            TrezorManager?.Dispose();
+            TrezorManager = null;
+            _UsbContext?.Dispose();
         }
 
         private async Task<string> GetPin()
