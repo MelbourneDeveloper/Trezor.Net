@@ -7,16 +7,19 @@ namespace Trezor.Net.UnitTest
 {
     public class LibUsbDevice : IHidDevice
     {
+        #region Fields
+        private UsbEndpointReader _UsbEndpointReader;
+        private readonly UsbEndpointWriter _UsbEndpointWriter;
+        #endregion
+
         #region Public Properties
-        public IUsbDevice UsbDevice { get;}
+        public IUsbDevice UsbDevice { get; }
         public int VendorId => UsbDevice.VendorId;
         public int ProductId => UsbDevice.ProductId;
         public int ReadBufferSize { get; }
         public int WriteBufferSize { get; }
         public int Timeout { get; }
         #endregion
-
-        UsbEndpointReader UsbEndpointReader;
 
         #region Events
         public event EventHandler Connected;
@@ -49,11 +52,14 @@ namespace Trezor.Net.UnitTest
 
         public async Task<byte[]> ReadAsync()
         {
-            return Task.Run<byte[]>((a) ={
-                var buffer = new byte[ReadBufferSize];
+           return await Task.Run(() =>
+           {
+               var buffer = new byte[ReadBufferSize];
 
-                UsbEndpointReader.Read(buffer, )
-            });
+               _UsbEndpointReader.Read(buffer, Timeout, out var bytesRead);
+
+               return buffer;
+           });
         }
 
         public Task WriteAsync(byte[] data)
