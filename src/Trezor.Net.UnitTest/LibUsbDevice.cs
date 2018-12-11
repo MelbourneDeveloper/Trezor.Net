@@ -10,7 +10,7 @@ namespace Trezor.Net
     {
         #region Fields
         private UsbEndpointReader _UsbEndpointReader;
-        private readonly UsbEndpointWriter _UsbEndpointWriter;
+        private UsbEndpointWriter _UsbEndpointWriter;
         #endregion
 
         #region Public Properties
@@ -55,8 +55,8 @@ namespace Trezor.Net
                 //TODO: Error handling etc.
                 UsbDevice.Open();
                 UsbDevice.ClaimInterface(UsbDevice.Configs[0].Interfaces[0].Number);
-                var writeEndpoint = UsbDevice.OpenEndpointWriter(WriteEndpointID.Ep01);
-                var readEnpoint = UsbDevice.OpenEndpointReader(ReadEndpointID.Ep01);
+                _UsbEndpointWriter = UsbDevice.OpenEndpointWriter(WriteEndpointID.Ep01);
+                _UsbEndpointReader = UsbDevice.OpenEndpointReader(ReadEndpointID.Ep01);
             });
         }
 
@@ -76,7 +76,7 @@ namespace Trezor.Net
         {
             await Task.Run(() =>
             {
-               _UsbEndpointWriter.Write(data, Timeout, out var bytesWritten);
+                _UsbEndpointWriter.Write(data, Timeout, out var bytesWritten);
             });
         }
         #endregion
