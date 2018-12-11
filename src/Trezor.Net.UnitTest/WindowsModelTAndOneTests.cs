@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Trezor.Net
 {
     [TestClass]
-    public class WindowsFirmware17xTests : WindowsUnitTestBase
+    public class WindowsModelTAndOneTests : WindowsTestBase
     {
         #region Fields
         private UsbContext _UsbContext;

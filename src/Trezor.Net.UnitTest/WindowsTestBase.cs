@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Trezor.Net
 {
-    public abstract class WindowsUnitTestBase : UnitTestBase
+    public abstract class WindowsTestBase : UnitTestBase
     {
         #region Platform Specific Overrides
         protected string GetExecutingAssemblyDirectoryPath()

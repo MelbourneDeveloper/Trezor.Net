@@ -143,9 +143,9 @@
     <Compile Include="EthHelpers.cs" />
     <Compile Include="LibUsbDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WindowsFirmware16xTests.cs" />
-    <Compile Include="WindowsFirmware17xTests.cs" />
-    <Compile Include="WindowsUnitTestBase.cs" />
+    <Compile Include="WindowsTrezorOneOldTests.cs" />
+    <Compile Include="WindowsModelTAndOneTests.cs" />
+    <Compile Include="WindowsTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

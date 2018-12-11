@@ -1,16 +1,13 @@
 ﻿using Hid.Net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Trezor.Net
 {
     [TestClass]
-    public class WindowsFirmware16xTests : WindowsUnitTestBase
+    public class WindowsTrezorOneOldTests : WindowsTestBase
     {
         protected override async Task<IHidDevice> Connect()
         {
