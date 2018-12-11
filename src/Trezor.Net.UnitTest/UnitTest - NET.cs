@@ -1,5 +1,6 @@
 ﻿using Hid.Net;
 using LibUsbDotNet.LibUsb;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -11,18 +12,37 @@ namespace Trezor.Net
 {
     public partial class UnitTest
     {
+        #region Fields
+        UsbContext _UsbContext;
+        LibUsbDevice _LibUsbDevice;
+        #endregion
+
         private async Task<IHidDevice> Connect()
         {
-            var context = new UsbContext();
+            _UsbContext = new UsbContext();
 
-            var trezorUsbDevice = context.List().FirstOrDefault(d => d.ProductId == 0x1 && d.VendorId == 0x534C);
+            var trezorUsbDevice = _UsbContext.List().FirstOrDefault
+                (
+                d => 
+                //Trezor One - 1.6.x
+                (d.ProductId == 0x1 && d.VendorId == 0x534C) || 
+                //Trezor One - 1.7.x
+                (d.ProductId == 0x53C1 && d.VendorId == 0x1209)
+                );
 
-            var libUsbDevice = new LibUsbDevice(trezorUsbDevice, 64, 64, 3000);
-            await libUsbDevice.InitializeAsync();
+            _LibUsbDevice = new LibUsbDevice(trezorUsbDevice, 64, 64, 3000);
+            await _LibUsbDevice.InitializeAsync();
 
             Console.WriteLine("Connected");
 
-            return libUsbDevice;
+            return _LibUsbDevice;
+        }
+
+        [TestCleanup]
+        public void Teardown()
+        {
+            _LibUsbDevice.Dispose();
+            _UsbContext.Dispose();
         }
 
         private async Task<string> GetPin()
