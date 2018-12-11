@@ -30,7 +30,7 @@ namespace Trezor.Net
                 (d.ProductId == 0x53C1 && d.VendorId == 0x1209)
                 );
 
-            _LibUsbDevice = new LibUsbDevice(trezorUsbDevice, 64, 64, 3000);
+            _LibUsbDevice = new LibUsbDevice(trezorUsbDevice, 64, 64, 60000);
             await _LibUsbDevice.InitializeAsync();
 
             Console.WriteLine("Connected");

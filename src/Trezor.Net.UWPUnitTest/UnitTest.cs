@@ -70,17 +70,17 @@ namespace Trezor.Net
             var addressManager = new AddressManager(TrezorManager, new BIP44AddressPathFactory(true, 0));
 
             //Get 10 addresses with all the trimming
-            const int numberOfAddresses = 1;
-            const int numberOfAccounts = 1;
+            const int numberOfAddresses = 3;
+            const int numberOfAccounts = 2;
             var addresses = await addressManager.GetAddressesAsync(0, numberOfAddresses, numberOfAccounts, true, true);
 
             Assert.IsTrue(addresses != null);
             Assert.IsTrue(addresses.Accounts != null);
             Assert.IsTrue(addresses.Accounts.Count == numberOfAccounts);
             Assert.IsTrue(addresses.Accounts[0].Addresses.Count == numberOfAddresses);
-            //Assert.IsTrue(addresses.Accounts[1].Addresses.Count == numberOfAddresses);
+            Assert.IsTrue(addresses.Accounts[1].Addresses.Count == numberOfAddresses);
             Assert.IsTrue(addresses.Accounts[0].ChangeAddresses.Count == numberOfAddresses);
-            //Assert.IsTrue(addresses.Accounts[1].ChangeAddresses.Count == numberOfAddresses);
+            Assert.IsTrue(addresses.Accounts[1].ChangeAddresses.Count == numberOfAddresses);
             Assert.IsTrue(addresses.Accounts[0].Addresses[0].PublicKey.Length > addresses.Accounts[0].Addresses[0].Address.Length);
         }
 
@@ -135,14 +135,14 @@ namespace Trezor.Net
 
             var tasks = new List<Task>();
 
-            for (uint i = 0; i < 10; i++)
+            for (uint i = 0; i < 50; i++)
             {
                 tasks.Add(DoGetAddress(i));
             }
 
             await Task.WhenAll(tasks);
 
-            for (uint i = 0; i < 10; i++)
+            for (uint i = 0; i < 50; i++)
             {
                 var address = await GetAddressAsync(i);
 
