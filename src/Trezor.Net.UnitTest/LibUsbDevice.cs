@@ -3,7 +3,7 @@ using LibUsbDotNet.LibUsb;
 using System;
 using System.Threading.Tasks;
 
-namespace Trezor.Net.UnitTest
+namespace Trezor.Net
 {
     public class LibUsbDevice : IHidDevice
     {

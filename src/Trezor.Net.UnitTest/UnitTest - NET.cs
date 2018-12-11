@@ -1,4 +1,5 @@
 ﻿using Hid.Net;
+using LibUsbDotNet.LibUsb;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -8,36 +9,15 @@ using System.Threading.Tasks;
 
 namespace Trezor.Net
 {
-    public partial class UnitTest
+    public partial class UnitTesta
     {
         private async Task<IHidDevice> Connect()
         {
-            DeviceInformation trezorDeviceInformation = null;
+            var context = new UsbContext();
 
-            WindowsHidDevice retVal = null;
+            var trezorUsbDevice = context.List().FirstOrDefault(d => d.ProductId == 0x53C1 && d.VendorId == 0x1209);
 
-            retVal = new WindowsHidDevice();
-
-            Console.Write("Waiting for Trezor .");
-
-            while (trezorDeviceInformation == null)
-            {
-                var devices = WindowsHidDevice.GetConnectedDeviceInformations();
-                var trezors = devices.Where(d => d.VendorId == TrezorManager.TrezorVendorId && TrezorManager.TrezorProductId == d.ProductId).ToList();
-                trezorDeviceInformation = trezors.FirstOrDefault(t => t.UsagePage == TrezorManager.AcceptedUsagePages[0]);
-
-                if (trezorDeviceInformation != null)
-                {
-                    break;
-                }
-
-                await Task.Delay(1000);
-                Console.Write(".");
-            }
-
-            retVal.DeviceInformation = trezorDeviceInformation;
-
-            await retVal.InitializeAsync();
+            var libUsbDevice = new LibUsbDevice(trezorUsbDevice, 64, 64, 3000);
 
             Console.WriteLine("Connected");
 

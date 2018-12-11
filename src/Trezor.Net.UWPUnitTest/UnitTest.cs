@@ -13,7 +13,7 @@ using Trezor.Net.Contracts.Ethereum;
 namespace Trezor.Net
 {
     [TestClass]
-    public partial class UnitTest
+    public partial class UnitTesta
     {
         private static TrezorManager TrezorManager;
         private static readonly string[] _Addresses = new string[50];
