@@ -23,7 +23,11 @@ namespace Trezor.Net.XamarinFormsSample.Droid
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            //Firmware 1.6.x
             _TrezorHidDevice = new AndroidHidDevice(GetSystemService(UsbService) as UsbManager, ApplicationContext, 3000, 64, TrezorManager.TrezorVendorId, TrezorManager.TrezorProductId);
+
+            //Firmware 1.7.x / Trezor Model T
+            //_TrezorHidDevice = new AndroidHidDevice(GetSystemService(UsbService) as UsbManager, ApplicationContext, 3000, 64, 0x1209, 0x53C1);
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
