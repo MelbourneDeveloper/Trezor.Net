@@ -1,4 +1,5 @@
-﻿using Hid.Net;
+﻿using Device.Net;
+using Hid.Net.Windows;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Trezor.Net
     {
         protected override async Task<IDevice> Connect()
         {
-            DeviceInformation trezorDeviceInformation = null;
+            WindowsHidDeviceInformation trezorDeviceInformation = null;
 
             WindowsHidDevice retVal = null;
 
@@ -21,7 +22,7 @@ namespace Trezor.Net
 
             while (trezorDeviceInformation == null)
             {
-                var devices = WindowsHidDevice.GetConnectedDeviceInformations();
+                var devices = WindowsHidDevice.GetConnectedDeviceInformations().Cast<WindowsHidDeviceInformation>();
                 var trezors = devices.Where(d => d.VendorId == TrezorManager.TrezorVendorId && TrezorManager.TrezorProductId == d.ProductId).ToList();
                 trezorDeviceInformation = trezors.FirstOrDefault(t => t.UsagePage == TrezorManager.AcceptedUsagePages[0]);
 

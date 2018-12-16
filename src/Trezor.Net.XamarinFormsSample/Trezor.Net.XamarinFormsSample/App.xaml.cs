@@ -1,4 +1,5 @@
-﻿using Hardwarewallets.Net.AddressManagement;
+﻿using Device.Net;
+using Hardwarewallets.Net.AddressManagement;
 using Hid.Net;
 using System;
 using Xamarin.Forms;

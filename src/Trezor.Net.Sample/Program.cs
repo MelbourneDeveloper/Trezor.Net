@@ -1,6 +1,5 @@
 ﻿using Device.Net;
 using Hardwarewallets.Net.AddressManagement;
-using Hid.Net;
 using Hid.Net.Windows;
 using System;
 using System.Collections.Generic;

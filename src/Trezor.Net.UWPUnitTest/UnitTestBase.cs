@@ -1,6 +1,6 @@
-﻿using Hardwarewallets.Net;
+﻿using Device.Net;
+using Hardwarewallets.Net;
 using Hardwarewallets.Net.AddressManagement;
-using Hid.Net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NBitcoin;
 using Nethereum.Hex.HexConvertors.Extensions;
