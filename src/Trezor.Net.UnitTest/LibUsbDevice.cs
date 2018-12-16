@@ -1,4 +1,5 @@
-﻿using LibUsbDotNet.LibUsb;
+﻿using Device.Net;
+using LibUsbDotNet.LibUsb;
 using LibUsbDotNet.Main;
 using System;
 using System.Threading.Tasks;

@@ -34,7 +34,7 @@ namespace TrezorTestApp
         #region Private  Methods
         private static async Task<IDevice> Connect()
         {
-            DeviceInformation trezorDeviceInformation = null;
+            WindowsHidDeviceInformation trezorDeviceInformation = null;
 
             WindowsHidDevice retVal = null;
 
@@ -44,7 +44,7 @@ namespace TrezorTestApp
 
             while (trezorDeviceInformation == null)
             {
-                var devices = WindowsHidDevice.GetConnectedDeviceInformations();
+                var devices = WindowsHidDevice.GetConnectedDeviceInformations().Cast<WindowsHidDeviceInformation>();
                 var trezors = devices.Where(d => d.VendorId == TrezorManager.TrezorVendorId && TrezorManager.TrezorProductId == 1).ToList();
                 trezorDeviceInformation = trezors.FirstOrDefault(t => t.UsagePage == TrezorManager.AcceptedUsagePages[0]);
 
