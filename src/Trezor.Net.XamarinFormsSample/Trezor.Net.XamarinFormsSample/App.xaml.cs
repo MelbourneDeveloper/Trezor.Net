@@ -1,6 +1,5 @@
 ﻿using Device.Net;
 using Hardwarewallets.Net.AddressManagement;
-using Hid.Net;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -37,7 +36,7 @@ namespace Trezor.Net.XamarinFormsSample
         #region Event Handlers
         private void TrezorHidDevice_Connected(object sender, System.EventArgs e)
         {
-            Device.BeginInvokeOnMainThread(async () =>
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
             {
                 await _TrezorManager.InitializeAsync();
                 Address = await _TrezorManager.GetAddressAsync(new BIP44AddressPath(true, 0, 0, false, 0), false, true);
