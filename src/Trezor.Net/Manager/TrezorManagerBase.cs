@@ -1,6 +1,6 @@
-﻿using Hardwarewallets.Net;
+﻿using Device.Net;
+using Hardwarewallets.Net;
 using Hardwarewallets.Net.Model;
-using Hid.Net;
 using ProtoBuf;
 using System;
 using System.Collections.Generic;
@@ -26,7 +26,7 @@ namespace Trezor.Net
         #endregion
 
         #region Fields
-        private readonly IHidDevice _HidDevice;
+        private readonly IDevice _HidDevice;
         private int _InvalidChunksCounter;
         private readonly EnterPinArgs _EnterPinCallback;
         protected SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
@@ -53,12 +53,12 @@ namespace Trezor.Net
         #endregion
 
         #region Constructor
-        protected TrezorManagerBase(EnterPinArgs enterPinCallback, IHidDevice hidDevice) : this(enterPinCallback, hidDevice, null)
+        protected TrezorManagerBase(EnterPinArgs enterPinCallback, IDevice hidDevice) : this(enterPinCallback, hidDevice, null)
         {
 
         }
 
-        protected TrezorManagerBase(EnterPinArgs enterPinCallback, IHidDevice hidDevice, ICoinUtility coinUtility)
+        protected TrezorManagerBase(EnterPinArgs enterPinCallback, IDevice hidDevice, ICoinUtility coinUtility)
         {
             CoinUtility = coinUtility;
 

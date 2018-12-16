@@ -23,7 +23,7 @@ namespace Trezor.Net.XamarinFormsSample
         #endregion
 
         #region Constructor
-        public App(IHidDevice trezorHidDevice)
+        public App(IDevice trezorHidDevice)
         {
             _TrezorManager = new TrezorManager(TrezorPinPad.GetPin, trezorHidDevice, new DefaultCoinUtility());
             InitializeComponent();

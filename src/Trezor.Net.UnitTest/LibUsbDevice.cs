@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Trezor.Net
 {
-    public class LibUsbDevice : IHidDevice
+    public class LibUsbDevice : IDevice
     {
         #region Fields
         private UsbEndpointReader _UsbEndpointReader;

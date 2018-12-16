@@ -9,7 +9,7 @@ namespace Trezor.Net
     [TestClass]
     public class WindowsTrezorOneOldTests : WindowsTestBase
     {
-        protected override async Task<IHidDevice> Connect()
+        protected override async Task<IDevice> Connect()
         {
             DeviceInformation trezorDeviceInformation = null;
 

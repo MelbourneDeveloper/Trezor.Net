@@ -4,7 +4,7 @@ using Android.Content;
 using Android.Content.PM;
 using Android.Hardware.Usb;
 using Android.OS;
-using Hid.Net.Android;
+using Usb.Net.Android;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -15,7 +15,7 @@ namespace Trezor.Net.XamarinFormsSample.Droid
     public class MainActivity : FormsAppCompatActivity
     {
         #region Fields
-        private AndroidHidDevice _TrezorHidDevice;
+        private AndroidUsbDevice _TrezorHidDevice;
         private UsbDeviceAttachedReceiver _TrezorUsbDeviceAttachedReceiver;
         private UsbDeviceDetachedReceiver _TrezorUsbDeviceDetachedReceiver;
         private readonly object _ReceiverLock = new object();
@@ -24,7 +24,7 @@ namespace Trezor.Net.XamarinFormsSample.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             //Firmware 1.6.x
-            _TrezorHidDevice = new AndroidHidDevice(GetSystemService(UsbService) as UsbManager, ApplicationContext, 3000, 64, TrezorManager.TrezorVendorId, TrezorManager.TrezorProductId);
+            _TrezorHidDevice = new AndroidUsbDevice(GetSystemService(UsbService) as UsbManager, ApplicationContext, 3000, 64, TrezorManager.TrezorVendorId, TrezorManager.TrezorProductId);
 
             //Firmware 1.7.x / Trezor Model T
             //_TrezorHidDevice = new AndroidHidDevice(GetSystemService(UsbService) as UsbManager, ApplicationContext, 3000, 64, 0x1209, 0x53C1);

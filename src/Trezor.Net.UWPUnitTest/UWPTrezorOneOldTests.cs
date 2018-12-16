@@ -20,9 +20,9 @@ namespace Trezor.Net
             return pin;
         }
 
-        protected override async Task<IHidDevice> Connect()
+        protected override async Task<IDevice> Connect()
         {
-            var taskCompletionSource = new TaskCompletionSource<IHidDevice>();
+            var taskCompletionSource = new TaskCompletionSource<IDevice>();
             var trezorHidDevice = new UWPHidDevice();
             var poller = new UWPHidDevicePoller(TrezorManager.TrezorProductId, TrezorManager.TrezorVendorId, trezorHidDevice);
             trezorHidDevice.Connected += (a, b) =>

@@ -1,5 +1,7 @@
-﻿using Hardwarewallets.Net.AddressManagement;
+﻿using Device.Net;
+using Hardwarewallets.Net.AddressManagement;
 using Hid.Net;
+using Hid.Net.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +33,7 @@ namespace TrezorTestApp
         #endregion
 
         #region Private  Methods
-        private static async Task<IHidDevice> Connect()
+        private static async Task<IDevice> Connect()
         {
             DeviceInformation trezorDeviceInformation = null;
 
