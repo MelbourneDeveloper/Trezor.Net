@@ -1,4 +1,5 @@
 ﻿using Device.Net;
+using Hid.Net.UWP;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using Trezor.Net.UWPUnitTest;
