@@ -15,7 +15,7 @@ namespace Trezor.Net.XamarinFormsSample.Droid
     public class MainActivity : FormsAppCompatActivity
     {
         #region Fields
-        private AndroidUsbDevice _TrezorHidDevice;
+        private AndroidUsbDevice _TrezorUsbDevice;
         private UsbDeviceAttachedReceiver _TrezorUsbDeviceAttachedReceiver;
         private UsbDeviceDetachedReceiver _TrezorUsbDeviceDetachedReceiver;
         private readonly object _ReceiverLock = new object();
@@ -24,10 +24,10 @@ namespace Trezor.Net.XamarinFormsSample.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             //Firmware 1.6.x
-            _TrezorHidDevice = new AndroidUsbDevice(GetSystemService(UsbService) as UsbManager, ApplicationContext, 3000, 64, TrezorManager.TrezorVendorId, TrezorManager.TrezorProductId);
+            _TrezorUsbDevice = new AndroidUsbDevice(GetSystemService(UsbService) as UsbManager, ApplicationContext, 3000, 64, TrezorManager.TrezorVendorId, TrezorManager.TrezorProductId);
 
             //Firmware 1.7.x / Trezor Model T
-            //_TrezorHidDevice = new AndroidHidDevice(GetSystemService(UsbService) as UsbManager, ApplicationContext, 3000, 64, 0x1209, 0x53C1);
+            //_TrezorUsbDevice = new AndroidUsbDevice(GetSystemService(UsbService) as UsbManager, ApplicationContext, 3000, 64, 0x1209, 0x53C1);
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
@@ -35,7 +35,7 @@ namespace Trezor.Net.XamarinFormsSample.Droid
             base.OnCreate(savedInstanceState);
             Forms.Init(this, savedInstanceState);
             RegisterReceiver();
-            LoadApplication(new App(_TrezorHidDevice));
+            LoadApplication(new App(_TrezorUsbDevice));
         }
 
         protected override void OnResume()
@@ -56,7 +56,7 @@ namespace Trezor.Net.XamarinFormsSample.Droid
                         _TrezorUsbDeviceAttachedReceiver.Dispose();
                     }
 
-                    _TrezorUsbDeviceAttachedReceiver = new UsbDeviceAttachedReceiver(_TrezorHidDevice);
+                    _TrezorUsbDeviceAttachedReceiver = new UsbDeviceAttachedReceiver(_TrezorUsbDevice);
                     RegisterReceiver(_TrezorUsbDeviceAttachedReceiver, new IntentFilter(UsbManager.ActionUsbDeviceAttached));
 
 
@@ -67,7 +67,7 @@ namespace Trezor.Net.XamarinFormsSample.Droid
                     }
 
 
-                    _TrezorUsbDeviceDetachedReceiver = new UsbDeviceDetachedReceiver(_TrezorHidDevice);
+                    _TrezorUsbDeviceDetachedReceiver = new UsbDeviceDetachedReceiver(_TrezorUsbDevice);
                     RegisterReceiver(_TrezorUsbDeviceDetachedReceiver, new IntentFilter(UsbManager.ActionUsbDeviceDetached));
                 }
             }
