@@ -1,5 +1,4 @@
 ﻿using Device.Net;
-using Hid.Net.UWP;
 using System.Threading.Tasks;
 using app = Trezor.Net.XamarinFormsSample.App;
 
