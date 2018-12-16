@@ -1,5 +1,7 @@
 # Trezor.Net
-Cross Platform C# Library for the Trezor Cryptocurrency Hardwarewallet
+Cross Platform C# Library for the [Trezor Cryptocurrency Hardwarewallet](https://trezor.io/)
+
+This library allows you to communicate with both Trezor hardwarewallets in the same way that the Trezor browser wallet app communicates with them. It can be used to build apps that send or receive crypto currencies like Bitcoin in a secure way.
 
 Join us on Slack:
 https://hardwarewallets.slack.com
@@ -15,6 +17,10 @@ Currently supports:
 * .NET Core
 * Android
 * UWP 
+* Linux (Please use LibUsbDotNot as per the Unit Tests)
+
+* Trezor One
+* Trezor Model T
 
 ## Quick Start
 
@@ -28,6 +34,9 @@ Currently supports:
 These samples mostly show you how to get addresses and sign transactions, but samples for other messages are being added.
 
 Note: not all messages have a public method, but all messages exist. If you want to send a message to the Trezor you need to construct the message object and send it to the Trezor with the SendMessageAsync method. This requires that you know the result type before calling.
+
+### Model T
+There are now Model T Windows Unit Tests. These tests use LibUsb as the transport. Trezor One Firmware 1.7.x is also supported. The tests are in WindowsModelTAndOneTests. The same should also work on Android, but a working version in UWP is not yet available. There is no NuGet upgrade necessary for Model T or Firmware 1.7.x.
 
 ## NuGet
 
@@ -74,6 +83,8 @@ Trezor.Net communicates with the device via the Hid.Net library. You can see the
 [Ledger.Net](https://github.com/MelbourneDeveloper/Ledger.Net) - Ledger Hardwarewallet Library
 
 [KeepKey.Net](https://github.com/MelbourneDeveloper/KeepKey.Net) - KeepKey Hardwarewallet Library
+
+[LibUsbDotNet](https://github.com/LibUsbDotNet/LibUsbDotNet) - The latest Windows Unit Tests use this library. It can also be used to add Linux support.
 
 These are the Trezor firmware open sources repos:
 
