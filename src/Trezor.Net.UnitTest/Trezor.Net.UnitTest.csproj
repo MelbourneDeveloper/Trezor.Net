@@ -154,6 +154,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Device.Net\src\Device.Net\Device.Net.csproj">
+      <Project>{2ea210b0-a236-47ba-9d68-ea35934ff733}</Project>
+      <Name>Device.Net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Device.Net\src\Hid.Net.Windows\Hid.Net.Windows.csproj">
+      <Project>{31953e0f-4873-4bcf-a77d-e53eaf9cf37b}</Project>
+      <Name>Hid.Net.Windows</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Trezor.Net\Trezor.Net.csproj">
       <Project>{dda97f34-2e5e-481c-83dd-ee58e9e6aaf0}</Project>
       <Name>Trezor.Net</Name>
