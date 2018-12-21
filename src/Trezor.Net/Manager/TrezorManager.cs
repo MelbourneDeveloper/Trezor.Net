@@ -30,9 +30,12 @@ namespace Trezor.Net
         #endregion
 
         #region Public Constants
-        public const ushort TrezorVendorId = 21324;
-        public const int TrezorProductId = 1;
-        public static List<ushort> AcceptedUsagePages { get; } = new List<ushort> { 65280 };
+        public static List<DeviceInformation> DeviceDefinitions = new List<DeviceInformation>
+        {
+            new DeviceInformation{ DeviceType= DeviceType.Hid, VendorId= 0x534C, ProductId=0x0001, Label="Trezor One Firmware 1.6.x" },
+            new DeviceInformation{ DeviceType= DeviceType.Usb, VendorId= 0x1209, ProductId=0x53C1, Label="Trezor One Firmware 1.7.x" },
+            new DeviceInformation{ DeviceType= DeviceType.Usb, VendorId= 0x1209, ProductId=0x53C0, Label="Model T" }
+        };
         #endregion
 
         #region Public Properties
