@@ -43,6 +43,7 @@ namespace Trezor.Net
                             trezorHidDevice = new UWPUsbDevice(trezorDeviceDefinition.DeviceId);
                             break;
                     }
+                    await trezorHidDevice.InitializeAsync();
                     break;
                 }
             }

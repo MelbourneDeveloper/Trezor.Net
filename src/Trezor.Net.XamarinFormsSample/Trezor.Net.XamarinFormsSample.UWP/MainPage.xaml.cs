@@ -37,6 +37,7 @@ namespace Trezor.Net.XamarinFormsSample.UWP
                             trezorHidDevice = new UWPUsbDevice(trezorDeviceDefinition.DeviceId);
                             break;
                     }
+                    await trezorHidDevice.InitializeAsync();
                     LoadApplication(new app(trezorHidDevice));
                     break;
                 }

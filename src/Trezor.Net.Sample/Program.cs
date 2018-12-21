@@ -52,6 +52,7 @@ namespace TrezorTestApp
                             trezorHidDevice = new WindowsUsbDevice(trezorDeviceDefinition.DeviceId, 64, 64);
                             break;
                     }
+                    await trezorHidDevice.InitializeAsync();
                     break;
                 }
             }
