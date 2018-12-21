@@ -1,7 +1,6 @@
 ﻿using Device.Net;
 using Hid.Net.Windows;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,36 +11,37 @@ namespace Trezor.Net
     {
         protected override async Task<IDevice> Connect()
         {
-            WindowsHidDeviceInformation trezorDeviceInformation = null;
 
-            WindowsHidDevice retVal = null;
+            DeviceDefinition trezorDeviceDefinition;
+            IDevice trezorHidDevice = null;
 
-            retVal = new WindowsHidDevice();
-
-            Console.Write("Waiting for Trezor .");
-
-            while (trezorDeviceInformation == null)
+            foreach (var deviceDefinition in TrezorManager.DeviceDefinitions)
             {
-                var devices = WindowsHidDevice.GetConnectedDeviceInformations().Cast<WindowsHidDeviceInformation>();
-                var trezors = devices.Where(d => d.VendorId == TrezorManager.TrezorVendorId && TrezorManager.TrezorProductId == d.ProductId).ToList();
-                trezorDeviceInformation = trezors.FirstOrDefault(t => t.UsagePage == TrezorManager.AcceptedUsagePages[0]);
-
-                if (trezorDeviceInformation != null)
+                var definitions = await DeviceManager.Current.GetConnectedDeviceDefinitions(deviceDefinition.VendorId, deviceDefinition.ProductId, deviceDefinition.DeviceType);
+                trezorDeviceDefinition = definitions.FirstOrDefault();
+                if (trezorDeviceDefinition != null)
                 {
+                    switch (trezorDeviceDefinition.DeviceType)
+                    {
+                        case DeviceType.Hid:
+                            trezorHidDevice = new WindowsHidDevice(trezorDeviceDefinition);
+                            break;
+                        case DeviceType.Usb:
+                            trezorHidDevice = new WindowsUsbDevice(trezorDeviceDefinition.DeviceId, 64, 64);
+                            break;
+                    }
                     break;
                 }
-
-                await Task.Delay(1000);
-                Console.Write(".");
             }
 
-            retVal.DeviceInformation = trezorDeviceInformation;
+            if (trezorHidDevice == null)
+            {
+                throw new System.Exception("No Trezor was connected");
+            }
 
-            await retVal.InitializeAsync();
+            return trezorHidDevice;
 
-            Console.WriteLine("Connected");
 
-            return retVal;
         }
     }
 }
