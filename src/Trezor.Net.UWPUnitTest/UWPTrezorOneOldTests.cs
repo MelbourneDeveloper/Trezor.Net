@@ -2,8 +2,10 @@
 using Device.Net.UWP;
 using Hid.Net.UWP;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 using System.Threading.Tasks;
 using Trezor.Net.UWPUnitTest;
+using Usb.Net.UWP;
 
 namespace Trezor.Net
 {
@@ -23,16 +25,34 @@ namespace Trezor.Net
 
         protected override async Task<IDevice> Connect()
         {
-            var taskCompletionSource = new TaskCompletionSource<IDevice>();
-            var trezorHidDevice = new UWPHidDevice();
-            var poller = new UWPDevicePoller(TrezorManager.TrezorProductId, TrezorManager.TrezorVendorId, DeviceType.Hid , trezorHidDevice);
-            trezorHidDevice.Connected += (a, b) =>
-            {
-                poller.Stop();
-                taskCompletionSource.SetResult(trezorHidDevice);
-            };
-            return await taskCompletionSource.Task;
-        }
+            DeviceDefinition trezorDeviceDefinition;
+            IDevice trezorHidDevice = null;
 
+            foreach (var deviceDefinition in TrezorManager.DeviceDefinitions)
+            {
+                var definitions = await DeviceManager.Current.GetConnectedDeviceDefinitions(deviceDefinition.VendorId, deviceDefinition.ProductId, deviceDefinition.DeviceType);
+                trezorDeviceDefinition = definitions.FirstOrDefault();
+                if (trezorDeviceDefinition != null)
+                {
+                    switch (trezorDeviceDefinition.DeviceType)
+                    {
+                        case DeviceType.Hid:
+                            trezorHidDevice = new UWPHidDevice(trezorDeviceDefinition.DeviceId);
+                            break;
+                        case DeviceType.Usb:
+                            trezorHidDevice = new UWPUsbDevice(trezorDeviceDefinition.DeviceId);
+                            break;
+                    }
+                    break;
+                }
+            }
+
+            if (trezorHidDevice == null)
+            {
+                throw new System.Exception("No Trezor was connected");
+            }
+
+            return trezorHidDevice;
+        }
     }
 }
