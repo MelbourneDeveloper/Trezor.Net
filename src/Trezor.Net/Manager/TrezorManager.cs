@@ -30,11 +30,11 @@ namespace Trezor.Net
         #endregion
 
         #region Public Constants
-        public static List<DeviceInformation> DeviceDefinitions = new List<DeviceInformation>
+        public static List<DeviceDefinition> DeviceDefinitions = new List<DeviceDefinition>
         {
-            new DeviceInformation{ DeviceType= DeviceType.Hid, VendorId= 0x534C, ProductId=0x0001, Label="Trezor One Firmware 1.6.x" },
-            new DeviceInformation{ DeviceType= DeviceType.Usb, VendorId= 0x1209, ProductId=0x53C1, Label="Trezor One Firmware 1.7.x" },
-            new DeviceInformation{ DeviceType= DeviceType.Usb, VendorId= 0x1209, ProductId=0x53C0, Label="Model T" }
+            new DeviceDefinition{ DeviceType= DeviceType.Hid, VendorId= 0x534C, ProductId=0x0001, Label="Trezor One Firmware 1.6.x" },
+            new DeviceDefinition{ DeviceType= DeviceType.Usb, VendorId= 0x1209, ProductId=0x53C1, Label="Trezor One Firmware 1.7.x" },
+            new DeviceDefinition{ DeviceType= DeviceType.Usb, VendorId= 0x1209, ProductId=0x53C0, Label="Model T" }
         };
         #endregion
 
