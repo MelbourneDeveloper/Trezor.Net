@@ -1,4 +1,5 @@
 ﻿using Device.Net;
+using Device.Net.UWP;
 using Hid.Net.UWP;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace Trezor.Net
         {
             var taskCompletionSource = new TaskCompletionSource<IDevice>();
             var trezorHidDevice = new UWPHidDevice();
-            var poller = new UWPHidDevicePoller(TrezorManager.TrezorProductId, TrezorManager.TrezorVendorId, trezorHidDevice);
+            var poller = new UWPDevicePoller(TrezorManager.TrezorProductId, TrezorManager.TrezorVendorId, DeviceType.Hid , trezorHidDevice);
             trezorHidDevice.Connected += (a, b) =>
             {
                 poller.Stop();

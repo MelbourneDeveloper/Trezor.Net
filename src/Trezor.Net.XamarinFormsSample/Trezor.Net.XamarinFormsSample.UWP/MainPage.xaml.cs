@@ -1,4 +1,5 @@
 ﻿using Device.Net;
+using Device.Net.UWP;
 using Hid.Net.UWP;
 using System.Threading.Tasks;
 using app = Trezor.Net.XamarinFormsSample.App;
@@ -7,7 +8,7 @@ namespace Trezor.Net.XamarinFormsSample.UWP
 {
     public sealed partial class MainPage
     {
-        private UWPHidDevicePoller poller;
+        private UWPDevicePoller poller;
 
         public MainPage()
         {
@@ -16,7 +17,7 @@ namespace Trezor.Net.XamarinFormsSample.UWP
             var taskCompletionSource = new TaskCompletionSource<IDevice>();
             var trezorHidDevice = new UWPHidDevice();
             trezorHidDevice.Connected += TrezorHidDevice_Connected;
-            poller = new UWPHidDevicePoller(TrezorManager.TrezorProductId, TrezorManager.TrezorVendorId, trezorHidDevice);
+            poller = new UWPDevicePoller(TrezorManager.TrezorProductId, TrezorManager.TrezorVendorId, DeviceType.Hid, trezorHidDevice);
             LoadApplication(new app(trezorHidDevice));
         }
 
