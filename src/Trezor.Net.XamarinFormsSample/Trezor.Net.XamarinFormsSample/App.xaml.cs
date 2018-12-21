@@ -28,6 +28,7 @@ namespace Trezor.Net.XamarinFormsSample
             _TrezorManager = new TrezorManager(TrezorPinPad.GetPin, trezorHidDevice, new DefaultCoinUtility());
             InitializeComponent();
             trezorHidDevice.Connected += TrezorHidDevice_Connected;
+            trezorHidDevice.InitializeAsync();
             MainNavigationPage = new NavigationPage(new MainPage());
             MainPage = MainNavigationPage;
         }
