@@ -29,7 +29,6 @@ namespace Trezor.Net.XamarinFormsSample.UWP
                 throw new System.Exception("No Trezor was connected");
             }
 
-            await trezorDevice.InitializeAsync();
             LoadApplication(new app(trezorDevice));
         }
     }

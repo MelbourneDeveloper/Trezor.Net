@@ -77,10 +77,12 @@
     </DeviceCapability>
 
     <DeviceCapability Name="usb">
+
+      <!--Trezor Firmware 1.7.x -->
       <Device Id="vidpid:1209 53C1">
-        <Function Type="name:vendorSpecific"/>
-        <!--<Function Type="classId:ff * *" />-->
+        <Function Type="classId:ff * *" />
       </Device>
+
     </DeviceCapability>
 
   </Capabilities>
