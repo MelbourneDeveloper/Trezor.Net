@@ -11,38 +11,21 @@ namespace Trezor.Net
     {
         protected override async Task<IDevice> Connect()
         {
+            WindowsHidDeviceFactory.Register();
+            //WindowsUsbDeviceFactory.Register();
 
-            DeviceDefinition trezorDeviceDefinition;
-            IDevice trezorHidDevice = null;
+            var devices = await DeviceManager.Current.GetDevices(TrezorManager.DeviceDefinitions);
+            var trezorDevice = devices.FirstOrDefault();
 
-            foreach (var deviceDefinition in TrezorManager.DeviceDefinitions)
-            {
-                var definitions = await DeviceManager.Current.GetConnectedDeviceDefinitions(deviceDefinition.VendorId, deviceDefinition.ProductId, deviceDefinition.DeviceType);
-                trezorDeviceDefinition = definitions.FirstOrDefault();
-                if (trezorDeviceDefinition != null)
-                {
-                    switch (trezorDeviceDefinition.DeviceType)
-                    {
-                        case DeviceType.Hid:
-                            trezorHidDevice = new WindowsHidDevice(trezorDeviceDefinition);
-                            break;
-                        case DeviceType.Usb:
-                            trezorHidDevice = new WindowsUsbDevice(trezorDeviceDefinition.DeviceId, 64, 64);
-                            break;
-                    }
-                    await trezorHidDevice.InitializeAsync();
-                    break;
-                }
-            }
-
-            if (trezorHidDevice == null)
+            if (trezorDevice == null)
             {
                 throw new System.Exception("No Trezor was connected");
             }
 
-            return trezorHidDevice;
+            await trezorDevice.InitializeAsync();
 
-
+   
+            return trezorDevice;
         }
     }
 }

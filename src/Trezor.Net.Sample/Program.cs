@@ -34,35 +34,20 @@ namespace TrezorTestApp
         #region Private  Methods
         private static async Task<IDevice> Connect()
         {
-            DeviceDefinition trezorDeviceDefinition;
-            IDevice trezorHidDevice = null;
+            WindowsHidDeviceFactory.Register();
+            //WindowsUsbDeviceFactory.Register();
 
-            foreach (var deviceDefinition in TrezorManager.DeviceDefinitions)
-            {
-                var definitions = await DeviceManager.Current.GetConnectedDeviceDefinitions(deviceDefinition.VendorId, deviceDefinition.ProductId, deviceDefinition.DeviceType);
-                trezorDeviceDefinition = definitions.FirstOrDefault();
-                if (trezorDeviceDefinition != null)
-                {
-                    switch (trezorDeviceDefinition.DeviceType)
-                    {
-                        case DeviceType.Hid:
-                            trezorHidDevice = new WindowsHidDevice(trezorDeviceDefinition);
-                            break;
-                        case DeviceType.Usb:
-                            trezorHidDevice = new WindowsUsbDevice(trezorDeviceDefinition.DeviceId, 64, 64);
-                            break;
-                    }
-                    await trezorHidDevice.InitializeAsync();
-                    break;
-                }
-            }
+            var devices = await DeviceManager.Current.GetDevices(TrezorManager.DeviceDefinitions);
+            var trezorDevice = devices.FirstOrDefault();
 
-            if (trezorHidDevice == null)
+            if (trezorDevice == null)
             {
                 throw new System.Exception("No Trezor was connected");
             }
 
-            return trezorHidDevice;
+            await trezorDevice.InitializeAsync();
+
+            return trezorDevice;
         }
 
         /// <summary>

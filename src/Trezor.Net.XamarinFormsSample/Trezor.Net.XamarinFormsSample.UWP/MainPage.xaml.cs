@@ -9,7 +9,6 @@ namespace Trezor.Net.XamarinFormsSample.UWP
 {
     public sealed partial class MainPage
     {
-
         public MainPage()
         {
             InitializeComponent();
@@ -19,33 +18,19 @@ namespace Trezor.Net.XamarinFormsSample.UWP
 
         private async Task Go()
         {
-            DeviceDefinition trezorDeviceDefinition;
-            IDevice trezorHidDevice = null;
+            UWPUsbDeviceFactory.Register();
+            UWPHidDeviceFactory.Register();
 
-            foreach (var deviceDefinition in TrezorManager.DeviceDefinitions)
-            {
-                var definitions = await DeviceManager.Current.GetConnectedDeviceDefinitions(deviceDefinition.VendorId, deviceDefinition.ProductId, deviceDefinition.DeviceType);
-                trezorDeviceDefinition = definitions.FirstOrDefault();
-                if (trezorDeviceDefinition != null)
-                {
-                    switch (trezorDeviceDefinition.DeviceType)
-                    {
-                        case DeviceType.Hid:
-                            trezorHidDevice = new UWPHidDevice(trezorDeviceDefinition.DeviceId);
-                            break;
-                        case DeviceType.Usb:
-                            trezorHidDevice = new UWPUsbDevice(trezorDeviceDefinition.DeviceId);
-                            break;
-                    }
-                    LoadApplication(new app(trezorHidDevice));
-                    break;
-                }
-            }
+            var devices = await DeviceManager.Current.GetDevices(TrezorManager.DeviceDefinitions);
+            var trezorDevice = devices.FirstOrDefault();
 
-            if (trezorHidDevice == null)
+            if (trezorDevice == null)
             {
                 throw new System.Exception("No Trezor was connected");
             }
+
+            await trezorDevice.InitializeAsync();
+            LoadApplication(new app(trezorDevice));
         }
     }
 }
