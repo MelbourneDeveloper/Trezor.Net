@@ -11,12 +11,6 @@ namespace Trezor.Net
     [TestClass]
     public class UWPTrezorOneOldTests : UnitTestBase
     {
-        static UWPTrezorOneOldTests()
-        {
-            UWPUsbDeviceFactory.Register();
-            UWPHidDeviceFactory.Register();
-        }
-
         protected override async Task<string> GetPin()
         {
             var pinCompletionSource = new TaskCompletionSource<string>();
@@ -30,15 +24,17 @@ namespace Trezor.Net
 
         protected override async Task<IDevice> Connect()
         {
+            UWPUsbDeviceFactory.Register();
+            UWPHidDeviceFactory.Register();
+
             var devices = await DeviceManager.Current.GetDevices(TrezorManager.DeviceDefinitions);
             var trezorDevice = devices.FirstOrDefault();
+            await trezorDevice.InitializeAsync();
 
             if (trezorDevice == null)
             {
                 throw new System.Exception("No Trezor was connected");
             }
-
-            await trezorDevice.InitializeAsync();
 
             return trezorDevice;
         }
