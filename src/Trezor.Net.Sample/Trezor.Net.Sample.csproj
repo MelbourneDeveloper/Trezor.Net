@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Hid.Net" Version="2.1.0" />
+    <PackageReference Include="Usb.Net" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Trezor.Net\Trezor.Net.csproj" />
   </ItemGroup>
 
