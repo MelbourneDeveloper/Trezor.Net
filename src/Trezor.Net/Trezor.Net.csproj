@@ -41,8 +41,4 @@ Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for ot
     <PackageReference Include="protobuf-net" Version="2.3.17" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Device.Net\src\Device.Net\Device.Net.csproj" />
-  </ItemGroup>
-
 </Project>

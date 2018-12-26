@@ -92,14 +92,6 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Device.Net\src\Device.Net\Device.Net.csproj">
-      <Project>{2ea210b0-a236-47ba-9d68-ea35934ff733}</Project>
-      <Name>Device.Net</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Device.Net\src\Usb.Net.Android\Usb.Net.Android.csproj">
-      <Project>{A6FB0608-0D21-4892-ADCE-3E79ABCC030D}</Project>
-      <Name>Usb.Net.Android</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Trezor.Net\Trezor.Net.csproj">
       <Project>{dda97f34-2e5e-481c-83dd-ee58e9e6aaf0}</Project>
       <Name>Trezor.Net</Name>

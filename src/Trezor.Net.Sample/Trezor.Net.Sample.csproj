@@ -7,9 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Device.Net\src\Device.Net.Windows\Device.Net.Windows.csproj" />
-    <ProjectReference Include="..\..\..\Device.Net\src\Device.Net\Device.Net.csproj" />
     <ProjectReference Include="..\..\..\Device.Net\src\Hid.Net.Windows\Hid.Net.Windows.csproj" />
-    <ProjectReference Include="..\..\..\Device.Net\src\Usb.Net\Usb.Net.csproj" />
     <ProjectReference Include="..\Trezor.Net\Trezor.Net.csproj" />
   </ItemGroup>
 
