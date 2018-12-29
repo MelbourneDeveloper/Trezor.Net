@@ -9,7 +9,7 @@ using Usb.Net.Windows;
 namespace Trezor.Net
 {
     [TestClass]
-    public class WindowsTrezorOneOldTests : WindowsTestBase
+    public class WindowsTests : WindowsTestBase
     {
         protected override async Task<IDevice> Connect()
         {

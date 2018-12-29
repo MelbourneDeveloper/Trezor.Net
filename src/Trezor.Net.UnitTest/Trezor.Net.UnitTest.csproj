@@ -147,16 +147,12 @@
       <Link>UnitTestBase.cs</Link>
     </Compile>
     <Compile Include="EthHelpers.cs" />
-    <Compile Include="LibUsbDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WindowsTrezorOneOldTests.cs" />
+    <Compile Include="WindowsTests.cs" />
     <Compile Include="WindowsTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <Content Include="libusb-1.0.lib">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -168,12 +164,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="libusb-1.0.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="libusb-1.0.pdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Misc\GetPassword.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
