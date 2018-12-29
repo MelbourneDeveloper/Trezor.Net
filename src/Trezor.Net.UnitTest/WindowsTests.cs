@@ -1,6 +1,7 @@
 ﻿using Device.Net;
 using Hid.Net.Windows;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,13 +14,24 @@ namespace Trezor.Net
     {
         protected override async Task<IDevice> Connect()
         {
-            //Register the factory for creating Usb devices. This only needs to be done once.
+            //This only needs to be done once.
+            //Register the factory for creating Usb devices. Trezor One Firmware 1.7.x / Trezor Model T
             WindowsUsbDeviceFactory.Register();
+            //Register the factory for creating Hid devices. Trezor One Firmware 1.6.x
             WindowsHidDeviceFactory.Register();
 
             //Get the first available device and connect to it
             var devices = await DeviceManager.Current.GetDevices(TrezorManager.DeviceDefinitions);
-            return devices.FirstOrDefault();
+            var trezorDevice = devices.FirstOrDefault();
+
+            if (trezorDevice == null)
+            {
+                throw new Exception("No trezor connected");
+            }
+
+            await trezorDevice.InitializeAsync();
+
+            return trezorDevice;
         }
     }
 }

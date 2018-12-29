@@ -35,9 +35,12 @@ namespace TrezorTestApp
         #region Private  Methods
         private static async Task<IDevice> Connect()
         {
-            //Register the factory for creating Usb devices. This only needs to be done once.
+            //This only needs to be done once.
+            //Register the factory for creating Usb devices. Trezor One Firmware 1.7.x / Trezor Model T
             WindowsUsbDeviceFactory.Register();
+            //Register the factory for creating Hid devices. Trezor One Firmware 1.6.x
             WindowsHidDeviceFactory.Register();
+
 
             //Get the first available device and connect to it
             var devices = await DeviceManager.Current.GetDevices(TrezorManager.DeviceDefinitions);
