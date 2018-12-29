@@ -59,7 +59,16 @@ namespace Trezor.Net
             return TrezorManager.GetAddressAsync(bip44AddressPath, isPublicKey, display);
         }
 
-        private async Task GetAndInitialize()
+        private async Task DoGetAddress(uint i)
+        {
+            var address = await GetAddressAsync(i);
+            _Addresses[i] = address;
+        }
+        #endregion
+
+        #region Setup / Teardown
+        [TestInitialize]
+        public async Task GetAndInitialize()
         {
             if (TrezorManager != null)
             {
@@ -69,12 +78,6 @@ namespace Trezor.Net
             var trezorHidDevice = await Connect();
             TrezorManager = new TrezorManager(GetPin, trezorHidDevice, new DefaultCoinUtility());
             await TrezorManager.InitializeAsync();
-        }
-
-        private async Task DoGetAddress(uint i)
-        {
-            var address = await GetAddressAsync(i);
-            _Addresses[i] = address;
         }
         #endregion
 
@@ -86,9 +89,6 @@ namespace Trezor.Net
         [TestMethod]
         public async Task SignBitcoinTransactionAsync()
         {
-            // initialize connection with device
-            await GetAndInitialize();
-
             //get address path for address in Trezor
             var addressPath = AddressPathBase.Parse<BIP44AddressPath>("m/49'/0'/0'/0/0").ToArray();
 
@@ -201,22 +201,18 @@ namespace Trezor.Net
         [TestMethod]
         public async Task DisplayBitcoinAddress()
         {
-            await GetAndInitialize();
             var address = await GetAddressAsync(0, true);
         }
 
         [TestMethod]
         public async Task GetBitcoinAddress()
         {
-            await GetAndInitialize();
             var address = await GetAddressAsync(true, 0, false, 0, false);
         }
 
         [TestMethod]
         public async Task GetBitcoinAddresses()
         {
-            await GetAndInitialize();
-
             var addressManager = new AddressManager(TrezorManager, new BIP44AddressPathFactory(true, 0));
 
             //Get 10 addresses with all the trimming
@@ -237,35 +233,30 @@ namespace Trezor.Net
         [TestMethod]
         public async Task GetBitcoinCashAddress()
         {
-            await GetAndInitialize();
             var address = await GetAddressAsync(false, 145, false, 0, false);
         }
 
         [TestMethod]
         public async Task GetBitcoinCashParsedAddress()
         {
-            await GetAndInitialize();
             var address = await GetAddressAsync("m/44'/145'/0'/0/0");
         }
 
         [TestMethod]
         public async Task DisplayBitcoinCashAddress()
         {
-            await GetAndInitialize();
             var address = await GetAddressAsync(false, 145, false, 0, true, "Bcash");
         }
 
         [TestMethod]
         public async Task DisplayBitcoinGoldAddress()
         {
-            await GetAndInitialize();
             var address = await GetAddressAsync(156, true);
         }
 
         [TestMethod]
         public async Task DisplayEthereumAddress()
         {
-            await GetAndInitialize();
             //Ethereum coins don't need the coin name
             var address = await GetAddressAsync(false, 60, false, 0, true);
         }
@@ -273,7 +264,6 @@ namespace Trezor.Net
         [TestMethod]
         public async Task DisplayEthereumClassicAddress()
         {
-            await GetAndInitialize();
             //Ethereum coins don't need the coin name
             var address = await GetAddressAsync(false, 61, false, 0, true);
         }
@@ -281,8 +271,6 @@ namespace Trezor.Net
         [TestMethod]
         public async Task TestThreadSafety()
         {
-            await GetAndInitialize();
-
             var tasks = new List<Task>();
 
             for (uint i = 0; i < 50; i++)
@@ -308,8 +296,6 @@ namespace Trezor.Net
         [TestMethod]
         public async Task SignEthereumTransaction()
         {
-            await GetAndInitialize();
-
             //Note: these are not reasonable values. They should not be used for a transaction. Looking for a better example here...
             var txMessage = new EthereumSignTx
             {
@@ -331,8 +317,6 @@ namespace Trezor.Net
         [TestMethod]
         public async Task SignEthereumTransaction2()
         {
-            await GetAndInitialize();
-
             var txMessage = new EthereumSignTx
             {
                 Nonce = 10.ToBytesForRLPEncoding().ToHex().ToHexBytes(),
