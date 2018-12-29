@@ -150,7 +150,6 @@
     <Compile Include="LibUsbDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WindowsTrezorOneOldTests.cs" />
-    <Compile Include="WindowsModelTAndOneTests.cs" />
     <Compile Include="WindowsTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
