@@ -84,7 +84,8 @@ namespace Trezor.Net
         [TestCleanup]
         public void Cleanup()
         {
-            TrezorManager.Device.Dispose();
+            //TODO: We should dispose of the TrezorManager here, but this is called after every test...
+            //TrezorManager.Dispose();
         }
         #endregion
 
