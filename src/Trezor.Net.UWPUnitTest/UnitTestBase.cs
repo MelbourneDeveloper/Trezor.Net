@@ -19,7 +19,8 @@ namespace Trezor.Net
     public abstract partial class UnitTestBase
     {
         #region Fields
-        protected TrezorManager TrezorManager;
+        //This must remain static for persistenance across tests
+        protected static TrezorManager TrezorManager;
         private readonly string[] _Addresses = new string[50];
         #endregion
 
@@ -78,6 +79,12 @@ namespace Trezor.Net
             var trezorHidDevice = await Connect();
             TrezorManager = new TrezorManager(GetPin, trezorHidDevice, new DefaultCoinUtility());
             await TrezorManager.InitializeAsync();
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            TrezorManager.Device.Dispose();
         }
         #endregion
 

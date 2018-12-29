@@ -26,7 +26,6 @@ namespace Trezor.Net
         #endregion
 
         #region Fields
-        private readonly IDevice _HidDevice;
         private int _InvalidChunksCounter;
         private readonly EnterPinArgs _EnterPinCallback;
         protected SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
@@ -40,6 +39,7 @@ namespace Trezor.Net
         #endregion
 
         #region Public Properties
+        public IDevice Device { get; private set; }
         public ICoinUtility CoinUtility { get; set; }
         #endregion
 
@@ -53,24 +53,24 @@ namespace Trezor.Net
         #endregion
 
         #region Constructor
-        protected TrezorManagerBase(EnterPinArgs enterPinCallback, IDevice hidDevice) : this(enterPinCallback, hidDevice, null)
+        protected TrezorManagerBase(EnterPinArgs enterPinCallback, IDevice device) : this(enterPinCallback, device, null)
         {
 
         }
 
-        protected TrezorManagerBase(EnterPinArgs enterPinCallback, IDevice hidDevice, ICoinUtility coinUtility)
+        protected TrezorManagerBase(EnterPinArgs enterPinCallback, IDevice device, ICoinUtility coinUtility)
         {
             CoinUtility = coinUtility;
 
-            if (hidDevice == null)
+            if (device == null)
             {
-                throw new ArgumentNullException(nameof(hidDevice));
+                throw new ArgumentNullException(nameof(device));
             }
 
-            hidDevice.Connected += HidDevice_Connected;
+            device.Connected += HidDevice_Connected;
 
             _EnterPinCallback = enterPinCallback;
-            _HidDevice = hidDevice;
+            Device = device;
         }
         #endregion
 
@@ -149,7 +149,7 @@ namespace Trezor.Net
         /// </summary>
         public Task<bool> GetIsConnectedAsync()
         {
-            return _HidDevice.GetIsConnectedAsync();
+            return Device.GetIsConnectedAsync();
         }
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace Trezor.Net
 
         public void Dispose()
         {
-            _HidDevice?.Dispose();
+            Device?.Dispose();
         }
 
         #endregion
@@ -216,7 +216,7 @@ namespace Trezor.Net
                     range[x + 1] = wholeArray[(i * 63) + x];
                 }
 
-                await _HidDevice.WriteAsync(range);
+                await Device.WriteAsync(range);
             }
 
             _LastWrittenMessage = msg;
@@ -225,7 +225,7 @@ namespace Trezor.Net
         private async Task<object> ReadAsync()
         {
             //Read a chunk
-            var readBuffer = await _HidDevice.ReadAsync();
+            var readBuffer = await Device.ReadAsync();
 
             //Check to see that this is a valid first chunk 
             var firstByteNot63 = readBuffer[0] != (byte)'?';
@@ -285,7 +285,7 @@ namespace Trezor.Net
             while (remainingDataLength > 0)
             {
                 //Read a chunk
-                readBuffer = await _HidDevice.ReadAsync();
+                readBuffer = await Device.ReadAsync();
 
                 //check that there was some data returned
                 if (readBuffer.Length <= 0)

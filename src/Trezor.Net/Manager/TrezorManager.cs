@@ -52,11 +52,11 @@ namespace Trezor.Net
         #endregion
 
         #region Constructor
-        public TrezorManager(EnterPinArgs enterPinCallback, IDevice trezorHidDevice) : this(enterPinCallback, trezorHidDevice, null)
+        public TrezorManager(EnterPinArgs enterPinCallback, IDevice trezorDevice) : this(enterPinCallback, trezorDevice, null)
         {
         }
 
-        public TrezorManager(EnterPinArgs enterPinCallback, IDevice trezorHidDevice, ICoinUtility coinUtility) : base(enterPinCallback, trezorHidDevice, coinUtility)
+        public TrezorManager(EnterPinArgs enterPinCallback, IDevice trezorDevice, ICoinUtility coinUtility) : base(enterPinCallback, trezorDevice, coinUtility)
         {
         }
         #endregion
