@@ -9,7 +9,7 @@ using Usb.Net.UWP;
 namespace Trezor.Net
 {
     [TestClass]
-    public class UWPTrezorOneOldTests : UnitTestBase
+    public class UWPTests : UnitTestBase
     {
         protected override async Task<string> GetPin()
         {
