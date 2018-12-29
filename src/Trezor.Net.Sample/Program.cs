@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Trezor.Net;
+using Usb.Net.Windows;
 
 namespace TrezorTestApp
 {
@@ -34,15 +35,17 @@ namespace TrezorTestApp
         #region Private  Methods
         private static async Task<IDevice> Connect()
         {
+            //Register the factory for creating Usb devices. This only needs to be done once.
+            WindowsUsbDeviceFactory.Register();
             WindowsHidDeviceFactory.Register();
-            //WindowsUsbDeviceFactory.Register();
 
+            //Get the first available device and connect to it
             var devices = await DeviceManager.Current.GetDevices(TrezorManager.DeviceDefinitions);
             var trezorDevice = devices.FirstOrDefault();
 
             if (trezorDevice == null)
             {
-                throw new System.Exception("No Trezor was connected");
+                throw new Exception("No trezor connected");
             }
 
             await trezorDevice.InitializeAsync();
