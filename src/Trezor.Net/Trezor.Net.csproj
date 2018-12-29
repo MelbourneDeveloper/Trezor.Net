@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
     <CodeAnalysisRuleSet>..\Hid.Net\CodeRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -36,7 +36,7 @@ Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for ot
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Device.Net" Version="2.1.0" />
+    <PackageReference Include="Device.Net" Version="2.2.0" />
     <PackageReference Include="Hardwarewallets.Net" Version="1.2.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
     <PackageReference Include="protobuf-net" Version="2.3.17" />

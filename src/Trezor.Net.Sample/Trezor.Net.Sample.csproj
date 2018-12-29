@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hid.Net" Version="2.1.0" />
-    <PackageReference Include="Usb.Net" Version="2.1.0" />
+    <PackageReference Include="Hid.Net" Version="2.2.0" />
+    <PackageReference Include="Usb.Net" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>

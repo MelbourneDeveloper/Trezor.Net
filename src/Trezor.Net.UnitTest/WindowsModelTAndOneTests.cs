@@ -20,7 +20,7 @@ namespace Trezor.Net
         {
             _UsbContext = new UsbContext();
 
-            var trezorUsbDevice = _UsbContext.List().FirstOrDefault
+            var trezorUsbDevices = _UsbContext.List().Where
                 (
                 d =>
                 //Trezor One - 1.6.x
@@ -30,6 +30,10 @@ namespace Trezor.Net
                 //Trezor Model T ?
                 (d.ProductId == 0x53C0 && d.VendorId == 0x1209)
               );
+
+            var trezorUsbDevice = trezorUsbDevices.FirstOrDefault();
+
+            trezorUsbDevice.Open();
 
             _LibUsbDevice = new LibUsbDevice(trezorUsbDevice, 60000);
             await _LibUsbDevice.InitializeAsync();
