@@ -2,6 +2,7 @@
 using LibUsbDotNet.LibUsb;
 using LibUsbDotNet.Main;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Trezor.Net
@@ -12,6 +13,7 @@ namespace Trezor.Net
         private UsbEndpointReader _UsbEndpointReader;
         private UsbEndpointWriter _UsbEndpointWriter;
         private int ReadPacketSize;
+        private SemaphoreSlim _WriteAndReadLock = new SemaphoreSlim(1, 1);
         #endregion
 
         #region Public Properties
@@ -76,6 +78,21 @@ namespace Trezor.Net
             {
                 _UsbEndpointWriter.Write(data, Timeout, out var bytesWritten);
             });
+        }
+
+        public async Task<byte[]> WriteAndReadAsync(byte[] writeBuffer)
+        {
+            await _WriteAndReadLock.WaitAsync();
+
+            try
+            {
+                await WriteAsync(writeBuffer);
+                return await ReadAsync();
+            }
+            finally
+            {
+                _WriteAndReadLock.Release();
+            }
         }
         #endregion
     }
