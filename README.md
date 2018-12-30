@@ -72,7 +72,7 @@ https://play.google.com/store/apps/details?id=com.Hardfolio (Android)
 
 https://www.microsoft.com/en-au/p/hardfolio/9p8xx70n5d2j (UWP)
 
-## [Hid.Net](https://github.com/MelbourneDeveloper/Hid.Net)
+## [Hid.Net, Usb.Net](https://github.com/MelbourneDeveloper/Device.Net)
 
 Trezor.Net communicates with the device via the Hid.Net library. You can see the repo for this library here:
 
