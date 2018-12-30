@@ -166,7 +166,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="libusb-1.0.dll" />
+    <Content Include="libusb-1.0.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Misc\GetPassword.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -1,36 +1,36 @@
 ﻿using Device.Net;
-using Hid.Net.Windows;
+using LibUsbDotNet.LibUsb;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Usb.Net.Windows;
 
 namespace Trezor.Net
 {
     [TestClass]
-    public class WindowsTests : WindowsTestBase
+    public class LibUsbTests : WindowsTestBase
     {
         protected override async Task<IDevice> Connect()
         {
-            //This only needs to be done once.
-            //Register the factory for creating Usb devices. Trezor One Firmware 1.7.x / Trezor Model T
-            WindowsUsbDeviceFactory.Register();
-            //Register the factory for creating Hid devices. Trezor One Firmware 1.6.x
-            WindowsHidDeviceFactory.Register();
+            var _UsbContext = new UsbContext();
 
-            //Get the first available device and connect to it
-            var devices = await DeviceManager.Current.GetDevices(TrezorManager.DeviceDefinitions);
-            var trezorDevice = devices.FirstOrDefault();
+            var trezorUsbDevice = _UsbContext.List().FirstOrDefault
+                (
+                d =>
+                //Trezor One - 1.6.x
+                (d.ProductId == 0x1 && d.VendorId == 0x534C) ||
+                //Trezor One - 1.7.x
+                (d.ProductId == 0x53C1 && d.VendorId == 0x1209) ||
+                //Trezor Model T ?
+                (d.ProductId == 0x53C0 && d.VendorId == 0x1209)
+              );
 
-            if (trezorDevice == null)
-            {
-                throw new Exception("No trezor connected");
-            }
+            var _LibUsbDevice = new LibUsbDevice(trezorUsbDevice, 60000);
+            await _LibUsbDevice.InitializeAsync();
 
-            await trezorDevice.InitializeAsync();
+            Console.WriteLine("Connected");
 
-            return trezorDevice;
+            return _LibUsbDevice;
         }
     }
 }
