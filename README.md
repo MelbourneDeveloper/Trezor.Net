@@ -74,7 +74,7 @@ https://www.microsoft.com/en-au/p/hardfolio/9p8xx70n5d2j (UWP)
 
 ## [Hid.Net, Usb.Net](https://github.com/MelbourneDeveloper/Device.Net)
 
-Trezor.Net communicates with the device via the Hid.Net library. You can see the repo for this library here:
+Trezor.Net communicates with the devices via the Hid.Net and Usb.Net libraries. You can see the repo for this library here.
 
 ## See Also
 
