@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2397AD63-6E69-4FAB-BDD2-0B6C353C8B22}</ProjectGuid>
+    <ProjectGuid>{FB0FFEF4-8EF6-4A76-A745-CCE2F1B78263}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Trezor.Net.UnitTest</RootNamespace>
-    <AssemblyName>Trezor.Net.UnitTest</AssemblyName>
+    <RootNamespace>Trezor.Net.LibUsbUnitTest</RootNamespace>
+    <AssemblyName>Trezor.Net.LibUsbUnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -148,6 +148,7 @@
       <Link>UnitTestBase.cs</Link>
     </Compile>
     <Compile Include="EthHelpers.cs" />
+    <Compile Include="LibUsbDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WindowsTests.cs" />
     <Compile Include="WindowsTestBase.cs" />
@@ -165,6 +166,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="libusb-1.0.dll" />
     <Content Include="Misc\GetPassword.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
