@@ -36,7 +36,7 @@ Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for ot
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Device.Net" Version="2.2.0" />
+    <PackageReference Include="Device.Net" Version="2.3.0" />
     <PackageReference Include="Hardwarewallets.Net" Version="1.2.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
     <PackageReference Include="protobuf-net" Version="2.3.17" />
