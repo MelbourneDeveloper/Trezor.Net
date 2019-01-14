@@ -4,6 +4,9 @@ using Android.Content;
 using Android.Content.PM;
 using Android.Hardware.Usb;
 using Android.OS;
+using Device.Net;
+using System.Collections.Generic;
+using System.Linq;
 using Usb.Net.Android;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
@@ -15,66 +18,30 @@ namespace Trezor.Net.XamarinFormsSample.Droid
     public class MainActivity : FormsAppCompatActivity
     {
         #region Fields
+        private readonly List<FilterDeviceDefinition> _DeviceDefinitions = new List<FilterDeviceDefinition>
+        {
+            new FilterDeviceDefinition{ DeviceType= DeviceType.Hid, VendorId= 0x534C, ProductId=0x0001, Label="Trezor One Firmware 1.6.x", UsagePage=65280 },
+            new FilterDeviceDefinition{ DeviceType= DeviceType.Usb, VendorId= 0x534C, ProductId=0x0001, Label="Trezor One Firmware 1.6.x (Android Only)" },
+            new FilterDeviceDefinition{ DeviceType= DeviceType.Usb, VendorId= 0x1209, ProductId=0x53C1, Label="Trezor One Firmware 1.7.x" },
+            new FilterDeviceDefinition{ DeviceType= DeviceType.Usb, VendorId= 0x1209, ProductId=0x53C0, Label="Model T" }
+        };
+
         private AndroidUsbDevice _TrezorUsbDevice;
-        private UsbDeviceAttachedReceiver _TrezorUsbDeviceAttachedReceiver;
-        private UsbDeviceDetachedReceiver _TrezorUsbDeviceDetachedReceiver;
         private readonly object _ReceiverLock = new object();
         #endregion
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected async override void OnCreate(Bundle savedInstanceState)
         {
-            //Firmware 1.6.x
-            //_TrezorUsbDevice = new AndroidUsbDevice(GetSystemService(UsbService) as UsbManager, ApplicationContext, 3000, 64, TrezorManager.TrezorVendorId, TrezorManager.TrezorProductId);
+            var devices = await DeviceManager.Current.GetDevices(_DeviceDefinitions);
+            _TrezorUsbDevice = (AndroidUsbDevice)devices.FirstOrDefault();
 
-            //Firmware 1.7.x / Trezor Model T
-            _TrezorUsbDevice = new AndroidUsbDevice(GetSystemService(UsbService) as UsbManager, ApplicationContext, 3000, 0x1209, 0x53C1);
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
             Forms.Init(this, savedInstanceState);
-            RegisterReceiver();
             LoadApplication(new App(_TrezorUsbDevice));
-        }
-
-        protected override void OnResume()
-        {
-            base.OnResume();
-            RegisterReceiver();
-        }
-
-        private void RegisterReceiver()
-        {
-            try
-            {
-                lock (_ReceiverLock)
-                {
-                    if (_TrezorUsbDeviceAttachedReceiver != null)
-                    {
-                        UnregisterReceiver(_TrezorUsbDeviceAttachedReceiver);
-                        _TrezorUsbDeviceAttachedReceiver.Dispose();
-                    }
-
-                    _TrezorUsbDeviceAttachedReceiver = new UsbDeviceAttachedReceiver(_TrezorUsbDevice);
-                    RegisterReceiver(_TrezorUsbDeviceAttachedReceiver, new IntentFilter(UsbManager.ActionUsbDeviceAttached));
-
-
-                    if (_TrezorUsbDeviceDetachedReceiver != null)
-                    {
-                        UnregisterReceiver(_TrezorUsbDeviceDetachedReceiver);
-                        _TrezorUsbDeviceDetachedReceiver.Dispose();
-                    }
-
-
-                    _TrezorUsbDeviceDetachedReceiver = new UsbDeviceDetachedReceiver(_TrezorUsbDevice);
-                    RegisterReceiver(_TrezorUsbDeviceDetachedReceiver, new IntentFilter(UsbManager.ActionUsbDeviceDetached));
-                }
-            }
-            catch
-            {
-
-            }
         }
     }
 }

@@ -17,10 +17,6 @@ namespace Trezor.Net
     /// </summary>
     public abstract class TrezorManagerBase<TMessageType> : IDisposable, IAddressDeriver
     {
-        #region Events
-        public event EventHandler Connected;
-        #endregion
-
         #region Constants
         private const int FirstChunkStartIndex = 9;
         #endregion
@@ -61,24 +57,8 @@ namespace Trezor.Net
         protected TrezorManagerBase(EnterPinArgs enterPinCallback, IDevice device, ICoinUtility coinUtility)
         {
             CoinUtility = coinUtility;
-
-            if (device == null)
-            {
-                throw new ArgumentNullException(nameof(device));
-            }
-
-            device.Connected += HidDevice_Connected;
-
             _EnterPinCallback = enterPinCallback;
-            Device = device;
-        }
-        #endregion
-
-        #region Event Handlers
-        private void HidDevice_Connected(object sender, EventArgs e)
-        {
-            Logger.Log("Hid Device Connected", null, LogSection);
-            Connected?.Invoke(this, new EventArgs());
+            Device = device ?? throw new ArgumentNullException(nameof(device));
         }
         #endregion
 
@@ -147,9 +127,9 @@ namespace Trezor.Net
         /// <summary>
         /// Check to see if the Trezor is connected to the device
         /// </summary>
-        public Task<bool> GetIsConnectedAsync()
+        public bool IsDeviceInitialized()
         {
-            return Device.GetIsConnectedAsync();
+            return Device.IsInitialized;
         }
 
         /// <summary>
