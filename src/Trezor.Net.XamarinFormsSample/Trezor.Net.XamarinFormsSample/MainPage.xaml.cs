@@ -4,6 +4,8 @@ namespace Trezor.Net.XamarinFormsSample
 {
     public partial class MainPage : ContentPage
     {
+        private bool IsDisplayed;
+
         #region Constructor
         public MainPage()
         {
@@ -19,24 +21,19 @@ namespace Trezor.Net.XamarinFormsSample
         }
         #endregion
 
-        #region Event Handlers
-        private void App_GetAddress(object sender, System.EventArgs e)
-        {
-            DisplayAddress();
-        }
-        #endregion
 
         #region Private Methods
-
         private void DisplayAddress()
         {
+            if (IsDisplayed) return;
+
+            IsDisplayed = true;
 
             Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
             {
                 TheLabel.Text = $"First Bitcoin Address: {await App.GetAddressAsync()}";
                 TheActivityIndicator.IsRunning = false;
             });
-
         }
         #endregion
     }
