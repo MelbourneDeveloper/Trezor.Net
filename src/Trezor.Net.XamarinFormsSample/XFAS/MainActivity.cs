@@ -5,6 +5,7 @@ using Android.Content.PM;
 using Android.Hardware.Usb;
 using Android.OS;
 using Device.Net;
+using System;
 using System.Linq;
 using Usb.Net.Android;
 using Xamarin.Forms;
@@ -18,11 +19,19 @@ namespace Trezor.Net.XamarinFormsSample.Droid
     {
         #region Fields
         private AndroidUsbDevice _TrezorUsbDevice;
-        private readonly object _ReceiverLock = new object();
         #endregion
 
         protected async override void OnCreate(Bundle savedInstanceState)
         {
+            //TODO: Error handling. If something goes wrong here, or the device is not connected the whole app will crash
+
+            var usbManager = GetSystemService(UsbService) as UsbManager;
+            if (usbManager == null) throw new Exception("UsbManager is null");
+
+            //Register the factory for creating Usb devices. This only needs to be done once.
+            AndroidUsbDeviceFactory.Register(usbManager, base.ApplicationContext);
+
+
             var devices = await DeviceManager.Current.GetDevices(TrezorManager.DeviceDefinitions);
             _TrezorUsbDevice = (AndroidUsbDevice)devices.FirstOrDefault();
 
