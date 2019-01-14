@@ -8,7 +8,6 @@ namespace Trezor.Net.XamarinFormsSample
         public MainPage()
         {
             InitializeComponent();
-            App.GetAddress += App_GetAddress;
         }
         #endregion
 
@@ -16,11 +15,7 @@ namespace Trezor.Net.XamarinFormsSample
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            if (!string.IsNullOrEmpty(App.Address))
-            {
-                DisplayAddress();
-            }
+            DisplayAddress();
         }
         #endregion
 
@@ -35,8 +30,13 @@ namespace Trezor.Net.XamarinFormsSample
 
         private void DisplayAddress()
         {
-            TheLabel.Text = $"First Bitcoin Address: {App.Address}";
-            TheActivityIndicator.IsRunning = false;
+
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
+            {
+                TheLabel.Text = $"First Bitcoin Address: {await App.GetAddressAsync()}";
+                TheActivityIndicator.IsRunning = false;
+            });
+
         }
         #endregion
     }
