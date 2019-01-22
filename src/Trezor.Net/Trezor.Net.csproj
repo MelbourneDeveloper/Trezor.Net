@@ -6,7 +6,7 @@
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>2.8.1</Version>
+    <Version>2.9.0</Version>
     <Authors>Christian Findlay</Authors>
     <Company>Christian Findlay</Company>
     <Description>A cross platform library for communicating with the Satoshi Labs' Trezor Hardware Wallet
@@ -17,9 +17,9 @@ Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for ot
     <PackageProjectUrl>https://github.com/MelbourneDeveloper/Trezor.Net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MelbourneDeveloper/Trezor.Net</RepositoryUrl>
     <PackageTags>Hid Trezor Hardwarewallet Bitcoin Ethereum SatoshiLabs KeepKey Cryptocurrency security</PackageTags>
-    <AssemblyVersion>2.8.1.0</AssemblyVersion>
-    <FileVersion>2.8.1.0</FileVersion>
-    <PackageReleaseNotes>Native Windows USB support for Trezor Model T / Firmware 1.7.x. Upgrade Device/Hid/USB.Net. Device connection simplication. Some breaking changes.</PackageReleaseNotes>
+    <AssemblyVersion>2.9.0.0</AssemblyVersion>
+    <FileVersion>2.9.0.0</FileVersion>
+    <PackageReleaseNotes>Upgrade Device/Hid/USB.Net. Device connection simplication. Some breaking changes.</PackageReleaseNotes>
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
 
@@ -36,7 +36,7 @@ Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for ot
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Device.Net" Version="2.2.0" />
+    <PackageReference Include="Device.Net" Version="2.3.0" />
     <PackageReference Include="Hardwarewallets.Net" Version="1.2.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
     <PackageReference Include="protobuf-net" Version="2.3.17" />

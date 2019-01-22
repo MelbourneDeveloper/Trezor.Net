@@ -40,18 +40,21 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.2.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.2\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
-    <Reference Include="Device.Net, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Device.Net.2.2.0\lib\net46\Device.Net.dll</HintPath>
+    <Reference Include="Device.Net, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Device.Net.2.3.0\lib\net46\Device.Net.dll</HintPath>
     </Reference>
     <Reference Include="Hardwarewallets.Net, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Hardwarewallets.Net.1.2.0\lib\net452\Hardwarewallets.Net.dll</HintPath>
     </Reference>
-    <Reference Include="Hid.Net, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hid.Net.2.2.0\lib\net46\Hid.Net.dll</HintPath>
+    <Reference Include="Hid.Net, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hid.Net.2.3.0\lib\net46\Hid.Net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -132,8 +135,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.ServiceModel" />
-    <Reference Include="Usb.Net, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Usb.Net.2.2.0\lib\net46\Usb.Net.dll</HintPath>
+    <Reference Include="Usb.Net, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Usb.Net.2.3.0\lib\net46\Usb.Net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
