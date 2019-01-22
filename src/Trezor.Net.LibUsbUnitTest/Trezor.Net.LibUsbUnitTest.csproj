@@ -31,4 +31,14 @@
     <ProjectReference Include="..\Trezor.Net\Trezor.Net.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Misc\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\Trezor.Net.UnitTest\Misc\GetPassword.exe" Link="Misc\GetPassword.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
