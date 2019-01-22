@@ -21,6 +21,9 @@ namespace Trezor.Net
         public int VendorId => UsbDevice.VendorId;
         public int ProductId => UsbDevice.ProductId;
         public int Timeout { get; }
+        public bool IsInitialized => true;
+        public ConnectedDeviceDefinitionBase ConnectedDeviceDefinition => throw new NotImplementedException();
+        public string DeviceId => throw new NotImplementedException();
         #endregion
 
         #region Events
@@ -42,10 +45,6 @@ namespace Trezor.Net
             UsbDevice.Dispose();
         }
 
-        public async Task<bool> GetIsConnectedAsync()
-        {
-            return true;
-        }
 
         public async Task InitializeAsync()
         {
