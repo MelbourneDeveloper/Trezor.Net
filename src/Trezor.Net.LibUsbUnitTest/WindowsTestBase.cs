@@ -28,12 +28,11 @@ namespace Trezor.Net
             var processStartInfo = new ProcessStartInfo
             {
                 FileName = passwordExePath,
-                WindowStyle = ProcessWindowStyle.Maximized,
-                CreateNoWindow = false,
                 UseShellExecute =true
             };
 
             var process = Process.Start(processStartInfo);
+
             process.WaitForExit();
             return File.ReadAllText(Path.Combine(GetExecutingAssemblyDirectoryPath(), "pin.txt"));
         }
