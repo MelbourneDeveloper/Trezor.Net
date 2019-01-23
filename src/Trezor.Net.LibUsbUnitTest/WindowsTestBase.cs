@@ -25,9 +25,18 @@ namespace Trezor.Net
                 throw new Exception($"The pin exe doesn't exist at passwordExePath {passwordExePath}");
             }
 
-            var process = Process.Start(passwordExePath);
+            var asdasd = new ProcessStartInfo { FileName = @"C:\GitRepos\Trezor.Net\src\Trezor.Net.UnitTest\Misc\GetPassword.exe", WindowStyle= ProcessWindowStyle.Maximized, CreateNoWindow= false, UseShellExecute=true };
+            var process = Process.Start(asdasd);
+            //var asdasd = Process.Start(@"C:\GitRepos\Trezor.Net\src\Trezor.Net.UnitTest\Misc\GetPassword.exe");
+
+            //var process = Process.Start(passwordExePath);
+            //process.StartInfo.RedirectStandardOutput = false;
+            //process.StartInfo.RedirectStandardError = false;
+            ////var buffer = new char[1000];
+            //////await process.StandardError.ReadAsync(buffer, 0, 1000);
+            ////await process.StandardOutput.ReadAsync(buffer, 0, 1000);
             process.WaitForExit();
-            await Task.Delay(100);
+            //await Task.Delay(5000);
             var pin = File.ReadAllText(Path.Combine(GetExecutingAssemblyDirectoryPath(), "pin.txt"));
             return pin;
         }
