@@ -89,8 +89,8 @@ namespace TrezorTestApp
 
                     while (true)
                     {
-                        await Task.Delay(5000);                        
                         Console.WriteLine($"Count of connected Trezors: {_TrezorManagerBroker.TrezorManagers.Count}");
+                        await Task.Delay(5000);                        
                     }
                 }
             }
