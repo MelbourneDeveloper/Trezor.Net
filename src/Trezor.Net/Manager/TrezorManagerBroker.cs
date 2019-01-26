@@ -34,16 +34,18 @@ namespace Trezor.Net.Manager
         #region Public Properties
         public IEnumerable<TrezorManager> TrezorManagers => _TrezorManagers;
         public EnterPinArgs EnterPinArgs { get; }
+        public ICoinUtility CoinUtility { get; }
         #endregion
 
         #region Constructor
-        public TrezorManagerBroker(EnterPinArgs enterPinArgs, int? pollInterval)
+        public TrezorManagerBroker(EnterPinArgs enterPinArgs, int? pollInterval, ICoinUtility coinUtility)
         {
             _DeviceListener = new DeviceListener(_DeviceDefinitions, pollInterval);
             _DeviceListener.DeviceDisconnected += DevicePoller_DeviceDisconnected;
             _DeviceListener.DeviceInitialized += DevicePoller_DeviceInitialized;
 
             EnterPinArgs = enterPinArgs;
+            CoinUtility = coinUtility;
         }
         #endregion
 
@@ -57,7 +59,7 @@ namespace Trezor.Net.Manager
                 var trezorManager = _TrezorManagers.FirstOrDefault(t => ReferenceEquals(t.Device, e.Device));
                 if (trezorManager == null)
                 {
-                    trezorManager = new TrezorManager(EnterPinArgs, e.Device);
+                    trezorManager = new TrezorManager(EnterPinArgs, e.Device, CoinUtility);
 
                     var tempList = new List<TrezorManager>(_TrezorManagers)
                     {
