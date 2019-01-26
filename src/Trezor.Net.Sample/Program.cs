@@ -1,11 +1,10 @@
-﻿using Device.Net;
-using Hardwarewallets.Net.AddressManagement;
+﻿using Hardwarewallets.Net.AddressManagement;
 using Hid.Net.Windows;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Trezor.Net;
+using Trezor.Net.Manager;
 using Usb.Net.Windows;
 
 namespace TrezorTestApp
@@ -21,6 +20,7 @@ namespace TrezorTestApp
         {
             try
             {
+                Console.WriteLine("Waiting for Trezor... Please plug it in if it is not connected.");
                 Go();
                 while (true) ;
             }
@@ -33,27 +33,17 @@ namespace TrezorTestApp
         #endregion
 
         #region Private  Methods
-        private static async Task<IDevice> Connect()
+        private static async Task<TrezorManager> Connect()
         {
             //This only needs to be done once.
             //Register the factory for creating Usb devices. Trezor One Firmware 1.7.x / Trezor Model T
             WindowsUsbDeviceFactory.Register();
+
             //Register the factory for creating Hid devices. Trezor One Firmware 1.6.x
             WindowsHidDeviceFactory.Register();
 
-
-            //Get the first available device and connect to it
-            var devices = await DeviceManager.Current.GetDevices(TrezorManager.DeviceDefinitions);
-            var trezorDevice = devices.FirstOrDefault();
-
-            if (trezorDevice == null)
-            {
-                throw new Exception("No trezor connected");
-            }
-
-            await trezorDevice.InitializeAsync();
-
-            return trezorDevice;
+            var _TrezorManagerBroker = new TrezorManagerBroker(GetPin, 2000, new DefaultCoinUtility());
+            return await _TrezorManagerBroker.WaitForFirstTrezorAsync();
         }
 
         /// <summary>
@@ -64,42 +54,39 @@ namespace TrezorTestApp
         {
             try
             {
-                using (var trezorHid = await Connect())
+                using (var trezorManager = await Connect())
                 {
-                    using (var trezorManager = new TrezorManager(GetPin, trezorHid, new DefaultCoinUtility()))
+                    Console.WriteLine("Trezor connection recognized");
+
+                    var tasks = new List<Task>();
+
+                    for (uint i = 0; i < 50; i++)
                     {
-                        await trezorManager.InitializeAsync();
-
-                        var tasks = new List<Task>();
-
-                        for (uint i = 0; i < 50; i++)
-                        {
-                            tasks.Add(DoGetAddress(trezorManager, i));
-                        }
-
-                        await Task.WhenAll(tasks);
-
-                        for (uint i = 0; i < 50; i++)
-                        {
-                            var address = await GetAddress(trezorManager, i);
-
-                            Console.WriteLine($"Index: {i} (No change) - Address: {address}");
-
-                            if (address != _Addresses[i])
-                            {
-                                throw new Exception("The ordering got messed up");
-                            }
-                        }
-
-                        var addressPath = new BIP44AddressPath(false, 60, 0, false, 0);
-
-                        var ethAddress = await trezorManager.GetAddressAsync(addressPath, false, false);
-                        Console.WriteLine($"First ETH address: {ethAddress}");
-
-                        Console.WriteLine("All good");
-
-                        Console.ReadLine();
+                        tasks.Add(DoGetAddress(trezorManager, i));
                     }
+
+                    await Task.WhenAll(tasks);
+
+                    for (uint i = 0; i < 50; i++)
+                    {
+                        var address = await GetAddress(trezorManager, i);
+
+                        Console.WriteLine($"Index: {i} (No change) - Address: {address}");
+
+                        if (address != _Addresses[i])
+                        {
+                            throw new Exception("The ordering got messed up");
+                        }
+                    }
+
+                    var addressPath = new BIP44AddressPath(false, 60, 0, false, 0);
+
+                    var ethAddress = await trezorManager.GetAddressAsync(addressPath, false, false);
+                    Console.WriteLine($"First ETH address: {ethAddress}");
+
+                    Console.WriteLine("All good");
+
+                    Console.ReadLine();
                 }
             }
             catch (Exception ex)

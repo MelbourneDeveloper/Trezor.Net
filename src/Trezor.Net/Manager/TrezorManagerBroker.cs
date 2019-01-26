@@ -27,8 +27,15 @@ namespace Trezor.Net.Manager
         #endregion
 
         #region Events
-        public event EventHandler TrezorInitialized;
-        public event EventHandler TrezorDisconnected;
+        /// <summary>
+        /// Occurs after the TrezorManagerBroker notices that a device hasbeen connected, and initialized
+        /// </summary>
+        public event EventHandler<TrezorManagerConnectionEventArgs> TrezorInitialized;
+
+        /// <summary>
+        /// Occurs after the TrezorManagerBroker notices that the device has been disconnected, but before the TrezorManager is disposed
+        /// </summary>
+        public event EventHandler<TrezorManagerConnectionEventArgs> TrezorDisconnected;
         #endregion
 
         #region Public Properties
@@ -71,6 +78,8 @@ namespace Trezor.Net.Manager
                     await trezorManager.InitializeAsync();
 
                     if (_FirstTrezorTaskCompletionSource.Task.Status == TaskStatus.WaitingForActivation) _FirstTrezorTaskCompletionSource.SetResult(trezorManager);
+
+                    TrezorInitialized?.Invoke(this, new TrezorManagerConnectionEventArgs(trezorManager));
                 }
             }
             finally
@@ -88,6 +97,10 @@ namespace Trezor.Net.Manager
                 var trezorManager = _TrezorManagers.FirstOrDefault(t => ReferenceEquals(t.Device, e.Device));
                 if (trezorManager != null)
                 {
+                    TrezorDisconnected?.Invoke(this, new TrezorManagerConnectionEventArgs(trezorManager));
+
+                    trezorManager.Dispose();
+
                     var tempList = new List<TrezorManager>(_TrezorManagers);
 
                     tempList.Remove(trezorManager);
@@ -115,6 +128,7 @@ namespace Trezor.Net.Manager
         public void Dispose()
         {
             _DeviceListener.Stop();
+
             //TODO: 
             //_DeviceListener.Dispose();
 
