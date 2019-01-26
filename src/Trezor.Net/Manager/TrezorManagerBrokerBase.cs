@@ -8,18 +8,17 @@ using System.Threading.Tasks;
 
 namespace Trezor.Net.Manager
 {
-    public abstract class TrezorManagerBrokerBase<T, TMessageType> 
-        where T : TrezorManagerBase<TMessageType> 
+    public abstract class TrezorManagerBrokerBase<T, TMessageType> where T : TrezorManagerBase<TMessageType>
     {
         #region Protected Abstract Properties
         protected abstract List<FilterDeviceDefinition> DeviceDefinitions { get; }
         #endregion
 
         #region Fields
-        private ReadOnlyCollection<TrezorManager> _TrezorManagers = new ReadOnlyCollection<TrezorManager>(new List<TrezorManager>());
+        private ReadOnlyCollection<T> _TrezorManagers = new ReadOnlyCollection<T>(new List<T>());
         private DeviceListener _DeviceListener;
         private SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
-        private TaskCompletionSource<TrezorManager> _FirstTrezorTaskCompletionSource = new TaskCompletionSource<TrezorManager>();
+        private TaskCompletionSource<T> _FirstTrezorTaskCompletionSource = new TaskCompletionSource<T>();
         #endregion
 
         #region Events
@@ -35,7 +34,7 @@ namespace Trezor.Net.Manager
         #endregion
 
         #region Public Properties
-        public IEnumerable<TrezorManager> TrezorManagers => _TrezorManagers;
+        public IEnumerable<T> TrezorManagers => _TrezorManagers;
         public EnterPinArgs EnterPinArgs { get; }
         public ICoinUtility CoinUtility { get; }
         public int? PollInterval { get; }
@@ -57,17 +56,17 @@ namespace Trezor.Net.Manager
             {
                 await _Lock.WaitAsync();
 
-                var trezorManager = _TrezorManagers.FirstOrDefault(t => ReferenceEquals(t.Device, e.Device));
+                var T = _TrezorManagers.FirstOrDefault(t => ReferenceEquals(t.Device, e.Device));
                 if (trezorManager == null)
                 {
-                    trezorManager = new TrezorManager(EnterPinArgs, e.Device, CoinUtility);
+                    trezorManager = new T(EnterPinArgs, e.Device, CoinUtility);
 
-                    var tempList = new List<TrezorManager>(_TrezorManagers)
+                    var tempList = new List<T>(_TrezorManagers)
                     {
                         trezorManager
                     };
 
-                    _TrezorManagers = new ReadOnlyCollection<TrezorManager>(tempList);
+                    _TrezorManagers = new ReadOnlyCollection<T>(tempList);
 
                     await trezorManager.InitializeAsync();
 
@@ -149,7 +148,7 @@ namespace Trezor.Net.Manager
         /// Starts the device listener and waits for the first connected Trezor to be initialized
         /// </summary>
         /// <returns></returns>
-        public async Task<TrezorManager> WaitForFirstTrezorAsync()
+        public async Task<T> WaitForFirstTrezorAsync()
         {
             if (_DeviceListener == null) Start();
             await _DeviceListener.CheckForDevicesAsync();
