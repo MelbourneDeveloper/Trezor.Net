@@ -24,7 +24,7 @@ namespace Trezor.Net
         #endregion
 
         #region Protected Abstract Methods
-        protected abstract Task<IDevice> Connect();
+        protected abstract Task<TrezorManager> Connect();
         protected abstract Task<string> GetPin();
         #endregion
 
@@ -75,9 +75,7 @@ namespace Trezor.Net
                 return;
             }
 
-            var trezorHidDevice = await Connect();
-            TrezorManager = new TrezorManager(GetPin, trezorHidDevice, new DefaultCoinUtility());
-            await TrezorManager.InitializeAsync();
+            TrezorManager = await Connect();
         }
 
         [TestCleanup]

@@ -105,7 +105,7 @@ namespace Trezor.Net.Manager
         /// Waits for the first connected Trezor to be initialized
         /// </summary>
         /// <returns></returns>
-        public async Task<TrezorManager> InitializeTrezorAsync()
+        public async Task<TrezorManager> WaitForFirstTrezorAsync()
         {
             return await _FirstTrezorTaskCompletionSource.Task;
         }
