@@ -10,7 +10,7 @@ namespace Trezor.Net
     [TestClass]
     public class LibUsbTests : WindowsTestBase
     {
-        protected override async Task<IDevice> ConnectAsync()
+        protected override async Task<TrezorManager> ConnectAsync()
         {
             var _UsbContext = new UsbContext();
 
@@ -30,7 +30,10 @@ namespace Trezor.Net
 
             Console.WriteLine("Connected");
 
-            return _LibUsbDevice;
+            var trezorManager = new TrezorManager(GetPin, _LibUsbDevice);
+            await trezorManager.InitializeAsync();
+
+            return trezorManager;
         }
     }
 }
