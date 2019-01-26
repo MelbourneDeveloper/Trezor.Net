@@ -1,40 +1,39 @@
-﻿using Xamarin.Forms;
+﻿using Hardwarewallets.Net.AddressManagement;
+using Trezor.Net.Manager;
+using Xamarin.Forms;
 
 namespace Trezor.Net.XamarinFormsSample
 {
     public partial class MainPage : ContentPage
     {
+        #region Fields
         private bool IsDisplayed;
+        private TrezorManagerBroker TrezorManagerBroker;
+        #endregion
 
         #region Constructor
         public MainPage()
         {
             InitializeComponent();
+            TrezorManagerBroker.Start();
         }
         #endregion
 
-        #region Protected Overrides
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
-            DisplayAddress();
-        }
-        #endregion
 
+            TrezorManagerBroker = new TrezorManagerBroker(TrezorPinPad.GetPin, 2000, new DefaultCoinUtility());
 
-        #region Private Methods
-        private void DisplayAddress()
-        {
-            if (IsDisplayed) return;
+            var trezorManager = await TrezorManagerBroker.WaitForFirstTrezorAsync();
 
-            IsDisplayed = true;
+            var address = await trezorManager.GetAddressAsync(new BIP44AddressPath(true, 0, 0, false, 0), false, true);
 
-            Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
             {
-                TheLabel.Text = $"First Bitcoin Address: {await App.GetAddressAsync()}";
+                TheLabel.Text = $"First Bitcoin Address: {address}";
                 TheActivityIndicator.IsRunning = false;
             });
         }
-        #endregion
     }
 }

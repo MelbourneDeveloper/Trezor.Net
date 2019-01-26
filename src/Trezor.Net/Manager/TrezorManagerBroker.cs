@@ -12,7 +12,7 @@ namespace Trezor.Net.Manager
     {
         #region Fields
         private ReadOnlyCollection<TrezorManager> _TrezorManagers = new ReadOnlyCollection<TrezorManager>(new List<TrezorManager>());
-        private readonly DeviceListener _DeviceListener;
+        private DeviceListener _DeviceListener;
         private SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
         private TaskCompletionSource<TrezorManager> _FirstTrezorTaskCompletionSource = new TaskCompletionSource<TrezorManager>();
 
@@ -42,17 +42,15 @@ namespace Trezor.Net.Manager
         public IEnumerable<TrezorManager> TrezorManagers => _TrezorManagers;
         public EnterPinArgs EnterPinArgs { get; }
         public ICoinUtility CoinUtility { get; }
+        public int? PollInterval { get; }
         #endregion
 
         #region Constructor
         public TrezorManagerBroker(EnterPinArgs enterPinArgs, int? pollInterval, ICoinUtility coinUtility)
         {
-            _DeviceListener = new DeviceListener(_DeviceDefinitions, pollInterval);
-            _DeviceListener.DeviceDisconnected += DevicePoller_DeviceDisconnected;
-            _DeviceListener.DeviceInitialized += DevicePoller_DeviceInitialized;
-
             EnterPinArgs = enterPinArgs;
             CoinUtility = coinUtility;
+            PollInterval = pollInterval;
         }
         #endregion
 
@@ -116,12 +114,34 @@ namespace Trezor.Net.Manager
         #endregion
 
         #region Public Methods
+
         /// <summary>
-        /// Waits for the first connected Trezor to be initialized
+        /// Placeholder. This currently does nothing but you should call this to initialize listening
+        /// </summary>
+        public void Start()
+        {
+            if (_DeviceListener == null)
+            {
+                _DeviceListener = new DeviceListener(_DeviceDefinitions, PollInterval);
+                _DeviceListener.DeviceDisconnected += DevicePoller_DeviceDisconnected;
+                _DeviceListener.DeviceInitialized += DevicePoller_DeviceInitialized;
+            }
+
+            //TODO: Call Start on the DeviceListener when it is implemented...
+        }
+
+        public void Stop()
+        {
+            _DeviceListener?.Stop();
+        }
+
+        /// <summary>
+        /// Starts the device listener and waits for the first connected Trezor to be initialized
         /// </summary>
         /// <returns></returns>
         public async Task<TrezorManager> WaitForFirstTrezorAsync()
         {
+            if (_DeviceListener == null) Start();
             return await _FirstTrezorTaskCompletionSource.Task;
         }
 

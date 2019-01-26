@@ -34,23 +34,16 @@ namespace Trezor.Net.XamarinFormsSample.Droid
         {
             try
             {
-                //TODO: Error handling. If something goes wrong here, or the device is not connected the whole app will crash
-
                 var usbManager = GetSystemService(UsbService) as UsbManager;
                 if (usbManager == null) throw new Exception("UsbManager is null");
 
                 //Register the factory for creating Usb devices. This only needs to be done once.
                 AndroidUsbDeviceFactory.Register(usbManager, base.ApplicationContext);
 
-
-                var devices = await DeviceManager.Current.GetDevices(TrezorManager.DeviceDefinitions);
-                _TrezorUsbDevice = (AndroidUsbDevice)devices.FirstOrDefault();
-
-
                 TabLayoutResource = Resource.Layout.Tabbar;
                 ToolbarResource = Resource.Layout.Toolbar;
 
-                LoadApplication(new App(_TrezorUsbDevice));
+                LoadApplication(new App());
             }
             catch (Exception ex)
             {
