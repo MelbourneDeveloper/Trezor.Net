@@ -124,6 +124,5 @@ namespace Trezor.Net.Manager
             }
         }
         #endregion
-
     }
 }
