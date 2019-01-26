@@ -8,16 +8,18 @@ using System.Threading.Tasks;
 
 namespace Trezor.Net.Manager
 {
-    public class TrezorManagerBroker : IDisposable
+    public class TrezorManagerBroker : TrezorManagerBrokerBase, IDisposable
     {
         #region Fields
         private ReadOnlyCollection<TrezorManager> _TrezorManagers = new ReadOnlyCollection<TrezorManager>(new List<TrezorManager>());
         private DeviceListener _DeviceListener;
         private SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
         private TaskCompletionSource<TrezorManager> _FirstTrezorTaskCompletionSource = new TaskCompletionSource<TrezorManager>();
+        #endregion
 
+        #region Protected Overrides
         //Define the types of devices to search for. This particular device can be connected to via USB, or Hid
-        private static readonly List<FilterDeviceDefinition> _DeviceDefinitions = new List<FilterDeviceDefinition>
+        protected override List<FilterDeviceDefinition> DeviceDefinitions { get; } = new List<FilterDeviceDefinition>
         {
             new FilterDeviceDefinition{ DeviceType= DeviceType.Hid, VendorId= 0x534C, ProductId=0x0001, Label="Trezor One Firmware 1.6.x", UsagePage=65280 },
             new FilterDeviceDefinition{ DeviceType= DeviceType.Usb, VendorId= 0x534C, ProductId=0x0001, Label="Trezor One Firmware 1.6.x (Android Only)" },
@@ -122,7 +124,7 @@ namespace Trezor.Net.Manager
         {
             if (_DeviceListener == null)
             {
-                _DeviceListener = new DeviceListener(_DeviceDefinitions, PollInterval);
+                _DeviceListener = new DeviceListener(DeviceDefinitions, PollInterval);
                 _DeviceListener.DeviceDisconnected += DevicePoller_DeviceDisconnected;
                 _DeviceListener.DeviceInitialized += DevicePoller_DeviceInitialized;
             }
