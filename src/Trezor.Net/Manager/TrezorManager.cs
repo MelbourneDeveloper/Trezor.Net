@@ -53,7 +53,7 @@ namespace Trezor.Net
         #endregion
 
         #region Constructor
-        public TrezorManager(EnterPinArgs enterPinCallback, IDevice trezorDevice) : this(enterPinCallback, trezorDevice, null)
+        public TrezorManager(EnterPinArgs enterPinCallback, IDevice trezorDevice) : this(enterPinCallback, trezorDevice, new DefaultCoinUtility())
         {
         }
 
