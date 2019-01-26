@@ -25,10 +25,9 @@ namespace Trezor.Net.XamarinFormsSample
 
             var trezorManager = await TrezorManagerBroker.WaitForFirstTrezorAsync();
 
-            var address = await trezorManager.GetAddressAsync(new BIP44AddressPath(true, 0, 0, false, 0), false, true);
-
-            Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
             {
+                var address = await trezorManager.GetAddressAsync(new BIP44AddressPath(true, 0, 0, false, 0), false, true);
                 TheLabel.Text = $"First Bitcoin Address: {address}";
                 TheActivityIndicator.IsRunning = false;
             });
