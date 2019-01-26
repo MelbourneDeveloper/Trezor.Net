@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Trezor.Net.Manager
 {
@@ -13,6 +14,7 @@ namespace Trezor.Net.Manager
         private ReadOnlyCollection<TrezorManager> _TrezorManagers = new ReadOnlyCollection<TrezorManager>(new List<TrezorManager>());
         private readonly DeviceListener _DeviceListener;
         private SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
+        private TaskCompletionSource<TrezorManager> _FirstTrezorTaskCompletionSource = new TaskCompletionSource<TrezorManager>();
 
         //Define the types of devices to search for. This particular device can be connected to via USB, or Hid
         private static readonly List<FilterDeviceDefinition> _DeviceDefinitions = new List<FilterDeviceDefinition>
@@ -65,6 +67,8 @@ namespace Trezor.Net.Manager
                     _TrezorManagers = new ReadOnlyCollection<TrezorManager>(tempList);
 
                     await trezorManager.InitializeAsync();
+
+                    if (_FirstTrezorTaskCompletionSource.Task.Status == TaskStatus.Created) _FirstTrezorTaskCompletionSource.SetResult(trezorManager);
                 }
             }
             finally
@@ -97,6 +101,15 @@ namespace Trezor.Net.Manager
         #endregion
 
         #region Public Methods
+        /// <summary>
+        /// Waits for the first connected Trezor to be initialized
+        /// </summary>
+        /// <returns></returns>
+        public async Task<TrezorManager> InitializeTrezorAsync()
+        {
+            return await _FirstTrezorTaskCompletionSource.Task;
+        }
+
         public void Dispose()
         {
             _DeviceListener.Stop();
