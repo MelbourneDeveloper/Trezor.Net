@@ -10,7 +10,7 @@ namespace Trezor.Net
     [TestClass]
     public class LibUsbTests : WindowsTestBase
     {
-        protected override async Task<IDevice> Connect()
+        protected override async Task<IDevice> ConnectAsync()
         {
             var _UsbContext = new UsbContext();
 
