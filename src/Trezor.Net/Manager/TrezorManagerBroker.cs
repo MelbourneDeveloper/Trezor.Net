@@ -135,6 +135,8 @@ namespace Trezor.Net.Manager
             _DeviceListener?.Stop();
         }
 
+        //TODO: GetTrezorsAsync()
+
         /// <summary>
         /// Starts the device listener and waits for the first connected Trezor to be initialized
         /// </summary>
