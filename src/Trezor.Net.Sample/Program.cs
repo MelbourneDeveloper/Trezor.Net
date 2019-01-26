@@ -42,8 +42,8 @@ namespace TrezorTestApp
             //Register the factory for creating Hid devices. Trezor One Firmware 1.6.x
             WindowsHidDeviceFactory.Register();
 
-            var _TrezorManagerBroker = new TrezorManagerBroker(GetPin, 2000, new DefaultCoinUtility());
-            return await _TrezorManagerBroker.WaitForFirstTrezorAsync();
+            var trezorManagerBroker = new TrezorManagerBroker(GetPin, 2000, new DefaultCoinUtility());
+            return await trezorManagerBroker.WaitForFirstTrezorAsync();
         }
 
         /// <summary>
