@@ -8,6 +8,7 @@ namespace Trezor.Net.XamarinFormsSample
     {
         #region Fields
         private TrezorManagerBroker TrezorManagerBroker;
+        private bool _IsDisplayed;
         #endregion
 
         #region Constructor
@@ -20,6 +21,9 @@ namespace Trezor.Net.XamarinFormsSample
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
+            if (_IsDisplayed) return;
+            _IsDisplayed = true;
 
             TrezorManagerBroker = new TrezorManagerBroker(TrezorPinPad.GetPin, 2000, new DefaultCoinUtility());
 
