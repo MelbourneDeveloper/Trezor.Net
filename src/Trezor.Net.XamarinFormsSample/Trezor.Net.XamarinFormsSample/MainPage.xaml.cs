@@ -7,7 +7,6 @@ namespace Trezor.Net.XamarinFormsSample
     public partial class MainPage : ContentPage
     {
         #region Fields
-        private bool IsDisplayed;
         private TrezorManagerBroker TrezorManagerBroker;
         #endregion
 
@@ -15,7 +14,6 @@ namespace Trezor.Net.XamarinFormsSample
         public MainPage()
         {
             InitializeComponent();
-            TrezorManagerBroker.Start();
         }
         #endregion
 
