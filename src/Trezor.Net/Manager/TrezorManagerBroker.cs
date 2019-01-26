@@ -63,6 +63,8 @@ namespace Trezor.Net.Manager
                     };
 
                     _TrezorManagers = new ReadOnlyCollection<TrezorManager>(tempList);
+
+                    await trezorManager.InitializeAsync();
                 }
             }
             finally
@@ -80,7 +82,6 @@ namespace Trezor.Net.Manager
                 var trezorManager = _TrezorManagers.FirstOrDefault(t => ReferenceEquals(t.Device, e.Device));
                 if (trezorManager != null)
                 {
-
                     var tempList = new List<TrezorManager>(_TrezorManagers);
 
                     tempList.Remove(trezorManager);
@@ -105,7 +106,7 @@ namespace Trezor.Net.Manager
             foreach (var trezorManager in _TrezorManagers)
             {
                 trezorManager.Dispose();
-            }            
+            }
         }
         #endregion
 
