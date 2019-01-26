@@ -61,37 +61,46 @@ namespace Trezor.Net
 
         public async Task<byte[]> ReadAsync()
         {
-            return await Task.Run(() =>
-            {
-                var buffer = new byte[ReadPacketSize];
-
-                _UsbEndpointReader.Read(buffer, Timeout, out var bytesRead);
-
-                return buffer;
-            });
-        }
-
-        public async Task WriteAsync(byte[] data)
-        {
-            await Task.Run(() =>
-            {
-                _UsbEndpointWriter.Write(data, Timeout, out var bytesWritten);
-            });
-        }
-
-        public async Task<byte[]> WriteAndReadAsync(byte[] writeBuffer)
-        {
             await _WriteAndReadLock.WaitAsync();
 
             try
             {
-                await WriteAsync(writeBuffer);
-                return await ReadAsync();
+                return await Task.Run(() =>
+                {
+                    var buffer = new byte[ReadPacketSize];
+
+                    _UsbEndpointReader.Read(buffer, Timeout, out var bytesRead);
+
+                    return buffer;
+                });
             }
             finally
             {
                 _WriteAndReadLock.Release();
             }
+        }
+
+        public async Task WriteAsync(byte[] data)
+        {
+            await _WriteAndReadLock.WaitAsync();
+
+            try
+            {
+                await Task.Run(() =>
+                {
+                    _UsbEndpointWriter.Write(data, Timeout, out var bytesWritten);
+                });
+            }
+            finally
+            {
+                _WriteAndReadLock.Release();
+            }
+        }
+
+        public async Task<byte[]> WriteAndReadAsync(byte[] writeBuffer)
+        {
+            await WriteAsync(writeBuffer);
+            return await ReadAsync();
         }
         #endregion
     }

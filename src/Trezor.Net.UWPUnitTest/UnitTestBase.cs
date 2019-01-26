@@ -1,5 +1,4 @@
-﻿using Device.Net;
-using Hardwarewallets.Net;
+﻿using Hardwarewallets.Net;
 using Hardwarewallets.Net.AddressManagement;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Nethereum.Hex.HexConvertors.Extensions;
@@ -11,6 +10,7 @@ using System.Numerics;
 using System.Threading.Tasks;
 using Trezor.Net.Contracts.Bitcoin;
 using Trezor.Net.Contracts.Ethereum;
+using Trezor.Net.Manager;
 
 namespace Trezor.Net
 {
@@ -21,11 +21,19 @@ namespace Trezor.Net
         //This must remain static for persistenance across tests
         protected static TrezorManager TrezorManager;
         private readonly string[] _Addresses = new string[50];
+        private TrezorManagerBroker _TrezorManagerBroker;
         #endregion
 
         #region Protected Abstract Methods
-        protected abstract Task<IDevice> Connect();
         protected abstract Task<string> GetPin();
+        #endregion
+
+        #region Protected Virtual Methods
+        protected virtual async Task<TrezorManager> ConnectAsync()
+        {
+            _TrezorManagerBroker = new TrezorManagerBroker(GetPin, 2000, new DefaultCoinUtility());
+            return await _TrezorManagerBroker.WaitForFirstTrezorAsync();
+        }
         #endregion
 
         #region Helpers
@@ -68,16 +76,14 @@ namespace Trezor.Net
 
         #region Setup / Teardown
         [TestInitialize]
-        public async Task GetAndInitialize()
+        public async Task GetAndInitializeAsync()
         {
             if (TrezorManager != null)
             {
                 return;
             }
 
-            var trezorHidDevice = await Connect();
-            TrezorManager = new TrezorManager(GetPin, trezorHidDevice, new DefaultCoinUtility());
-            await TrezorManager.InitializeAsync();
+            TrezorManager = await ConnectAsync();
         }
 
         [TestCleanup]
