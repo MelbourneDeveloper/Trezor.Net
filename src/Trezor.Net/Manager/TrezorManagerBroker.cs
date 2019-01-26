@@ -135,7 +135,19 @@ namespace Trezor.Net.Manager
             _DeviceListener?.Stop();
         }
 
-        //TODO: GetTrezorsAsync()
+        /// <summary>
+        /// Check to see if there are any devices connected
+        /// </summary>
+        public async Task CheckForDevicesAsync()
+        {
+            try
+            {
+                await _DeviceListener.CheckForDevicesAsync();
+            }
+            catch
+            {
+            }
+        }
 
         /// <summary>
         /// Starts the device listener and waits for the first connected Trezor to be initialized
@@ -143,10 +155,8 @@ namespace Trezor.Net.Manager
         /// <returns></returns>
         public async Task<TrezorManager> WaitForFirstTrezorAsync()
         {
-            //TODO: this should call GetDevicesAsync on the DeviceListener to get all connected devices. This basically a deficiency in DeviceListener
-            //See https://github.com/MelbourneDeveloper/Device.Net/issues/28
-
             if (_DeviceListener == null) Start();
+            await _DeviceListener.CheckForDevicesAsync();
             return await _FirstTrezorTaskCompletionSource.Task;
         }
 
