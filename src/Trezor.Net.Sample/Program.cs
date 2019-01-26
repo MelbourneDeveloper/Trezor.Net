@@ -13,6 +13,7 @@ namespace TrezorTestApp
     {
         #region Fields
         private static readonly string[] _Addresses = new string[50];
+        private static TrezorManagerBroker _TrezorManagerBroker;
         #endregion
 
         #region Main
@@ -42,8 +43,8 @@ namespace TrezorTestApp
             //Register the factory for creating Hid devices. Trezor One Firmware 1.6.x
             WindowsHidDeviceFactory.Register();
 
-            var trezorManagerBroker = new TrezorManagerBroker(GetPin, 2000, new DefaultCoinUtility());
-            return await trezorManagerBroker.WaitForFirstTrezorAsync();
+            _TrezorManagerBroker = new TrezorManagerBroker(GetPin, 2000, new DefaultCoinUtility());
+            return await _TrezorManagerBroker.WaitForFirstTrezorAsync();
         }
 
         /// <summary>
@@ -86,7 +87,11 @@ namespace TrezorTestApp
 
                     Console.WriteLine("All good");
 
-                    Console.ReadLine();
+                    while (true)
+                    {
+                        await Task.Delay(5000);                        
+                        Console.WriteLine($"Count of connected Trezors: {_TrezorManagerBroker.TrezorManagers.Count}");
+                    }
                 }
             }
             catch (Exception ex)

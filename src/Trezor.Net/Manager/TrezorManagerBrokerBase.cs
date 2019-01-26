@@ -12,10 +12,9 @@ namespace Trezor.Net.Manager
     {
         #region Protected Abstract Properties
         protected abstract List<FilterDeviceDefinition> DeviceDefinitions { get; }
-        #endregion
 
+        #endregion
         #region Fields
-        private ReadOnlyCollection<T> _TrezorManagers = new ReadOnlyCollection<T>(new List<T>());
         private DeviceListener _DeviceListener;
         private SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
         private TaskCompletionSource<T> _FirstTrezorTaskCompletionSource = new TaskCompletionSource<T>();
@@ -34,7 +33,7 @@ namespace Trezor.Net.Manager
         #endregion
 
         #region Public Properties
-        public IEnumerable<T> TrezorManagers => _TrezorManagers;
+        public ReadOnlyCollection<T> TrezorManagers { get; private set; } = new ReadOnlyCollection<T>(new List<T>());
         public EnterPinArgs EnterPinArgs { get; }
         public ICoinUtility CoinUtility { get; }
         public int? PollInterval { get; }
@@ -60,17 +59,17 @@ namespace Trezor.Net.Manager
             {
                 await _Lock.WaitAsync();
 
-                var trezorManager = _TrezorManagers.FirstOrDefault(t => ReferenceEquals(t.Device, e.Device));
+                var trezorManager = TrezorManagers.FirstOrDefault(t => ReferenceEquals(t.Device, e.Device));
                 if (trezorManager == null)
                 {
                     trezorManager = CreateTrezorManager(e.Device);
 
-                    var tempList = new List<T>(_TrezorManagers)
+                    var tempList = new List<T>(TrezorManagers)
                     {
                         trezorManager
                     };
 
-                    _TrezorManagers = new ReadOnlyCollection<T>(tempList);
+                    TrezorManagers = new ReadOnlyCollection<T>(tempList);
 
                     await trezorManager.InitializeAsync();
 
@@ -91,18 +90,18 @@ namespace Trezor.Net.Manager
             {
                 await _Lock.WaitAsync();
 
-                var trezorManager = _TrezorManagers.FirstOrDefault(t => ReferenceEquals(t.Device, e.Device));
+                var trezorManager = TrezorManagers.FirstOrDefault(t => ReferenceEquals(t.Device, e.Device));
                 if (trezorManager != null)
                 {
                     TrezorDisconnected?.Invoke(this, new TrezorManagerConnectionEventArgs<TMessageType>(trezorManager));
 
                     trezorManager.Dispose();
 
-                    var tempList = new List<T>(_TrezorManagers);
+                    var tempList = new List<T>(TrezorManagers);
 
                     tempList.Remove(trezorManager);
 
-                    _TrezorManagers = new ReadOnlyCollection<T>(tempList);
+                    TrezorManagers = new ReadOnlyCollection<T>(tempList);
                 }
             }
             finally
@@ -166,7 +165,7 @@ namespace Trezor.Net.Manager
             //TODO: 
             //_DeviceListener.Dispose();
 
-            foreach (var trezorManager in _TrezorManagers)
+            foreach (var trezorManager in TrezorManagers)
             {
                 trezorManager.Dispose();
             }
