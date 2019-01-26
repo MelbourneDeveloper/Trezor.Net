@@ -2,11 +2,11 @@
 
 namespace Trezor.Net.Manager
 {
-    public class TrezorManagerConnectionEventArgs : EventArgs
+    public class TrezorManagerConnectionEventArgs<TMessageType> : EventArgs
     {
-        public TrezorManager TrezorManager { get; }
+        public TrezorManagerBase<TMessageType> TrezorManager { get; }
 
-        public TrezorManagerConnectionEventArgs(TrezorManager trezorManager)
+        public TrezorManagerConnectionEventArgs(TrezorManagerBase<TMessageType> trezorManager)
         {
             TrezorManager = trezorManager;
         }

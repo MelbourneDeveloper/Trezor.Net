@@ -25,12 +25,12 @@ namespace Trezor.Net.Manager
         /// <summary>
         /// Occurs after the TrezorManagerBroker notices that a device hasbeen connected, and initialized
         /// </summary>
-        public event EventHandler<TrezorManagerConnectionEventArgs> TrezorInitialized;
+        public event EventHandler<TrezorManagerConnectionEventArgs<TMessageType>> TrezorInitialized;
 
         /// <summary>
         /// Occurs after the TrezorManagerBroker notices that the device has been disconnected, but before the TrezorManager is disposed
         /// </summary>
-        public event EventHandler<TrezorManagerConnectionEventArgs> TrezorDisconnected;
+        public event EventHandler<TrezorManagerConnectionEventArgs<TMessageType>> TrezorDisconnected;
         #endregion
 
         #region Public Properties
@@ -56,7 +56,7 @@ namespace Trezor.Net.Manager
             {
                 await _Lock.WaitAsync();
 
-                var T = _TrezorManagers.FirstOrDefault(t => ReferenceEquals(t.Device, e.Device));
+                var trezorManager = _TrezorManagers.FirstOrDefault(t => ReferenceEquals(t.Device, e.Device));
                 if (trezorManager == null)
                 {
                     trezorManager = new T(EnterPinArgs, e.Device, CoinUtility);
@@ -72,7 +72,7 @@ namespace Trezor.Net.Manager
 
                     if (_FirstTrezorTaskCompletionSource.Task.Status == TaskStatus.WaitingForActivation) _FirstTrezorTaskCompletionSource.SetResult(trezorManager);
 
-                    TrezorInitialized?.Invoke(this, new TrezorManagerConnectionEventArgs(trezorManager));
+                    TrezorInitialized?.Invoke(this, new TrezorManagerConnectionEventArgs<TMessageType>(trezorManager));
                 }
             }
             finally
@@ -90,11 +90,11 @@ namespace Trezor.Net.Manager
                 var trezorManager = _TrezorManagers.FirstOrDefault(t => ReferenceEquals(t.Device, e.Device));
                 if (trezorManager != null)
                 {
-                    TrezorDisconnected?.Invoke(this, new TrezorManagerConnectionEventArgs(trezorManager));
+                    TrezorDisconnected?.Invoke(this, new TrezorManagerConnectionEventArgs<TMessageType>(trezorManager));
 
                     trezorManager.Dispose();
 
-                    var tempList = new List<TrezorManager>(_TrezorManagers);
+                    var tempList = new List<TrezorManagerBase<T>>(_TrezorManagers);
 
                     tempList.Remove(trezorManager);
 
