@@ -68,7 +68,7 @@ namespace Trezor.Net.Manager
 
                     await trezorManager.InitializeAsync();
 
-                    if (_FirstTrezorTaskCompletionSource.Task.Status == TaskStatus.Created) _FirstTrezorTaskCompletionSource.SetResult(trezorManager);
+                    if (_FirstTrezorTaskCompletionSource.Task.Status == TaskStatus.WaitingForActivation) _FirstTrezorTaskCompletionSource.SetResult(trezorManager);
                 }
             }
             finally
