@@ -49,6 +49,10 @@ namespace Trezor.Net.Manager
         }
         #endregion
 
+        #region Protected Abstract Methods
+        protected abstract T CreateTrezorManager(IDevice device);
+        #endregion
+
         #region Event Handlers
         private async void DevicePoller_DeviceInitialized(object sender, DeviceEventArgs e)
         {
@@ -59,7 +63,7 @@ namespace Trezor.Net.Manager
                 var trezorManager = _TrezorManagers.FirstOrDefault(t => ReferenceEquals(t.Device, e.Device));
                 if (trezorManager == null)
                 {
-                    trezorManager = new T(EnterPinArgs, e.Device, CoinUtility);
+                    trezorManager = CreateTrezorManager(e.Device);
 
                     var tempList = new List<T>(_TrezorManagers)
                     {
@@ -94,11 +98,11 @@ namespace Trezor.Net.Manager
 
                     trezorManager.Dispose();
 
-                    var tempList = new List<TrezorManagerBase<T>>(_TrezorManagers);
+                    var tempList = new List<T>(_TrezorManagers);
 
                     tempList.Remove(trezorManager);
 
-                    _TrezorManagers = new ReadOnlyCollection<TrezorManager>(tempList);
+                    _TrezorManagers = new ReadOnlyCollection<T>(tempList);
                 }
             }
             finally

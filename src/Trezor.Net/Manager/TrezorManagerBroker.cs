@@ -21,6 +21,11 @@ namespace Trezor.Net.Manager
             new FilterDeviceDefinition{ DeviceType= DeviceType.Usb, VendorId= 0x1209, ProductId=0x53C1, Label="Trezor One Firmware 1.7.x" },
             new FilterDeviceDefinition{ DeviceType= DeviceType.Usb, VendorId= 0x1209, ProductId=0x53C0, Label="Model T" }
         };
+
+        protected override TrezorManager CreateTrezorManager(IDevice device)
+        {
+            return new TrezorManager(EnterPinArgs, device);
+        }
         #endregion
     }
 }
