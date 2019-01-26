@@ -33,7 +33,7 @@ namespace TrezorTestApp
         #endregion
 
         #region Private  Methods
-        private static async Task<TrezorManager> Connect()
+        private static async Task<TrezorManager> ConnectAsync()
         {
             //This only needs to be done once.
             //Register the factory for creating Usb devices. Trezor One Firmware 1.7.x / Trezor Model T
@@ -54,7 +54,7 @@ namespace TrezorTestApp
         {
             try
             {
-                using (var trezorManager = await Connect())
+                using (var trezorManager = await ConnectAsync())
                 {
                     Console.WriteLine("Trezor connection recognized");
 
