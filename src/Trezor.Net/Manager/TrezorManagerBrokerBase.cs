@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Trezor.Net.Manager
 {
-    public abstract class TrezorManagerBrokerBase<T, TMessageType> where T : TrezorManagerBase<TMessageType>
+    public abstract class TrezorManagerBrokerBase<T, TMessageType> where T : TrezorManagerBase<TMessageType>, IDisposable
     {
         #region Protected Abstract Properties
         protected abstract List<FilterDeviceDefinition> DeviceDefinitions { get; }
