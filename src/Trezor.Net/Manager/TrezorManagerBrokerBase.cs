@@ -162,9 +162,7 @@ namespace Trezor.Net.Manager
         public void Dispose()
         {
             _DeviceListener.Stop();
-
-            //TODO: 
-            //_DeviceListener.Dispose();
+            _DeviceListener.Dispose();
 
             foreach (var trezorManager in TrezorManagers)
             {
