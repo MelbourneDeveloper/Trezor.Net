@@ -123,6 +123,7 @@ namespace Trezor.Net.Manager
                 _DeviceListener = new DeviceListener(DeviceDefinitions, PollInterval);
                 _DeviceListener.DeviceDisconnected += DevicePoller_DeviceDisconnected;
                 _DeviceListener.DeviceInitialized += DevicePoller_DeviceInitialized;
+                _DeviceListener.Start();
             }
 
             //TODO: Call Start on the DeviceListener when it is implemented...

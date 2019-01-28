@@ -1,5 +1,4 @@
-﻿using Device.Net;
-using LibUsbDotNet.LibUsb;
+﻿using LibUsbDotNet.LibUsb;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
