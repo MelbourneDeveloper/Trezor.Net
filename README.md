@@ -1,6 +1,8 @@
 # Trezor.Net
 Cross Platform C# Library for the [Trezor Cryptocurrency Hardwarewallet](https://trezor.io/)
 
+**MacOS is coming! Some early experiments yielded results with a USB device using LibUsb on MacOS. When this is perfected it will be released with a MacOS sample.**
+
 This library allows you to communicate with both Trezor hardwarewallets in the same way that the Trezor browser wallet app communicates with them. It can be used to build apps that send or receive crypto currencies like Bitcoin in a secure way.
 
 Join us on Slack:
