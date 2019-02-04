@@ -1,11 +1,16 @@
 ﻿using Hardwarewallets.Net.AddressManagement;
-using Hid.Net.Windows;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Trezor.Net;
 using Trezor.Net.Manager;
+
+#if (LIBUSB)
+using Device.Net.LibUsb;
+#else
 using Usb.Net.Windows;
+using Hid.Net.Windows;
+#endif
 
 namespace TrezorTestApp
 {
