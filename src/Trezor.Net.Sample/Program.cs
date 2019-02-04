@@ -36,12 +36,16 @@ namespace TrezorTestApp
         #region Private  Methods
         private static async Task<TrezorManager> ConnectAsync()
         {
+#if (LIBUSB)
+            LibUsbUsbDeviceFactory.Register();
+#else
             //This only needs to be done once.
             //Register the factory for creating Usb devices. Trezor One Firmware 1.7.x / Trezor Model T
             WindowsUsbDeviceFactory.Register();
 
             //Register the factory for creating Hid devices. Trezor One Firmware 1.6.x
             WindowsHidDeviceFactory.Register();
+#endif
 
             _TrezorManagerBroker = new TrezorManagerBroker(GetPin, 2000, new DefaultCoinUtility());
             return await _TrezorManagerBroker.WaitForFirstTrezorAsync();
@@ -90,7 +94,7 @@ namespace TrezorTestApp
                     while (true)
                     {
                         Console.WriteLine($"Count of connected Trezors: {_TrezorManagerBroker.TrezorManagers.Count}");
-                        await Task.Delay(5000);                        
+                        await Task.Delay(5000);
                     }
                 }
             }
