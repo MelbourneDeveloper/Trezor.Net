@@ -152,7 +152,7 @@ namespace Trezor.Net
         #region Private Methods
         private async Task WriteAsync(object msg)
         {
-            Logger.Log($"Write: {msg}", LogSection, null, LogLevel.Information);
+            Logger?.Log($"Write: {msg}", LogSection, null, LogLevel.Information);
 
             var byteArray = Serialize(msg);
 
@@ -302,7 +302,7 @@ namespace Trezor.Net
 
             var msg = Deserialize(messageType, allData);
 
-            Logger.Log($"Read: {msg}", LogSection, null, LogLevel.Information);
+            Logger?.Log($"Read: {msg}", LogSection, null, LogLevel.Information);
 
             return msg;
         }

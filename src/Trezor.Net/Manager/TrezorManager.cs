@@ -522,7 +522,7 @@ namespace Trezor.Net
             }
             catch (Exception ex)
             {
-                Logger.Log("Error Getting Trezor Address", LogSection, ex, LogLevel.Error);
+                Logger?.Log("Error Getting Trezor Address", LogSection, ex, LogLevel.Error);
                 throw;
             }
         }
