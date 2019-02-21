@@ -37,6 +37,7 @@ namespace Trezor.Net
         #region Public Properties
         public IDevice Device { get; private set; }
         public ICoinUtility CoinUtility { get; set; }
+        public ILogger Logger { get; set; }
         #endregion
 
         #region Public Abstract Properties
@@ -151,7 +152,7 @@ namespace Trezor.Net
         #region Private Methods
         private async Task WriteAsync(object msg)
         {
-            Logger.Log($"Write: {msg}", null, LogSection);
+            Logger.Log($"Write: {msg}", LogSection, null, LogLevel.Information);
 
             var byteArray = Serialize(msg);
 
@@ -301,7 +302,7 @@ namespace Trezor.Net
 
             var msg = Deserialize(messageType, allData);
 
-            Logger.Log($"Read: {msg}", null, LogSection);
+            Logger.Log($"Read: {msg}", LogSection, null, LogLevel.Information);
 
             return msg;
         }
