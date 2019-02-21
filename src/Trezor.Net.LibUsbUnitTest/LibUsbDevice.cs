@@ -45,6 +45,10 @@ namespace Trezor.Net
             UsbDevice.Dispose();
         }
 
+        public void Close()
+        {
+            UsbDevice.Close();
+        }
 
         public async Task InitializeAsync()
         {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Trezor.Net.Manager
 {
-    public abstract class TrezorManagerBrokerBase<T, TMessageType> where T : TrezorManagerBase<TMessageType>
+    public abstract class TrezorManagerBrokerBase<T, TMessageType> where T : TrezorManagerBase<TMessageType>, IDisposable
     {
         #region Protected Abstract Properties
         protected abstract List<FilterDeviceDefinition> DeviceDefinitions { get; }
@@ -123,6 +123,7 @@ namespace Trezor.Net.Manager
                 _DeviceListener = new DeviceListener(DeviceDefinitions, PollInterval);
                 _DeviceListener.DeviceDisconnected += DevicePoller_DeviceDisconnected;
                 _DeviceListener.DeviceInitialized += DevicePoller_DeviceInitialized;
+                _DeviceListener.Start();
             }
 
             //TODO: Call Start on the DeviceListener when it is implemented...
@@ -161,9 +162,7 @@ namespace Trezor.Net.Manager
         public void Dispose()
         {
             _DeviceListener.Stop();
-
-            //TODO: 
-            //_DeviceListener.Dispose();
+            _DeviceListener.Dispose();
 
             foreach (var trezorManager in TrezorManagers)
             {
