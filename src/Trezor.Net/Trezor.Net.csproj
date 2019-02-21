@@ -6,20 +6,20 @@
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>3.0.0</Version>
+    <Version>3.1.0</Version>
     <Authors>Christian Findlay</Authors>
     <Company>Christian Findlay</Company>
     <Description>A cross platform library for communicating with the Satoshi Labs' Trezor Hardware Wallet
 
 Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for other platforms can be added with Hid.Net dependency injection</Description>
-    <Copyright>Copyright (c) 2018 Christian Findlay</Copyright>
+    <Copyright>Copyright (c) 2019 Christian Findlay</Copyright>
     <PackageLicenseUrl>https://github.com/MelbourneDeveloper/Trezor.Net/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/MelbourneDeveloper/Trezor.Net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MelbourneDeveloper/Trezor.Net</RepositoryUrl>
     <PackageTags>Hid Usb Trezor Hardwarewallet Bitcoin Ethereum SatoshiLabs KeepKey Cryptocurrency security</PackageTags>
-    <AssemblyVersion>3.0.0.0</AssemblyVersion>
-    <FileVersion>3.0.0.0</FileVersion>
-    <PackageReleaseNotes>Introducing TrezorManagerBroker which handles connection, disconnection and initialization of devices across all platforms seamlessly.</PackageReleaseNotes>
+    <AssemblyVersion>3.1.0.0</AssemblyVersion>
+    <FileVersion>3.1.0.0</FileVersion>
+    <PackageReleaseNotes>Upgrade Usb.Net, Hid.Net</PackageReleaseNotes>
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
 
