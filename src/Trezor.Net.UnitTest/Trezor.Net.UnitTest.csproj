@@ -47,14 +47,14 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.2.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.2\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
-    <Reference Include="Device.Net, Version=2.4.0.0, Culture=neutral, PublicKeyToken=918542c6e3a3318a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Device.Net.2.4.0\lib\net45\Device.Net.dll</HintPath>
+    <Reference Include="Device.Net, Version=2.5.0.0, Culture=neutral, PublicKeyToken=918542c6e3a3318a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Device.Net.2.5.0\lib\net45\Device.Net.dll</HintPath>
     </Reference>
     <Reference Include="Hardwarewallets.Net, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Hardwarewallets.Net.1.2.0\lib\net452\Hardwarewallets.Net.dll</HintPath>
     </Reference>
-    <Reference Include="Hid.Net, Version=2.4.0.0, Culture=neutral, PublicKeyToken=918542c6e3a3318a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hid.Net.2.4.0\lib\net45\Hid.Net.dll</HintPath>
+    <Reference Include="Hid.Net, Version=2.5.0.0, Culture=neutral, PublicKeyToken=918542c6e3a3318a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hid.Net.2.5.0\lib\net45\Hid.Net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -63,11 +63,11 @@
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.3.2\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Nethereum.Hex, Version=2.5.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Nethereum.Hex.2.5.1\lib\net451\Nethereum.Hex.dll</HintPath>
+    <Reference Include="Nethereum.Hex, Version=3.0.0.0, Culture=neutral, PublicKeyToken=8768a594786aba4e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.Hex.3.0.0\lib\net451\Nethereum.Hex.dll</HintPath>
     </Reference>
-    <Reference Include="Nethereum.RLP, Version=2.5.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Nethereum.RLP.2.5.1\lib\net451\Nethereum.RLP.dll</HintPath>
+    <Reference Include="Nethereum.RLP, Version=3.0.0.0, Culture=neutral, PublicKeyToken=8768a594786aba4e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.RLP.3.0.0\lib\net451\Nethereum.RLP.dll</HintPath>
     </Reference>
     <Reference Include="Nethereum.Signer, Version=2.5.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Nethereum.Signer.2.5.1\lib\net451\Nethereum.Signer.dll</HintPath>
@@ -136,7 +136,7 @@
     </Reference>
     <Reference Include="System.ServiceModel" />
     <Reference Include="Usb.Net, Version=2.4.0.0, Culture=neutral, PublicKeyToken=918542c6e3a3318a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Usb.Net.2.4.0\lib\net45\Usb.Net.dll</HintPath>
+      <HintPath>..\packages\Usb.Net.2.5.0\lib\net45\Usb.Net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
