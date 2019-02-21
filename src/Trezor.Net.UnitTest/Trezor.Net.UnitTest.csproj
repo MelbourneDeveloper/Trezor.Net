@@ -135,7 +135,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.ServiceModel" />
-    <Reference Include="Usb.Net, Version=2.4.0.0, Culture=neutral, PublicKeyToken=918542c6e3a3318a, processorArchitecture=MSIL">
+    <Reference Include="Usb.Net, Version=2.5.0.0, Culture=neutral, PublicKeyToken=918542c6e3a3318a, processorArchitecture=MSIL">
       <HintPath>..\packages\Usb.Net.2.5.0\lib\net45\Usb.Net.dll</HintPath>
     </Reference>
   </ItemGroup>
