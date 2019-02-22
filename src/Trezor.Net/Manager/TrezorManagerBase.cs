@@ -27,6 +27,7 @@ namespace Trezor.Net
         protected SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
         private readonly string LogSection = "TrezorManagerBase";
         private object _LastWrittenMessage;
+        private bool disposed;
         #endregion
 
         #region Private Static Fields
@@ -138,8 +139,11 @@ namespace Trezor.Net
         /// </summary>
         public abstract Task InitializeAsync();
 
-        public void Dispose()
+        public virtual void Dispose()
         {
+            if (disposed) return;
+            disposed = true;
+
             Device?.Dispose();
         }
 

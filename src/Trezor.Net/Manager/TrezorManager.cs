@@ -23,8 +23,12 @@ using Trezor.Net.Contracts.Tezos;
 
 namespace Trezor.Net
 {
-    public class TrezorManager : TrezorManagerBase<MessageType>
+    public class TrezorManager : TrezorManagerBase<MessageType>, IDisposable
     {
+        #region Fields
+        private bool disposed;
+        #endregion
+
         #region Private Constants
         private const string LogSection = "Trezor Manager";
         #endregion
@@ -451,6 +455,14 @@ namespace Trezor.Net
         #endregion
 
         #region Public Methods
+        public override void Dispose()
+        {
+            if (disposed) return;
+            disposed = true;
+
+            base.Dispose();
+        }
+
         public override Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display)
         {
             if (CoinUtility == null)
@@ -532,6 +544,8 @@ namespace Trezor.Net
         /// </summary>
         public override async Task InitializeAsync()
         {
+            if (disposed) throw new Exception("Initialization cannot occur after disposal");
+
             Features = await SendMessageAsync<Features, Initialize>(new Initialize());
 
             if (Features == null)
