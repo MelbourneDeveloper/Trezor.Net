@@ -162,22 +162,16 @@ namespace Trezor.Net
                     return typeof(CardanoGetAddress);
                 case MessageType.MessageTypeCardanoGetPublicKey:
                     return typeof(CardanoGetPublicKey);
-                case MessageType.MessageTypeCardanoMessageSignature:
-                    return typeof(CardanoMessageSignature);
                 case MessageType.MessageTypeCardanoPublicKey:
                     return typeof(CardanoPublicKey);
                 case MessageType.MessageTypeCardanoSignedTx:
                     return typeof(CardanoSignedTx);
-                case MessageType.MessageTypeCardanoSignMessage:
-                    return typeof(CardanoSignMessage);
                 case MessageType.MessageTypeCardanoSignTx:
                     return typeof(CardanoSignTx);
                 case MessageType.MessageTypeCardanoTxAck:
                     return typeof(CardanoTxAck);
                 case MessageType.MessageTypeCardanoTxRequest:
                     return typeof(CardanoTxRequest);
-                case MessageType.MessageTypeCardanoVerifyMessage:
-                    return typeof(CardanoVerifyMessage);
                 case MessageType.MessageTypeStellarCreateAccountOp:
                     return typeof(StellarCreateAccountOp);
                 case MessageType.MessageTypeStellarCreatePassiveOfferOp:
@@ -404,8 +398,6 @@ namespace Trezor.Net
                     return typeof(RippleSignTx);
                 case MessageType.MessageTypeRippleSignedTx:
                     return typeof(RippleSignedTx);
-                case MessageType.MessageTypeMoneroTransactionSignRequest:
-                    return typeof(MoneroTransactionSignRequest);
                 case MessageType.MessageTypeMoneroTransactionInitAck:
                     return typeof(MoneroTransactionInitAck);
                 case MessageType.MessageTypeMoneroTransactionSetInputAck:
@@ -418,18 +410,12 @@ namespace Trezor.Net
                     return typeof(MoneroTransactionAllInputsSetAck);
                 case MessageType.MessageTypeMoneroTransactionSetOutputAck:
                     return typeof(MoneroTransactionSetOutputAck);
-                case MessageType.MessageTypeMoneroTransactionRangeSigAck:
-                    return typeof(MoneroTransactionRangeSigAck);
                 case MessageType.MessageTypeMoneroTransactionAllOutSetAck:
                     return typeof(MoneroTransactionAllOutSetAck);
-                case MessageType.MessageTypeMoneroTransactionMlsagDoneAck:
-                    return typeof(MoneroTransactionMlsagDoneAck);
                 case MessageType.MessageTypeMoneroTransactionSignInputAck:
                     return typeof(MoneroTransactionSignInputAck);
                 case MessageType.MessageTypeMoneroTransactionFinalAck:
                     return typeof(MoneroTransactionFinalAck);
-                case MessageType.MessageTypeMoneroKeyImageSyncRequest:
-                    return typeof(MoneroKeyImageSyncRequest);
                 case MessageType.MessageTypeMoneroKeyImageExportInitAck:
                     return typeof(MoneroKeyImageExportInitAck);
                 case MessageType.MessageTypeMoneroKeyImageSyncStepAck:

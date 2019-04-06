@@ -3,6 +3,8 @@
 // Input: messages-management.proto
 
 #pragma warning disable CS1591, CS0612, CS3021, IDE1006
+using Trezor.Net.Contracts.Common;
+
 namespace Trezor.Net.Contracts.Management
 {
 
@@ -580,7 +582,7 @@ namespace Trezor.Net.Contracts.Management
         private string __pbn__Mnemonic;
 
         [global::ProtoBuf.ProtoMember(2, Name = @"node")]
-        public global::hw.trezor.messages.common.HDNodeType Node { get; set; }
+        public HDNodeType Node { get; set; }
 
         [global::ProtoBuf.ProtoMember(3, Name = @"pin")]
         [global::System.ComponentModel.DefaultValue("")]
