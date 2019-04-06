@@ -3,7 +3,7 @@
 // Input: messages-cardano.proto
 
 #pragma warning disable CS1591, CS0612, CS3021, IDE1006
-namespace hw.trezor.messages.cardano
+namespace Trezor.Net.Contracts.Cardano
 {
 
     [global::ProtoBuf.ProtoContract()]

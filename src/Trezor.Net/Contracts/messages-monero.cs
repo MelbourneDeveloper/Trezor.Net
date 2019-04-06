@@ -3,7 +3,7 @@
 // Input: messages-monero.proto
 
 #pragma warning disable CS1591, CS0612, CS3021, IDE1006
-namespace hw.trezor.messages.monero
+namespace Trezor.Net.Contracts.Monero
 {
 
     [global::ProtoBuf.ProtoContract()]

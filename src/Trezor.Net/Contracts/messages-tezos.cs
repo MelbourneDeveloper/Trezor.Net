@@ -3,7 +3,7 @@
 // Input: messages-tezos.proto
 
 #pragma warning disable CS1591, CS0612, CS3021, IDE1006
-namespace hw.trezor.messages.tezos
+namespace Trezor.Net.Contracts.Tezos
 {
 
     [global::ProtoBuf.ProtoContract()]

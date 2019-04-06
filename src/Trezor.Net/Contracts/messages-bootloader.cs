@@ -3,7 +3,7 @@
 // Input: messages-bootloader.proto
 
 #pragma warning disable CS1591, CS0612, CS3021, IDE1006
-namespace hw.trezor.messages.bootloader
+namespace Trezor.Net.Contracts.Bootloader
 {
 
     [global::ProtoBuf.ProtoContract()]

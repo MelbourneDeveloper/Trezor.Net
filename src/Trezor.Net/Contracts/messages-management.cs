@@ -3,7 +3,7 @@
 // Input: messages-management.proto
 
 #pragma warning disable CS1591, CS0612, CS3021, IDE1006
-namespace hw.trezor.messages.management
+namespace Trezor.Net.Contracts.Management
 {
 
     [global::ProtoBuf.ProtoContract()]

@@ -3,7 +3,7 @@
 // Input: messages-debug.proto
 
 #pragma warning disable CS1591, CS0612, CS3021, IDE1006
-namespace hw.trezor.messages.debug
+namespace Trezor.Net.Contracts.Debug
 {
 
     [global::ProtoBuf.ProtoContract()]

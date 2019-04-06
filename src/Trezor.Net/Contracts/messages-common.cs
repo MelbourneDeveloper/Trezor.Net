@@ -3,7 +3,7 @@
 // Input: messages-common.proto
 
 #pragma warning disable CS1591, CS0612, CS3021, IDE1006
-namespace hw.trezor.messages.common
+namespace Trezor.Net.Contracts.Common
 {
 
     [global::ProtoBuf.ProtoContract()]
