@@ -11,7 +11,8 @@
         Ontology,
         Ripple,
         Stellar,
-        Tezoz
+        Tezoz,
+        Tron
     }
 }
 

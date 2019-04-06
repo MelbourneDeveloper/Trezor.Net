@@ -20,6 +20,7 @@ using Trezor.Net.Contracts.Ontology;
 using Trezor.Net.Contracts.Ripple;
 using Trezor.Net.Contracts.Stellar;
 using Trezor.Net.Contracts.Tezos;
+using Trezor.Net.Contracts.Tron;
 
 namespace Trezor.Net
 {
@@ -434,6 +435,9 @@ namespace Trezor.Net
                     return typeof(DebugMoneroDiagRequest);
                 case MessageType.MessageTypeDebugMoneroDiagAck:
                     return typeof(DebugMoneroDiagAck);
+
+                case MessageType.MessageTypeTronAddress:
+                    return typeof(TronAddress);
                 default:
                     throw new NotImplementedException();
             }
@@ -505,6 +509,12 @@ namespace Trezor.Net
                             var ethereumAddress = await SendMessageAsync<EthereumAddress, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = display, AddressNs = path });
 
                             return ethereumAddress.Address.ToLower();
+
+                        case AddressType.Tron:
+
+                            var tronAddress = await SendMessageAsync<TronAddress, TronGetAddress>(new TronGetAddress { ShowDisplay = display, AddressNs = path });
+
+                            return tronAddress.Address;
 
                         default:
                             throw new NotImplementedException();
