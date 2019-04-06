@@ -2,7 +2,7 @@
 // Consider using 'partial classes' to extend these types
 // Input: messages-binance.proto
 
-#pragma warning disable CS1591, CS0612, CS3021, IDE1006
+#pragma warning disable
 namespace hw.trezor.messages.binance
 {
 
@@ -456,4 +456,4 @@ namespace hw.trezor.messages.binance
 
 }
 
-#pragma warning restore CS1591, CS0612, CS3021, IDE1006
+#pragma warning restore

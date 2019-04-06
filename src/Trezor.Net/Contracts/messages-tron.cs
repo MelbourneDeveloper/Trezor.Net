@@ -5,7 +5,7 @@
 namespace Trezor.Net.Contracts.Tron
 {
 
-#pragma warning disable CS1591, CS0612, CS3021, IDE1006
+#pragma warning disable
     [global::ProtoBuf.ProtoContract()]
     public partial class TronGetAddress : global::ProtoBuf.IExtensible
     {
@@ -721,6 +721,6 @@ namespace Trezor.Net.Contracts.Tron
 
     }
 
-#pragma warning restore CS1591, CS0612, CS3021, IDE1006
+#pragma warning restore
 
 }

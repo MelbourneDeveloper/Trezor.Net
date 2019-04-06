@@ -2,7 +2,7 @@
 // Consider using 'partial classes' to extend these types
 // Input: messages-common.proto
 
-#pragma warning disable CS1591, CS0612, CS3021, IDE1006
+#pragma warning disable 
 namespace Trezor.Net.Contracts.Common
 {
 
@@ -326,4 +326,4 @@ namespace Trezor.Net.Contracts.Common
 
 }
 
-#pragma warning restore CS1591, CS0612, CS3021, IDE1006
+#pragma warning restore
