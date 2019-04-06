@@ -504,15 +504,8 @@ namespace Trezor.Net
 
                             var ethereumAddress = await SendMessageAsync<EthereumAddress, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = display, AddressNs = path });
 
-                            var sb = new StringBuilder();
-                            foreach (var b in ethereumAddress.Address)
-                            {
-                                sb.Append(b.ToString("X2").ToLower());
-                            }
+                            return ethereumAddress.Address.ToLower();
 
-                            var hexString = sb.ToString();
-
-                            return $"0x{hexString}";
                         default:
                             throw new NotImplementedException();
                     }
