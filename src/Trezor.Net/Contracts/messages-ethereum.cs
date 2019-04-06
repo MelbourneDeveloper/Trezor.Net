@@ -3,6 +3,8 @@
 // Input: messages-ethereum.proto
 
 #pragma warning disable CS1591, CS0612, CS3021, IDE1006
+using Trezor.Net.Contracts.Common;
+
 namespace Trezor.Net.Contracts.Ethereum
 {
 
@@ -36,7 +38,7 @@ namespace Trezor.Net.Contracts.Ethereum
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1, Name = @"node")]
-        public global::hw.trezor.messages.common.HDNodeType Node { get; set; }
+        public HDNodeType Node { get; set; }
 
         [global::ProtoBuf.ProtoMember(2, Name = @"xpub")]
         [global::System.ComponentModel.DefaultValue("")]
