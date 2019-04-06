@@ -21,6 +21,7 @@ Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for ot
     <FileVersion>3.1.0.0</FileVersion>
     <PackageReleaseNotes>Upgrade Usb.Net, Hid.Net</PackageReleaseNotes>
     <LangVersion>7.3</LangVersion>
+    <NoWarn>CA2007,IDE0010</NoWarn>
     <CodeAnalysisRuleSet>CodeRules.ruleset</CodeAnalysisRuleSet> 
   </PropertyGroup>
 

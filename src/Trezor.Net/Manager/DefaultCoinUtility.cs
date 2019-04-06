@@ -41,12 +41,14 @@ namespace Trezor.Net
             throw new NotImplementedException($"The coin number {coinNumber} has not been filled in for {nameof(DefaultCoinUtility)}. Please create a class that implements ICoinUtility, or call an overload that specifies coin information.");
         }
 
-        public static SerialiseType DeserialiseObject<SerialiseType>(string objectXml)
+        public static TSerialiseType DeserialiseObject<TSerialiseType>(string objectXml)
         {
-            var serializer = new XmlSerializer(typeof(SerialiseType));
-            var sr = new StringReader(objectXml);
-            var retVal = serializer.Deserialize(sr);
-            return (SerialiseType)retVal;
+            var serializer = new XmlSerializer(typeof(TSerialiseType));
+            using (var sr = new StringReader(objectXml))
+            {
+                var retVal = serializer.Deserialize(sr);
+                return (TSerialiseType)retVal;
+            }
         }
     }
 }

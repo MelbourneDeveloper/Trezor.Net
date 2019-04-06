@@ -325,7 +325,7 @@ namespace Trezor.Net
                 GasLimit = 21000.ToHexBytes(),
                 To = "689c56aef474df92d44a1b70850f808488f9769c",
                 Value = 100000000000000.ToHexBytes(),
-                AddressNs = ManagerHelpers.GetAddressPath(false, 0, false, 0, 60),
+                AddressNs = new BIP44AddressPath(false,60, 0, false, 0).ToArray(),
                 ChainId = 4
             };
 

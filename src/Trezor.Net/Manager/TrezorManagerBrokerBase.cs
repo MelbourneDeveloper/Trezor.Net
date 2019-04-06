@@ -164,6 +164,7 @@ namespace Trezor.Net.Manager
             if (_disposed) return;
             _disposed = true;
 
+            _Lock.Dispose();
             _DeviceListener.Stop();
             _DeviceListener.Dispose();
 

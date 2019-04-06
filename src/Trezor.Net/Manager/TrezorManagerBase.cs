@@ -3,10 +3,8 @@ using Hardwarewallets.Net;
 using Hardwarewallets.Net.Model;
 using ProtoBuf;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,11 +26,6 @@ namespace Trezor.Net
         private readonly string LogSection = "TrezorManagerBase";
         private object _LastWrittenMessage;
         private bool disposed;
-        #endregion
-
-        #region Private Static Fields
-        private static readonly Assembly[] _Assemblies;
-        private static readonly Dictionary<string, Type> _ContractsByName = new Dictionary<string, Type>();
         #endregion
 
         #region Public Properties
@@ -145,6 +138,8 @@ namespace Trezor.Net
             disposed = true;
 
             Device?.Dispose();
+
+            GC.SuppressFinalize(this);
         }
 
         #endregion
@@ -243,7 +238,7 @@ namespace Trezor.Net
 
             if (!Enum.IsDefined(MessageTypeType, (int)messageTypeInt))
             {
-                throw new Exception($"The number {messageTypeInt} is not a valid MessageType");
+                throw new ManagerException($"The number {messageTypeInt} is not a valid MessageType");
             }
 
             //Get the message type
@@ -258,7 +253,7 @@ namespace Trezor.Net
                                       + ((readBuffer[7] & 0xFF) << 8)
                                       + (readBuffer[8] & 0xFF);
 
-            var length = Math.Min(readBuffer.Length - (FirstChunkStartIndex), remainingDataLength);
+            var length = Math.Min(readBuffer.Length - FirstChunkStartIndex, remainingDataLength);
 
             //This is the first chunk so read from 9-64
             var allData = GetRange(readBuffer, FirstChunkStartIndex, length);
@@ -285,14 +280,14 @@ namespace Trezor.Net
                 {
                     if (_InvalidChunksCounter++ > 5)
                     {
-                        throw new Exception("messageRead: too many invalid chunks (2)");
+                        throw new ManagerException("messageRead: too many invalid chunks (2)");
                     }
                 }
 
                 allData = Append(allData, GetRange(readBuffer, 1, length - 1));
 
                 //Decrement the length of the data to be read
-                remainingDataLength -= (length - 1);
+                remainingDataLength -= length - 1;
 
                 //Super hack! Fix this!
                 if (remainingDataLength != 1)
@@ -321,9 +316,9 @@ namespace Trezor.Net
 
                 return Deserialize(contractType, data);
             }
-            catch
+            catch(Exception ex)
             {
-                throw new Exception("InvalidProtocolBufferException");
+                throw new ManagerException("InvalidProtocolBufferException", ex);
             }
         }
         #endregion
@@ -342,6 +337,8 @@ namespace Trezor.Net
         /// </summary>
         protected async Task<object> SendMessageAsync(object message)
         {
+            if (message == null) throw new ArgumentNullException(nameof(message));
+
             await WriteAsync(message);
 
             var retVal = await ReadAsync();

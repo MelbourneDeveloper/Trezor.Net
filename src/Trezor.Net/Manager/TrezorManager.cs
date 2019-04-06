@@ -23,7 +23,7 @@ using Trezor.Net.Contracts.Tron;
 
 namespace Trezor.Net
 {
-    public class TrezorManager : TrezorManagerBase<MessageType>, IDisposable
+    public class TrezorManager : TrezorManagerBase<MessageType>
     {
         #region Fields
         private bool disposed;
@@ -34,7 +34,7 @@ namespace Trezor.Net
         #endregion
 
         #region Public Constants
-        public static List<FilterDeviceDefinition> DeviceDefinitions = new List<FilterDeviceDefinition>
+        public static List<FilterDeviceDefinition> DeviceDefinitions => new List<FilterDeviceDefinition>
         {
             new FilterDeviceDefinition{ DeviceType= DeviceType.Hid, VendorId= 0x534C, ProductId=0x0001, Label="Trezor One Firmware 1.6.x", UsagePage=65280 },
             new FilterDeviceDefinition{ DeviceType= DeviceType.Usb, VendorId= 0x534C, ProductId=0x0001, Label="Trezor One Firmware 1.6.x (Android Only)" },
@@ -119,12 +119,13 @@ namespace Trezor.Net
             var isValid = Enum.TryParse(messageTypeString, out MessageType messageType);
             if (!isValid)
             {
-                throw new Exception($"{messageTypeString} is not a valid MessageType");
+                throw new ManagerException($"{messageTypeString} is not a valid MessageType");
             }
 
             return messageType;
         }
 
+#pragma warning disable CA2213, CA1502
         /// <summary>
         /// TODO: Nasty. This at least needs some caching or something...
         /// </summary>
@@ -446,6 +447,7 @@ namespace Trezor.Net
                     throw new NotImplementedException();
             }
         }
+#pragma warning restore CA2213
         #endregion
 
         #region Public Methods
@@ -464,6 +466,8 @@ namespace Trezor.Net
                 throw new ManagerException($"A {nameof(CoinUtility)} must be specified if {nameof(AddressType)} is not specified.");
             }
 
+            if (addressPath == null) throw new ArgumentNullException(nameof(addressPath));
+
             var cointType = addressPath.AddressPathElements.Count > 1 ? addressPath.AddressPathElements[1].Value : throw new ManagerException("The first element of the address path is considered to be the coin type. This was not specified so no coin information is available. Please use an overload that specifies CoinInfo.");
 
             var coinInfo = CoinUtility.GetCoinInfo(cointType);
@@ -473,6 +477,8 @@ namespace Trezor.Net
 
         public Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display, CoinInfo coinInfo)
         {
+            if (coinInfo == null) throw new ArgumentNullException(nameof(coinInfo));
+
             var inputScriptType = coinInfo.IsSegwit ? InputScriptType.Spendp2shwitness : InputScriptType.Spendaddress;
 
             return GetAddressAsync(addressPath, isPublicKey, display, coinInfo.AddressType, inputScriptType, coinInfo.CoinName);
@@ -487,6 +493,8 @@ namespace Trezor.Net
         {
             try
             {
+                if (addressPath == null) throw new ArgumentNullException(nameof(addressPath));
+
                 var path = addressPath.ToArray();
 
                 if (isPublicKey)
@@ -500,7 +508,7 @@ namespace Trezor.Net
                     case AddressType.Bitcoin:
 
                         //Ultra hack to deal with a coin name change in Firmware Version 1.6.2
-                        if ((Features.MajorVersion <= 1 && Features.MinorVersion < 6) && coinName == "Bgold")
+                        if (Features.MajorVersion <= 1 && Features.MinorVersion < 6 && string.Equals(coinName, "Bgold", StringComparison.Ordinal))
                         {
                             coinName = "Bitcoin Gold";
                         }
@@ -535,13 +543,13 @@ namespace Trezor.Net
         /// </summary>
         public override async Task InitializeAsync()
         {
-            if (disposed) throw new Exception("Initialization cannot occur after disposal");
+            if (disposed) throw new ManagerException("Initialization cannot occur after disposal");
 
             Features = await SendMessageAsync<Features, Initialize>(new Initialize());
 
             if (Features == null)
             {
-                throw new Exception("Error initializing Trezor. Features were not retrieved");
+                throw new ManagerException("Error initializing Trezor. Features were not retrieved");
             }
         }
         #endregion

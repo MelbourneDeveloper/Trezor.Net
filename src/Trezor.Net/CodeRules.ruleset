@@ -15,7 +15,7 @@
     <Rule Id="CA1011" Action="Error" />
     <Rule Id="CA1012" Action="Error" />
     <Rule Id="CA1013" Action="Error" />
-    <Rule Id="CA1014" Action="Error" />
+    <Rule Id="CA1014" Action="Warning" />
     <Rule Id="CA1016" Action="Error" />
     <Rule Id="CA1017" Action="Error" />
     <Rule Id="CA1018" Action="Error" />
@@ -29,8 +29,7 @@
     <Rule Id="CA1027" Action="Error" />
     <Rule Id="CA1028" Action="Error" />
     <Rule Id="CA1030" Action="Error" />
-    <Rule Id="CA1031" Action="Error" />
-    <Rule Id="CA1032" Action="Error" />
+    <Rule Id="CA1031" Action="Warning" />
     <Rule Id="CA1033" Action="Error" />
     <Rule Id="CA1034" Action="Error" />
     <Rule Id="CA1035" Action="Error" />
@@ -59,13 +58,13 @@
     <Rule Id="CA1060" Action="Error" />
     <Rule Id="CA1061" Action="Error" />
     <Rule Id="CA1062" Action="Error" />
-    <Rule Id="CA1063" Action="Error" />
+    <Rule Id="CA1063" Action="Warning" />
     <Rule Id="CA1064" Action="Error" />
     <Rule Id="CA1065" Action="Error" />
     <Rule Id="CA1300" Action="Error" />
     <Rule Id="CA1301" Action="Error" />
     <Rule Id="CA1302" Action="Error" />
-    <Rule Id="CA1303" Action="Error" />
+    <Rule Id="CA1303" Action="Warning" />
     <Rule Id="CA1304" Action="Error" />
     <Rule Id="CA1305" Action="Error" />
     <Rule Id="CA1306" Action="Error" />
@@ -131,7 +130,7 @@
     <Rule Id="CA1813" Action="Error" />
     <Rule Id="CA1814" Action="Error" />
     <Rule Id="CA1815" Action="Error" />
-    <Rule Id="CA1816" Action="Error" />
+    <Rule Id="CA1816" Action="Warning" />
     <Rule Id="CA1819" Action="Error" />
     <Rule Id="CA1820" Action="Error" />
     <Rule Id="CA1821" Action="Error" />
@@ -201,7 +200,7 @@
     <Rule Id="CA2210" Action="Error" />
     <Rule Id="CA2211" Action="Error" />
     <Rule Id="CA2212" Action="Error" />
-    <Rule Id="CA2213" Action="Error" />
+    <Rule Id="CA2213" Action="Warning" />
     <Rule Id="CA2214" Action="Error" />
     <Rule Id="CA2215" Action="Error" />
     <Rule Id="CA2216" Action="Error" />
@@ -217,7 +216,6 @@
     <Rule Id="CA2226" Action="Error" />
     <Rule Id="CA2227" Action="Error" />
     <Rule Id="CA2228" Action="Error" />
-    <Rule Id="CA2229" Action="Error" />
     <Rule Id="CA2230" Action="Error" />
     <Rule Id="CA2231" Action="Error" />
     <Rule Id="CA2232" Action="Error" />
@@ -225,7 +223,6 @@
     <Rule Id="CA2234" Action="Error" />
     <Rule Id="CA2235" Action="Error" />
     <Rule Id="CA2236" Action="Error" />
-    <Rule Id="CA2237" Action="Error" />
     <Rule Id="CA2238" Action="Error" />
     <Rule Id="CA2239" Action="Error" />
     <Rule Id="CA2240" Action="Error" />
@@ -923,7 +920,7 @@
     <Rule Id="CA1008" Action="Error" />
     <Rule Id="CA1010" Action="Error" />
     <Rule Id="CA1012" Action="Error" />
-    <Rule Id="CA1014" Action="Error" />
+    <Rule Id="CA1014" Action="Warning" />
     <Rule Id="CA1016" Action="Error" />
     <Rule Id="CA1017" Action="Error" />
     <Rule Id="CA1018" Action="Error" />
@@ -931,7 +928,6 @@
     <Rule Id="CA1027" Action="Error" />
     <Rule Id="CA1028" Action="Error" />
     <Rule Id="CA1030" Action="Error" />
-    <Rule Id="CA1031" Action="Error" />
     <Rule Id="CA1033" Action="Error" />
     <Rule Id="CA1034" Action="Error" />
     <Rule Id="CA1036" Action="Error" />
@@ -948,7 +944,7 @@
     <Rule Id="CA1060" Action="Error" />
     <Rule Id="CA1061" Action="Error" />
     <Rule Id="CA1062" Action="Error" />
-    <Rule Id="CA1063" Action="Error" />
+    <Rule Id="CA1063" Action="Warning" />
     <Rule Id="CA1064" Action="Error" />
     <Rule Id="CA1066" Action="Error" />
     <Rule Id="CA1067" Action="Error" />
@@ -1005,7 +1001,7 @@
     <Rule Id="CA1001" Action="Error" />
     <Rule Id="CA1003" Action="Error" />
     <Rule Id="CA1019" Action="Error" />
-    <Rule Id="CA1032" Action="Error" />
+    <Rule Id="CA1032" Action="None" />
     <Rule Id="CA1065" Action="Error" />
     <Rule Id="CA1200" Action="Error" />
     <Rule Id="CA1500" Action="Error" />
@@ -1019,14 +1015,14 @@
     <Rule Id="CA2234" Action="Error" />
   </Rules>
   <Rules AnalyzerId="Microsoft.NetCore.Analyzers" RuleNamespace="Microsoft.NetCore.Analyzers">
-    <Rule Id="CA1303" Action="Error" />
+    <Rule Id="CA1303" Action="Warning" />
     <Rule Id="CA1304" Action="Error" />
     <Rule Id="CA1305" Action="Error" />
     <Rule Id="CA1307" Action="Error" />
     <Rule Id="CA1308" Action="Error" />
     <Rule Id="CA1401" Action="Error" />
     <Rule Id="CA1813" Action="Error" />
-    <Rule Id="CA1816" Action="Error" />
+    <Rule Id="CA1816" Action="Warning" />
     <Rule Id="CA1820" Action="Error" />
     <Rule Id="CA1826" Action="Error" />
     <Rule Id="CA2000" Action="Error" />
@@ -1036,11 +1032,11 @@
     <Rule Id="CA2100" Action="Error" />
     <Rule Id="CA2101" Action="Error" />
     <Rule Id="CA2208" Action="Error" />
-    <Rule Id="CA2213" Action="Error" />
+    <Rule Id="CA2213" Action="Warning" />
     <Rule Id="CA2216" Action="Error" />
-    <Rule Id="CA2229" Action="Error" />
+    <Rule Id="CA2229" Action="None" />
     <Rule Id="CA2235" Action="Error" />
-    <Rule Id="CA2237" Action="Error" />
+    <Rule Id="CA2237" Action="None" />
     <Rule Id="CA2241" Action="Error" />
     <Rule Id="CA2242" Action="Error" />
     <Rule Id="CA2243" Action="Error" />
@@ -1097,10 +1093,10 @@
   <Rules AnalyzerId="Microsoft.NetFramework.Analyzers" RuleNamespace="Microsoft.NetFramework.Analyzers">
     <Rule Id="CA1058" Action="Error" />
     <Rule Id="CA2153" Action="Error" />
-    <Rule Id="CA2229" Action="Error" />
+    <Rule Id="CA2229" Action="None" />
     <Rule Id="CA2235" Action="Error" />
-    <Rule Id="CA2237" Action="Error" />
-    <Rule Id="CA3075" Action="Error" />
+    <Rule Id="CA2237" Action="None" />
+    <Rule Id="CA3075" Action="Warning" />
     <Rule Id="CA3147" Action="Error" />
     <Rule Id="CA9999" Action="Error" />
   </Rules>
