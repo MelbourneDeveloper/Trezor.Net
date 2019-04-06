@@ -2,7 +2,6 @@
 using Hardwarewallets.Net.Model;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Trezor.Net.Contracts;
 using Trezor.Net.Contracts.Bitcoin;
@@ -39,7 +38,7 @@ namespace Trezor.Net
         {
             new FilterDeviceDefinition{ DeviceType= DeviceType.Hid, VendorId= 0x534C, ProductId=0x0001, Label="Trezor One Firmware 1.6.x", UsagePage=65280 },
             new FilterDeviceDefinition{ DeviceType= DeviceType.Usb, VendorId= 0x534C, ProductId=0x0001, Label="Trezor One Firmware 1.6.x (Android Only)" },
-            new FilterDeviceDefinition{ DeviceType= DeviceType.Usb, VendorId= 0x1209, ProductId=0x53C1, Label="Trezor One Firmware 1.7.x" },
+            new FilterDeviceDefinition{ DeviceType= DeviceType.Usb, VendorId= 0x1209, ProductId=0x53C1, Label="Trezor One Firmware 1.7.x +" },
             new FilterDeviceDefinition{ DeviceType= DeviceType.Usb, VendorId= 0x1209, ProductId=0x53C0, Label="Model T" }
         };
         #endregion
@@ -495,35 +494,33 @@ namespace Trezor.Net
                     var publicKey = await SendMessageAsync<PublicKey, GetPublicKey>(new GetPublicKey { CoinName = coinName, AddressNs = path, ShowDisplay = display, ScriptType = inputScriptType });
                     return publicKey.Xpub;
                 }
-                else
+
+                switch (addressType)
                 {
-                    switch (addressType)
-                    {
-                        case AddressType.Bitcoin:
+                    case AddressType.Bitcoin:
 
-                            //Ultra hack to deal with a coin name change in Firmware Version 1.6.2
-                            if ((Features.MajorVersion <= 1 && Features.MinorVersion < 6) && coinName == "Bgold")
-                            {
-                                coinName = "Bitcoin Gold";
-                            }
+                        //Ultra hack to deal with a coin name change in Firmware Version 1.6.2
+                        if ((Features.MajorVersion <= 1 && Features.MinorVersion < 6) && coinName == "Bgold")
+                        {
+                            coinName = "Bitcoin Gold";
+                        }
 
-                            return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = display, AddressNs = path, CoinName = coinName, ScriptType = inputScriptType })).address;
+                        return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = display, AddressNs = path, CoinName = coinName, ScriptType = inputScriptType })).address;
 
-                        case AddressType.Ethereum:
+                    case AddressType.Ethereum:
 
-                            var ethereumAddress = await SendMessageAsync<EthereumAddress, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = display, AddressNs = path });
+                        var ethereumAddress = await SendMessageAsync<EthereumAddress, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = display, AddressNs = path });
 
-                            return ethereumAddress.Address.ToLower();
+                        return ethereumAddress.Address.ToLower();
 
-                        case AddressType.Tron:
+                    case AddressType.Tron:
 
-                            var tronAddress = await SendMessageAsync<TronAddress, TronGetAddress>(new TronGetAddress { ShowDisplay = display, AddressNs = path });
+                        var tronAddress = await SendMessageAsync<TronAddress, TronGetAddress>(new TronGetAddress { ShowDisplay = display, AddressNs = path });
 
-                            return tronAddress.Address;
+                        return tronAddress.Address;
 
-                        default:
-                            throw new NotImplementedException();
-                    }
+                    default:
+                        throw new NotImplementedException();
                 }
             }
             catch (Exception ex)

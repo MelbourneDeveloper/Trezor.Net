@@ -274,12 +274,13 @@ namespace Trezor.Net
             var address = await GetAddressAsync(false, 60, false, 0, true);
         }
 
-        [TestMethod]
-        public async Task GetTronAddress()
-        {
-            //Ethereum coins don't need the coin name
-            var address = await GetAddressAsync(false, 195, false, 0, true);
-        }
+        //Tron doesn't seem to work on the Trezor One
+        //[TestMethod]
+        //public async Task GetTronAddress()
+        //{
+        //    //Ethereum coins don't need the coin name
+        //    var address = await GetAddressAsync(false, 195, false, 0, true);
+        //}
 
         [TestMethod]
         public async Task DisplayEthereumClassicAddress()

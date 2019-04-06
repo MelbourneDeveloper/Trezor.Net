@@ -24,7 +24,7 @@ namespace Trezor.Net
         #region Fields
         private int _InvalidChunksCounter;
         private readonly EnterPinArgs _EnterPinCallback;
-        protected SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
+        private SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
         private readonly string LogSection = "TrezorManagerBase";
         private object _LastWrittenMessage;
         private bool disposed;
