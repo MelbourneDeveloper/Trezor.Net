@@ -435,9 +435,14 @@ namespace Trezor.Net
                     return typeof(DebugMoneroDiagRequest);
                 case MessageType.MessageTypeDebugMoneroDiagAck:
                     return typeof(DebugMoneroDiagAck);
-
+                case MessageType.MessageTypeTronGetAddress:
+                    return typeof(TronGetAddress);
                 case MessageType.MessageTypeTronAddress:
                     return typeof(TronAddress);
+                case MessageType.MessageTypeTronSignTx:
+                    return typeof(TronSignTx);
+                case MessageType.MessageTypeTronSignedTx:
+                    return typeof(TronSignedTx);                  
                 default:
                     throw new NotImplementedException();
             }
