@@ -15,6 +15,7 @@ namespace Trezor.Net.Manager
 
         #endregion
         #region Fields
+        private bool _disposed;
         private DeviceListener _DeviceListener;
         private SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
         private TaskCompletionSource<T> _FirstTrezorTaskCompletionSource = new TaskCompletionSource<T>();
@@ -60,23 +61,23 @@ namespace Trezor.Net.Manager
                 await _Lock.WaitAsync();
 
                 var trezorManager = TrezorManagers.FirstOrDefault(t => ReferenceEquals(t.Device, e.Device));
-                if (trezorManager == null)
+
+                if (trezorManager != null) return;
+
+                trezorManager = CreateTrezorManager(e.Device);
+
+                var tempList = new List<T>(TrezorManagers)
                 {
-                    trezorManager = CreateTrezorManager(e.Device);
+                    trezorManager
+                };
 
-                    var tempList = new List<T>(TrezorManagers)
-                    {
-                        trezorManager
-                    };
+                TrezorManagers = new ReadOnlyCollection<T>(tempList);
 
-                    TrezorManagers = new ReadOnlyCollection<T>(tempList);
+                await trezorManager.InitializeAsync();
 
-                    await trezorManager.InitializeAsync();
+                if (_FirstTrezorTaskCompletionSource.Task.Status == TaskStatus.WaitingForActivation) _FirstTrezorTaskCompletionSource.SetResult(trezorManager);
 
-                    if (_FirstTrezorTaskCompletionSource.Task.Status == TaskStatus.WaitingForActivation) _FirstTrezorTaskCompletionSource.SetResult(trezorManager);
-
-                    TrezorInitialized?.Invoke(this, new TrezorManagerConnectionEventArgs<TMessageType>(trezorManager));
-                }
+                TrezorInitialized?.Invoke(this, new TrezorManagerConnectionEventArgs<TMessageType>(trezorManager));
             }
             finally
             {
@@ -91,18 +92,18 @@ namespace Trezor.Net.Manager
                 await _Lock.WaitAsync();
 
                 var trezorManager = TrezorManagers.FirstOrDefault(t => ReferenceEquals(t.Device, e.Device));
-                if (trezorManager != null)
-                {
-                    TrezorDisconnected?.Invoke(this, new TrezorManagerConnectionEventArgs<TMessageType>(trezorManager));
 
-                    trezorManager.Dispose();
+                if (trezorManager == null) return;
 
-                    var tempList = new List<T>(TrezorManagers);
+                TrezorDisconnected?.Invoke(this, new TrezorManagerConnectionEventArgs<TMessageType>(trezorManager));
 
-                    tempList.Remove(trezorManager);
+                trezorManager.Dispose();
 
-                    TrezorManagers = new ReadOnlyCollection<T>(tempList);
-                }
+                var tempList = new List<T>(TrezorManagers);
+
+                tempList.Remove(trezorManager);
+
+                TrezorManagers = new ReadOnlyCollection<T>(tempList);
             }
             finally
             {
@@ -118,13 +119,12 @@ namespace Trezor.Net.Manager
         /// </summary>
         public void Start()
         {
-            if (_DeviceListener == null)
-            {
-                _DeviceListener = new DeviceListener(DeviceDefinitions, PollInterval);
-                _DeviceListener.DeviceDisconnected += DevicePoller_DeviceDisconnected;
-                _DeviceListener.DeviceInitialized += DevicePoller_DeviceInitialized;
-                _DeviceListener.Start();
-            }
+            if (_DeviceListener != null) return;
+
+            _DeviceListener = new DeviceListener(DeviceDefinitions, PollInterval);
+            _DeviceListener.DeviceDisconnected += DevicePoller_DeviceDisconnected;
+            _DeviceListener.DeviceInitialized += DevicePoller_DeviceInitialized;
+            _DeviceListener.Start();
 
             //TODO: Call Start on the DeviceListener when it is implemented...
         }
@@ -161,6 +161,10 @@ namespace Trezor.Net.Manager
 
         public void Dispose()
         {
+            if (_disposed) return;
+            _disposed = true;
+
+            _Lock.Dispose();
             _DeviceListener.Stop();
             _DeviceListener.Dispose();
 
@@ -168,6 +172,8 @@ namespace Trezor.Net.Manager
             {
                 trezorManager.Dispose();
             }
+
+            GC.SuppressFinalize(this);
         }
         #endregion
     }

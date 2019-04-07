@@ -274,6 +274,14 @@ namespace Trezor.Net
             var address = await GetAddressAsync(false, 60, false, 0, true);
         }
 
+        //Tron doesn't seem to work on the Trezor One
+        //[TestMethod]
+        //public async Task GetTronAddress()
+        //{
+        //    //Ethereum coins don't need the coin name
+        //    var address = await GetAddressAsync(false, 195, false, 0, true);
+        //}
+
         [TestMethod]
         public async Task DisplayEthereumClassicAddress()
         {
@@ -315,9 +323,9 @@ namespace Trezor.Net
                 Nonce = 0.ToHexBytes(),
                 GasPrice = 1000000000.ToHexBytes(),
                 GasLimit = 21000.ToHexBytes(),
-                To = "689c56aef474df92d44a1b70850f808488f9769c".ToHexBytes(),
+                To = "689c56aef474df92d44a1b70850f808488f9769c",
                 Value = 100000000000000.ToHexBytes(),
-                AddressNs = ManagerHelpers.GetAddressPath(false, 0, false, 0, 60),
+                AddressNs = new BIP44AddressPath(false,60, 0, false, 0).ToArray(),
                 ChainId = 4
             };
 
@@ -335,7 +343,7 @@ namespace Trezor.Net
                 Nonce = 10.ToBytesForRLPEncoding().ToHex().ToHexBytes(),
                 GasPrice = 1000000000.ToBytesForRLPEncoding().ToHex().ToHexBytes(),
                 GasLimit = 21000.ToBytesForRLPEncoding().ToHex().ToHexBytes(),
-                To = "689c56aef474df92d44a1b70850f808488f9769c".ToHexBytes(),
+                To = "689c56aef474df92d44a1b70850f808488f9769c",
                 Value = BigInteger.Parse("10000000000000000000").ToBytesForRLPEncoding().ToHex().ToHexBytes(),
                 AddressNs = AddressPathBase.Parse<BIP44AddressPath>("m/44'/60'/0'/0/0").ToArray(),
                 ChainId = 1

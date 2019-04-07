@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Trezor.Net
@@ -32,6 +33,8 @@ namespace Trezor.Net
 
         public void Put(byte[] bytes)
         {
+            if (bytes == null) throw new ArgumentNullException(nameof(bytes));
+
             foreach (var thebyte in bytes)
             {
                 Put(thebyte);
@@ -45,6 +48,8 @@ namespace Trezor.Net
 
         public void Put(byte[] bytes, int startIndex, int Length)
         {
+            if (bytes == null) throw new ArgumentNullException(nameof(bytes));
+
             for (var i = startIndex; i < Length; i++)
             {
                 Put(bytes[i]);

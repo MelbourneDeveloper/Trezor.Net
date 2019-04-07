@@ -1,7 +1,6 @@
 ﻿using Hid.Net.Windows;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
-using Trezor.Net.Manager;
 using Usb.Net.Windows;
 
 namespace Trezor.Net

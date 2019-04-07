@@ -8,5 +8,10 @@ namespace Trezor.Net
         {
 
         }
+
+        public ManagerException(string message, Exception innerException) : base(message, innerException)
+        {
+
+        }
     }
 }

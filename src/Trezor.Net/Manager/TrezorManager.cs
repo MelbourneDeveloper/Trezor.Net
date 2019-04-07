@@ -2,7 +2,6 @@
 using Hardwarewallets.Net.Model;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Trezor.Net.Contracts;
 using Trezor.Net.Contracts.Bitcoin;
@@ -20,21 +19,26 @@ using Trezor.Net.Contracts.Ontology;
 using Trezor.Net.Contracts.Ripple;
 using Trezor.Net.Contracts.Stellar;
 using Trezor.Net.Contracts.Tezos;
+using Trezor.Net.Contracts.Tron;
 
 namespace Trezor.Net
 {
     public class TrezorManager : TrezorManagerBase<MessageType>
     {
+        #region Fields
+        private bool disposed;
+        #endregion
+
         #region Private Constants
         private const string LogSection = "Trezor Manager";
         #endregion
 
         #region Public Constants
-        public static List<FilterDeviceDefinition> DeviceDefinitions = new List<FilterDeviceDefinition>
+        public static List<FilterDeviceDefinition> DeviceDefinitions => new List<FilterDeviceDefinition>
         {
             new FilterDeviceDefinition{ DeviceType= DeviceType.Hid, VendorId= 0x534C, ProductId=0x0001, Label="Trezor One Firmware 1.6.x", UsagePage=65280 },
             new FilterDeviceDefinition{ DeviceType= DeviceType.Usb, VendorId= 0x534C, ProductId=0x0001, Label="Trezor One Firmware 1.6.x (Android Only)" },
-            new FilterDeviceDefinition{ DeviceType= DeviceType.Usb, VendorId= 0x1209, ProductId=0x53C1, Label="Trezor One Firmware 1.7.x" },
+            new FilterDeviceDefinition{ DeviceType= DeviceType.Usb, VendorId= 0x1209, ProductId=0x53C1, Label="Trezor One Firmware 1.7.x +" },
             new FilterDeviceDefinition{ DeviceType= DeviceType.Usb, VendorId= 0x1209, ProductId=0x53C0, Label="Model T" }
         };
         #endregion
@@ -115,12 +119,13 @@ namespace Trezor.Net
             var isValid = Enum.TryParse(messageTypeString, out MessageType messageType);
             if (!isValid)
             {
-                throw new Exception($"{messageTypeString} is not a valid MessageType");
+                throw new ManagerException($"{messageTypeString} is not a valid MessageType");
             }
 
             return messageType;
         }
 
+#pragma warning disable CA2213, CA1502
         /// <summary>
         /// TODO: Nasty. This at least needs some caching or something...
         /// </summary>
@@ -158,22 +163,16 @@ namespace Trezor.Net
                     return typeof(CardanoGetAddress);
                 case MessageType.MessageTypeCardanoGetPublicKey:
                     return typeof(CardanoGetPublicKey);
-                case MessageType.MessageTypeCardanoMessageSignature:
-                    return typeof(CardanoMessageSignature);
                 case MessageType.MessageTypeCardanoPublicKey:
                     return typeof(CardanoPublicKey);
                 case MessageType.MessageTypeCardanoSignedTx:
                     return typeof(CardanoSignedTx);
-                case MessageType.MessageTypeCardanoSignMessage:
-                    return typeof(CardanoSignMessage);
                 case MessageType.MessageTypeCardanoSignTx:
                     return typeof(CardanoSignTx);
                 case MessageType.MessageTypeCardanoTxAck:
                     return typeof(CardanoTxAck);
                 case MessageType.MessageTypeCardanoTxRequest:
                     return typeof(CardanoTxRequest);
-                case MessageType.MessageTypeCardanoVerifyMessage:
-                    return typeof(CardanoVerifyMessage);
                 case MessageType.MessageTypeStellarCreateAccountOp:
                     return typeof(StellarCreateAccountOp);
                 case MessageType.MessageTypeStellarCreatePassiveOfferOp:
@@ -400,8 +399,6 @@ namespace Trezor.Net
                     return typeof(RippleSignTx);
                 case MessageType.MessageTypeRippleSignedTx:
                     return typeof(RippleSignedTx);
-                case MessageType.MessageTypeMoneroTransactionSignRequest:
-                    return typeof(MoneroTransactionSignRequest);
                 case MessageType.MessageTypeMoneroTransactionInitAck:
                     return typeof(MoneroTransactionInitAck);
                 case MessageType.MessageTypeMoneroTransactionSetInputAck:
@@ -414,18 +411,12 @@ namespace Trezor.Net
                     return typeof(MoneroTransactionAllInputsSetAck);
                 case MessageType.MessageTypeMoneroTransactionSetOutputAck:
                     return typeof(MoneroTransactionSetOutputAck);
-                case MessageType.MessageTypeMoneroTransactionRangeSigAck:
-                    return typeof(MoneroTransactionRangeSigAck);
                 case MessageType.MessageTypeMoneroTransactionAllOutSetAck:
                     return typeof(MoneroTransactionAllOutSetAck);
-                case MessageType.MessageTypeMoneroTransactionMlsagDoneAck:
-                    return typeof(MoneroTransactionMlsagDoneAck);
                 case MessageType.MessageTypeMoneroTransactionSignInputAck:
                     return typeof(MoneroTransactionSignInputAck);
                 case MessageType.MessageTypeMoneroTransactionFinalAck:
                     return typeof(MoneroTransactionFinalAck);
-                case MessageType.MessageTypeMoneroKeyImageSyncRequest:
-                    return typeof(MoneroKeyImageSyncRequest);
                 case MessageType.MessageTypeMoneroKeyImageExportInitAck:
                     return typeof(MoneroKeyImageExportInitAck);
                 case MessageType.MessageTypeMoneroKeyImageSyncStepAck:
@@ -444,19 +435,38 @@ namespace Trezor.Net
                     return typeof(DebugMoneroDiagRequest);
                 case MessageType.MessageTypeDebugMoneroDiagAck:
                     return typeof(DebugMoneroDiagAck);
+                case MessageType.MessageTypeTronGetAddress:
+                    return typeof(TronGetAddress);
+                case MessageType.MessageTypeTronAddress:
+                    return typeof(TronAddress);
+                case MessageType.MessageTypeTronSignTx:
+                    return typeof(TronSignTx);
+                case MessageType.MessageTypeTronSignedTx:
+                    return typeof(TronSignedTx);                  
                 default:
                     throw new NotImplementedException();
             }
         }
+#pragma warning restore CA2213
         #endregion
 
         #region Public Methods
+        public override void Dispose()
+        {
+            if (disposed) return;
+            disposed = true;
+
+            base.Dispose();
+        }
+
         public override Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display)
         {
             if (CoinUtility == null)
             {
                 throw new ManagerException($"A {nameof(CoinUtility)} must be specified if {nameof(AddressType)} is not specified.");
             }
+
+            if (addressPath == null) throw new ArgumentNullException(nameof(addressPath));
 
             var cointType = addressPath.AddressPathElements.Count > 1 ? addressPath.AddressPathElements[1].Value : throw new ManagerException("The first element of the address path is considered to be the coin type. This was not specified so no coin information is available. Please use an overload that specifies CoinInfo.");
 
@@ -467,6 +477,8 @@ namespace Trezor.Net
 
         public Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display, CoinInfo coinInfo)
         {
+            if (coinInfo == null) throw new ArgumentNullException(nameof(coinInfo));
+
             var inputScriptType = coinInfo.IsSegwit ? InputScriptType.Spendp2shwitness : InputScriptType.Spendaddress;
 
             return GetAddressAsync(addressPath, isPublicKey, display, coinInfo.AddressType, inputScriptType, coinInfo.CoinName);
@@ -481,6 +493,8 @@ namespace Trezor.Net
         {
             try
             {
+                if (addressPath == null) throw new ArgumentNullException(nameof(addressPath));
+
                 var path = addressPath.ToArray();
 
                 if (isPublicKey)
@@ -488,36 +502,33 @@ namespace Trezor.Net
                     var publicKey = await SendMessageAsync<PublicKey, GetPublicKey>(new GetPublicKey { CoinName = coinName, AddressNs = path, ShowDisplay = display, ScriptType = inputScriptType });
                     return publicKey.Xpub;
                 }
-                else
+
+                switch (addressType)
                 {
-                    switch (addressType)
-                    {
-                        case AddressType.Bitcoin:
+                    case AddressType.Bitcoin:
 
-                            //Ultra hack to deal with a coin name change in Firmware Version 1.6.2
-                            if ((Features.MajorVersion <= 1 && Features.MinorVersion < 6) && coinName == "Bgold")
-                            {
-                                coinName = "Bitcoin Gold";
-                            }
+                        //Ultra hack to deal with a coin name change in Firmware Version 1.6.2
+                        if (Features.MajorVersion <= 1 && Features.MinorVersion < 6 && string.Equals(coinName, "Bgold", StringComparison.Ordinal))
+                        {
+                            coinName = "Bitcoin Gold";
+                        }
 
-                            return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = display, AddressNs = path, CoinName = coinName, ScriptType = inputScriptType })).address;
+                        return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = display, AddressNs = path, CoinName = coinName, ScriptType = inputScriptType })).address;
 
-                        case AddressType.Ethereum:
+                    case AddressType.Ethereum:
 
-                            var ethereumAddress = await SendMessageAsync<EthereumAddress, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = display, AddressNs = path });
+                        var ethereumAddress = await SendMessageAsync<EthereumAddress, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = display, AddressNs = path });
 
-                            var sb = new StringBuilder();
-                            foreach (var b in ethereumAddress.Address)
-                            {
-                                sb.Append(b.ToString("X2").ToLower());
-                            }
+                        return ethereumAddress.Address.ToLower();
 
-                            var hexString = sb.ToString();
+                    case AddressType.Tron:
 
-                            return $"0x{hexString}";
-                        default:
-                            throw new NotImplementedException();
-                    }
+                        var tronAddress = await SendMessageAsync<TronAddress, TronGetAddress>(new TronGetAddress { ShowDisplay = display, AddressNs = path });
+
+                        return tronAddress.Address;
+
+                    default:
+                        throw new NotImplementedException();
                 }
             }
             catch (Exception ex)
@@ -532,11 +543,13 @@ namespace Trezor.Net
         /// </summary>
         public override async Task InitializeAsync()
         {
+            if (disposed) throw new ManagerException("Initialization cannot occur after disposal");
+
             Features = await SendMessageAsync<Features, Initialize>(new Initialize());
 
             if (Features == null)
             {
-                throw new Exception("Error initializing Trezor. Features were not retrieved");
+                throw new ManagerException("Error initializing Trezor. Features were not retrieved");
             }
         }
         #endregion
