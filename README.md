@@ -6,21 +6,21 @@ Cross Platform C# Library for the [Trezor Cryptocurrency Hardwarewallet](https:/
 This library allows you to communicate with both Trezor hardwarewallets in the same way that the Trezor browser wallet app communicates with them. It can be used to build apps that send or receive crypto currencies like Bitcoin in a secure way.
 
 ````cs
-        public async Task<string> GetAddressAsync()
-        {
-            //Register the factory for creating Usb devices. Trezor One Firmware 1.7.x, 1.8.x / Trezor Model T 2.1.x
-            WindowsUsbDeviceFactory.Register();
-            //Register the factory for creating Hid devices. Trezor One Firmware 1.6.x
-            WindowsHidDeviceFactory.Register();
+public async Task<string> GetAddressAsync()
+{
+    //Register the factory for creating Usb devices. Trezor One Firmware 1.7.x, 1.8.x / Trezor Model T 2.1.x
+    WindowsUsbDeviceFactory.Register();
+    //Register the factory for creating Hid devices. Trezor One Firmware 1.6.x
+    WindowsHidDeviceFactory.Register();
 
-            var trezorManagerBroker = new TrezorManagerBroker(GetPin, 2000, new DefaultCoinUtility());
+    var trezorManagerBroker = new TrezorManagerBroker(GetPin, 2000, new DefaultCoinUtility());
 
-            var trezorManager =  await trezorManagerBroker.WaitForFirstTrezorAsync();
+    var trezorManager =  await trezorManagerBroker.WaitForFirstTrezorAsync();
 
-            var bip44AddressPath = AddressPathBase.Parse<BIP44AddressPath>("m/49'/0'/0'/0/0");
+    var bip44AddressPath = AddressPathBase.Parse<BIP44AddressPath>("m/49'/0'/0'/0/0");
 
-            return await trezorManager.GetAddressAsync(bip44AddressPath, false, true);
-        }
+    return await trezorManager.GetAddressAsync(bip44AddressPath, false, true);
+}
 ````
 
 Join us on Slack:
