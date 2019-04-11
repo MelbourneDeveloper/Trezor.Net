@@ -44,7 +44,6 @@ There are now Model T Windows Unit Tests. These tests use LibUsb as the transpor
 
 Install-Package Trezor.Net
 
-
 ## [Hid.Net, Usb.Net (Device.Net)](https://github.com/MelbourneDeveloper/Device.Net)
 
 Trezor.Net communicates with the devices via the Hid.Net and Usb.Net libraries. You can see the repo for this library here.
@@ -53,13 +52,7 @@ Trezor.Net communicates with the devices via the Hid.Net and Usb.Net libraries. 
 
 This library is part of the Hardwarewallets.Net suite of libraries. It is an ambitious project aimed toward putting a set of common C# interfaces across all hardwarewallets
 
-## Contribution
-
-I welcome feedback, and pull requests. If there's something that you need to change in the library, please log an issue, and explain the problem. If you have a proposed solution, please write it up and explain why you think it is the answer to the problem. The best way to highlight a bug is to submit a pull request with a unit test that fails so I can clearly see what the problem is in the first place.
-
-### Pull Requests
-
-Please break pull requests up in to their smallest possible parts. If you have a small feature of refactor that other code depends on, try submitting that first. Please try to reference an issue so that I understand the context of the pull request. If there is no issue, I don't know what the code is about. If you need help, please jump on Slack here: https://hardwarewallets.slack.com
+## [Contribution](https://github.com/MelbourneDeveloper/Trezor.Net/CONTRIBUTING.md)
 
 ## Donate
 
