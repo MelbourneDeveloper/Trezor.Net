@@ -5,7 +5,7 @@ Cross Platform C# Library for the [Trezor Cryptocurrency Hardwarewallet](https:/
 
 This library allows you to communicate with both Trezor hardwarewallets in the same way that the Trezor browser wallet app communicates with them. It can be used to build apps that send or receive crypto currencies like Bitcoin in a secure way.
 
-cs````
+````cs
         public async Task<string> GetAddressAsync()
         {
             //Register the factory for creating Usb devices. Trezor One Firmware 1.7.x, 1.8.x / Trezor Model T 2.1.x
