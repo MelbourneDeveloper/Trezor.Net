@@ -44,6 +44,11 @@ There are now Model T Windows Unit Tests. These tests use LibUsb as the transpor
 
 Install-Package Trezor.Net
 
+
+## [Hid.Net, Usb.Net (Device.Net)](https://github.com/MelbourneDeveloper/Device.Net)
+
+Trezor.Net communicates with the devices via the Hid.Net and Usb.Net libraries. You can see the repo for this library here.
+
 ## [Hardwarewallets.Net](https://github.com/MelbourneDeveloper/Hardwarewallets.Net)
 
 This library is part of the Hardwarewallets.Net suite of libraries. It is an ambitious project aimed toward putting a set of common C# interfaces across all hardwarewallets
@@ -74,10 +79,6 @@ https://play.google.com/store/apps/details?id=com.Hardfolio (Android)
 
 https://www.microsoft.com/en-au/p/hardfolio/9p8xx70n5d2j (UWP)
 
-## [Hid.Net, Usb.Net](https://github.com/MelbourneDeveloper/Device.Net)
-
-Trezor.Net communicates with the devices via the Hid.Net and Usb.Net libraries. You can see the repo for this library here.
-
 ## See Also
 
 [Hardwarewallets.Net](https://github.com/MelbourneDeveloper/Hardwarewallets.Net) - Base level Hardwarewallet Library
@@ -93,7 +94,7 @@ These are the Trezor firmware open sources repos:
 ### Trezor One
 https://github.com/trezor/trezor-mcu
 
-### Trezor Model T (Not Yet Supported)
+### Trezor Model T
 https://github.com/trezor/trezor-core
 
 ### Trezor Android Library - A client which is similar in design to Trezor.Net
