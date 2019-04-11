@@ -52,7 +52,7 @@ Trezor.Net communicates with the devices via the Hid.Net and Usb.Net libraries. 
 
 This library is part of the Hardwarewallets.Net suite of libraries. It is an ambitious project aimed toward putting a set of common C# interfaces across all hardwarewallets
 
-## [Contribution](https://github.com/MelbourneDeveloper/Trezor.Net/CONTRIBUTING.md)
+## [Contribution](https://github.com/MelbourneDeveloper/Trezor.Net/blob/master/CONTRIBUTING.md)
 
 ## Donate
 
