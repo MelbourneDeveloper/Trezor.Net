@@ -2,7 +2,6 @@
 using Hardwarewallets.Net.Model;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Trezor.Net.Contracts;
 using Trezor.Net.Contracts.Bitcoin;
@@ -20,6 +19,7 @@ using Trezor.Net.Contracts.Ontology;
 using Trezor.Net.Contracts.Ripple;
 using Trezor.Net.Contracts.Stellar;
 using Trezor.Net.Contracts.Tezos;
+using Trezor.Net.Contracts.Tron;
 
 namespace Trezor.Net
 {
