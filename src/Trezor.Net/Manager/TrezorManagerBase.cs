@@ -311,18 +311,21 @@ namespace Trezor.Net
         {
             try
             {
-                var namesspacde = ContractNamespace;
+                var messageTypeNamespace = ContractNamespace;
 
                 if (IsOldFirmware.HasValue && IsOldFirmware.Value)
                 {
-                    namesspacde = $"{namesspacde}.BackwardsCompatible";
+                    //Look for the type in the backwards compatibility namespace
+                    messageTypeNamespace = $"{messageTypeNamespace}.BackwardsCompatible";
                 }
 
-                var typeName = $"{namesspacde}.{messageType.ToString().Replace("MessageType", string.Empty)}";
+                var typeName = $"{messageTypeNamespace}.{messageType.ToString().Replace("MessageType", string.Empty)}";
 
                 if (IsOldFirmware.HasValue && IsOldFirmware.Value)
                 {
                     var type = Type.GetType(typeName);
+
+                    //Fall back on the non-backwards compatible namespace if necessary
                     if (type == null) typeName = $"{ContractNamespace}.{messageType.ToString().Replace("MessageType", string.Empty)}";
                 }
 
