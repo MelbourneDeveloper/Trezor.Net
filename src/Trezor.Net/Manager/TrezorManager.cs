@@ -20,7 +20,6 @@ using Trezor.Net.Contracts.Ontology;
 using Trezor.Net.Contracts.Ripple;
 using Trezor.Net.Contracts.Stellar;
 using Trezor.Net.Contracts.Tezos;
-using Trezor.Net.Contracts.Tron;
 
 namespace Trezor.Net
 {
@@ -436,15 +435,7 @@ namespace Trezor.Net
                 case MessageType.MessageTypeDebugMoneroDiagRequest:
                     return typeof(DebugMoneroDiagRequest);
                 case MessageType.MessageTypeDebugMoneroDiagAck:
-                    return typeof(DebugMoneroDiagAck);
-                case MessageType.MessageTypeTronGetAddress:
-                    return typeof(TronGetAddress);
-                case MessageType.MessageTypeTronAddress:
-                    return typeof(TronAddress);
-                case MessageType.MessageTypeTronSignTx:
-                    return typeof(TronSignTx);
-                case MessageType.MessageTypeTronSignedTx:
-                    return typeof(TronSignedTx);                  
+                    return typeof(DebugMoneroDiagAck);               
                 default:
                     throw new NotImplementedException();
             }
@@ -542,12 +533,6 @@ namespace Trezor.Net
                         }
 
                         throw new NotImplementedException();
-
-                    case AddressType.Tron:
-
-                        var tronAddress = await SendMessageAsync<TronAddress, TronGetAddress>(new TronGetAddress { ShowDisplay = display, AddressNs = path });
-
-                        return tronAddress.Address;
 
                     default:
                         throw new NotImplementedException();

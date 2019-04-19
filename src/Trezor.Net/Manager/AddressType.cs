@@ -12,7 +12,6 @@
         Ripple,
         Stellar,
         Tezoz,
-        Tron
     }
 }
 
