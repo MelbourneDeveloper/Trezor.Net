@@ -19,6 +19,16 @@ namespace Trezor.Net
 
         protected override async Task<string> GetPin()
         {
+            return GetTextFromUI();
+        }
+
+        protected override async Task<string> GetPassphrase()
+        {
+            return GetTextFromUI();
+        }
+
+        private string GetTextFromUI()
+        {
             var passwordExePath = Path.Combine(GetExecutingAssemblyDirectoryPath(), "Misc", "GetPassword.exe");
             if (!File.Exists(passwordExePath))
             {
@@ -28,7 +38,7 @@ namespace Trezor.Net
             var processStartInfo = new ProcessStartInfo
             {
                 FileName = passwordExePath,
-                UseShellExecute =true
+                UseShellExecute = true
             };
 
             var process = Process.Start(processStartInfo);

@@ -27,5 +27,10 @@ namespace Trezor.Net
 
             return base.ConnectAsync();
         }
+
+        protected override Task<string> GetPassphrase()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

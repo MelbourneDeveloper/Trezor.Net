@@ -17,8 +17,8 @@ namespace Trezor.Net.Manager
         #region Fields
         private bool _disposed;
         private DeviceListener _DeviceListener;
-        private SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
-        private TaskCompletionSource<T> _FirstTrezorTaskCompletionSource = new TaskCompletionSource<T>();
+        private readonly SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
+        private readonly TaskCompletionSource<T> _FirstTrezorTaskCompletionSource = new TaskCompletionSource<T>();
         #endregion
 
         #region Events
@@ -36,14 +36,16 @@ namespace Trezor.Net.Manager
         #region Public Properties
         public ReadOnlyCollection<T> TrezorManagers { get; private set; } = new ReadOnlyCollection<T>(new List<T>());
         public EnterPinArgs EnterPinArgs { get; }
+        public EnterPinArgs EnterPassphraseArgs { get; }
         public ICoinUtility CoinUtility { get; }
         public int? PollInterval { get; }
         #endregion
 
         #region Constructor
-        protected TrezorManagerBrokerBase(EnterPinArgs enterPinArgs, int? pollInterval, ICoinUtility coinUtility)
+        protected TrezorManagerBrokerBase(EnterPinArgs enterPinArgs, EnterPinArgs enterPassphraseArgs, int? pollInterval, ICoinUtility coinUtility)
         {
             EnterPinArgs = enterPinArgs;
+            EnterPassphraseArgs = enterPassphraseArgs;
             CoinUtility = coinUtility;
             PollInterval = pollInterval;
         }

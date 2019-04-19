@@ -22,7 +22,8 @@ namespace Trezor.Net
         #region Fields
         private int _InvalidChunksCounter;
         private readonly EnterPinArgs _EnterPinCallback;
-        private SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
+        private readonly EnterPinArgs _EnterPassphraseCallback;
+        private readonly SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
         private readonly string LogSection = "TrezorManagerBase";
         private object _LastWrittenMessage;
         private bool disposed;
@@ -41,18 +42,20 @@ namespace Trezor.Net
         #region Protected Abstract Properties
         protected abstract string ContractNamespace { get; }
         protected abstract Type MessageTypeType { get; }
+        protected abstract bool? IsOldFirmware { get; }
         #endregion
 
         #region Constructor
-        protected TrezorManagerBase(EnterPinArgs enterPinCallback, IDevice device) : this(enterPinCallback, device, null)
+        protected TrezorManagerBase(EnterPinArgs enterPinCallback, EnterPinArgs enterPassphraseCallback, IDevice device) : this(enterPinCallback, enterPassphraseCallback, device, null)
         {
 
         }
 
-        protected TrezorManagerBase(EnterPinArgs enterPinCallback, IDevice device, ICoinUtility coinUtility)
+        protected TrezorManagerBase(EnterPinArgs enterPinCallback, EnterPinArgs enterPassphraseCallback, IDevice device, ICoinUtility coinUtility)
         {
             CoinUtility = coinUtility;
             _EnterPinCallback = enterPinCallback;
+            _EnterPassphraseCallback = enterPassphraseCallback;
             Device = device ?? throw new ArgumentNullException(nameof(device));
         }
         #endregion
@@ -61,6 +64,7 @@ namespace Trezor.Net
         protected abstract object GetEnumValue(string messageTypeString);
         protected abstract bool IsButtonRequest(object response);
         protected abstract bool IsPinMatrixRequest(object response);
+        protected abstract bool IsPassphraseRequest(object response);
         protected abstract bool IsInitialize(object response);
         protected abstract Type GetContractType(TMessageType messageType, string typeName);
         #endregion
@@ -89,6 +93,16 @@ namespace Trezor.Net
                     {
                         var pin = await _EnterPinCallback.Invoke();
                         response = await PinMatrixAckAsync(pin);
+                        if (response is TReadMessage readMessage)
+                        {
+                            return readMessage;
+                        }
+                    }
+
+                    if (IsPassphraseRequest(response))
+                    {
+                        var passPhrase = await _EnterPassphraseCallback.Invoke();
+                        response = await PassphraseAckAsync(passPhrase);
                         if (response is TReadMessage readMessage)
                         {
                             return readMessage;
@@ -310,13 +324,29 @@ namespace Trezor.Net
         {
             try
             {
-                var typeName = $"{ContractNamespace}.{messageType.ToString().Replace("MessageType", string.Empty)}";
+                var messageTypeNamespace = ContractNamespace;
+
+                if (IsOldFirmware.HasValue && IsOldFirmware.Value)
+                {
+                    //Look for the type in the backwards compatibility namespace
+                    messageTypeNamespace = $"{messageTypeNamespace}.BackwardsCompatible";
+                }
+
+                var typeName = $"{messageTypeNamespace}.{messageType.ToString().Replace("MessageType", string.Empty)}";
+
+                if (IsOldFirmware.HasValue && IsOldFirmware.Value)
+                {
+                    var type = Type.GetType(typeName);
+
+                    //Fall back on the non-backwards compatible namespace if necessary
+                    if (type == null) typeName = $"{ContractNamespace}.{messageType.ToString().Replace("MessageType", string.Empty)}";
+                }
 
                 var contractType = GetContractType(messageType, typeName);
 
                 return Deserialize(contractType, data);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new ManagerException("InvalidProtocolBufferException", ex);
             }
@@ -352,6 +382,7 @@ namespace Trezor.Net
         #region Protected Abstract Methods
         protected abstract void CheckForFailure(object returnMessage);
         protected abstract Task<object> PinMatrixAckAsync(string pin);
+        protected abstract Task<object> PassphraseAckAsync(string passPhrase);
         protected abstract Task<object> ButtonAckAsync();
         #endregion
 

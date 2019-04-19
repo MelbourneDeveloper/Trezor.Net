@@ -43,7 +43,7 @@ namespace TrezorTestApp
             //Register the factory for creating Hid devices. Trezor One Firmware 1.6.x
             WindowsHidDeviceFactory.Register();
 
-            _TrezorManagerBroker = new TrezorManagerBroker(GetPin, 2000, new DefaultCoinUtility());
+            _TrezorManagerBroker = new TrezorManagerBroker(GetPin, GetPassphrase, 2000, new DefaultCoinUtility());
             return await _TrezorManagerBroker.WaitForFirstTrezorAsync();
         }
 
@@ -117,6 +117,11 @@ namespace TrezorTestApp
             Console.WriteLine("Enter PIN based on Trezor values: ");
             return Console.ReadLine().Trim();
         }
+        private static Task<string> GetPassphrase()
+        {
+            return GetPin();
+        }
+
         #endregion
     }
 }

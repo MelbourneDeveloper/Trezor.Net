@@ -26,12 +26,13 @@ namespace Trezor.Net
 
         #region Protected Abstract Methods
         protected abstract Task<string> GetPin();
+        protected abstract Task<string> GetPassphrase();
         #endregion
 
         #region Protected Virtual Methods
         protected virtual async Task<TrezorManager> ConnectAsync()
         {
-            _TrezorManagerBroker = new TrezorManagerBroker(GetPin, 2000, new DefaultCoinUtility());
+            _TrezorManagerBroker = new TrezorManagerBroker(GetPin, GetPassphrase, 2000, new DefaultCoinUtility());
             return await _TrezorManagerBroker.WaitForFirstTrezorAsync();
         }
         #endregion
@@ -61,10 +62,15 @@ namespace Trezor.Net
             return secondAddress;
         }
 
-        private Task<string> GetAddressAsync(string addressPath, bool display = false, string coinName = null, bool isPublicKey = false)
+        private async Task<string> GetAddressAsync(string addressPath, bool display = false, string coinName = null, bool isPublicKey = false)
         {
             var bip44AddressPath = AddressPathBase.Parse<BIP44AddressPath>(addressPath);
-            return TrezorManager.GetAddressAsync(bip44AddressPath, isPublicKey, display);
+
+            //TODO: Duplicate code here
+            var address = await TrezorManager.GetAddressAsync(bip44AddressPath, isPublicKey, display);
+            Assert.IsTrue(!string.IsNullOrEmpty(address), $"The address was null or empty. Path: {addressPath}");
+            Console.WriteLine(address);
+            return address;
         }
 
         private async Task DoGetAddress(uint i)
@@ -283,6 +289,18 @@ namespace Trezor.Net
         //}
 
         [TestMethod]
+        public async Task GetEthereumAddress()
+        {
+            var address = await GetAddressAsync("m/44'/60'/0'/1/0");
+        }
+
+        [TestMethod]
+        public async Task GetEthereumClassicAddress()
+        {
+            var address = await GetAddressAsync("m/44'/61'/0'/1/0");
+        }
+
+        [TestMethod]
         public async Task DisplayEthereumClassicAddress()
         {
             //Ethereum coins don't need the coin name
@@ -325,7 +343,7 @@ namespace Trezor.Net
                 GasLimit = 21000.ToHexBytes(),
                 To = "689c56aef474df92d44a1b70850f808488f9769c",
                 Value = 100000000000000.ToHexBytes(),
-                AddressNs = new BIP44AddressPath(false,60, 0, false, 0).ToArray(),
+                AddressNs = new BIP44AddressPath(false, 60, 0, false, 0).ToArray(),
                 ChainId = 4
             };
 

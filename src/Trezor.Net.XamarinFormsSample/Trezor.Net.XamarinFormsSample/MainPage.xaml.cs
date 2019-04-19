@@ -1,4 +1,5 @@
 ﻿using Hardwarewallets.Net.AddressManagement;
+using System.Threading.Tasks;
 using Trezor.Net.Manager;
 using Xamarin.Forms;
 
@@ -25,7 +26,7 @@ namespace Trezor.Net.XamarinFormsSample
             if (_IsDisplayed) return;
             _IsDisplayed = true;
 
-            TrezorManagerBroker = new TrezorManagerBroker(TrezorPinPad.GetPin, 2000, new DefaultCoinUtility());
+            TrezorManagerBroker = new TrezorManagerBroker(TrezorPinPad.GetPin, () => { return Task.FromResult("a"); }, 2000, new DefaultCoinUtility());
 
             var trezorManager = await TrezorManagerBroker.WaitForFirstTrezorAsync();
 

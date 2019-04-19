@@ -29,7 +29,7 @@ namespace Trezor.Net
 
             Console.WriteLine("Connected");
 
-            var trezorManager = new TrezorManager(GetPin, _LibUsbDevice);
+            var trezorManager = new TrezorManager(GetPin, GetPassphrase, _LibUsbDevice);
             await trezorManager.InitializeAsync();
 
             return trezorManager;
