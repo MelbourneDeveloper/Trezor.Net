@@ -6,7 +6,7 @@
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>4.0.0</Version>
+    <Version>4.1.0</Version>
     <Authors>Christian Findlay</Authors>
     <Company>Christian Findlay</Company>
     <Description>A cross platform library for communicating with the Satoshi Labs' Trezor Hardware Wallet
