@@ -95,6 +95,16 @@ namespace Trezor.Net
                         }
                     }
 
+                    if (IsPassphraseRequest(response))
+                    {
+                        var pin = await _EnterPinCallback.Invoke();
+                        response = await PinMatrixAckAsync(pin);
+                        if (response is TReadMessage readMessage)
+                        {
+                            return readMessage;
+                        }
+                    }
+
                     else if (IsButtonRequest(response))
                     {
                         response = await ButtonAckAsync();
@@ -117,6 +127,11 @@ namespace Trezor.Net
             {
                 _Lock.Release();
             }
+        }
+
+        private bool IsPassphraseRequest(object response)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
