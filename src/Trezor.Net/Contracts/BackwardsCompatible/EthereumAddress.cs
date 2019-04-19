@@ -1,6 +1,6 @@
 ﻿#pragma warning disable
 
-namespace Trezor.Net.Contracts.Ethereum.BackwardsCompatible
+namespace Trezor.Net.Contracts.BackwardsCompatible
 {
     [ProtoBuf.ProtoContract()]
     public class EthereumAddress : ProtoBuf.IExtensible

@@ -54,6 +54,8 @@ namespace Trezor.Net
         #region Protected Override Properties
         protected override string ContractNamespace => "Trezor.Net.Contracts";
         protected override Type MessageTypeType => typeof(MessageType);
+
+        public bool IsOldFirmware => Features.MajorVersion < 2 && Features.MinorVersion < 8;
         #endregion
 
         #region Constructor
@@ -314,7 +316,7 @@ namespace Trezor.Net
                 case MessageType.MessageTypeEthereumGetAddress:
                     return typeof(EthereumGetAddress);
                 case MessageType.MessageTypeEthereumAddress:
-                    return typeof(EthereumAddress);
+                    return IsOldFirmware ? typeof(Contracts.BackwardsCompatible.EthereumAddress) : typeof(EthereumAddress);
                 case MessageType.MessageTypeEthereumSignTx:
                     return typeof(EthereumSignTx);
                 case MessageType.MessageTypeEthereumTxRequest:
