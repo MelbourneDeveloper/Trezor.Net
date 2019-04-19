@@ -2,6 +2,7 @@
 using Hardwarewallets.Net.Model;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using Trezor.Net.Contracts;
 using Trezor.Net.Contracts.Bitcoin;
@@ -19,7 +20,6 @@ using Trezor.Net.Contracts.Ontology;
 using Trezor.Net.Contracts.Ripple;
 using Trezor.Net.Contracts.Stellar;
 using Trezor.Net.Contracts.Tezos;
-using Trezor.Net.Contracts.Tron;
 
 namespace Trezor.Net
 {
@@ -54,6 +54,7 @@ namespace Trezor.Net
         #region Protected Override Properties
         protected override string ContractNamespace => "Trezor.Net.Contracts";
         protected override Type MessageTypeType => typeof(MessageType);
+        protected override bool? IsOldFirmware => Features?.MajorVersion < 2 && Features?.MinorVersion < 8;
         #endregion
 
         #region Constructor
@@ -331,7 +332,7 @@ namespace Trezor.Net
                 case MessageType.MessageTypeEthereumGetAddress:
                     return typeof(EthereumGetAddress);
                 case MessageType.MessageTypeEthereumAddress:
-                    return typeof(EthereumAddress);
+                    return IsOldFirmware.HasValue && IsOldFirmware.Value ? typeof(Contracts.BackwardsCompatible.EthereumAddress) : typeof(EthereumAddress);
                 case MessageType.MessageTypeEthereumSignTx:
                     return typeof(EthereumSignTx);
                 case MessageType.MessageTypeEthereumTxRequest:
@@ -451,15 +452,7 @@ namespace Trezor.Net
                 case MessageType.MessageTypeDebugMoneroDiagRequest:
                     return typeof(DebugMoneroDiagRequest);
                 case MessageType.MessageTypeDebugMoneroDiagAck:
-                    return typeof(DebugMoneroDiagAck);
-                case MessageType.MessageTypeTronGetAddress:
-                    return typeof(TronGetAddress);
-                case MessageType.MessageTypeTronAddress:
-                    return typeof(TronAddress);
-                case MessageType.MessageTypeTronSignTx:
-                    return typeof(TronSignTx);
-                case MessageType.MessageTypeTronSignedTx:
-                    return typeof(TronSignedTx);                  
+                    return typeof(DebugMoneroDiagAck);               
                 default:
                     throw new NotImplementedException();
             }
@@ -534,15 +527,29 @@ namespace Trezor.Net
 
                     case AddressType.Ethereum:
 
-                        var ethereumAddress = await SendMessageAsync<EthereumAddress, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = display, AddressNs = path });
+                        var ethereumAddresssds = await SendMessageAsync<object, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = display, AddressNs = path });
 
-                        return ethereumAddress.Address.ToLower();
+                        switch (ethereumAddresssds)
+                        {
+                            case EthereumAddress ethereumAddress:
+                                return ethereumAddress.Address.ToLower();
+                            case Contracts.BackwardsCompatible.EthereumAddress ethereumAddress:
 
-                    case AddressType.Tron:
+                                //Ouch. Nasty
+                                var sb = new StringBuilder();
+                                foreach (var b in ethereumAddress.Address)
+                                {
+                                    sb.Append(b.ToString("X2").ToLower());
+                                }
 
-                        var tronAddress = await SendMessageAsync<TronAddress, TronGetAddress>(new TronGetAddress { ShowDisplay = display, AddressNs = path });
+                                var hexString = sb.ToString();
 
-                        return tronAddress.Address;
+                                hexString = $"0x{hexString}";
+
+                                return hexString;
+                        }
+
+                        throw new NotImplementedException();
 
                     default:
                         throw new NotImplementedException();

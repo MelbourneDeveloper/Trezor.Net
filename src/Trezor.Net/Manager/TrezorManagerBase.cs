@@ -42,6 +42,7 @@ namespace Trezor.Net
         #region Protected Abstract Properties
         protected abstract string ContractNamespace { get; }
         protected abstract Type MessageTypeType { get; }
+        protected abstract bool? IsOldFirmware { get; }
         #endregion
 
         #region Constructor
@@ -323,13 +324,29 @@ namespace Trezor.Net
         {
             try
             {
-                var typeName = $"{ContractNamespace}.{messageType.ToString().Replace("MessageType", string.Empty)}";
+                var messageTypeNamespace = ContractNamespace;
+
+                if (IsOldFirmware.HasValue && IsOldFirmware.Value)
+                {
+                    //Look for the type in the backwards compatibility namespace
+                    messageTypeNamespace = $"{messageTypeNamespace}.BackwardsCompatible";
+                }
+
+                var typeName = $"{messageTypeNamespace}.{messageType.ToString().Replace("MessageType", string.Empty)}";
+
+                if (IsOldFirmware.HasValue && IsOldFirmware.Value)
+                {
+                    var type = Type.GetType(typeName);
+
+                    //Fall back on the non-backwards compatible namespace if necessary
+                    if (type == null) typeName = $"{ContractNamespace}.{messageType.ToString().Replace("MessageType", string.Empty)}";
+                }
 
                 var contractType = GetContractType(messageType, typeName);
 
                 return Deserialize(contractType, data);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new ManagerException("InvalidProtocolBufferException", ex);
             }
