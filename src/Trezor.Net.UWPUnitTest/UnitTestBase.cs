@@ -68,6 +68,7 @@ namespace Trezor.Net
             //TODO: Duplicate code here
             var address = await TrezorManager.GetAddressAsync(bip44AddressPath, isPublicKey, display);
             Assert.IsTrue(!string.IsNullOrEmpty(address), $"The address was null or empty. Path: {addressPath}");
+            Console.WriteLine(address);
             return address;
         }
 

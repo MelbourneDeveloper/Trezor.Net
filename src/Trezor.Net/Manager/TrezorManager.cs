@@ -2,6 +2,7 @@
 using Hardwarewallets.Net.Model;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using Trezor.Net.Contracts;
 using Trezor.Net.Contracts.Bitcoin;
@@ -54,8 +55,7 @@ namespace Trezor.Net
         #region Protected Override Properties
         protected override string ContractNamespace => "Trezor.Net.Contracts";
         protected override Type MessageTypeType => typeof(MessageType);
-
-        public bool IsOldFirmware => Features.MajorVersion < 2 && Features.MinorVersion < 8;
+        protected override bool? IsOldFirmware => Features?.MajorVersion < 2 && Features?.MinorVersion < 8;
         #endregion
 
         #region Constructor
@@ -316,7 +316,7 @@ namespace Trezor.Net
                 case MessageType.MessageTypeEthereumGetAddress:
                     return typeof(EthereumGetAddress);
                 case MessageType.MessageTypeEthereumAddress:
-                    return IsOldFirmware ? typeof(Contracts.BackwardsCompatible.EthereumAddress) : typeof(EthereumAddress);
+                    return IsOldFirmware.HasValue && IsOldFirmware.Value ? typeof(Contracts.BackwardsCompatible.EthereumAddress) : typeof(EthereumAddress);
                 case MessageType.MessageTypeEthereumSignTx:
                     return typeof(EthereumSignTx);
                 case MessageType.MessageTypeEthereumTxRequest:
@@ -519,9 +519,29 @@ namespace Trezor.Net
 
                     case AddressType.Ethereum:
 
-                        var ethereumAddress = await SendMessageAsync<EthereumAddress, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = display, AddressNs = path });
+                        var ethereumAddresssds = await SendMessageAsync<object, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = display, AddressNs = path });
 
-                        return ethereumAddress.Address.ToLower();
+                        switch (ethereumAddresssds)
+                        {
+                            case EthereumAddress ethereumAddress:
+                                return ethereumAddress.Address.ToLower();
+                            case Contracts.BackwardsCompatible.EthereumAddress ethereumAddress:
+
+                                //Ouch. Nasty
+                                var sb = new StringBuilder();
+                                foreach (var b in ethereumAddress.Address)
+                                {
+                                    sb.Append(b.ToString("X2").ToLower());
+                                }
+
+                                var hexString = sb.ToString();
+
+                                hexString = $"0x{hexString}";
+
+                                return hexString;
+                        }
+
+                        throw new NotImplementedException();
 
                     case AddressType.Tron:
 

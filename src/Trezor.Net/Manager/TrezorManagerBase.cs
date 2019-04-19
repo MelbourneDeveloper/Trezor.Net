@@ -22,7 +22,7 @@ namespace Trezor.Net
         #region Fields
         private int _InvalidChunksCounter;
         private readonly EnterPinArgs _EnterPinCallback;
-        private SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
+        private readonly SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
         private readonly string LogSection = "TrezorManagerBase";
         private object _LastWrittenMessage;
         private bool disposed;
@@ -41,7 +41,7 @@ namespace Trezor.Net
         #region Protected Abstract Properties
         protected abstract string ContractNamespace { get; }
         protected abstract Type MessageTypeType { get; }
-        public bool IsOld { get; } = true;
+        protected abstract bool? IsOldFirmware { get; }
         #endregion
 
         #region Constructor
@@ -313,15 +313,14 @@ namespace Trezor.Net
             {
                 var namesspacde = ContractNamespace;
 
-                if (IsOld)
+                if (IsOldFirmware.HasValue && IsOldFirmware.Value)
                 {
                     namesspacde = $"{namesspacde}.BackwardsCompatible";
                 }
 
-
                 var typeName = $"{namesspacde}.{messageType.ToString().Replace("MessageType", string.Empty)}";
 
-                if (IsOld)
+                if (IsOldFirmware.HasValue && IsOldFirmware.Value)
                 {
                     var type = Type.GetType(typeName);
                     if (type == null) typeName = $"{ContractNamespace}.{messageType.ToString().Replace("MessageType", string.Empty)}";

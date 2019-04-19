@@ -9,3 +9,7 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1304:Specify CultureInfo", Justification = "<Pending>", Scope = "member", Target = "~M:Trezor.Net.TrezorManager.GetAddressAsync(Hardwarewallets.Net.Model.IAddressPath,System.Boolean,System.Boolean,Trezor.Net.AddressType,Trezor.Net.Contracts.Bitcoin.InputScriptType,System.String)~System.Threading.Tasks.Task{System.String}")]
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable", Justification = "<Pending>", Scope = "type", Target = "~T:Trezor.Net.Manager.TrezorManagerBrokerBase`2")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "<Pending>", Scope = "member", Target = "~M:Trezor.Net.TrezorManager.GetAddressResult(System.Object)~Trezor.Net.Manager.AddressResult")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1304:Specify CultureInfo", Justification = "<Pending>", Scope = "member", Target = "~M:Trezor.Net.TrezorManager.GetAddressResult(System.Object)~Trezor.Net.Manager.AddressResult")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "<Pending>", Scope = "member", Target = "~M:Trezor.Net.TrezorManager.GetAddressAsync(Hardwarewallets.Net.Model.IAddressPath,System.Boolean,System.Boolean,Trezor.Net.AddressType,Trezor.Net.Contracts.Bitcoin.InputScriptType,System.String)~System.Threading.Tasks.Task{System.String}")]
+
