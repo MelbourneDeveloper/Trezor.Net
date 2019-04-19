@@ -19,13 +19,18 @@ namespace Trezor.Net
 
         protected override async Task<string> GetPin()
         {
+            return await Prompt("Pin");
+        }
+
+        private async Task<string> Prompt(string prompt)
+        {
             var passwordExePath = Path.Combine(GetExecutingAssemblyDirectoryPath(), "Misc", "GetPassword.exe");
             if (!File.Exists(passwordExePath))
             {
                 throw new Exception($"The pin exe doesn't exist at passwordExePath {passwordExePath}");
             }
 
-            var process = Process.Start(passwordExePath);
+            var process = Process.Start(passwordExePath, prompt);
             process.WaitForExit();
             await Task.Delay(100);
             var pin = File.ReadAllText(Path.Combine(GetExecutingAssemblyDirectoryPath(), "pin.txt"));
@@ -34,7 +39,7 @@ namespace Trezor.Net
 
         protected override Task<string> GetPassphrase()
         {
-            return GetPin();
+            return Prompt("Passphrase");
         }
         #endregion
     }
