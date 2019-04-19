@@ -17,9 +17,9 @@ Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for ot
     <PackageProjectUrl>https://github.com/MelbourneDeveloper/Trezor.Net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MelbourneDeveloper/Trezor.Net</RepositoryUrl>
     <PackageTags>Hid Usb Trezor Hardwarewallet Bitcoin Ethereum SatoshiLabs KeepKey Cryptocurrency security</PackageTags>
-    <AssemblyVersion>4.0.0.0</AssemblyVersion>
-    <FileVersion>4.0.0.0</FileVersion>
-    <PackageReleaseNotes>Firmware compatibility as of 5th of April 2019.</PackageReleaseNotes>
+    <AssemblyVersion>4.1.0.0</AssemblyVersion>
+    <FileVersion>4.1.0.0</FileVersion>
+    <PackageReleaseNotes>https://github.com/MelbourneDeveloper/Trezor.Net/projects/2</PackageReleaseNotes>
     <LangVersion>7.3</LangVersion>
     <NoWarn>CA2007,IDE0010</NoWarn>
     <CodeAnalysisRuleSet>CodeRules.ruleset</CodeAnalysisRuleSet> 
