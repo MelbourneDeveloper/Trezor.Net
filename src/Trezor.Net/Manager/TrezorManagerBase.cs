@@ -22,7 +22,8 @@ namespace Trezor.Net
         #region Fields
         private int _InvalidChunksCounter;
         private readonly EnterPinArgs _EnterPinCallback;
-        private SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
+        private readonly EnterPinArgs _EnterPassphraseCallback;
+        private readonly SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
         private readonly string LogSection = "TrezorManagerBase";
         private object _LastWrittenMessage;
         private bool disposed;
@@ -44,15 +45,16 @@ namespace Trezor.Net
         #endregion
 
         #region Constructor
-        protected TrezorManagerBase(EnterPinArgs enterPinCallback, IDevice device) : this(enterPinCallback, device, null)
+        protected TrezorManagerBase(EnterPinArgs enterPinCallback, EnterPinArgs enterPassphraseCallback, IDevice device) : this(enterPinCallback, enterPassphraseCallback, device, null)
         {
 
         }
 
-        protected TrezorManagerBase(EnterPinArgs enterPinCallback, IDevice device, ICoinUtility coinUtility)
+        protected TrezorManagerBase(EnterPinArgs enterPinCallback, EnterPinArgs enterPassphraseCallback, IDevice device, ICoinUtility coinUtility)
         {
             CoinUtility = coinUtility;
             _EnterPinCallback = enterPinCallback;
+            _EnterPassphraseCallback = enterPassphraseCallback;
             Device = device ?? throw new ArgumentNullException(nameof(device));
         }
         #endregion
@@ -61,6 +63,7 @@ namespace Trezor.Net
         protected abstract object GetEnumValue(string messageTypeString);
         protected abstract bool IsButtonRequest(object response);
         protected abstract bool IsPinMatrixRequest(object response);
+        protected abstract bool IsPassphraseRequest(object response);
         protected abstract bool IsInitialize(object response);
         protected abstract Type GetContractType(TMessageType messageType, string typeName);
         #endregion
@@ -97,8 +100,8 @@ namespace Trezor.Net
 
                     if (IsPassphraseRequest(response))
                     {
-                        var pin = await _EnterPinCallback.Invoke();
-                        response = await PinMatrixAckAsync(pin);
+                        var passPhrase = await _EnterPassphraseCallback.Invoke();
+                        response = await PassphraseAckAsync(passPhrase);
                         if (response is TReadMessage readMessage)
                         {
                             return readMessage;
@@ -127,11 +130,6 @@ namespace Trezor.Net
             {
                 _Lock.Release();
             }
-        }
-
-        private bool IsPassphraseRequest(object response)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -367,6 +365,7 @@ namespace Trezor.Net
         #region Protected Abstract Methods
         protected abstract void CheckForFailure(object returnMessage);
         protected abstract Task<object> PinMatrixAckAsync(string pin);
+        protected abstract Task<object> PassphraseAckAsync(string passPhrase);
         protected abstract Task<object> ButtonAckAsync();
         #endregion
 

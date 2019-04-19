@@ -26,12 +26,13 @@ namespace Trezor.Net
 
         #region Protected Abstract Methods
         protected abstract Task<string> GetPin();
+        protected abstract Task<string> GetPassphrase();
         #endregion
 
         #region Protected Virtual Methods
         protected virtual async Task<TrezorManager> ConnectAsync()
         {
-            _TrezorManagerBroker = new TrezorManagerBroker(GetPin, 2000, new DefaultCoinUtility());
+            _TrezorManagerBroker = new TrezorManagerBroker(GetPin, GetPassphrase, 2000, new DefaultCoinUtility());
             return await _TrezorManagerBroker.WaitForFirstTrezorAsync();
         }
         #endregion

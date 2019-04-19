@@ -57,11 +57,11 @@ namespace Trezor.Net
         #endregion
 
         #region Constructor
-        public TrezorManager(EnterPinArgs enterPinCallback, IDevice trezorDevice) : this(enterPinCallback, trezorDevice, new DefaultCoinUtility())
+        public TrezorManager(EnterPinArgs enterPinCallback, EnterPinArgs enterPassphraseCallback, IDevice trezorDevice) : this(enterPinCallback, enterPassphraseCallback, trezorDevice, new DefaultCoinUtility())
         {
         }
 
-        public TrezorManager(EnterPinArgs enterPinCallback, IDevice trezorDevice, ICoinUtility coinUtility) : base(enterPinCallback, trezorDevice, coinUtility)
+        public TrezorManager(EnterPinArgs enterPinCallback, EnterPinArgs enterPassphraseCallback, IDevice trezorDevice, ICoinUtility coinUtility) : base(enterPinCallback, enterPassphraseCallback, trezorDevice, coinUtility)
         {
         }
         #endregion
@@ -77,6 +77,11 @@ namespace Trezor.Net
             return response is PinMatrixRequest;
         }
 
+        protected override bool IsPassphraseRequest(object response)
+        {
+            return response is PassphraseRequest;
+        }
+
         protected override bool IsInitialize(object response)
         {
             return response is Initialize;
@@ -89,6 +94,18 @@ namespace Trezor.Net
             if (retVal is Failure failure)
             {
                 throw new FailureException<Failure>("PIN Attempt Failed.", failure);
+            }
+
+            return retVal;
+        }
+
+        protected override async Task<object> PassphraseAckAsync(string passPhrase)
+        {
+            var retVal = await SendMessageAsync(new PassphraseAck {  Passphrase = passPhrase });
+
+            if (retVal is Failure failure)
+            {
+                throw new FailureException<Failure>("Passphrase Attempt Failed.", failure);
             }
 
             return retVal;

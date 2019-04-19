@@ -31,6 +31,11 @@ namespace Trezor.Net
             var pin = File.ReadAllText(Path.Combine(GetExecutingAssemblyDirectoryPath(), "pin.txt"));
             return pin;
         }
+
+        protected override Task<string> GetPassphrase()
+        {
+            return GetPin();
+        }
         #endregion
     }
 }

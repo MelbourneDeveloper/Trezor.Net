@@ -7,7 +7,7 @@ namespace Trezor.Net.Manager
     public class TrezorManagerBroker : TrezorManagerBrokerBase<TrezorManager, MessageType>
     {
         #region Constructor
-        public TrezorManagerBroker(EnterPinArgs enterPinArgs, int? pollInterval, ICoinUtility coinUtility) : base(enterPinArgs, pollInterval, coinUtility)
+        public TrezorManagerBroker(EnterPinArgs enterPinArgs, EnterPinArgs enterPassphraseArgs, int? pollInterval, ICoinUtility coinUtility) : base(enterPinArgs, enterPassphraseArgs, pollInterval, coinUtility)
         {
         }
         #endregion
@@ -24,7 +24,7 @@ namespace Trezor.Net.Manager
 
         protected override TrezorManager CreateTrezorManager(IDevice device)
         {
-            return new TrezorManager(EnterPinArgs, device);
+            return new TrezorManager(EnterPinArgs, EnterPassphraseArgs, device);
         }
         #endregion
     }
