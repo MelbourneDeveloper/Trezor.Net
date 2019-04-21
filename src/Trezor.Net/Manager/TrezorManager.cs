@@ -102,7 +102,7 @@ namespace Trezor.Net
 
         protected override async Task<object> PassphraseAckAsync(string passPhrase)
         {
-            var retVal = await SendMessageAsync(new PassphraseAck {  Passphrase = passPhrase });
+            var retVal = await SendMessageAsync(new PassphraseAck { Passphrase = passPhrase });
 
             if (retVal is Failure failure)
             {
@@ -452,7 +452,7 @@ namespace Trezor.Net
                 case MessageType.MessageTypeDebugMoneroDiagRequest:
                     return typeof(DebugMoneroDiagRequest);
                 case MessageType.MessageTypeDebugMoneroDiagAck:
-                    return typeof(DebugMoneroDiagAck);               
+                    return typeof(DebugMoneroDiagAck);
                 default:
                     throw new NotImplementedException();
             }
@@ -551,9 +551,14 @@ namespace Trezor.Net
 
                         throw new NotImplementedException();
 
-                    
+
 
                     case AddressType.Cardano:
+
+                        if (string.Compare(Features.Model, "T", StringComparison.OrdinalIgnoreCase) != 0)
+                        {
+                            throw new NotSupportedException("Cardano is only supported on the Model T");
+                        }
 
                         return (await SendMessageAsync<CardanoAddress, CardanoGetAddress>(new CardanoGetAddress { ShowDisplay = display, AddressNs = path })).Address;
 
