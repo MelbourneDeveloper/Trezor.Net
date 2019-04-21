@@ -565,6 +565,9 @@ namespace Trezor.Net
                     case AddressType.Stellar:
                         return (await SendMessageAsync<StellarAddress, StellarGetAddress>(new StellarGetAddress { ShowDisplay = display, AddressNs = path })).Address;
 
+                    case AddressType.Tezoz:
+                        return (await SendMessageAsync<TezosAddress, TezosGetAddress>(new TezosGetAddress { ShowDisplay = display, AddressNs = path })).Address;
+
                     default:
                         throw new NotImplementedException();
                 }

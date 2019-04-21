@@ -249,6 +249,27 @@ namespace Trezor.Net
         }
 
         [TestMethod]
+        public async Task GetTezosAddress()
+        {
+            var isModelT = string.Compare(TrezorManager.Features.Model, "T", StringComparison.OrdinalIgnoreCase) == 0;
+
+            string address = null;
+            try
+            {
+                address = await GetAddressAsync("44'/1729'/0'", false);
+            }
+            catch (NotSupportedException)
+            {
+                if (!isModelT) return;
+            }
+
+            if (isModelT)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(address));
+            }
+        }
+
+        [TestMethod]
         public async Task GetNamecoinAddress()
         {
             var address = await GetAddressAsync(7, false);
