@@ -2,6 +2,7 @@
 using Hardwarewallets.Net.Model;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using Trezor.Net.Contracts;
 using Trezor.Net.Contracts.Bitcoin;
@@ -19,7 +20,6 @@ using Trezor.Net.Contracts.Ontology;
 using Trezor.Net.Contracts.Ripple;
 using Trezor.Net.Contracts.Stellar;
 using Trezor.Net.Contracts.Tezos;
-using Trezor.Net.Contracts.Tron;
 
 namespace Trezor.Net
 {
@@ -550,6 +550,10 @@ namespace Trezor.Net
                         }
 
                         throw new NotImplementedException();
+
+                    case AddressType.Cardano:
+
+                        return (await SendMessageAsync<CardanoAddress, CardanoGetAddress>(new CardanoGetAddress { ShowDisplay = display, AddressNs = path })).Address;
 
                     default:
                         throw new NotImplementedException();

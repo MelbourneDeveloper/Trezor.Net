@@ -28,7 +28,7 @@ namespace Trezor.Net
 
             Coins.Add(60, new CoinInfo("Ethereum", AddressType.Ethereum, false, 60));
             Coins.Add(61, new CoinInfo("Ethereum Classic", AddressType.Ethereum, false, 61));
-            Coins.Add(195, new CoinInfo("Mr T", AddressType.Tron, false, 195));
+            Coins.Add(1815, new CoinInfo(null, AddressType.Cardano, false, 1815));
         }
 
         public CoinInfo GetCoinInfo(uint coinNumber)

@@ -218,6 +218,12 @@ namespace Trezor.Net
         }
 
         [TestMethod]
+        public async Task DisplayCardanoAddress()
+        {
+            var address = await GetAddressAsync(1815, true);
+        }
+
+        [TestMethod]
         public async Task DisplayBitcoinAddress()
         {
             var address = await GetAddressAsync(0, true);
