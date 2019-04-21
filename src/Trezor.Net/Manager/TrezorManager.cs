@@ -557,6 +557,9 @@ namespace Trezor.Net
 
                         return (await SendMessageAsync<CardanoAddress, CardanoGetAddress>(new CardanoGetAddress { ShowDisplay = display, AddressNs = path })).Address;
 
+                    case AddressType.Stellar:
+                        return (await SendMessageAsync<StellarAddress, StellarGetAddress>(new StellarGetAddress { ShowDisplay = display, AddressNs = path })).Address;
+
                     default:
                         throw new NotImplementedException();
                 }

@@ -217,6 +217,16 @@ namespace Trezor.Net
             Debug.WriteLine($"TxSignature: {serializedTx.ToArray().ToHexCompact()}");
         }
 
+        /// <summary>
+        /// Note: I don't know how to verify if this is returning the correct address or not
+        /// </summary>
+        /// <returns></returns>
+        [TestMethod]
+        public async Task DisplayStellarPublicKey()
+        {
+            var address = await GetAddressAsync("m/44'/148'/0'/0/0", true, null, true);
+        }
+
         [TestMethod]
         public async Task GetCardanoAddress()
         {
