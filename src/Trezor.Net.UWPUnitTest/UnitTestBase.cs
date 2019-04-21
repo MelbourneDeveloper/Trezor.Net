@@ -327,14 +327,16 @@ namespace Trezor.Net
         {
             var tasks = new List<Task>();
 
-            for (uint i = 0; i < 50; i++)
+            const int addresses = 20;
+
+            for (uint i = 0; i < addresses; i++)
             {
                 tasks.Add(DoGetAddress(i));
             }
 
             await Task.WhenAll(tasks);
 
-            for (uint i = 0; i < 50; i++)
+            for (uint i = 0; i < addresses; i++)
             {
                 var address = await GetAddressAsync(i);
 
