@@ -227,6 +227,9 @@ namespace Trezor.Net
             var address = await GetAddressAsync("m/44'/148'/0'/0/0", true, null, true);
         }
 
+        /// <summary>
+        /// Confirmed address valid as per online wallet
+        /// </summary>
         [TestMethod]
         public async Task GetCardanoAddress()
         {
@@ -248,6 +251,9 @@ namespace Trezor.Net
             }
         }
 
+        /// <summary>
+        /// Confirmed address valid as per online wallet
+        /// </summary>
         [TestMethod]
         public async Task GetTezosAddress()
         {
