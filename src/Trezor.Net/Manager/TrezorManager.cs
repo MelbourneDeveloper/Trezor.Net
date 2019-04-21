@@ -551,6 +551,8 @@ namespace Trezor.Net
 
                         throw new NotImplementedException();
 
+                    
+
                     case AddressType.Cardano:
 
                         return (await SendMessageAsync<CardanoAddress, CardanoGetAddress>(new CardanoGetAddress { ShowDisplay = display, AddressNs = path })).Address;

@@ -218,9 +218,16 @@ namespace Trezor.Net
         }
 
         [TestMethod]
-        public async Task DisplayCardanoAddress()
+        public async Task GetCardanoAddress()
         {
-            var address = await GetAddressAsync(1815, true);
+            var address = await GetAddressAsync(1815, false);
+        }
+
+
+        [TestMethod]
+        public async Task GetNamecoinAddress()
+        {
+            var address = await GetAddressAsync(7, false);
         }
 
         [TestMethod]
@@ -274,9 +281,9 @@ namespace Trezor.Net
         }
 
         [TestMethod]
-        public async Task DisplayBitcoinGoldAddress()
+        public async Task GetBitcoinGoldAddress()
         {
-            var address = await GetAddressAsync(156, true);
+            var address = await GetAddressAsync(156, false);
         }
 
         [TestMethod]
@@ -286,14 +293,6 @@ namespace Trezor.Net
             var address = await GetAddressAsync(false, 60, false, 0, true);
         }
 
-        //Tron doesn't seem to work on the Trezor One
-        //[TestMethod]
-        //public async Task GetTronAddress()
-        //{
-        //    //Ethereum coins don't need the coin name
-        //    var address = await GetAddressAsync(false, 195, false, 0, true);
-        //}
-
         [TestMethod]
         public async Task GetEthereumAddress()
         {
@@ -301,16 +300,16 @@ namespace Trezor.Net
         }
 
         [TestMethod]
-        public async Task GetEthereumClassicAddress()
+        public async Task GetEthereumClassicAddressParsed()
         {
             var address = await GetAddressAsync("m/44'/61'/0'/1/0");
         }
 
         [TestMethod]
-        public async Task DisplayEthereumClassicAddress()
+        public async Task GetEthereumClassicAddress()
         {
             //Ethereum coins don't need the coin name
-            var address = await GetAddressAsync(false, 61, false, 0, true);
+            var address = await GetAddressAsync(false, 61, false, 0, false);
         }
 
         [TestMethod]
