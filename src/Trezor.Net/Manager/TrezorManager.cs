@@ -51,6 +51,16 @@ namespace Trezor.Net
         public override bool IsInitialized => Features != null;
         #endregion
 
+        #region Private Methods
+        private void CheckForSupported(string feature)
+        {
+            if (string.Compare(Features.Model, "T", StringComparison.OrdinalIgnoreCase) != 0)
+            {
+                throw new NotSupportedException($"{feature} is only supported on the Model T");
+            }
+        }
+        #endregion
+
         #region Protected Override Properties
         protected override string ContractNamespace => "Trezor.Net.Contracts";
         protected override Type MessageTypeType => typeof(MessageType);
@@ -554,18 +564,14 @@ namespace Trezor.Net
 
 
                     case AddressType.Cardano:
-
-                        if (string.Compare(Features.Model, "T", StringComparison.OrdinalIgnoreCase) != 0)
-                        {
-                            throw new NotSupportedException("Cardano is only supported on the Model T");
-                        }
-
+                        CheckForSupported(nameof(AddressType.Cardano));
                         return (await SendMessageAsync<CardanoAddress, CardanoGetAddress>(new CardanoGetAddress { ShowDisplay = display, AddressNs = path })).Address;
 
                     case AddressType.Stellar:
                         return (await SendMessageAsync<StellarAddress, StellarGetAddress>(new StellarGetAddress { ShowDisplay = display, AddressNs = path })).Address;
 
                     case AddressType.Tezoz:
+                        CheckForSupported(nameof(AddressType.Tezoz));
                         return (await SendMessageAsync<TezosAddress, TezosGetAddress>(new TezosGetAddress { ShowDisplay = display, AddressNs = path })).Address;
 
                     default:
