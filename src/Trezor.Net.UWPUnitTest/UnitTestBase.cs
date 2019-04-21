@@ -230,6 +230,11 @@ namespace Trezor.Net
         [TestMethod]
         public async Task GetCardanoAddress()
         {
+            if (TrezorManager.Features.Model != "T")
+            {
+                Assert.Inconclusive("Cardano is only supported on Model T");
+            }
+
             var address = await GetAddressAsync(1815, false);
         }
 
