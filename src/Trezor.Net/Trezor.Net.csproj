@@ -13,7 +13,7 @@
 
 Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for other platforms can be added with Hid.Net dependency injection</Description>
     <Copyright>Copyright (c) 2019 Christian Findlay</Copyright>
-    <PackageLicenseUrl>https://github.com/MelbourneDeveloper/Trezor.Net/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/MelbourneDeveloper/Trezor.Net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MelbourneDeveloper/Trezor.Net</RepositoryUrl>
     <PackageTags>Hid Usb Trezor Hardwarewallet Bitcoin Ethereum SatoshiLabs KeepKey Cryptocurrency security</PackageTags>
@@ -22,7 +22,8 @@ Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for ot
     <PackageReleaseNotes>https://github.com/MelbourneDeveloper/Trezor.Net/projects/2</PackageReleaseNotes>
     <LangVersion>7.3</LangVersion>
     <NoWarn>CA2007,IDE0010</NoWarn>
-    <CodeAnalysisRuleSet>CodeRules.ruleset</CodeAnalysisRuleSet> 
+    <CodeAnalysisRuleSet>CodeRules.ruleset</CodeAnalysisRuleSet>
+    <PackageLicenseFile>License.txt</PackageLicenseFile> 
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -31,6 +32,10 @@ Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for ot
 
   <ItemGroup>
     <None Remove="Resources\Coins.xml" />
+    <None Include="License.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
