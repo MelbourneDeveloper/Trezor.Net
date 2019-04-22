@@ -46,7 +46,7 @@ Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for ot
     <PackageReference Include="Device.Net" Version="2.7.0" />
     <PackageReference Include="Hardwarewallets.Net" Version="1.2.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.2" />
-    <PackageReference Include="protobuf-net" Version="2.3.17" />
+    <PackageReference Include="protobuf-net" Version="2.4.0" />
   </ItemGroup>
 
 </Project>
