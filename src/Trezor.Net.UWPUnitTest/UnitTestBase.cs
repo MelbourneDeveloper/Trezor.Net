@@ -220,7 +220,6 @@ namespace Trezor.Net
         /// <summary>
         /// Note: I don't know how to verify if this is returning the correct address or not
         /// </summary>
-        /// <returns></returns>
         [TestMethod]
         public async Task DisplayStellarPublicKey()
         {
@@ -273,6 +272,15 @@ namespace Trezor.Net
             {
                 Assert.IsTrue(!string.IsNullOrEmpty(address));
             }
+        }
+
+        /// <summary>
+        /// Note: I don't know how to verify if this is returning the correct address or not
+        /// </summary>
+        [TestMethod]
+        public async Task GetNEMAddress()
+        {
+            var address = await GetAddressAsync("44'/43'/0'", false);
         }
 
         [TestMethod]

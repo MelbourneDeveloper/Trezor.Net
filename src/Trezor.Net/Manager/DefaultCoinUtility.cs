@@ -26,6 +26,7 @@ namespace Trezor.Net
                 Coins.Add(coinInfo.CoinType, new CoinInfo(coinInfo.CoinName, AddressType.Bitcoin, coinInfo.IsSegwit, coinInfo.CoinType));
             }
 
+            Coins.Add(43, new CoinInfo(null, AddressType.NEM, false, 43));
             Coins.Add(60, new CoinInfo("Ethereum", AddressType.Ethereum, false, 60));
             Coins.Add(61, new CoinInfo("Ethereum Classic", AddressType.Ethereum, false, 61));
             Coins.Add(1815, new CoinInfo(null, AddressType.Cardano, false, 1815));

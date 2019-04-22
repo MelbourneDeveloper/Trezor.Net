@@ -574,6 +574,9 @@ namespace Trezor.Net
                         CheckForSupported(nameof(AddressType.Tezoz));
                         return (await SendMessageAsync<TezosAddress, TezosGetAddress>(new TezosGetAddress { ShowDisplay = display, AddressNs = path })).Address;
 
+                    case AddressType.NEM:
+                        return (await SendMessageAsync<NEMAddress, NEMGetAddress>(new NEMGetAddress { ShowDisplay = display, AddressNs = path })).Address;
+
                     default:
                         throw new NotImplementedException();
                 }
