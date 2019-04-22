@@ -2,6 +2,7 @@
 using Hardwarewallets.Net.Model;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using Trezor.Net.Contracts;
 using Trezor.Net.Contracts.Bitcoin;
@@ -19,7 +20,6 @@ using Trezor.Net.Contracts.Ontology;
 using Trezor.Net.Contracts.Ripple;
 using Trezor.Net.Contracts.Stellar;
 using Trezor.Net.Contracts.Tezos;
-using Trezor.Net.Contracts.Tron;
 
 namespace Trezor.Net
 {
@@ -49,6 +49,16 @@ namespace Trezor.Net
 
         #region Public Override Properties
         public override bool IsInitialized => Features != null;
+        #endregion
+
+        #region Private Methods
+        private void CheckForSupported(string feature)
+        {
+            if (string.Compare(Features.Model, "T", StringComparison.OrdinalIgnoreCase) != 0)
+            {
+                throw new NotSupportedException($"{feature} is only supported on the Model T");
+            }
+        }
         #endregion
 
         #region Protected Override Properties
@@ -102,7 +112,7 @@ namespace Trezor.Net
 
         protected override async Task<object> PassphraseAckAsync(string passPhrase)
         {
-            var retVal = await SendMessageAsync(new PassphraseAck {  Passphrase = passPhrase });
+            var retVal = await SendMessageAsync(new PassphraseAck { Passphrase = passPhrase });
 
             if (retVal is Failure failure)
             {
@@ -452,7 +462,7 @@ namespace Trezor.Net
                 case MessageType.MessageTypeDebugMoneroDiagRequest:
                     return typeof(DebugMoneroDiagRequest);
                 case MessageType.MessageTypeDebugMoneroDiagAck:
-                    return typeof(DebugMoneroDiagAck);               
+                    return typeof(DebugMoneroDiagAck);
                 default:
                     throw new NotImplementedException();
             }
@@ -550,6 +560,22 @@ namespace Trezor.Net
                         }
 
                         throw new NotImplementedException();
+
+
+
+                    case AddressType.Cardano:
+                        CheckForSupported(nameof(AddressType.Cardano));
+                        return (await SendMessageAsync<CardanoAddress, CardanoGetAddress>(new CardanoGetAddress { ShowDisplay = display, AddressNs = path })).Address;
+
+                    case AddressType.Stellar:
+                        return (await SendMessageAsync<StellarAddress, StellarGetAddress>(new StellarGetAddress { ShowDisplay = display, AddressNs = path })).Address;
+
+                    case AddressType.Tezoz:
+                        CheckForSupported(nameof(AddressType.Tezoz));
+                        return (await SendMessageAsync<TezosAddress, TezosGetAddress>(new TezosGetAddress { ShowDisplay = display, AddressNs = path })).Address;
+
+                    case AddressType.NEM:
+                        return (await SendMessageAsync<NEMAddress, NEMGetAddress>(new NEMGetAddress { ShowDisplay = display, AddressNs = path })).Address;
 
                     default:
                         throw new NotImplementedException();

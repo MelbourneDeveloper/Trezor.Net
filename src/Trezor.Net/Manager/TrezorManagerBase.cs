@@ -247,10 +247,10 @@ namespace Trezor.Net
                 throw new ReadException(message, readBuffer, _LastWrittenMessage);
             }
 
-            //Looks like the message type is at index 4
-            var messageTypeInt = readBuffer[4];
+            //From Trezor-Android TrezorManager.messageRead
+            var messageTypeInt = ((readBuffer[3] & 0xFF) << 8) + (readBuffer[4] & 0xFF);
 
-            if (!Enum.IsDefined(MessageTypeType, (int)messageTypeInt))
+            if (!Enum.IsDefined(MessageTypeType, messageTypeInt))
             {
                 throw new ManagerException($"The number {messageTypeInt} is not a valid MessageType");
             }
