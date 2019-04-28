@@ -32,6 +32,9 @@ Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for ot
 
   <ItemGroup>
     <None Remove="Resources\Coins.xml" />
+    <None Include="..\..\CONTRIBUTING.md" Link="CONTRIBUTING.md" />
+    <None Include="..\..\LICENSE" Link="LICENSE" />
+    <None Include="..\..\README.md" Link="README.md" />
     <None Include="License.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
