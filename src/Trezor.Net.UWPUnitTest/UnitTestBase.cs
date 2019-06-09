@@ -101,10 +101,6 @@ namespace Trezor.Net
         #endregion
 
         #region Tests
-        /// <summary>
-        /// Special thanks to https://github.com/ljupko123
-        /// </summary>
-        /// <returns></returns>
         [TestMethod]
         public async Task SignBitcoinTransactionAsync()
         {
@@ -117,7 +113,7 @@ namespace Trezor.Net
                 AddressNs = addressPath,
                 Amount = 100837,
                 ScriptType = InputScriptType.Spendp2shwitness,
-                PrevHash = "3becf448ae38cf08c0db3c6de2acb8e47acf6953331a466fca76165fdef1ccb7".ToHexBytes(), // transaction ID
+                PrevHash = "797ad8727ee672123acfc7bcece06bf648d3833580b1b50246363f3293d9fe20".ToHexBytes(), // transaction ID
                 PrevIndex = 0,
                 Sequence = 4294967293 // Sequence  number represent Replace By Fee 4294967293 or leave empty for default 
             };
@@ -127,7 +123,7 @@ namespace Trezor.Net
             {
                 AddressNs = new uint[0],
                 Amount = 100837,
-                Address = "18UxSJMw7D4UEiRqWkArN1Lq7VSGX6qH3H",
+                Address = "34i58jxXbcjHbHmo1Pdzx8UjqLphZuG8c1",
                 ScriptType = TxAck.TransactionType.TxOutputType.OutputScriptType.Paytoaddress // if is segwit use Spendp2shwitness
 
             };
