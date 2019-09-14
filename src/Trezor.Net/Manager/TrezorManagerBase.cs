@@ -219,7 +219,7 @@ namespace Trezor.Net
         private async Task<object> ReadAsync()
         {
             //Read a chunk
-            var readBuffer = await Device.ReadAsync();
+            var readBuffer = (await Device.ReadAsync()).Data;
 
             //Check to see that this is a valid first chunk 
             var firstByteNot63 = readBuffer[0] != (byte)'?';
