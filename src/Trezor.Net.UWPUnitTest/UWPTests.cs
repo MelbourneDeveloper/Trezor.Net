@@ -1,4 +1,5 @@
-﻿using Hid.Net.UWP;
+﻿using Device.Net;
+using Hid.Net.UWP;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using Trezor.Net.UWPUnitTest;
@@ -22,8 +23,8 @@ namespace Trezor.Net
 
         protected override Task<TrezorManager> ConnectAsync()
         {
-            UWPUsbDeviceFactory.Register();
-            UWPHidDeviceFactory.Register();
+            UWPUsbDeviceFactory.Register(new DebugLogger(), new DebugTracer());
+            UWPHidDeviceFactory.Register(new DebugLogger(), new DebugTracer());
 
             return base.ConnectAsync();
         }
