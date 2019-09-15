@@ -63,7 +63,7 @@ namespace Trezor.Net
             });
         }
 
-        public async Task<byte[]> ReadAsync()
+        public async Task<ReadResult> ReadAsync()
         {
             await _WriteAndReadLock.WaitAsync();
 
@@ -101,10 +101,14 @@ namespace Trezor.Net
             }
         }
 
-        public async Task<byte[]> WriteAndReadAsync(byte[] writeBuffer)
+        public async Task<ReadResult> WriteAndReadAsync(byte[] writeBuffer)
         {
             await WriteAsync(writeBuffer);
             return await ReadAsync();
+        }
+
+        public async Task Flush()
+        {
         }
         #endregion
     }
