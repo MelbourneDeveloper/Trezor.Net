@@ -27,7 +27,7 @@ Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for ot
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>C:\GitRepos\Trezor.Net\NuGet\</OutputPath>
+    <OutputPath>..\..\NuGet\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
