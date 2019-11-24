@@ -1,4 +1,4 @@
-﻿using Hardwarewallets.Net.AddressManagement;
+﻿using CryptoCurrency.Net.Base.AddressManagement;
 using System.Threading.Tasks;
 using Trezor.Net.Manager;
 using Xamarin.Forms;

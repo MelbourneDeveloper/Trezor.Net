@@ -1,6 +1,5 @@
-﻿using Device.Net;
-using Hardwarewallets.Net;
-using Hardwarewallets.Net.Model;
+﻿using CryptoCurrency.Net.Base.Abstractions.AddressManagement;
+using Device.Net;
 using ProtoBuf;
 using System;
 using System.IO;

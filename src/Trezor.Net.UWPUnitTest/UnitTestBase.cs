@@ -1,5 +1,4 @@
-﻿using Hardwarewallets.Net;
-using Hardwarewallets.Net.AddressManagement;
+﻿using CryptoCurrency.Net.Base.AddressManagement;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.RLP;

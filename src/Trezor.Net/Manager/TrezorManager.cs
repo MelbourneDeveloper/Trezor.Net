@@ -1,5 +1,5 @@
-﻿using Device.Net;
-using Hardwarewallets.Net.Model;
+﻿using CryptoCurrency.Net.Base.Abstractions.AddressManagement;
+using Device.Net;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -542,14 +542,20 @@ namespace Trezor.Net
                         switch (ethereumAddresssds)
                         {
                             case EthereumAddress ethereumAddress:
+#pragma warning disable CA1304 // Specify CultureInfo
                                 return ethereumAddress.Address.ToLower();
+#pragma warning restore CA1304 // Specify CultureInfo
                             case Contracts.BackwardsCompatible.EthereumAddress ethereumAddress:
 
                                 //Ouch. Nasty
                                 var sb = new StringBuilder();
                                 foreach (var b in ethereumAddress.Address)
                                 {
+#pragma warning disable CA1304 // Specify CultureInfo
+#pragma warning disable CA1305 // Specify IFormatProvider
                                     sb.Append(b.ToString("X2").ToLower());
+#pragma warning restore CA1305 // Specify IFormatProvider
+#pragma warning restore CA1304 // Specify CultureInfo
                                 }
 
                                 var hexString = sb.ToString();
