@@ -1,4 +1,7 @@
 # Trezor.Net
+
+## [Follow Me on Twitter](https://twitter.com/intent/follow?screen_name=cfdevelop&tw_p=followbutton) ##
+
 Cross Platform C# Library for the [Trezor Cryptocurrency Hardwarewallet](https://trezor.io/)
 
 This library allows you to communicate with both Trezor hardwarewallets in the same way that the Trezor browser wallet app communicates with them. It can be used to build apps that send or receive crypto currencies like Bitcoin in a secure way.
