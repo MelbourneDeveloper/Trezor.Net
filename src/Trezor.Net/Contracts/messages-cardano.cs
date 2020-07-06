@@ -93,7 +93,7 @@ namespace Trezor.Net.Contracts.Cardano
         private string __pbn__Xpub;
 
         [global::ProtoBuf.ProtoMember(2, Name = @"node")]
-        public global::hw.trezor.messages.common.HDNodeType Node { get; set; }
+        public HDNodeType Node { get; set; }
 
     }
 

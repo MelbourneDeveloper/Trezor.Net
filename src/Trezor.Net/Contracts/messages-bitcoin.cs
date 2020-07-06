@@ -34,7 +34,7 @@ namespace Trezor.Net.Contracts.Bitcoin
         private uint? __pbn__M;
 
         [global::ProtoBuf.ProtoMember(4, Name = @"nodes")]
-        public global::System.Collections.Generic.List<global::hw.trezor.messages.common.HDNodeType> Nodes { get; } = new global::System.Collections.Generic.List<global::hw.trezor.messages.common.HDNodeType>();
+        public global::System.Collections.Generic.List<HDNodeType> Nodes { get; } = new global::System.Collections.Generic.List<HDNodeType>();
 
         [global::ProtoBuf.ProtoMember(5, Name = @"address_n")]
         public uint[] AddressNs { get; set; }
@@ -47,7 +47,7 @@ namespace Trezor.Net.Contracts.Bitcoin
                 => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [global::ProtoBuf.ProtoMember(1, Name = @"node", IsRequired = true)]
-            public global::hw.trezor.messages.common.HDNodeType Node { get; set; }
+            public HDNodeType Node { get; set; }
 
             [global::ProtoBuf.ProtoMember(2, Name = @"address_n")]
             public uint[] AddressNs { get; set; }
@@ -119,7 +119,7 @@ namespace Trezor.Net.Contracts.Bitcoin
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1, Name = @"node")]
-        public global::hw.trezor.messages.common.HDNodeType Node { get; set; }
+        public HDNodeType Node { get; set; }
 
         [global::ProtoBuf.ProtoMember(2, Name = @"xpub")]
         [global::System.ComponentModel.DefaultValue("")]

@@ -16,7 +16,6 @@ using Trezor.Net.Contracts.Lisk;
 using Trezor.Net.Contracts.Management;
 using Trezor.Net.Contracts.Monero;
 using Trezor.Net.Contracts.NEM;
-using Trezor.Net.Contracts.Ontology;
 using Trezor.Net.Contracts.Ripple;
 using Trezor.Net.Contracts.Stellar;
 using Trezor.Net.Contracts.Tezos;
@@ -265,8 +264,6 @@ namespace Trezor.Net
                     return typeof(LoadDevice);
                 case MessageType.MessageTypeResetDevice:
                     return typeof(ResetDevice);
-                case MessageType.MessageTypeClearSession:
-                    return typeof(ClearSession);
                 case MessageType.MessageTypeEntropyRequest:
                     return typeof(EntropyRequest);
                 case MessageType.MessageTypeEntropyAck:
@@ -275,10 +272,6 @@ namespace Trezor.Net
                     return typeof(PassphraseRequest);
                 case MessageType.MessageTypePassphraseAck:
                     return typeof(PassphraseAck);
-                case MessageType.MessageTypePassphraseStateRequest:
-                    return typeof(PassphraseStateRequest);
-                case MessageType.MessageTypePassphraseStateAck:
-                    return typeof(PassphraseStateAck);
                 case MessageType.MessageTypeRecoveryDevice:
                     return typeof(RecoveryDevice);
                 case MessageType.MessageTypeGetFeatures:

@@ -329,7 +329,7 @@ namespace Trezor.Net.Contracts.Debug
         private byte[] __pbn__MnemonicSecret;
 
         [global::ProtoBuf.ProtoMember(5, Name = @"node")]
-        public global::hw.trezor.messages.common.HDNodeType Node { get; set; }
+        public HDNodeType Node { get; set; }
 
         [global::ProtoBuf.ProtoMember(6, Name = @"passphrase_protection")]
         public bool PassphraseProtection
