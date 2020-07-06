@@ -395,30 +395,6 @@ namespace Trezor.Net
                     return typeof(StellarAccountMergeOp);
                 case MessageType.MessageTypeStellarBumpSequenceOp:
                     return typeof(StellarBumpSequenceOp);
-                case MessageType.MessageTypeOntologyGetAddress:
-                    return typeof(OntologyGetAddress);
-                case MessageType.MessageTypeOntologyAddress:
-                    return typeof(OntologyAddress);
-                case MessageType.MessageTypeOntologyGetPublicKey:
-                    return typeof(OntologyGetPublicKey);
-                case MessageType.MessageTypeOntologyPublicKey:
-                    return typeof(OntologyPublicKey);
-                case MessageType.MessageTypeOntologySignTransfer:
-                    return typeof(OntologySignTransfer);
-                case MessageType.MessageTypeOntologySignedTransfer:
-                    return typeof(OntologySignedTransfer);
-                case MessageType.MessageTypeOntologySignWithdrawOng:
-                    return typeof(OntologySignWithdrawOng);
-                case MessageType.MessageTypeOntologySignedWithdrawOng:
-                    return typeof(OntologySignedWithdrawOng);
-                case MessageType.MessageTypeOntologySignOntIdRegister:
-                    return typeof(OntologySignOntIdRegister);
-                case MessageType.MessageTypeOntologySignedOntIdRegister:
-                    return typeof(OntologySignedOntIdRegister);
-                case MessageType.MessageTypeOntologySignOntIdAddAttributes:
-                    return typeof(OntologySignOntIdAddAttributes);
-                case MessageType.MessageTypeOntologySignedOntIdAddAttributes:
-                    return typeof(OntologySignedOntIdAddAttributes);
                 case MessageType.MessageTypeRippleGetAddress:
                     return typeof(RippleGetAddress);
                 case MessageType.MessageTypeRippleAddress:
