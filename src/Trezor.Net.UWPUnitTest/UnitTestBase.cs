@@ -1,4 +1,4 @@
-﻿using Hardwarewallets.Net;
+using Hardwarewallets.Net;
 using Hardwarewallets.Net.AddressManagement;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Nethereum.Hex.HexConvertors.Extensions;
@@ -131,7 +131,7 @@ namespace Trezor.Net
             // Must be filled with basic data like below
             var signTx = new SignTx()
             {
-                Expiry = 0,
+                //Expiry = 0,
                 LockTime = 0,
                 CoinName = "Bitcoin",
                 Version = 2,
@@ -146,10 +146,11 @@ namespace Trezor.Net
                 {
                     Inputs = { txInput }, // Tx Inputs
                     Outputs = { txOut },   // Tx Outputs
-                    Expiry = 0,
+                    //Expiry = 0,
                     InputsCnt = 1, // must be exact number of Inputs count
                     OutputsCnt = 1, // must be exact number of Outputs count
-                    Version = 2
+                    Version = 2,
+                    
                 }
             };
 
