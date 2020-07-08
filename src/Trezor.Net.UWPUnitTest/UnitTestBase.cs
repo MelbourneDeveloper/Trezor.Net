@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Trezor.Net.Contracts.Bitcoin;
 using Trezor.Net.Contracts.Ethereum;
 using Trezor.Net.Manager;
+using static Trezor.Net.Contracts.Bitcoin.TxAck;
 
 namespace Trezor.Net
 {
@@ -205,7 +206,36 @@ namespace Trezor.Net
                         }
                     case TxRequest.RequestType.Txmeta:
                         {
-                            // for now he didn't ask me for extra Tx meta data :)
+                            /*
+                             def copy_tx_meta(tx):
+                                tx_copy = messages.TransactionType(**tx)
+                                # clear fields
+                                tx_copy.inputs_cnt = len(tx.inputs)
+                                tx_copy.inputs = []
+                                tx_copy.outputs_cnt = len(tx.bin_outputs or tx.outputs)
+                                tx_copy.outputs = []
+                                tx_copy.bin_outputs = []
+                                tx_copy.extra_data_len = len(tx.extra_data or b"")
+                                tx_copy.extra_data = None
+                                return tx_copy        
+                            */
+
+                            //This code is converted from Trezor.py here:
+                            //https://github.com/trezor/python-trezor/blob/2813522b05cef4e0e545a101f8b3559a3183b45b/trezorlib/btc.py#L161
+                            TransactionType transactionType = new TransactionType {  };
+                            transactionType.InputsCnt = (uint)txAck.Tx.Inputs.Count;
+                            transactionType.OutputsCnt = (uint)txAck.Tx.Outputs.Count;
+
+                            if (txAck.Tx?.ExtraData != null)
+                            {
+                                transactionType.ExtraDataLen = (uint)txAck.Tx.ExtraData.Length;
+                            }
+
+                            var txRequest = await TrezorManager.SendMessageAsync<TxRequest, TxAck>(new TxAck
+                            {
+                                Tx = transactionType
+                            });
+
                             break;
                         }
                 }
