@@ -107,49 +107,84 @@ namespace Trezor.Net
             //get address path for address in Trezor
             var addressPath = AddressPathBase.Parse<BIP44AddressPath>("m/49'/0'/0'/0/0").ToArray();
 
-            // previous unspent input of Transaction
-            var txInput = new TxAck.TransactionType.TxInputType()
+            // previous unspent inputs of Transaction
+            var txInputs = new List<TxAck.TransactionType.TxInputType>()
             {
-                AddressNs = addressPath,
-                Amount = 100837,
-                ScriptType = InputScriptType.Spendp2shwitness,
-                PrevHash = "797ad8727ee672123acfc7bcece06bf648d3833580b1b50246363f3293d9fe20".ToHexBytes(), // transaction ID
-                PrevIndex = 0,
-                Sequence = 4294967293 // Sequence  number represent Replace By Fee 4294967293 or leave empty for default 
+                new TxAck.TransactionType.TxInputType()
+                {
+                    AddressNs = addressPath,
+                    Amount = 1790890,
+                    ScriptType = InputScriptType.Spendp2shwitness,
+                    PrevHash = "797ad8727ee672123acfc7bcece06bf648d3833580b1b50246363f3293d9fe20".ToHexBytes(), // transaction ID
+                    PrevIndex = 0,
+                    Sequence = 4294967293 // Sequence  number represent Replace By Fee 4294967293 or leave empty for default 
+                }
             };
 
             // TX we want to make a payment
-            var txOut = new TxAck.TransactionType.TxOutputType()
+            var txOutputs = new List<TxAck.TransactionType.TxOutputType>()
             {
-                AddressNs = new uint[0],
-                Amount = 100837,
-                Address = "34i58jxXbcjHbHmo1Pdzx8UjqLphZuG8c1",
-                ScriptType = TxAck.TransactionType.TxOutputType.OutputScriptType.Paytoaddress // if is segwit use Spendp2shwitness
-
+                new TxAck.TransactionType.TxOutputType()
+                {
+                    Amount = 50000,
+                    Address = "34i58jxXbcjHbHmo1Pdzx8UjqLphZuG8c1",
+                    ScriptType = TxAck.TransactionType.TxOutputType.OutputScriptType.Paytoaddress // always use Paytoaddress if Address is set
+                },
+                new TxAck.TransactionType.TxOutputType()
+                {
+                    Amount = 1790890 - 50000 - 1000,
+                    // change output does not specify Address but uses AddressNs
+                    AddressNs = AddressPathBase.Parse<BIP44AddressPath>("m/49'/0'/0'/1/0").ToArray(),
+                    ScriptType = TxAck.TransactionType.TxOutputType.OutputScriptType.Paytop2shwitness // must match all inputs
+                },
             };
 
             // Must be filled with basic data like below
             var signTx = new SignTx()
             {
-                Expiry = 0,
                 LockTime = 0,
                 CoinName = "Bitcoin",
                 Version = 2,
-                OutputsCount = 1,
-                InputsCount = 1
+                InputsCount = (uint)txInputs.Count,
+                OutputsCount = (uint)txOutputs.Count,
             };
 
-            // For every TX request from Trezor to us, we response with TxAck like below
-            var txAck = new TxAck()
+            // Cache of previous transactions. This dictionary must contain an entry for every PrevHash used in the transaction inputs above.
+            var prevTxes = new Dictionary<string, TxAck.TransactionType>
             {
-                Tx = new TxAck.TransactionType()
+
+                // Information taken from https://btc1.trezor.io/tx/797ad8727ee672123acfc7bcece06bf648d3833580b1b50246363f3293d9fe20
+                // All the shown fields must be correctly filled out. For Bitcoin, others can be omitted.
+                ["797ad8727ee672123acfc7bcece06bf648d3833580b1b50246363f3293d9fe20".ToUpper()] = new TxAck.TransactionType()
                 {
-                    Inputs = { txInput }, // Tx Inputs
-                    Outputs = { txOut },   // Tx Outputs
-                    Expiry = 0,
-                    InputsCnt = 1, // must be exact number of Inputs count
-                    OutputsCnt = 1, // must be exact number of Outputs count
-                    Version = 2
+                    Version = 1,
+                    LockTime = 0,
+
+                    Inputs =
+                    {
+                        new TxAck.TransactionType.TxInputType()
+                        {
+                            // address_n, script_type and amonout is unused in previous tx
+                            PrevHash = "0757c4c6247bbd46f718e6944735d3c5047c5e6f8bf0150506b5347b680b5812".ToHexBytes(),
+                            PrevIndex = 0,
+                            ScriptSig = "16001438865742de45fc9617e754fe0e413d2c6ef30124".ToHexBytes(),
+                            Sequence = 4294967295,
+                        },
+                    },
+                    // For previous tx, BinOutputs are used instead of Outputs. They only have amount and script_pubkey.
+                    BinOutputs =
+                    {
+                        new TxAck.TransactionType.TxOutputBinType()
+                        {
+                            Amount = 1790890,
+                            ScriptPubkey = "00146d4100c05c93a8f2bd7c1342df587ec90cb0ec43".ToHexBytes(),
+                        },
+                        new TxAck.TransactionType.TxOutputBinType()
+                        {
+                            Amount = 1998443,
+                            ScriptPubkey = "a914211b791fc53bad19ef17b3ddeeeb24e610a5ffd087".ToHexBytes(),
+                        },
+                    },
                 }
             };
 
@@ -164,47 +199,92 @@ namespace Trezor.Net
 
             // We do loop here since we need to send over and over the same transactions to trezor because his 64 kilobytes memory
             // and he will sign chunks and return part of signed chunk in serialized manner, until we receive finall type of Txrequest TxFinished
-            while (request.request_type != TxRequest.RequestType.Txfinished)
+            bool running = true;
+            while (running)
             {
+                if (request.Serialized != null)
+                {
+                    // if there is any we add to our list bytes
+                    serializedTx.AddRange(request.Serialized.SerializedTx);
+                }
+
+                // for clarity, use a new txAck object each time
+                var txAck = new TxAck()
+                {
+                    Tx = new TxAck.TransactionType()
+                };
+
                 switch (request.request_type)
                 {
                     case TxRequest.RequestType.Txinput:
                         {
-                            //We send TxAck() with  TxInputs
-                            request = await TrezorManager.SendMessageAsync<TxRequest, TxAck>(txAck);
+                            var prevHash = request.Details.TxHash;
+                            var prevIndex = (int)request.Details.RequestIndex;
 
-                            // Now we have to check every response is there any SerializedTx chunk 
-                            if (request.Serialized != null)
+                            if (prevHash != null)
                             {
-                                // if there is any we add to our list bytes
-                                serializedTx.AddRange(request.Serialized.SerializedTx);
+                                // retrieve input from specified previous tx
+                                var prevtx = prevTxes[prevHash.ToHexString()];
+                                txAck.Tx.Inputs.Add(prevtx.Inputs[prevIndex]);
+                            } else
+                            {
+                                // take one of the current transaction inputs
+                                txAck.Tx.Inputs.Add(txInputs[prevIndex]);
                             }
 
+                            request = await TrezorManager.SendMessageAsync<TxRequest, TxAck>(txAck);
                             break;
                         }
                     case TxRequest.RequestType.Txoutput:
                         {
-                            //We send TxAck()  with  TxOutputs
-                            request = await TrezorManager.SendMessageAsync<TxRequest, object>(txAck);
+                            var prevHash = request.Details.TxHash;
+                            var prevIndex = (int)request.Details.RequestIndex;
 
-                            // Now we have to check every response is there any SerializedTx chunk 
-                            if (request.Serialized != null)
+                            if (prevHash != null)
                             {
-                                // if there is any we add to our list bytes
-                                serializedTx.AddRange(request.Serialized.SerializedTx);
+                                // retrieve **bin** output from specified previous tx
+                                var prevtx = prevTxes[prevHash.ToHexString()];
+                                txAck.Tx.BinOutputs.Add(prevtx.BinOutputs[prevIndex]);
+                            }
+                            else
+                            {
+                                // take one of the current transaction normal outputs
+                                txAck.Tx.Outputs.Add(txOutputs[prevIndex]);
                             }
 
+                            request = await TrezorManager.SendMessageAsync<TxRequest, object>(txAck);
                             break;
                         }
 
                     case TxRequest.RequestType.Txextradata:
                         {
-                            // for now he didn't ask me for extra data :)
-                            break;
+                            // This will never happen for Bitcoin.
+                            // For Zcash, you need to pre-fill ExtraData and ExtraDataLen in the previous tx.
+                            // This is somewhat complicated: basically, parse the raw transaction bytes up to Expiry field,
+                            // and take all raw bytes beyond that.
+                            // request.Details will contain offset and length, pick that chunk and put it into TransactionType.ExtraData that you send.
+                            throw new NotImplementedException();
                         }
+                    
                     case TxRequest.RequestType.Txmeta:
                         {
-                            // for now he didn't ask me for extra Tx meta data :)
+                            // This will only happen when txHash is set.
+                            var prevtx = prevTxes[request.Details.TxHash.ToHexString()];
+                            txAck.Tx = new TxAck.TransactionType()
+                            {
+                                Version = prevtx.Version,
+                                LockTime = prevtx.LockTime,
+                                InputsCnt = (uint)prevtx.Inputs.Count,
+                                OutputsCnt = (uint)prevtx.BinOutputs.Count,
+                            };
+                            request = await TrezorManager.SendMessageAsync<TxRequest, object>(txAck);
+                            break;
+                        }
+
+                    case TxRequest.RequestType.Txfinished:
+                        {
+                            // stop the loop
+                            running = false;
                             break;
                         }
                 }
