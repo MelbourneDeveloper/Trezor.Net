@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="New Rule Set" Description=" " ToolsVersion="15.0">
+<RuleSet Name="New Rule Set" Description=" " ToolsVersion="16.0">
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <Rule Id="CA1000" Action="Error" />
     <Rule Id="CA1001" Action="Error" />
@@ -841,7 +841,7 @@
     <Rule Id="IDE0005" Action="Error" />
     <Rule Id="IDE0007" Action="Error" />
     <Rule Id="IDE0007WithoutSuggestion" Action="Error" />
-    <Rule Id="IDE0008" Action="Error" />
+    <Rule Id="IDE0008" Action="None" />
     <Rule Id="IDE0008WithoutSuggestion" Action="Error" />
     <Rule Id="IDE0009" Action="Error" />
     <Rule Id="IDE0009WithoutSuggestion" Action="Error" />
@@ -944,7 +944,6 @@
     <Rule Id="CA1060" Action="Error" />
     <Rule Id="CA1061" Action="Error" />
     <Rule Id="CA1062" Action="Error" />
-    <Rule Id="CA1063" Action="Warning" />
     <Rule Id="CA1064" Action="Error" />
     <Rule Id="CA1066" Action="Error" />
     <Rule Id="CA1067" Action="Error" />
@@ -1022,7 +1021,6 @@
     <Rule Id="CA1308" Action="Error" />
     <Rule Id="CA1401" Action="Error" />
     <Rule Id="CA1813" Action="Error" />
-    <Rule Id="CA1816" Action="Warning" />
     <Rule Id="CA1820" Action="Error" />
     <Rule Id="CA1826" Action="Error" />
     <Rule Id="CA2000" Action="Error" />
@@ -1096,7 +1094,6 @@
     <Rule Id="CA2229" Action="None" />
     <Rule Id="CA2235" Action="Error" />
     <Rule Id="CA2237" Action="None" />
-    <Rule Id="CA3075" Action="Warning" />
     <Rule Id="CA3147" Action="Error" />
     <Rule Id="CA9999" Action="Error" />
   </Rules>
