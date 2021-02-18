@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+#pragma warning disable CA1305 // Specify IFormatProvider
+#pragma warning disable IDE0058 // Expression value is never used
 
 namespace Trezor.Net
 {
@@ -13,6 +17,8 @@ namespace Trezor.Net
 
         public static byte[] ToHexBytes(this string ethString)
         {
+            if (ethString == null) throw new ArgumentNullException(nameof(ethString));
+
             var numberOfCharacters = ethString.Length / 2;
             var returnValue = new byte[numberOfCharacters];
 

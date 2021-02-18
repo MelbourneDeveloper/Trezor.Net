@@ -181,9 +181,6 @@ dotnet_diagnostic.CA1070.severity = error
 # CA1200: Avoid using cref tags with a prefix
 dotnet_diagnostic.CA1200.severity = error
 
-# CA1303: Do not pass literals as localized parameters
-dotnet_diagnostic.CA1303.severity = error
-
 # CA1304: Specify CultureInfo
 dotnet_diagnostic.CA1304.severity = error
 
@@ -776,3 +773,6 @@ dotnet_diagnostic.CA1063.severity = warning
 
 # CA1825: Avoid zero-length array allocations
 dotnet_diagnostic.CA1825.severity = warning
+
+# CA1303: Do not pass literals as localized parameters
+dotnet_diagnostic.CA1303.severity = warning
