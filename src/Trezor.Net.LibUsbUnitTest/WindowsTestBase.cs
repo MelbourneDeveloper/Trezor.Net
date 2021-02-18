@@ -17,15 +17,9 @@ namespace Trezor.Net
             return executingAssemblyDirectoryPath;
         }
 
-        protected override async Task<string> GetPin()
-        {
-            return GetTextFromUI();
-        }
+        protected override async Task<string> GetPin() => GetTextFromUI();
 
-        protected override async Task<string> GetPassphrase()
-        {
-            return GetTextFromUI();
-        }
+        protected override async Task<string> GetPassphrase() => GetTextFromUI();
 
         private string GetTextFromUI()
         {

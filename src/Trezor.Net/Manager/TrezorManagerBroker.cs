@@ -22,10 +22,7 @@ namespace Trezor.Net.Manager
             new FilterDeviceDefinition{ DeviceType= DeviceType.Usb, VendorId= 0x1209, ProductId=0x53C0, Label="Model T" }
         };
 
-        protected override TrezorManager CreateTrezorManager(IDevice device)
-        {
-            return new TrezorManager(EnterPinArgs, EnterPassphraseArgs, device);
-        }
+        protected override TrezorManager CreateTrezorManager(IDevice device) => new TrezorManager(EnterPinArgs, EnterPassphraseArgs, device);
         #endregion
     }
 }

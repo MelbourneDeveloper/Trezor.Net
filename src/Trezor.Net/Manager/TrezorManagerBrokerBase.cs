@@ -60,7 +60,7 @@ namespace Trezor.Net.Manager
         {
             try
             {
-                await _Lock.WaitAsync();
+                await _Lock.WaitAsync().ConfigureAwait(false);
 
                 var trezorManager = TrezorManagers.FirstOrDefault(t => ReferenceEquals(t.Device, e.Device));
 
@@ -75,7 +75,7 @@ namespace Trezor.Net.Manager
 
                 TrezorManagers = new ReadOnlyCollection<T>(tempList);
 
-                await trezorManager.InitializeAsync();
+                await trezorManager.InitializeAsync().ConfigureAwait(false);
 
                 if (_FirstTrezorTaskCompletionSource.Task.Status == TaskStatus.WaitingForActivation) _FirstTrezorTaskCompletionSource.SetResult(trezorManager);
 
@@ -91,7 +91,7 @@ namespace Trezor.Net.Manager
         {
             try
             {
-                await _Lock.WaitAsync();
+                await _Lock.WaitAsync().ConfigureAwait(false);
 
                 var trezorManager = TrezorManagers.FirstOrDefault(t => ReferenceEquals(t.Device, e.Device));
 
@@ -131,10 +131,7 @@ namespace Trezor.Net.Manager
             //TODO: Call Start on the DeviceListener when it is implemented...
         }
 
-        public void Stop()
-        {
-            _DeviceListener?.Stop();
-        }
+        public void Stop() => _DeviceListener?.Stop();
 
         /// <summary>
         /// Check to see if there are any devices connected
@@ -143,7 +140,7 @@ namespace Trezor.Net.Manager
         {
             try
             {
-                await _DeviceListener.CheckForDevicesAsync();
+                await _DeviceListener.CheckForDevicesAsync().ConfigureAwait(false);
             }
             catch
             {
@@ -157,8 +154,8 @@ namespace Trezor.Net.Manager
         public async Task<T> WaitForFirstTrezorAsync()
         {
             if (_DeviceListener == null) Start();
-            await _DeviceListener.CheckForDevicesAsync();
-            return await _FirstTrezorTaskCompletionSource.Task;
+            await _DeviceListener.CheckForDevicesAsync().ConfigureAwait(false);
+            return await _FirstTrezorTaskCompletionSource.Task.ConfigureAwait(false);
         }
 
         public void Dispose()

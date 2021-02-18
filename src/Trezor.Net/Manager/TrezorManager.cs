@@ -78,29 +78,17 @@ namespace Trezor.Net
         #endregion
 
         #region Protected Override Methods
-        protected override bool IsButtonRequest(object response)
-        {
-            return response is ButtonRequest;
-        }
+        protected override bool IsButtonRequest(object response) => response is ButtonRequest;
 
-        protected override bool IsPinMatrixRequest(object response)
-        {
-            return response is PinMatrixRequest;
-        }
+        protected override bool IsPinMatrixRequest(object response) => response is PinMatrixRequest;
 
-        protected override bool IsPassphraseRequest(object response)
-        {
-            return response is PassphraseRequest;
-        }
+        protected override bool IsPassphraseRequest(object response) => response is PassphraseRequest;
 
-        protected override bool IsInitialize(object response)
-        {
-            return response is Initialize;
-        }
+        protected override bool IsInitialize(object response) => response is Initialize;
 
         protected override async Task<object> PinMatrixAckAsync(string pin)
         {
-            var retVal = await SendMessageAsync(new PinMatrixAck { Pin = pin });
+            var retVal = await SendMessageAsync(new PinMatrixAck { Pin = pin }).ConfigureAwait(false);
 
             if (retVal is Failure failure)
             {
@@ -112,7 +100,7 @@ namespace Trezor.Net
 
         protected override async Task<object> PassphraseAckAsync(string passPhrase)
         {
-            var retVal = await SendMessageAsync(new PassphraseAck { Passphrase = passPhrase });
+            var retVal = await SendMessageAsync(new PassphraseAck { Passphrase = passPhrase }).ConfigureAwait(false);
 
             if (retVal is Failure failure)
             {
@@ -124,7 +112,7 @@ namespace Trezor.Net
 
         protected override async Task<object> ButtonAckAsync()
         {
-            var retVal = await SendMessageAsync(new ButtonAck());
+            var retVal = await SendMessageAsync(new ButtonAck()).ConfigureAwait(false);
 
             if (retVal is Failure failure)
             {
@@ -504,10 +492,7 @@ namespace Trezor.Net
             return GetAddressAsync(addressPath, isPublicKey, display, coinInfo.AddressType, inputScriptType, coinInfo.CoinName);
         }
 
-        public Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display, AddressType addressType, InputScriptType inputScriptType)
-        {
-            return GetAddressAsync(addressPath, isPublicKey, display, addressType, inputScriptType, null);
-        }
+        public Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display, AddressType addressType, InputScriptType inputScriptType) => GetAddressAsync(addressPath, isPublicKey, display, addressType, inputScriptType, null);
 
         public async Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display, AddressType addressType, InputScriptType inputScriptType, string coinName)
         {
@@ -519,7 +504,7 @@ namespace Trezor.Net
 
                 if (isPublicKey)
                 {
-                    var publicKey = await SendMessageAsync<PublicKey, GetPublicKey>(new GetPublicKey { CoinName = coinName, AddressNs = path, ShowDisplay = display, ScriptType = inputScriptType });
+                    var publicKey = await SendMessageAsync<PublicKey, GetPublicKey>(new GetPublicKey { CoinName = coinName, AddressNs = path, ShowDisplay = display, ScriptType = inputScriptType }).ConfigureAwait(false);
                     return publicKey.Xpub;
                 }
 
@@ -533,11 +518,11 @@ namespace Trezor.Net
                             coinName = "Bitcoin Gold";
                         }
 
-                        return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = display, AddressNs = path, CoinName = coinName, ScriptType = inputScriptType })).address;
+                        return (await SendMessageAsync<Address, GetAddress>(new GetAddress { ShowDisplay = display, AddressNs = path, CoinName = coinName, ScriptType = inputScriptType }).ConfigureAwait(false)).address;
 
                     case AddressType.Ethereum:
 
-                        var ethereumAddresssds = await SendMessageAsync<object, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = display, AddressNs = path });
+                        var ethereumAddresssds = await SendMessageAsync<object, EthereumGetAddress>(new EthereumGetAddress { ShowDisplay = display, AddressNs = path }).ConfigureAwait(false);
 
                         switch (ethereumAddresssds)
                         {
@@ -565,17 +550,17 @@ namespace Trezor.Net
 
                     case AddressType.Cardano:
                         CheckForSupported(nameof(AddressType.Cardano));
-                        return (await SendMessageAsync<CardanoAddress, CardanoGetAddress>(new CardanoGetAddress { ShowDisplay = display, AddressNs = path })).Address;
+                        return (await SendMessageAsync<CardanoAddress, CardanoGetAddress>(new CardanoGetAddress { ShowDisplay = display, AddressNs = path }).ConfigureAwait(false)).Address;
 
                     case AddressType.Stellar:
-                        return (await SendMessageAsync<StellarAddress, StellarGetAddress>(new StellarGetAddress { ShowDisplay = display, AddressNs = path })).Address;
+                        return (await SendMessageAsync<StellarAddress, StellarGetAddress>(new StellarGetAddress { ShowDisplay = display, AddressNs = path }).ConfigureAwait(false)).Address;
 
                     case AddressType.Tezoz:
                         CheckForSupported(nameof(AddressType.Tezoz));
-                        return (await SendMessageAsync<TezosAddress, TezosGetAddress>(new TezosGetAddress { ShowDisplay = display, AddressNs = path })).Address;
+                        return (await SendMessageAsync<TezosAddress, TezosGetAddress>(new TezosGetAddress { ShowDisplay = display, AddressNs = path }).ConfigureAwait(false)).Address;
 
                     case AddressType.NEM:
-                        return (await SendMessageAsync<NEMAddress, NEMGetAddress>(new NEMGetAddress { ShowDisplay = display, AddressNs = path })).Address;
+                        return (await SendMessageAsync<NEMAddress, NEMGetAddress>(new NEMGetAddress { ShowDisplay = display, AddressNs = path }).ConfigureAwait(false)).Address;
 
                     default:
                         throw new NotImplementedException();
@@ -595,7 +580,7 @@ namespace Trezor.Net
         {
             if (disposed) throw new ManagerException("Initialization cannot occur after disposal");
 
-            Features = await SendMessageAsync<Features, Initialize>(new Initialize());
+            Features = await SendMessageAsync<Features, Initialize>(new Initialize()).ConfigureAwait(false);
 
             if (Features == null)
             {

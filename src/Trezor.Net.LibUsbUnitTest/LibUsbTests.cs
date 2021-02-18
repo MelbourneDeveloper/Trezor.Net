@@ -25,12 +25,12 @@ namespace Trezor.Net
               );
 
             var _LibUsbDevice = new LibUsbDevice(trezorUsbDevice, 60000);
-            await _LibUsbDevice.InitializeAsync();
+            await _LibUsbDevice.InitializeAsync().ConfigureAwait(false);
 
             Console.WriteLine("Connected");
 
             var trezorManager = new TrezorManager(GetPin, GetPassphrase, _LibUsbDevice);
-            await trezorManager.InitializeAsync();
+            await trezorManager.InitializeAsync().ConfigureAwait(false);
 
             return trezorManager;
         }

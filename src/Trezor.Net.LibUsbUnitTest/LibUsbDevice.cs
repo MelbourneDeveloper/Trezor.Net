@@ -40,15 +40,9 @@ namespace Trezor.Net
         #endregion
 
         #region Implementation
-        public void Dispose()
-        {
-            UsbDevice.Dispose();
-        }
+        public void Dispose() => UsbDevice.Dispose();
 
-        public void Close()
-        {
-            UsbDevice.Close();
-        }
+        public void Close() => UsbDevice.Close();
 
         public async Task InitializeAsync()
         {
@@ -60,12 +54,12 @@ namespace Trezor.Net
                 _UsbEndpointWriter = UsbDevice.OpenEndpointWriter(WriteEndpointID.Ep01);
                 _UsbEndpointReader = UsbDevice.OpenEndpointReader(ReadEndpointID.Ep01);
                 ReadPacketSize = _UsbEndpointReader.EndpointInfo.MaxPacketSize;
-            });
+            }).ConfigureAwait(false);
         }
 
         public async Task<ReadResult> ReadAsync()
         {
-            await _WriteAndReadLock.WaitAsync();
+            await _WriteAndReadLock.WaitAsync().ConfigureAwait(false);
 
             try
             {
@@ -76,7 +70,7 @@ namespace Trezor.Net
                     _UsbEndpointReader.Read(buffer, Timeout, out var bytesRead);
 
                     return buffer;
-                });
+                }).ConfigureAwait(false);
             }
             finally
             {
@@ -86,14 +80,14 @@ namespace Trezor.Net
 
         public async Task WriteAsync(byte[] data)
         {
-            await _WriteAndReadLock.WaitAsync();
+            await _WriteAndReadLock.WaitAsync().ConfigureAwait(false);
 
             try
             {
                 await Task.Run(() =>
                 {
                     _UsbEndpointWriter.Write(data, Timeout, out var bytesWritten);
-                });
+                }).ConfigureAwait(false);
             }
             finally
             {
@@ -103,8 +97,8 @@ namespace Trezor.Net
 
         public async Task<ReadResult> WriteAndReadAsync(byte[] writeBuffer)
         {
-            await WriteAsync(writeBuffer);
-            return await ReadAsync();
+            await WriteAsync(writeBuffer).ConfigureAwait(false);
+            return await ReadAsync().ConfigureAwait(false);
         }
 
         public async Task Flush()

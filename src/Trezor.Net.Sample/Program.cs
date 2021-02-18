@@ -45,7 +45,7 @@ namespace TrezorTestApp
             WindowsHidDeviceFactory.Register(new DebugLogger(), new DebugTracer());
 
             _TrezorManagerBroker = new TrezorManagerBroker(GetPin, GetPassphrase, 2000, new DefaultCoinUtility());
-            return await _TrezorManagerBroker.WaitForFirstTrezorAsync();
+            return await _TrezorManagerBroker.WaitForFirstTrezorAsync().ConfigureAwait(false);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace TrezorTestApp
         {
             try
             {
-                using (var trezorManager = await ConnectAsync())
+                using (var trezorManager = await ConnectAsync().ConfigureAwait(false))
                 {
                     Console.WriteLine("Trezor connection recognized");
 
@@ -67,11 +67,11 @@ namespace TrezorTestApp
                         tasks.Add(DoGetAddress(trezorManager, i));
                     }
 
-                    await Task.WhenAll(tasks);
+                    await Task.WhenAll(tasks).ConfigureAwait(false);
 
                     for (uint i = 0; i < 50; i++)
                     {
-                        var address = await GetAddress(trezorManager, i);
+                        var address = await GetAddress(trezorManager, i).ConfigureAwait(false);
 
                         Console.WriteLine($"Index: {i} (No change) - Address: {address}");
 
@@ -83,7 +83,7 @@ namespace TrezorTestApp
 
                     var addressPath = new BIP44AddressPath(false, 60, 0, false, 0);
 
-                    var ethAddress = await trezorManager.GetAddressAsync(addressPath, false, false);
+                    var ethAddress = await trezorManager.GetAddressAsync(addressPath, false, false).ConfigureAwait(false);
                     Console.WriteLine($"First ETH address: {ethAddress}");
 
                     Console.WriteLine("All good");
@@ -91,7 +91,7 @@ namespace TrezorTestApp
                     while (true)
                     {
                         Console.WriteLine($"Count of connected Trezors: {_TrezorManagerBroker.TrezorManagers.Count}");
-                        await Task.Delay(5000);                        
+                        await Task.Delay(5000).ConfigureAwait(false);                        
                     }
                 }
             }
@@ -104,24 +104,18 @@ namespace TrezorTestApp
 
         private static async Task DoGetAddress(TrezorManager trezorManager, uint i)
         {
-            var address = await GetAddress(trezorManager, i);
+            var address = await GetAddress(trezorManager, i).ConfigureAwait(false);
             _Addresses[i] = address;
         }
 
-        private static async Task<string> GetAddress(TrezorManager trezorManager, uint i)
-        {
-            return await trezorManager.GetAddressAsync(new BIP44AddressPath(true, 0, 0, false, i), false, false);
-        }
+        private static async Task<string> GetAddress(TrezorManager trezorManager, uint i) => await trezorManager.GetAddressAsync(new BIP44AddressPath(true, 0, 0, false, i), false, false).ConfigureAwait(false);
 
         private static async Task<string> GetPin()
         {
             Console.WriteLine("Enter PIN based on Trezor values: ");
             return Console.ReadLine().Trim();
         }
-        private static Task<string> GetPassphrase()
-        {
-            return GetPin();
-        }
+        private static Task<string> GetPassphrase() => GetPin();
 
         #endregion
     }

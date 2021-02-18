@@ -41,10 +41,7 @@ namespace Trezor.Net
             }
         }
 
-        public byte[] ToArray()
-        {
-            return _Bytes.ToArray();
-        }
+        public byte[] ToArray() => _Bytes.ToArray();
 
         public void Put(byte[] bytes, int startIndex, int Length)
         {

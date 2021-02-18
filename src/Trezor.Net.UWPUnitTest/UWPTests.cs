@@ -17,7 +17,7 @@ namespace Trezor.Net
             {
                 pinCompletionSource.SetResult(App.Pin);
             };
-            var pin = await pinCompletionSource.Task;
+            var pin = await pinCompletionSource.Task.ConfigureAwait(false);
             return pin;
         }
 
@@ -29,9 +29,6 @@ namespace Trezor.Net
             return base.ConnectAsync();
         }
 
-        protected override Task<string> GetPassphrase()
-        {
-            throw new System.NotImplementedException();
-        }
+        protected override Task<string> GetPassphrase() => throw new System.NotImplementedException();
     }
 }

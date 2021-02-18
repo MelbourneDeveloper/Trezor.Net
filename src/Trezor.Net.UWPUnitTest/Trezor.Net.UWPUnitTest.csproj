@@ -115,6 +115,9 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="Trezor.Net.UWPUnitTest_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

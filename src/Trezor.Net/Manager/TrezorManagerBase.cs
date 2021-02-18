@@ -1,6 +1,7 @@
 ﻿using Device.Net;
 using Hardwarewallets.Net;
 using Hardwarewallets.Net.Model;
+using Microsoft.Extensions.Logging;
 using ProtoBuf;
 using System;
 using System.IO;
@@ -81,18 +82,18 @@ namespace Trezor.Net
         {
             ValidateInitialization(message);
 
-            await _Lock.WaitAsync();
+            await _Lock.WaitAsync().ConfigureAwait(false);
 
             try
             {
-                var response = await SendMessageAsync(message);
+                var response = await SendMessageAsync(message).ConfigureAwait(false);
 
                 for (var i = 0; i < 10; i++)
                 {
                     if (IsPinMatrixRequest(response))
                     {
-                        var pin = await _EnterPinCallback.Invoke();
-                        response = await PinMatrixAckAsync(pin);
+                        var pin = await _EnterPinCallback.Invoke().ConfigureAwait(false);
+                        response = await PinMatrixAckAsync(pin).ConfigureAwait(false);
                         if (response is TReadMessage readMessage)
                         {
                             return readMessage;
@@ -101,8 +102,8 @@ namespace Trezor.Net
 
                     if (IsPassphraseRequest(response))
                     {
-                        var passPhrase = await _EnterPassphraseCallback.Invoke();
-                        response = await PassphraseAckAsync(passPhrase);
+                        var passPhrase = await _EnterPassphraseCallback.Invoke().ConfigureAwait(false);
+                        response = await PassphraseAckAsync(passPhrase).ConfigureAwait(false);
                         if (response is TReadMessage readMessage)
                         {
                             return readMessage;
@@ -111,7 +112,7 @@ namespace Trezor.Net
 
                     else if (IsButtonRequest(response))
                     {
-                        response = await ButtonAckAsync();
+                        response = await ButtonAckAsync().ConfigureAwait(false);
 
                         if (response is TReadMessage readMessage)
                         {
@@ -129,17 +130,14 @@ namespace Trezor.Net
             }
             finally
             {
-                _Lock.Release();
+                _ = _Lock.Release();
             }
         }
 
         /// <summary>
         /// Check to see if the Trezor is connected to the device
         /// </summary>
-        public bool IsDeviceInitialized()
-        {
-            return Device.IsInitialized;
-        }
+        public bool IsDeviceInitialized() => Device.IsInitialized;
 
         /// <summary>
         /// Initialize the Trezor. Should only be called once.
@@ -165,7 +163,7 @@ namespace Trezor.Net
         #region Private Methods
         private async Task WriteAsync(object msg)
         {
-            Logger?.Log($"Write: {msg}", LogSection, null, LogLevel.Information);
+            Logger?.LogInformation($"Write: {msg}", LogSection);
 
             var byteArray = Serialize(msg);
 
@@ -210,7 +208,7 @@ namespace Trezor.Net
                     range[x + 1] = wholeArray[(i * 63) + x];
                 }
 
-                await Device.WriteAsync(range);
+                _ = await Device.WriteAsync(range).ConfigureAwait(false);
             }
 
             _LastWrittenMessage = msg;
@@ -219,7 +217,7 @@ namespace Trezor.Net
         private async Task<object> ReadAsync()
         {
             //Read a chunk
-            var readBuffer = (await Device.ReadAsync()).Data;
+            var readBuffer = (await Device.ReadAsync().ConfigureAwait(false)).Data;
 
             //Check to see that this is a valid first chunk 
             var firstByteNot63 = readBuffer[0] != (byte)'?';
@@ -279,7 +277,7 @@ namespace Trezor.Net
             while (remainingDataLength > 0)
             {
                 //Read a chunk
-                readBuffer = await Device.ReadAsync();
+                readBuffer = await Device.ReadAsync().ConfigureAwait(false);
 
                 //check that there was some data returned
                 if (readBuffer.Length <= 0)
@@ -315,7 +313,7 @@ namespace Trezor.Net
 
             var msg = Deserialize(messageType, allData);
 
-            Logger?.Log($"Read: {msg}", LogSection, null, LogLevel.Information);
+            Logger.LogInformation($"Read: {msg}", LogSection);
 
             return msg;
         }
@@ -369,9 +367,9 @@ namespace Trezor.Net
         {
             if (message == null) throw new ArgumentNullException(nameof(message));
 
-            await WriteAsync(message);
+            await WriteAsync(message).ConfigureAwait(false);
 
-            var retVal = await ReadAsync();
+            var retVal = await ReadAsync().ConfigureAwait(false);
 
             CheckForFailure(retVal);
 
@@ -391,10 +389,7 @@ namespace Trezor.Net
         /// Horribly inefficient array thing
         /// </summary>
         /// <returns></returns>
-        private static byte[] GetRange(byte[] bytes, int startIndex, int length)
-        {
-            return bytes.ToList().GetRange(startIndex, length).ToArray();
-        }
+        private static byte[] GetRange(byte[] bytes, int startIndex, int length) => bytes.ToList().GetRange(startIndex, length).ToArray();
 
         private static byte[] Append(byte[] x, byte[] y)
         {

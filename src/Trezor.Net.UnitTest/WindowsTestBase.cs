@@ -17,10 +17,7 @@ namespace Trezor.Net
             return executingAssemblyDirectoryPath;
         }
 
-        protected override async Task<string> GetPin()
-        {
-            return await Prompt("Pin");
-        }
+        protected override async Task<string> GetPin() => await Prompt("Pin").ConfigureAwait(false);
 
         private async Task<string> Prompt(string prompt)
         {
@@ -32,15 +29,12 @@ namespace Trezor.Net
 
             var process = Process.Start(passwordExePath, prompt);
             process.WaitForExit();
-            await Task.Delay(100);
+            await Task.Delay(100).ConfigureAwait(false);
             var pin = File.ReadAllText(Path.Combine(GetExecutingAssemblyDirectoryPath(), "pin.txt"));
             return pin;
         }
 
-        protected override Task<string> GetPassphrase()
-        {
-            return Prompt("Passphrase");
-        }
+        protected override Task<string> GetPassphrase() => Prompt("Passphrase");
         #endregion
     }
 }

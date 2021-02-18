@@ -28,11 +28,11 @@ namespace Trezor.Net.XamarinFormsSample
 
             TrezorManagerBroker = new TrezorManagerBroker(TrezorPinPad.GetPin, () => { return Task.FromResult("a"); }, 2000, new DefaultCoinUtility());
 
-            var trezorManager = await TrezorManagerBroker.WaitForFirstTrezorAsync();
+            var trezorManager = await TrezorManagerBroker.WaitForFirstTrezorAsync().ConfigureAwait(false);
 
             Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
             {
-                var address = await trezorManager.GetAddressAsync(new BIP44AddressPath(true, 0, 0, false, 0), false, true);
+                var address = await trezorManager.GetAddressAsync(new BIP44AddressPath(true, 0, 0, false, 0), false, true).ConfigureAwait(false);
                 TheLabel.Text = $"First Bitcoin Address: {address}";
                 TheActivityIndicator.IsRunning = false;
             });
