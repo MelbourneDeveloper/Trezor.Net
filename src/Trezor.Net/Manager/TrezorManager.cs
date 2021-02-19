@@ -1,5 +1,6 @@
 ﻿using Device.Net;
 using Hardwarewallets.Net.Model;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -568,7 +569,7 @@ namespace Trezor.Net
             }
             catch (Exception ex)
             {
-                Logger?.Log("Error Getting Trezor Address", LogSection, ex, LogLevel.Error);
+                Logger.LogError(ex, "Error Getting Trezor Address {LogSection}", LogSection);
                 throw;
             }
         }

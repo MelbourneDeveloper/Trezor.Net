@@ -12,11 +12,6 @@ namespace Trezor.Net.Manager
 {
     public abstract class TrezorManagerBrokerBase<T, TMessageType> where T : TrezorManagerBase<TMessageType>, IDisposable
     {
-        #region Protected Abstract Properties
-        protected abstract List<FilterDeviceDefinition> DeviceDefinitions { get; }
-
-        #endregion
-
         #region Fields
         private bool _disposed;
         private DeviceListener _DeviceListener;
@@ -59,7 +54,9 @@ namespace Trezor.Net.Manager
             EnterPassphraseArgs = enterPassphraseArgs;
             CoinUtility = coinUtility;
             PollInterval = pollInterval;
-            this.loggerFactory = loggerFactory ?? NullLoggerFactory.Instance;
+
+            //It's OK to pass null in to DeviceListener
+            this.loggerFactory = loggerFactory;
             this.deviceFactory = deviceFactory ?? throw new ArgumentNullException(nameof(deviceFactory));
         }
         #endregion
@@ -136,7 +133,7 @@ namespace Trezor.Net.Manager
         {
             if (_DeviceListener != null) return;
 
-            _DeviceListener = new DeviceListener(DeviceDefinitions, PollInterval, loggerFactory);
+            _DeviceListener = new DeviceListener(deviceFactory, PollInterval, loggerFactory);
             _DeviceListener.DeviceDisconnected += DevicePoller_DeviceDisconnected;
             _DeviceListener.DeviceInitialized += DevicePoller_DeviceInitialized;
             _DeviceListener.Start();
