@@ -152,6 +152,8 @@ namespace Trezor.Net
             Device?.Dispose();
 
             GC.SuppressFinalize(this);
+
+            _Lock.Dispose();
         }
 
         #endregion

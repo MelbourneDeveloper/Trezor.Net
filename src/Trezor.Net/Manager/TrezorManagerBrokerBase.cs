@@ -1,4 +1,6 @@
 ﻿using Device.Net;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,11 +16,14 @@ namespace Trezor.Net.Manager
         protected abstract List<FilterDeviceDefinition> DeviceDefinitions { get; }
 
         #endregion
+
         #region Fields
         private bool _disposed;
         private DeviceListener _DeviceListener;
         private readonly SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
         private readonly TaskCompletionSource<T> _FirstTrezorTaskCompletionSource = new TaskCompletionSource<T>();
+        private readonly ILoggerFactory loggerFactory;
+        private readonly IDeviceFactory deviceFactory;
         #endregion
 
         #region Events
@@ -42,12 +47,20 @@ namespace Trezor.Net.Manager
         #endregion
 
         #region Constructor
-        protected TrezorManagerBrokerBase(EnterPinArgs enterPinArgs, EnterPinArgs enterPassphraseArgs, int? pollInterval, ICoinUtility coinUtility)
+        protected TrezorManagerBrokerBase(
+            EnterPinArgs enterPinArgs,
+            EnterPinArgs enterPassphraseArgs,
+            int? pollInterval,
+            IDeviceFactory deviceFactory,
+            ICoinUtility coinUtility,
+            ILoggerFactory loggerFactory = null)
         {
             EnterPinArgs = enterPinArgs;
             EnterPassphraseArgs = enterPassphraseArgs;
             CoinUtility = coinUtility;
             PollInterval = pollInterval;
+            this.loggerFactory = loggerFactory ?? NullLoggerFactory.Instance;
+            this.deviceFactory = deviceFactory ?? throw new ArgumentNullException(nameof(deviceFactory));
         }
         #endregion
 
@@ -123,7 +136,7 @@ namespace Trezor.Net.Manager
         {
             if (_DeviceListener != null) return;
 
-            _DeviceListener = new DeviceListener(DeviceDefinitions, PollInterval);
+            _DeviceListener = new DeviceListener(DeviceDefinitions, PollInterval, loggerFactory);
             _DeviceListener.DeviceDisconnected += DevicePoller_DeviceDisconnected;
             _DeviceListener.DeviceInitialized += DevicePoller_DeviceInitialized;
             _DeviceListener.Start();

@@ -445,9 +445,6 @@ dotnet_diagnostic.CA2226.severity = error
 # CA2227: Collection properties should be read only
 dotnet_diagnostic.CA2227.severity = error
 
-# CA2229: Implement serialization constructors
-dotnet_diagnostic.CA2229.severity = error
-
 # CA2231: Overload operator equals on overriding value type Equals
 dotnet_diagnostic.CA2231.severity = error
 
@@ -776,3 +773,6 @@ dotnet_diagnostic.CA1825.severity = warning
 
 # CA1303: Do not pass literals as localized parameters
 dotnet_diagnostic.CA1303.severity = warning
+
+# CA2229: Implement serialization constructors
+dotnet_diagnostic.CA2229.severity = warning
