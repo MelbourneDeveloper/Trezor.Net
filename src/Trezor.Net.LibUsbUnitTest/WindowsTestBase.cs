@@ -17,11 +17,12 @@ namespace Trezor.Net
             return executingAssemblyDirectoryPath;
         }
 
-        protected override async Task<string> GetPin() => GetTextFromUI();
+        protected override Task<string> GetPin() => GetTextFromUI();
 
-        protected override async Task<string> GetPassphrase() => GetTextFromUI();
+        protected override Task<string> GetPassphrase() => GetTextFromUI();
 
-        private string GetTextFromUI()
+        private Task<string> GetTextFromUI()
+        => Task.Run(() =>
         {
             var passwordExePath = Path.Combine(GetExecutingAssemblyDirectoryPath(), "Misc", "GetPassword.exe");
             if (!File.Exists(passwordExePath))
@@ -39,7 +40,8 @@ namespace Trezor.Net
 
             process.WaitForExit();
             return File.ReadAllText(Path.Combine(GetExecutingAssemblyDirectoryPath(), "pin.txt"));
-        }
+        });
+
         #endregion
     }
 }

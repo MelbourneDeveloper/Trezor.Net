@@ -10,8 +10,8 @@
 		<AnalysisLevel>latest</AnalysisLevel>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <Version>5.0.0</Version>
-		<RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
-		<RunAnalyzers>true</RunAnalyzers>
-		<RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
+		<RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+		<RunAnalyzers>false</RunAnalyzers>
+		<RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
 	</PropertyGroup>
 </Project>

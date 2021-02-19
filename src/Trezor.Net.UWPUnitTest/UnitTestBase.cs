@@ -14,6 +14,8 @@ using Trezor.Net.Manager;
 
 namespace Trezor.Net
 {
+    //TODO: Put a LibUsb test back
+
     [TestClass]
     public abstract partial class UnitTestBase
     {
