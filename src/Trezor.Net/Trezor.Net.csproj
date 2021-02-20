@@ -1,59 +1,60 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
-    <CodeAnalysisRuleSet>..\Hid.Net\CodeRules.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>4.3.0</Version>
-    <Authors>Christian Findlay</Authors>
+	<PropertyGroup>
+		<LangVersion>Latest</LangVersion>
+		<TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
+		<CodeAnalysisRuleSet>..\Hid.Net\CodeRules.ruleset</CodeAnalysisRuleSet>
+		<RunCodeAnalysis>false</RunCodeAnalysis>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<Version>4.3.0</Version>
+		<Authors>Christian Findlay</Authors>
     <Company>Christian Findlay</Company>
     <Description>A cross platform library for communicating with the Satoshi Labs' Trezor Hardware Wallet
 
 Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for other platforms can be added with Hid.Net dependency injection</Description>
     <Copyright>Copyright (c) 2019 Christian Findlay</Copyright>
     <PackageLicenseUrl></PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/MelbourneDeveloper/Trezor.Net</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/MelbourneDeveloper/Trezor.Net</RepositoryUrl>
-    <PackageTags>Hid Usb Trezor Hardwarewallet Bitcoin Ethereum SatoshiLabs KeepKey Cryptocurrency security</PackageTags>
-    <AssemblyVersion>4.3.0.0</AssemblyVersion>
+		<PackageProjectUrl>https://github.com/MelbourneDeveloper/Trezor.Net</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/MelbourneDeveloper/Trezor.Net</RepositoryUrl>
+		<PackageTags>Hid Usb Trezor Hardwarewallet Bitcoin Ethereum SatoshiLabs KeepKey Cryptocurrency security</PackageTags>
+		<AssemblyVersion>4.3.0.0</AssemblyVersion>
     <FileVersion>4.3.0.0</FileVersion>
     <PackageReleaseNotes>Fix compatibility with Device.Net, Usb.Net, and Hid.Net 
 https://github.com/MelbourneDeveloper/Trezor.Net/projects/4</PackageReleaseNotes>
     <LangVersion>7.3</LangVersion>
     <NoWarn>CA2007,IDE0010</NoWarn>
-    <CodeAnalysisRuleSet>CodeRules.ruleset</CodeAnalysisRuleSet>
-    <PackageLicenseFile>License.txt</PackageLicenseFile> 
-  </PropertyGroup>
+		<CodeAnalysisRuleSet>CodeRules.ruleset</CodeAnalysisRuleSet>
+		<PackageLicenseFile>License.txt</PackageLicenseFile>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>C:\GitRepos\Trezor.Net\NuGet\</OutputPath>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<OutputPath>C:\GitRepos\Trezor.Net\NuGet\</OutputPath>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Resources\Coins.xml" />
-    <None Include="..\..\CONTRIBUTING.md" Link="CONTRIBUTING.md" />
-    <None Include="..\..\LICENSE" Link="LICENSE" />
-    <None Include="..\..\README.md" Link="README.md" />
-    <None Include="License.txt">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="Resources\Coins.xml" />
+		<None Include="..\..\CONTRIBUTING.md" Link="CONTRIBUTING.md" />
+		<None Include="..\..\LICENSE" Link="LICENSE" />
+		<None Include="..\..\README.md" Link="README.md" />
+		<None Include="License.txt">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Coins.xml" />
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Coins.xml" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Device.Net" Version="4.0.0" />
-    <PackageReference Include="Hardwarewallets.Net" Version="1.2.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="protobuf-net" Version="2.4.0" />
+	<ItemGroup>
+		<PackageReference Include="Device.Net" Version="4.0.0" />
+		<PackageReference Include="Hardwarewallets.Net" Version="1.2.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="protobuf-net" Version="2.4.0" />
   </ItemGroup>
 
 </Project>
