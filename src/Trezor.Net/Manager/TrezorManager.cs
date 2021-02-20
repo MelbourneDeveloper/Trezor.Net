@@ -91,36 +91,21 @@ namespace Trezor.Net
         {
             var retVal = await SendMessageAsync(new PinMatrixAck { Pin = pin }).ConfigureAwait(false);
 
-            if (retVal is Failure failure)
-            {
-                throw new FailureException<Failure>("PIN Attempt Failed.", failure);
-            }
-
-            return retVal;
+            return retVal is Failure failure ? throw new FailureException<Failure>("PIN Attempt Failed.", failure) : retVal;
         }
 
         protected override async Task<object> PassphraseAckAsync(string passPhrase)
         {
             var retVal = await SendMessageAsync(new PassphraseAck { Passphrase = passPhrase }).ConfigureAwait(false);
 
-            if (retVal is Failure failure)
-            {
-                throw new FailureException<Failure>("Passphrase Attempt Failed.", failure);
-            }
-
-            return retVal;
+            return retVal is Failure failure ? throw new FailureException<Failure>("Passphrase Attempt Failed.", failure) : retVal;
         }
 
         protected override async Task<object> ButtonAckAsync()
         {
             var retVal = await SendMessageAsync(new ButtonAck()).ConfigureAwait(false);
 
-            if (retVal is Failure failure)
-            {
-                throw new FailureException<Failure>("USer didn't push the button.", failure);
-            }
-
-            return retVal;
+            return retVal is Failure failure ? throw new FailureException<Failure>("USer didn't push the button.", failure) : retVal;
         }
 
         protected override void CheckForFailure(object returnMessage)
@@ -134,12 +119,7 @@ namespace Trezor.Net
         protected override object GetEnumValue(string messageTypeString)
         {
             var isValid = Enum.TryParse(messageTypeString, out MessageType messageType);
-            if (!isValid)
-            {
-                throw new ManagerException($"{messageTypeString} is not a valid MessageType");
-            }
-
-            return messageType;
+            return !isValid ? throw new ManagerException($"{messageTypeString} is not a valid MessageType") : (object)messageType;
         }
 
 #pragma warning disable CA2213, CA1502

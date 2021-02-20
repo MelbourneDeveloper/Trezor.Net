@@ -60,7 +60,7 @@ namespace Trezor.Net
             return address;
         }
 
-        private async Task<string> GetAddressAsync(bool isSegwit, uint coinNumber, bool isChange, uint index, bool display, string coinName = null, bool isPublicKey = false)
+        private async Task<string> GetAddressAsync(bool isSegwit, uint coinNumber, bool isChange, uint index, bool display, bool isPublicKey = false)
         {
             var addressPath = new BIP44AddressPath(isSegwit, coinNumber, 0, isChange, index);
             var firstAddress = await TrezorManager.GetAddressAsync(addressPath, isPublicKey, display).ConfigureAwait(false);
@@ -72,7 +72,7 @@ namespace Trezor.Net
             return secondAddress;
         }
 
-        private async Task<string> GetAddressAsync(string addressPath, bool display = false, string coinName = null, bool isPublicKey = false)
+        private async Task<string> GetAddressAsync(string addressPath, bool display = false, bool isPublicKey = false)
         {
             var bip44AddressPath = AddressPathBase.Parse<BIP44AddressPath>(addressPath);
 
@@ -209,7 +209,7 @@ namespace Trezor.Net
 
             // We do loop here since we need to send over and over the same transactions to trezor because his 64 kilobytes memory
             // and he will sign chunks and return part of signed chunk in serialized manner, until we receive finall type of Txrequest TxFinished
-            bool running = true;
+            var running = true;
             while (running)
             {
                 if (request.Serialized != null)
@@ -309,7 +309,7 @@ namespace Trezor.Net
         [TestMethod]
         public async Task DisplayStellarPublicKey()
         {
-            var address = await GetAddressAsync("m/44'/148'/0'/0/0", true, null, true).ConfigureAwait(false);
+            var address = await GetAddressAsync("m/44'/148'/0'/0/0", true, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -422,7 +422,7 @@ namespace Trezor.Net
         [TestMethod]
         public async Task DisplayBitcoinCashAddress()
         {
-            var address = await GetAddressAsync(false, 145, false, 0, true, "Bcash").ConfigureAwait(false);
+            var address = await GetAddressAsync(false, 145, false, 0, true).ConfigureAwait(false);
         }
 
         [TestMethod]

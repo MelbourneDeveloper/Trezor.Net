@@ -21,7 +21,7 @@ namespace Trezor.Net.XamarinFormsSample
             {
                 _ = await App.MainNavigationPage.Navigation.PopModalAsync().ConfigureAwait(false);
 
-                var currentApp = App.Current as App;
+                var currentApp = Xamarin.Forms.Application.Current as App;
 
                 taskCompletionSource.SetResult(trezorPinPad.Pin);
             }

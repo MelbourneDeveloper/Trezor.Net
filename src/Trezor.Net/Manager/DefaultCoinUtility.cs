@@ -36,12 +36,9 @@ namespace Trezor.Net
 
         public CoinInfo GetCoinInfo(uint coinNumber)
         {
-            if (Coins.TryGetValue(coinNumber, out var coinInfo))
-            {
-                return coinInfo;
-            }
-
-            throw new NotImplementedException($"The coin number {coinNumber} has not been filled in for {nameof(DefaultCoinUtility)}. Please create a class that implements ICoinUtility, or call an overload that specifies coin information.");
+            return Coins.TryGetValue(coinNumber, out var coinInfo)
+                ? coinInfo
+                : throw new NotImplementedException($"The coin number {coinNumber} has not been filled in for {nameof(DefaultCoinUtility)}. Please create a class that implements ICoinUtility, or call an overload that specifies coin information.");
         }
 
         public static TSerialiseType DeserialiseObject<TSerialiseType>(string objectXml)
