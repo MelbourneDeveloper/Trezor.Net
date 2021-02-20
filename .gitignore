@@ -21,3 +21,5 @@ AppPackages
 file_paths.xml
 Trezor.Net.deps.json
 *.nupkg
+.idea
+

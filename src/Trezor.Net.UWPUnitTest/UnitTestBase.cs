@@ -14,6 +14,8 @@ using Trezor.Net.Contracts.Bitcoin;
 using Trezor.Net.Contracts.Ethereum;
 using Trezor.Net.Manager;
 
+#pragma warning disable CA2201 // Do not raise reserved exception types
+
 namespace Trezor.Net
 {
     //TODO: Put a LibUsb test back
@@ -21,8 +23,8 @@ namespace Trezor.Net
     [TestClass]
     public abstract partial class UnitTestBase
     {
-        IDeviceFactory deviceFactory;
-        ILoggerFactory loggerFactory;
+        private readonly IDeviceFactory deviceFactory;
+        private readonly ILoggerFactory loggerFactory;
 
         protected UnitTestBase(IDeviceFactory deviceFactory, ILoggerFactory loggerFactory)
         {
@@ -32,7 +34,7 @@ namespace Trezor.Net
 
         #region Fields
         //This must remain static for persistenance across tests
-        protected static TrezorManager TrezorManager;
+        protected static TrezorManager TrezorManager { get; }
         private readonly string[] _Addresses = new string[50];
         private TrezorManagerBroker _TrezorManagerBroker;
         #endregion
@@ -51,16 +53,16 @@ namespace Trezor.Net
         #endregion
 
         #region Helpers
-        private async Task<string> GetAddressAsync(uint index) => await GetAddressAsync(true, 0, false, index, false).ConfigureAwait(false);
+        private static async Task<string> GetAddressAsync(uint index) => await GetAddressAsync(true, 0, false, index, false).ConfigureAwait(false);
 
-        private async Task<string> GetAddressAsync(uint coinNumber, bool display)
+        private static async Task<string> GetAddressAsync(uint coinNumber, bool display)
         {
             var coinInfo = TrezorManager.CoinUtility.GetCoinInfo(coinNumber);
             var address = await GetAddressAsync(coinInfo.IsSegwit, coinInfo.CoinType, false, 0, display).ConfigureAwait(false);
             return address;
         }
 
-        private async Task<string> GetAddressAsync(bool isSegwit, uint coinNumber, bool isChange, uint index, bool display, bool isPublicKey = false)
+        private static async Task<string> GetAddressAsync(bool isSegwit, uint coinNumber, bool isChange, uint index, bool display, bool isPublicKey = false)
         {
             var addressPath = new BIP44AddressPath(isSegwit, coinNumber, 0, isChange, index);
             var firstAddress = await TrezorManager.GetAddressAsync(addressPath, isPublicKey, display).ConfigureAwait(false);
@@ -72,7 +74,7 @@ namespace Trezor.Net
             return secondAddress;
         }
 
-        private async Task<string> GetAddressAsync(string addressPath, bool display = false, bool isPublicKey = false)
+        private static async Task<string> GetAddressAsync(string addressPath, bool display = false, bool isPublicKey = false)
         {
             var bip44AddressPath = AddressPathBase.Parse<BIP44AddressPath>(addressPath);
 
@@ -236,7 +238,8 @@ namespace Trezor.Net
                                 // retrieve input from specified previous tx
                                 var prevtx = prevTxes[prevHash.ToHexString()];
                                 txAck.Tx.Inputs.Add(prevtx.Inputs[prevIndex]);
-                            } else
+                            }
+                            else
                             {
                                 // take one of the current transaction inputs
                                 txAck.Tx.Inputs.Add(txInputs[prevIndex]);
@@ -275,7 +278,7 @@ namespace Trezor.Net
                             // request.Details will contain offset and length, pick that chunk and put it into TransactionType.ExtraData that you send.
                             throw new NotImplementedException();
                         }
-                    
+
                     case TxRequest.RequestType.Txmeta:
                         {
                             // This will only happen when txHash is set.
@@ -307,10 +310,7 @@ namespace Trezor.Net
         /// Note: I don't know how to verify if this is returning the correct address or not
         /// </summary>
         [TestMethod]
-        public async Task DisplayStellarPublicKey()
-        {
-            var address = await GetAddressAsync("m/44'/148'/0'/0/0", true, true).ConfigureAwait(false);
-        }
+        public async Task DisplayStellarPublicKey() => _ = await GetAddressAsync("m/44'/148'/0'/0/0", true, true).ConfigureAwait(false);
 
         /// <summary>
         /// Confirmed address valid as per online wallet
@@ -364,28 +364,16 @@ namespace Trezor.Net
         /// Note: I don't know how to verify if this is returning the correct address or not
         /// </summary>
         [TestMethod]
-        public async Task GetNEMAddress()
-        {
-            var address = await GetAddressAsync("44'/43'/0'", false).ConfigureAwait(false);
-        }
+        public async Task GetNEMAddress() => _ = await GetAddressAsync("44'/43'/0'", false).ConfigureAwait(false);
 
         [TestMethod]
-        public async Task GetNamecoinAddress()
-        {
-            var address = await GetAddressAsync(7, false).ConfigureAwait(false);
-        }
+        public async Task GetNamecoinAddress() => _ = await GetAddressAsync(7, false).ConfigureAwait(false);
 
         [TestMethod]
-        public async Task DisplayBitcoinAddress()
-        {
-            var address = await GetAddressAsync(0, true).ConfigureAwait(false);
-        }
+        public async Task DisplayBitcoinAddress() => _ = await GetAddressAsync(0, true).ConfigureAwait(false);
 
         [TestMethod]
-        public async Task GetBitcoinAddress()
-        {
-            var address = await GetAddressAsync(true, 0, false, 0, false).ConfigureAwait(false);
-        }
+        public async Task GetBitcoinAddress() => _ = await GetAddressAsync(true, 0, false, 0, false).ConfigureAwait(false);
 
         [TestMethod]
         public async Task GetBitcoinAddresses()
@@ -408,54 +396,32 @@ namespace Trezor.Net
         }
 
         [TestMethod]
-        public async Task GetBitcoinCashAddress()
-        {
-            var address = await GetAddressAsync(false, 145, false, 0, false).ConfigureAwait(false);
-        }
+        public async Task GetBitcoinCashAddress() => _ = await GetAddressAsync(false, 145, false, 0, false).ConfigureAwait(false);
 
         [TestMethod]
-        public async Task GetBitcoinCashParsedAddress()
-        {
-            var address = await GetAddressAsync("m/44'/145'/0'/0/0").ConfigureAwait(false);
-        }
+        public async Task GetBitcoinCashParsedAddress() => _ = await GetAddressAsync("m/44'/145'/0'/0/0").ConfigureAwait(false);
 
         [TestMethod]
-        public async Task DisplayBitcoinCashAddress()
-        {
-            var address = await GetAddressAsync(false, 145, false, 0, true).ConfigureAwait(false);
-        }
+        public async Task DisplayBitcoinCashAddress() => _ = await GetAddressAsync(false, 145, false, 0, true).ConfigureAwait(false);
 
         [TestMethod]
-        public async Task GetBitcoinGoldAddress()
-        {
-            var address = await GetAddressAsync(156, false).ConfigureAwait(false);
-        }
+        public async Task GetBitcoinGoldAddress() => _ = await GetAddressAsync(156, false).ConfigureAwait(false);
 
         [TestMethod]
-        public async Task DisplayEthereumAddress()
-        {
+        public async Task DisplayEthereumAddress() =>
             //Ethereum coins don't need the coin name
-            var address = await GetAddressAsync(false, 60, false, 0, true).ConfigureAwait(false);
-        }
+            _ = await GetAddressAsync(false, 60, false, 0, true).ConfigureAwait(false);
 
         [TestMethod]
-        public async Task GetEthereumAddress()
-        {
-            var address = await GetAddressAsync("m/44'/60'/0'/1/0").ConfigureAwait(false);
-        }
+        public async Task GetEthereumAddress() => _ = await GetAddressAsync("m/44'/60'/0'/1/0").ConfigureAwait(false);
 
         [TestMethod]
-        public async Task GetEthereumClassicAddressParsed()
-        {
-            var address = await GetAddressAsync("m/44'/61'/0'/1/0").ConfigureAwait(false);
-        }
+        public async Task GetEthereumClassicAddressParsed() => _ = await GetAddressAsync("m/44'/61'/0'/1/0").ConfigureAwait(false);
 
         [TestMethod]
-        public async Task GetEthereumClassicAddress()
-        {
+        public async Task GetEthereumClassicAddress() =>
             //Ethereum coins don't need the coin name
-            var address = await GetAddressAsync(false, 61, false, 0, false).ConfigureAwait(false);
-        }
+            _ = await GetAddressAsync(false, 61, false, 0, false).ConfigureAwait(false);
 
         [TestMethod]
         public async Task TestThreadSafety()

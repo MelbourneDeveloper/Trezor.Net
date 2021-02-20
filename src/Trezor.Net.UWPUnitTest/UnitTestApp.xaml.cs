@@ -21,10 +21,10 @@ namespace Trezor.Net.UWPUnitTest
         #endregion
 
         #region Fields
-        private TextBlock InstructionsTextBlock = new TextBlock { Margin = new Thickness(2), Text="To run unit tests:\r\n1) Run the test\r\n2) Plug in the device (or have it plugged in already).\r\n3) Wait for the pin display on the device (if it is not unlocked yet).\r\n4) Enter the pin as displayed on the device\r\n5) Click OK." };
-        private TextBox PinTextBox = new TextBox { Margin = new Thickness(2), Width = 200, Height = 50, FontSize = 30 };
-        private Button PinButton = new Button { Content = "OK" };
-        private StackPanel StackPanel = new StackPanel { Orientation = Orientation.Vertical, HorizontalAlignment= HorizontalAlignment.Center, VerticalAlignment= VerticalAlignment.Center };
+        private readonly TextBlock InstructionsTextBlock = new TextBlock { Margin = new Thickness(2), Text = "To run unit tests:\r\n1) Run the test\r\n2) Plug in the device (or have it plugged in already).\r\n3) Wait for the pin display on the device (if it is not unlocked yet).\r\n4) Enter the pin as displayed on the device\r\n5) Click OK." };
+        private readonly TextBox PinTextBox = new TextBox { Margin = new Thickness(2), Width = 200, Height = 50, FontSize = 30 };
+        private readonly Button PinButton = new Button { Content = "OK" };
+        private readonly StackPanel StackPanel = new StackPanel { Orientation = Orientation.Vertical, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
         #endregion
 
         /// <summary>

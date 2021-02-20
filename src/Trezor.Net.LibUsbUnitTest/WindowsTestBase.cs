@@ -8,6 +8,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Usb.Net.Windows;
 
+#pragma warning disable CA2201 // Do not raise reserved exception types
+
 namespace Trezor.Net
 {
     //Why are there two WindowsTestBase classes?
@@ -23,7 +25,7 @@ namespace Trezor.Net
         }
 
         #region Platform Specific Overrides
-        protected string GetExecutingAssemblyDirectoryPath()
+        protected static string GetExecutingAssemblyDirectoryPath()
         {
             var codeBase = Assembly.GetExecutingAssembly().CodeBase;
             var uri = new UriBuilder(codeBase);
@@ -35,7 +37,7 @@ namespace Trezor.Net
 
         protected override Task<string> GetPassphrase() => GetTextFromUI();
 
-        private Task<string> GetTextFromUI()
+        private static Task<string> GetTextFromUI()
         => Task.Run(() =>
         {
             var passwordExePath = Path.Combine(GetExecutingAssemblyDirectoryPath(), "Misc", "GetPassword.exe");

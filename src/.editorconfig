@@ -64,9 +64,6 @@ dotnet_diagnostic.CA1010.severity = error
 # CA1012: Abstract types should not have public constructors
 dotnet_diagnostic.CA1012.severity = error
 
-# CA1014: Mark assemblies with CLSCompliant
-dotnet_diagnostic.CA1014.severity = error
-
 # CA1016: Mark assemblies with assembly version
 dotnet_diagnostic.CA1016.severity = error
 
@@ -777,3 +774,5 @@ dotnet_diagnostic.CA2229.severity = warning
 # CA1032: Implement standard exception constructors
 dotnet_diagnostic.CA1032.severity = warning
 
+# CA1014: Mark assemblies with CLSCompliant
+dotnet_diagnostic.CA1014.severity = warning
