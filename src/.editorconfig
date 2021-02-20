@@ -769,7 +769,7 @@ dotnet_diagnostic.CA2229.severity = warning
 dotnet_diagnostic.CA1032.severity = warning
 
 # CA1014: Mark assemblies with CLSCompliant
-dotnet_diagnostic.CA1014.severity = silent
+dotnet_diagnostic.CA1014.severity = none
 
 # CA5369: Use XmlReader for 'XmlSerializer.Deserialize()'
 dotnet_diagnostic.CA5369.severity = warning
