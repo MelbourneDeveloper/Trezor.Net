@@ -3,7 +3,6 @@ using Hardwarewallets.Net.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
 using Trezor.Net.Contracts;
 using Trezor.Net.Contracts.Bitcoin;
@@ -479,7 +478,13 @@ namespace Trezor.Net
 
         public Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display, AddressType addressType, InputScriptType inputScriptType) => GetAddressAsync(addressPath, isPublicKey, display, addressType, inputScriptType, null);
 
-        public async Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display, AddressType addressType, InputScriptType inputScriptType, string coinName)
+        public async Task<string> GetAddressAsync(
+            IAddressPath addressPath,
+            bool isPublicKey,
+            bool display,
+            AddressType addressType,
+            InputScriptType inputScriptType,
+            string coinName)
         {
             try
             {
@@ -514,23 +519,10 @@ namespace Trezor.Net
                             case EthereumAddress ethereumAddress:
                                 return ethereumAddress.Address.ToLower();
                             case Contracts.BackwardsCompatible.EthereumAddress ethereumAddress:
-
-                                //Ouch. Nasty
-                                var sb = new StringBuilder();
-                                foreach (var b in ethereumAddress.Address)
-                                {
-                                    _ = sb.Append(b.ToString("X2").ToLower());
-                                }
-
-                                var hexString = sb.ToString();
-
-                                hexString = $"0x{hexString}";
-
-                                return hexString;
+                                return ethereumAddress.Address.ToHex();
                         }
 
                         throw new NotImplementedException();
-
 
 
                     case AddressType.Cardano:
@@ -557,6 +549,8 @@ namespace Trezor.Net
                 throw;
             }
         }
+
+
 
         /// <summary>
         /// Initialize the Trezor. Should only be called once.
