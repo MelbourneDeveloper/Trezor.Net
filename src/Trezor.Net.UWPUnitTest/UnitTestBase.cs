@@ -34,7 +34,7 @@ namespace Trezor.Net
 
         #region Fields
         //This must remain static for persistenance across tests
-        protected static TrezorManager TrezorManager { get; }
+        protected static TrezorManager TrezorManager { get; set; }
         private readonly string[] _Addresses = new string[50];
         private TrezorManagerBroker _TrezorManagerBroker;
         #endregion
