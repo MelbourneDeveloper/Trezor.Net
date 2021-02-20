@@ -5,14 +5,13 @@ using Android.Content.PM;
 using Android.Hardware.Usb;
 using Android.OS;
 using Android.Widget;
-using Device.Net;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Usb.Net.Android;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+
+#pragma warning disable CA2201 // Do not raise reserved exception types
 
 namespace Trezor.Net.XamarinFormsSample.Droid
 {
@@ -35,8 +34,7 @@ namespace Trezor.Net.XamarinFormsSample.Droid
         {
             try
             {
-                var usbManager = GetSystemService(UsbService) as UsbManager;
-                if (usbManager == null) throw new Exception("UsbManager is null");
+                if (GetSystemService(UsbService) is not UsbManager usbManager) throw new Exception("UsbManager is null");
 
                 TabLayoutResource = Resource.Layout.Tabbar;
                 ToolbarResource = Resource.Layout.Toolbar;

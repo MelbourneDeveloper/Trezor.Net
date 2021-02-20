@@ -9,9 +9,7 @@ namespace Trezor.Net.XamarinFormsSample
     {
         public event EventHandler OKClicked;
 
-        public string Pin => PinBox.Text;
-
-        public static async Task<string> GetPin()
+        public async Task<string> GetPin()
         {
             var trezorPinPad = new TrezorPinPad();
             await App.MainNavigationPage.Navigation.PushModalAsync(trezorPinPad).ConfigureAwait(false);
@@ -23,7 +21,7 @@ namespace Trezor.Net.XamarinFormsSample
 
                 var currentApp = Xamarin.Forms.Application.Current as App;
 
-                taskCompletionSource.SetResult(trezorPinPad.Pin);
+                taskCompletionSource.SetResult(PinBox.Text);
             }
 
             trezorPinPad.OKClicked += CompletedHandler;

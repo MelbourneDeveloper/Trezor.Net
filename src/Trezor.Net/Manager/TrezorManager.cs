@@ -3,6 +3,7 @@ using Hardwarewallets.Net.Model;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using Trezor.Net.Contracts;
@@ -35,13 +36,13 @@ namespace Trezor.Net
         #endregion
 
         #region Public Constants
-        public static List<FilterDeviceDefinition> DeviceDefinitions { get; } = new List<FilterDeviceDefinition>
+        public static IReadOnlyList<FilterDeviceDefinition> DeviceDefinitions { get; } = new ReadOnlyCollection<FilterDeviceDefinition>(new List<FilterDeviceDefinition>
         {
-            new FilterDeviceDefinition( vendorId: 0x534C, productId:0x0001, label:"Trezor One Firmware 1.6.x", usagePage: 65280),
-            new FilterDeviceDefinition( vendorId: 0x534C, productId:0x0001, label:"Trezor One Firmware 1.6.x (Android Only)" ),
-            new FilterDeviceDefinition( vendorId: 0x1209, productId:0x53C1, label:"Trezor One Firmware 1.7.x" ),
-            new FilterDeviceDefinition( vendorId: 0x1209, productId:0x53C0, label:"Model T" )
-        };
+            new FilterDeviceDefinition(vendorId: 0x534C, productId: 0x0001, label: "Trezor One Firmware 1.6.x", usagePage: 65280),
+            new FilterDeviceDefinition(vendorId: 0x534C, productId: 0x0001, label: "Trezor One Firmware 1.6.x (Android Only)"),
+            new FilterDeviceDefinition(vendorId: 0x1209, productId: 0x53C1, label: "Trezor One Firmware 1.7.x"),
+            new FilterDeviceDefinition(vendorId: 0x1209, productId: 0x53C0, label: "Model T")
+        });
         #endregion
 
         #region Public Properties
@@ -119,7 +120,7 @@ namespace Trezor.Net
         protected override object GetEnumValue(string messageTypeString)
         {
             var isValid = Enum.TryParse(messageTypeString, out MessageType messageType);
-            return !isValid ? throw new ManagerException($"{messageTypeString} is not a valid MessageType") : (object)messageType;
+            return !isValid ? throw new ManagerException($"{messageTypeString} is not a valid MessageType") : messageType;
         }
 
 #pragma warning disable CA2213, CA1502
