@@ -2,6 +2,9 @@
 using System.Threading.Tasks;
 using Xamarin.Forms.Xaml;
 
+#pragma warning disable CA1501
+
+
 namespace Trezor.Net.XamarinFormsSample
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -9,7 +12,7 @@ namespace Trezor.Net.XamarinFormsSample
     {
         public event EventHandler OKClicked;
 
-        public async Task<string> GetPin()
+        public static async Task<string> GetPin()
         {
             var trezorPinPad = new TrezorPinPad();
             await App.MainNavigationPage.Navigation.PushModalAsync(trezorPinPad).ConfigureAwait(false);
@@ -21,7 +24,7 @@ namespace Trezor.Net.XamarinFormsSample
 
                 var currentApp = Xamarin.Forms.Application.Current as App;
 
-                taskCompletionSource.SetResult(PinBox.Text);
+                taskCompletionSource.SetResult(trezorPinPad.PinBox.Text);
             }
 
             trezorPinPad.OKClicked += CompletedHandler;

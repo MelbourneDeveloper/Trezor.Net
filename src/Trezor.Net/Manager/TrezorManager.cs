@@ -1,6 +1,5 @@
 ﻿using Device.Net;
 using Hardwarewallets.Net.Model;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,6 +21,10 @@ using Trezor.Net.Contracts.Ontology;
 using Trezor.Net.Contracts.Ripple;
 using Trezor.Net.Contracts.Stellar;
 using Trezor.Net.Contracts.Tezos;
+
+#if NETSTANDARD2_0
+using Microsoft.Extensions.Logging;
+#endif
 
 namespace Trezor.Net
 {

@@ -5,6 +5,8 @@ using Trezor.Net.Manager;
 using Xamarin.Forms;
 using Device.Net;
 
+#pragma warning disable CA1501
+
 namespace Trezor.Net.XamarinFormsSample
 {
     public partial class MainPage : ContentPage
