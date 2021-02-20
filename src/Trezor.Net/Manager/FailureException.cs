@@ -7,10 +7,7 @@ namespace Trezor.Net
     {
         public T Failure { get; }
 
-        public FailureException(string message, T failure) : base($"{message}\r\n{GetFailureMessage(failure)}")
-        {
-            Failure = failure;
-        }
+        public FailureException(string message, T failure) : base($"{message}\r\n{GetFailureMessage(failure)}") => Failure = failure;
 
         private static string GetFailureMessage(object failure)
         {

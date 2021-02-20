@@ -31,10 +31,7 @@ namespace Trezor.Net.XamarinFormsSample
             return await taskCompletionSource.Task.ConfigureAwait(false);
         }
 
-        public TrezorPinPad()
-        {
-            InitializeComponent();
-        }
+        public TrezorPinPad() => InitializeComponent();
 
         private void Button1_Clicked(object sender, EventArgs e) => PinBox.Text += "1";
 

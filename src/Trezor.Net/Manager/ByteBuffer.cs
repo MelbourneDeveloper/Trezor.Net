@@ -16,10 +16,7 @@ namespace Trezor.Net
         #endregion
 
         #region Constructor
-        public ByteBuffer(int size)
-        {
-            _Bytes = new byte[size].ToList();
-        }
+        public ByteBuffer(int size) => _Bytes = new byte[size].ToList();
         #endregion
 
         #region Public Methods

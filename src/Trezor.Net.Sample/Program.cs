@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Trezor.Net;
 using Trezor.Net.Manager;
 
+#pragma warning disable CA2201 // Do not raise reserved exception types
+
 namespace TrezorTestApp
 {
     internal class Program
@@ -19,12 +21,12 @@ namespace TrezorTestApp
         #endregion
 
         #region Main
-        private static async Task Main(string[] args)
+        private static async Task Main()
         {
             try
             {
                 Console.WriteLine("Waiting for Trezor... Please plug it in if it is not connected.");
-                await Go();
+                await Go().ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -54,43 +56,42 @@ namespace TrezorTestApp
         {
             try
             {
-                using (var trezorManager = await ConnectAsync().ConfigureAwait(false))
+                using var trezorManager = await ConnectAsync().ConfigureAwait(false);
+
+                Console.WriteLine("Trezor connection recognized");
+
+                var tasks = new List<Task>();
+
+                for (uint i = 0; i < 50; i++)
                 {
-                    Console.WriteLine("Trezor connection recognized");
+                    tasks.Add(DoGetAddress(trezorManager, i));
+                }
 
-                    var tasks = new List<Task>();
+                await Task.WhenAll(tasks).ConfigureAwait(false);
 
-                    for (uint i = 0; i < 50; i++)
+                for (uint i = 0; i < 50; i++)
+                {
+                    var address = await GetAddress(trezorManager, i).ConfigureAwait(false);
+
+                    Console.WriteLine($"Index: {i} (No change) - Address: {address}");
+
+                    if (address != _Addresses[i])
                     {
-                        tasks.Add(DoGetAddress(trezorManager, i));
+                        throw new Exception("The ordering got messed up");
                     }
+                }
 
-                    await Task.WhenAll(tasks).ConfigureAwait(false);
+                var addressPath = new BIP44AddressPath(false, 60, 0, false, 0);
 
-                    for (uint i = 0; i < 50; i++)
-                    {
-                        var address = await GetAddress(trezorManager, i).ConfigureAwait(false);
+                var ethAddress = await trezorManager.GetAddressAsync(addressPath, false, false).ConfigureAwait(false);
+                Console.WriteLine($"First ETH address: {ethAddress}");
 
-                        Console.WriteLine($"Index: {i} (No change) - Address: {address}");
+                Console.WriteLine("All good");
 
-                        if (address != _Addresses[i])
-                        {
-                            throw new Exception("The ordering got messed up");
-                        }
-                    }
-
-                    var addressPath = new BIP44AddressPath(false, 60, 0, false, 0);
-
-                    var ethAddress = await trezorManager.GetAddressAsync(addressPath, false, false).ConfigureAwait(false);
-                    Console.WriteLine($"First ETH address: {ethAddress}");
-
-                    Console.WriteLine("All good");
-
-                    while (true)
-                    {
-                        Console.WriteLine($"Count of connected Trezors: {_TrezorManagerBroker.TrezorManagers.Count}");
-                        await Task.Delay(5000).ConfigureAwait(false);
-                    }
+                while (true)
+                {
+                    Console.WriteLine($"Count of connected Trezors: {_TrezorManagerBroker.TrezorManagers.Count}");
+                    await Task.Delay(5000).ConfigureAwait(false);
                 }
             }
             catch (Exception ex)
