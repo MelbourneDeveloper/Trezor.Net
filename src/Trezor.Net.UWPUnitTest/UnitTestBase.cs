@@ -21,6 +21,15 @@ namespace Trezor.Net
     [TestClass]
     public abstract partial class UnitTestBase
     {
+        IDeviceFactory deviceFactory;
+        ILoggerFactory loggerFactory;
+
+        protected UnitTestBase(IDeviceFactory deviceFactory, ILoggerFactory loggerFactory)
+        {
+            this.deviceFactory = deviceFactory;
+            this.loggerFactory = loggerFactory;
+        }
+
         #region Fields
         //This must remain static for persistenance across tests
         protected static TrezorManager TrezorManager;
@@ -34,7 +43,7 @@ namespace Trezor.Net
         #endregion
 
         #region Protected Virtual Methods
-        protected virtual async Task<TrezorManager> ConnectAsync(IDeviceFactory deviceFactory, ILoggerFactory loggerFactory)
+        protected virtual async Task<TrezorManager> ConnectAsync()
         {
             _TrezorManagerBroker = new TrezorManagerBroker(GetPin, GetPassphrase, 2000, new DefaultCoinUtility(), deviceFactory, loggerFactory);
             return await _TrezorManagerBroker.WaitForFirstTrezorAsync().ConfigureAwait(false);

@@ -3,11 +3,23 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
+using Device.Net;
+using Hid.Net.Windows;
+using Microsoft.Extensions.Logging;
+using Usb.Net.Windows;
 
 namespace Trezor.Net
 {
     public abstract class WindowsTestBase : UnitTestBase
     {
+        private static readonly ILoggerFactory _loggerFactory = LoggerFactory.Create(builder => _ = builder.AddDebug().SetMinimumLevel(LogLevel.Trace));
+
+        public WindowsTestBase() : base(TrezorManager.DeviceDefinitions.CreateWindowsHidDeviceFactory()
+            .Aggregate(TrezorManager.DeviceDefinitions.CreateWindowsUsbDeviceFactory()), _loggerFactory)
+        {
+
+        }
+
         #region Platform Specific Overrides
         protected string GetExecutingAssemblyDirectoryPath()
         {
