@@ -1,6 +1,5 @@
 ﻿using Device.Net;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -93,7 +92,7 @@ namespace Trezor.Net.Manager
             }
             finally
             {
-                _Lock.Release();
+                _ = _Lock.Release();
             }
         }
 
@@ -113,13 +112,13 @@ namespace Trezor.Net.Manager
 
                 var tempList = new List<T>(TrezorManagers);
 
-                tempList.Remove(trezorManager);
+                _ = tempList.Remove(trezorManager);
 
                 TrezorManagers = new ReadOnlyCollection<T>(tempList);
             }
             finally
             {
-                _Lock.Release();
+                _ = _Lock.Release();
             }
         }
         #endregion

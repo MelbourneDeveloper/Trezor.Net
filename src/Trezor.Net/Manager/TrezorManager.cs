@@ -535,7 +535,7 @@ namespace Trezor.Net
                                 var sb = new StringBuilder();
                                 foreach (var b in ethereumAddress.Address)
                                 {
-                                    sb.Append(b.ToString("X2").ToLower());
+                                    _ = sb.Append(b.ToString("X2").ToLower());
                                 }
 
                                 var hexString = sb.ToString();

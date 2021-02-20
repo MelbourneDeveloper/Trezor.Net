@@ -1,9 +1,4 @@
-﻿using Device.Net;
-using Hid.Net.Windows;
-using Microsoft.Extensions.Logging;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading.Tasks;
-using Usb.Net.Windows;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Trezor.Net
 {

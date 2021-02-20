@@ -23,8 +23,8 @@ namespace Trezor.Net
                 var secondHexCharacter = ethString[x + 1];
 
                 var hexStringBuilder = new StringBuilder();
-                hexStringBuilder.Append(firstHexCharacter);
-                hexStringBuilder.Append(secondHexCharacter);
+                _ = hexStringBuilder.Append(firstHexCharacter);
+                _ = hexStringBuilder.Append(secondHexCharacter);
 
                 var hexString = hexStringBuilder.ToString();
 

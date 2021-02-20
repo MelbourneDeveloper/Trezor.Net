@@ -94,9 +94,6 @@ dotnet_diagnostic.CA1028.severity = error
 # CA1030: Use events where appropriate
 dotnet_diagnostic.CA1030.severity = error
 
-# CA1032: Implement standard exception constructors
-dotnet_diagnostic.CA1032.severity = error
-
 # CA1033: Interface methods should be callable by child types
 dotnet_diagnostic.CA1033.severity = error
 
@@ -776,3 +773,7 @@ dotnet_diagnostic.CA1303.severity = warning
 
 # CA2229: Implement serialization constructors
 dotnet_diagnostic.CA2229.severity = warning
+
+# CA1032: Implement standard exception constructors
+dotnet_diagnostic.CA1032.severity = warning
+

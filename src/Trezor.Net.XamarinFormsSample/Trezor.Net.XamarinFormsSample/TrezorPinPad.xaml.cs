@@ -19,7 +19,7 @@ namespace Trezor.Net.XamarinFormsSample
 
             async void CompletedHandler(object s, EventArgs args)
             {
-                await App.MainNavigationPage.Navigation.PopModalAsync().ConfigureAwait(false);
+                _ = await App.MainNavigationPage.Navigation.PopModalAsync().ConfigureAwait(false);
 
                 var currentApp = App.Current as App;
 

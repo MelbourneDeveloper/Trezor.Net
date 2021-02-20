@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Trezor.Net;
 using Trezor.Net.Manager;
-using Usb.Net.Windows;
 
 namespace TrezorTestApp
 {
@@ -20,7 +19,7 @@ namespace TrezorTestApp
         #endregion
 
         #region Main
-        private async static Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
             try
             {
@@ -30,7 +29,7 @@ namespace TrezorTestApp
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                Console.ReadLine();
+                _ = Console.ReadLine();
             }
         }
         #endregion
@@ -97,7 +96,7 @@ namespace TrezorTestApp
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                Console.ReadLine();
+                _ = Console.ReadLine();
             }
         }
 
