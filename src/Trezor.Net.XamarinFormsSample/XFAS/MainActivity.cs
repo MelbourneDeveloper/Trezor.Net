@@ -6,6 +6,7 @@ using Android.Hardware.Usb;
 using Android.OS;
 using Android.Widget;
 using Device.Net;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,30 +21,30 @@ namespace Trezor.Net.XamarinFormsSample.Droid
     public class MainActivity : FormsAppCompatActivity
     {
         #region Fields
-        private AndroidUsbDevice _TrezorUsbDevice;
+        private static readonly ILoggerFactory _loggerFactory = LoggerFactory.Create(builder => _ = builder.AddDebug().SetMinimumLevel(LogLevel.Trace));
         #endregion
 
-        protected override async void OnCreate(Bundle savedInstanceState)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Forms.Init(this, savedInstanceState);
             Go();
         }
 
-        private async Task Go()
+        private void Go()
         {
             try
             {
                 var usbManager = GetSystemService(UsbService) as UsbManager;
                 if (usbManager == null) throw new Exception("UsbManager is null");
 
-                //Register the factory for creating Usb devices. This only needs to be done once.
-                AndroidUsbDeviceFactory.Register(usbManager, base.ApplicationContext, new DebugLogger(), new DebugTracer());
-
                 TabLayoutResource = Resource.Layout.Tabbar;
                 ToolbarResource = Resource.Layout.Toolbar;
 
-                LoadApplication(new App());
+                //Register the factory for creating Usb devices. This only needs to be done once.
+                var deviceFactory = TrezorManager.DeviceDefinitions.CreateAndroidUsbDeviceFactory(usbManager, base.ApplicationContext, _loggerFactory);
+
+                LoadApplication(new App(deviceFactory));
             }
             catch (Exception ex)
             {

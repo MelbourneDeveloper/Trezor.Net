@@ -43,7 +43,7 @@ namespace TrezorTestApp
             var aggregateFactory = usbFactory.Aggregate(hidFactory, _loggerFactory);
 
 
-            _TrezorManagerBroker = new TrezorManagerBroker(GetPin, GetPassphrase, 2000, new DefaultCoinUtility(), aggregateFactory, _loggerFactory );
+            _TrezorManagerBroker = new TrezorManagerBroker(GetPin, GetPassphrase, 2000, new DefaultCoinUtility(), aggregateFactory, _loggerFactory);
             return await _TrezorManagerBroker.WaitForFirstTrezorAsync().ConfigureAwait(false);
         }
 
@@ -90,7 +90,7 @@ namespace TrezorTestApp
                     while (true)
                     {
                         Console.WriteLine($"Count of connected Trezors: {_TrezorManagerBroker.TrezorManagers.Count}");
-                        await Task.Delay(5000).ConfigureAwait(false);                        
+                        await Task.Delay(5000).ConfigureAwait(false);
                     }
                 }
             }
@@ -109,11 +109,13 @@ namespace TrezorTestApp
 
         private static async Task<string> GetAddress(TrezorManager trezorManager, uint i) => await trezorManager.GetAddressAsync(new BIP44AddressPath(true, 0, 0, false, i), false, false).ConfigureAwait(false);
 
-        private static async Task<string> GetPin()
+        private static Task<string> GetPin()
+        => Task.Run(() =>
         {
             Console.WriteLine("Enter PIN based on Trezor values: ");
             return Console.ReadLine().Trim();
-        }
+        });
+
         private static Task<string> GetPassphrase() => GetPin();
 
         #endregion
