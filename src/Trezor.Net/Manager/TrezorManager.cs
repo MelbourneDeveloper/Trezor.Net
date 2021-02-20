@@ -1,4 +1,4 @@
-﻿using Device.Net;
+using Device.Net;
 using Hardwarewallets.Net.Model;
 using System;
 using System.Collections.Generic;
@@ -210,6 +210,7 @@ namespace Trezor.Net
         /// <summary>
         /// TODO: Nasty. This at least needs some caching or something...
         /// </summary>
+#pragma warning disable CA1502
         protected override Type GetContractType(MessageType messageType, string typeName)
         {
             switch (messageType)
@@ -520,6 +521,7 @@ namespace Trezor.Net
                     throw new NotImplementedException();
             }
         }
+#pragma warning restore CA1502
 
         protected override object GetEnumValue(string messageTypeString)
         {
