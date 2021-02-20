@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace Trezor.Net.Manager
 {
+    //TODO: Add logging (Inject the logger factory)
+
     public abstract class TrezorManagerBrokerBase<T, TMessageType> where T : TrezorManagerBase<TMessageType>, IDisposable
     {
         #region Fields
         private bool _disposed;
-        private DeviceListener _DeviceListener;
+        private readonly DeviceListener _DeviceListener;
         private readonly SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
         private readonly TaskCompletionSource<T> _FirstTrezorTaskCompletionSource = new TaskCompletionSource<T>();
-        private readonly ILoggerFactory loggerFactory;
-        private readonly IDeviceFactory deviceFactory;
         #endregion
 
         #region Events
@@ -54,9 +54,10 @@ namespace Trezor.Net.Manager
             CoinUtility = coinUtility;
             PollInterval = pollInterval;
 
-            //It's OK to pass null in to DeviceListener
-            this.loggerFactory = loggerFactory;
-            this.deviceFactory = deviceFactory ?? throw new ArgumentNullException(nameof(deviceFactory));
+
+            _DeviceListener = new DeviceListener(deviceFactory, PollInterval, loggerFactory);
+            _DeviceListener.DeviceDisconnected += DevicePoller_DeviceDisconnected;
+            _DeviceListener.DeviceInitialized += DevicePoller_DeviceInitialized;
         }
         #endregion
 
@@ -132,9 +133,6 @@ namespace Trezor.Net.Manager
         {
             if (_DeviceListener != null) return;
 
-            _DeviceListener = new DeviceListener(deviceFactory, PollInterval, loggerFactory);
-            _DeviceListener.DeviceDisconnected += DevicePoller_DeviceDisconnected;
-            _DeviceListener.DeviceInitialized += DevicePoller_DeviceInitialized;
             _DeviceListener.Start();
 
             //TODO: Call Start on the DeviceListener when it is implemented...

@@ -12,8 +12,8 @@ namespace Trezor.Net
     public class UWPTests : UnitTestBase
     {
         public UWPTests() : base(
-            TrezorManager.DeviceDefinitions.CreateUwpHidDeviceFactory()
-            .Aggregate(TrezorManager.DeviceDefinitions.CreateUwpHidDeviceFactory()), _loggerFactory)
+            TrezorManager.DeviceDefinitions.CreateUwpHidDeviceFactory(_loggerFactory)
+            .Aggregate(TrezorManager.DeviceDefinitions.CreateUwpHidDeviceFactory(_loggerFactory)), _loggerFactory)
         {
         }
 
