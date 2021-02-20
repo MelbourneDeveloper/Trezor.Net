@@ -1,6 +1,7 @@
 ﻿using Device.Net;
 using Hardwarewallets.Net.AddressManagement;
 using Hid.Net.Windows;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -15,16 +16,16 @@ namespace TrezorTestApp
         #region Fields
         private static readonly string[] _Addresses = new string[50];
         private static TrezorManagerBroker _TrezorManagerBroker;
+        private static readonly ILoggerFactory _loggerFactory = LoggerFactory.Create(builder => _ = builder.AddDebug().SetMinimumLevel(LogLevel.Trace));
         #endregion
 
         #region Main
-        private static void Main(string[] args)
+        private async static Task Main(string[] args)
         {
             try
             {
                 Console.WriteLine("Waiting for Trezor... Please plug it in if it is not connected.");
-                Go();
-                while (true) ;
+                await Go();
             }
             catch (Exception ex)
             {
@@ -37,14 +38,12 @@ namespace TrezorTestApp
         #region Private  Methods
         private static async Task<TrezorManager> ConnectAsync()
         {
-            //This only needs to be done once.
-            //Register the factory for creating Usb devices. Trezor One Firmware 1.7.x / Trezor Model T
-            WindowsUsbDeviceFactory.Register(new DebugLogger(), new DebugTracer());
+            var usbFactory = TrezorManager.DeviceDefinitions.CreateWindowsHidDeviceFactory();
+            var hidFactory = TrezorManager.DeviceDefinitions.CreateWindowsHidDeviceFactory();
+            var aggregateFactory = usbFactory.Aggregate(hidFactory, _loggerFactory);
 
-            //Register the factory for creating Hid devices. Trezor One Firmware 1.6.x
-            WindowsHidDeviceFactory.Register(new DebugLogger(), new DebugTracer());
 
-            _TrezorManagerBroker = new TrezorManagerBroker(GetPin, GetPassphrase, 2000, new DefaultCoinUtility());
+            _TrezorManagerBroker = new TrezorManagerBroker(GetPin, GetPassphrase, 2000, new DefaultCoinUtility(), aggregateFactory, _loggerFactory );
             return await _TrezorManagerBroker.WaitForFirstTrezorAsync().ConfigureAwait(false);
         }
 

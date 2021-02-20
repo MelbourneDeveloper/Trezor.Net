@@ -12,6 +12,10 @@ namespace Trezor.Net
 
         protected override Task<TrezorManager> ConnectAsync()
         {
+            var usbFactory = TrezorManager.DeviceDefinitions.CreateWindowsHidDeviceFactory();
+            var hidFactory = TrezorManager.DeviceDefinitions.CreateWindowsHidDeviceFactory();
+            var aggregateFactory = usbFactory.Aggregate(hidFactory);
+
             //This only needs to be done once.
             //Register the factory for creating Usb devices. Trezor One Firmware 1.7.x / Trezor Model T
             WindowsUsbDeviceFactory.Register(new DebugLogger(), new DebugTracer());

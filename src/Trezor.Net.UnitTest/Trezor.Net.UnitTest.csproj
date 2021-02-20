@@ -6,7 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\Trezor.Net.UWPUnitTest\UnitTestBase.cs" Link="UnitTestBase.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Hid.Net" Version="4.0.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
     <PackageReference Include="Usb.Net" Version="4.0.0" />
   </ItemGroup>
 

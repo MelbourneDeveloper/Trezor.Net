@@ -1,5 +1,7 @@
-﻿using Hardwarewallets.Net;
+﻿using Device.Net;
+using Hardwarewallets.Net;
 using Hardwarewallets.Net.AddressManagement;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.RLP;
@@ -32,9 +34,9 @@ namespace Trezor.Net
         #endregion
 
         #region Protected Virtual Methods
-        protected virtual async Task<TrezorManager> ConnectAsync()
+        protected virtual async Task<TrezorManager> ConnectAsync(IDeviceFactory deviceFactory, ILoggerFactory loggerFactory)
         {
-            _TrezorManagerBroker = new TrezorManagerBroker(GetPin, GetPassphrase, 2000, new DefaultCoinUtility());
+            _TrezorManagerBroker = new TrezorManagerBroker(GetPin, GetPassphrase, 2000, new DefaultCoinUtility(), deviceFactory, loggerFactory);
             return await _TrezorManagerBroker.WaitForFirstTrezorAsync().ConfigureAwait(false);
         }
         #endregion
@@ -514,7 +516,7 @@ namespace Trezor.Net
         }
 
         [TestMethod]
-        public async Task GetBitcoinCashCoinInfo()
+        public void GetBitcoinCashCoinInfo()
         {
             var defaultCoinUtility = new DefaultCoinUtility();
             var bitcoinCashCoinInfo = defaultCoinUtility.GetCoinInfo(145);

@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Device.Net;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -14,10 +15,10 @@ namespace Trezor.Net.XamarinFormsSample
         /// <summary>
         /// Look mum! No dependency injected variables!
         /// </summary>
-        public App()
+        public App(IDeviceFactory deviceFactory)
         {
             InitializeComponent();
-            MainNavigationPage = new NavigationPage(new MainPage());
+            MainNavigationPage = new NavigationPage(new MainPage(deviceFactory));
             MainPage = MainNavigationPage;
         }
         #endregion
