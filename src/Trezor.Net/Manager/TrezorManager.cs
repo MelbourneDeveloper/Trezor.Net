@@ -1,5 +1,6 @@
 using Device.Net;
 using Hardwarewallets.Net.Model;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -39,11 +40,16 @@ namespace Trezor.Net
 
         #region Public Constructors
 
-        public TrezorManager(EnterPinArgs enterPinCallback, EnterPinArgs enterPassphraseCallback, IDevice trezorDevice) : this(enterPinCallback, enterPassphraseCallback, trezorDevice, new DefaultCoinUtility())
-        {
-        }
-
-        public TrezorManager(EnterPinArgs enterPinCallback, EnterPinArgs enterPassphraseCallback, IDevice trezorDevice, ICoinUtility coinUtility) : base(enterPinCallback, enterPassphraseCallback, trezorDevice, coinUtility)
+        public TrezorManager(
+            EnterPinArgs enterPinCallback,
+            EnterPinArgs enterPassphraseCallback,
+            IDevice trezorDevice,
+            ILogger<TrezorManager> logger,
+            ICoinUtility coinUtility) : base(
+                enterPinCallback,
+                enterPassphraseCallback,
+                trezorDevice,
+                coinUtility)
         {
         }
 

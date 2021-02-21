@@ -2,6 +2,7 @@
 using Hardwarewallets.Net;
 using Hardwarewallets.Net.Model;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using ProtoBuf;
 using System;
 using System.IO;
@@ -16,61 +17,82 @@ namespace Trezor.Net
     /// </summary>
     public abstract class TrezorManagerBase<TMessageType> : IDisposable, IAddressDeriver
     {
-        #region Constants
-        private const int FirstChunkStartIndex = 9;
-        #endregion
 
-        #region Fields
-        private int _InvalidChunksCounter;
-        private readonly EnterPinArgs _EnterPinCallback;
+        #region Private Fields
+
+        private const int FirstChunkStartIndex = 9;
+
         private readonly EnterPinArgs _EnterPassphraseCallback;
+        private readonly EnterPinArgs _EnterPinCallback;
         private readonly SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
         private readonly string LogSection = "TrezorManagerBase";
+        private int _InvalidChunksCounter;
         private object _LastWrittenMessage;
         private bool disposed;
-        #endregion
 
-        #region Public Properties
-        public IDevice Device { get; private set; }
-        public ICoinUtility CoinUtility { get; set; }
-        public ILogger Logger { get; set; }
-        #endregion
+        #endregion Private Fields
 
-        #region Public Abstract Properties
-        public abstract bool IsInitialized { get; }
-        #endregion
+        #region Protected Constructors
 
-        #region Protected Abstract Properties
-        protected abstract string ContractNamespace { get; }
-        protected abstract Type MessageTypeType { get; }
-        protected abstract bool? IsOldFirmware { get; }
-        #endregion
-
-        #region Constructor
-        protected TrezorManagerBase(EnterPinArgs enterPinCallback, EnterPinArgs enterPassphraseCallback, IDevice device) : this(enterPinCallback, enterPassphraseCallback, device, null)
-        {
-
-        }
-
-        protected TrezorManagerBase(EnterPinArgs enterPinCallback, EnterPinArgs enterPassphraseCallback, IDevice device, ICoinUtility coinUtility)
+        protected TrezorManagerBase(
+            EnterPinArgs enterPinCallback,
+            EnterPinArgs enterPassphraseCallback,
+            IDevice device,
+            ILogger<TrezorManagerBase<TMessageType>> logger = null,
+            ICoinUtility coinUtility = null)
         {
             CoinUtility = coinUtility;
             _EnterPinCallback = enterPinCallback;
             _EnterPassphraseCallback = enterPassphraseCallback;
             Device = device ?? throw new ArgumentNullException(nameof(device));
+            Logger = (ILogger)logger ?? NullLogger.Instance;
         }
-        #endregion
 
-        #region Protected Abstract Methods
-        protected abstract object GetEnumValue(string messageTypeString);
-        protected abstract bool IsButtonRequest(object response);
-        protected abstract bool IsPinMatrixRequest(object response);
-        protected abstract bool IsPassphraseRequest(object response);
-        protected abstract bool IsInitialize(object response);
-        protected abstract Type GetContractType(TMessageType messageType, string typeName);
-        #endregion
+        #endregion Protected Constructors
+
+        #region Public Properties
+
+        public ICoinUtility CoinUtility { get; set; }
+        public IDevice Device { get; private set; }
+        public abstract bool IsInitialized { get; }
+
+        #endregion Public Properties
+
+        #region Protected Properties
+
+        protected abstract string ContractNamespace { get; }
+        protected abstract bool? IsOldFirmware { get; }
+        protected ILogger Logger { get; }
+        protected abstract Type MessageTypeType { get; }
+
+        #endregion Protected Properties
 
         #region Public Methods
+
+        public virtual void Dispose()
+        {
+            if (disposed) return;
+            disposed = true;
+
+            Device?.Dispose();
+
+            GC.SuppressFinalize(this);
+
+            _Lock.Dispose();
+        }
+
+        public abstract Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display);
+
+        /// <summary>
+        /// Initialize the Trezor. Should only be called once.
+        /// </summary>
+        public abstract Task InitializeAsync();
+
+        /// <summary>
+        /// Check to see if the Trezor is connected to the device
+        /// </summary>
+        public bool IsDeviceInitialized() => Device.IsInitialized;
+
         /// <summary>
         /// Send a message to the Trezor and receive the result
         /// </summary>
@@ -134,86 +156,116 @@ namespace Trezor.Net
             }
         }
 
-        /// <summary>
-        /// Check to see if the Trezor is connected to the device
-        /// </summary>
-        public bool IsDeviceInitialized() => Device.IsInitialized;
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected abstract Task<object> ButtonAckAsync();
+
+        protected abstract void CheckForFailure(object returnMessage);
+
+        protected abstract Type GetContractType(TMessageType messageType, string typeName);
+
+        protected abstract object GetEnumValue(string messageTypeString);
+        protected abstract bool IsButtonRequest(object response);
+        protected abstract bool IsInitialize(object response);
+
+        protected abstract bool IsPassphraseRequest(object response);
+
+        protected abstract bool IsPinMatrixRequest(object response);
+        protected abstract Task<object> PassphraseAckAsync(string passPhrase);
+
+        protected abstract Task<object> PinMatrixAckAsync(string pin);
 
         /// <summary>
-        /// Initialize the Trezor. Should only be called once.
+        /// Warning: This is not thread safe. It should only be used inside the generic version of this method or to call pin related stuff
         /// </summary>
-        public abstract Task InitializeAsync();
-
-        public virtual void Dispose()
+        protected async Task<object> SendMessageAsync(object message)
         {
-            if (disposed) return;
-            disposed = true;
+            if (message == null) throw new ArgumentNullException(nameof(message));
 
-            Device?.Dispose();
+            await WriteAsync(message).ConfigureAwait(false);
 
-            GC.SuppressFinalize(this);
+            var retVal = await ReadAsync().ConfigureAwait(false);
 
-            _Lock.Dispose();
+            CheckForFailure(retVal);
+
+            return retVal;
         }
 
-        #endregion
+        protected void ValidateInitialization(object message)
+        {
+            if (!IsInitialized && !IsInitialize(message))
+            {
+                throw new ManagerException($"The device has not been successfully initialised. Please call {nameof(InitializeAsync)}.");
+            }
+        }
 
-        #region Public Abstract Methods
-        public abstract Task<string> GetAddressAsync(IAddressPath addressPath, bool isPublicKey, bool display);
-        #endregion
+        #endregion Protected Methods
 
         #region Private Methods
-        private async Task WriteAsync(object msg)
+
+        private static byte[] Append(byte[] x, byte[] y)
         {
-            Logger?.LogInformation($"Write: {msg}", LogSection);
+            var z = new byte[x.Length + y.Length];
+            x.CopyTo(z, 0);
+            y.CopyTo(z, x.Length);
+            return z;
+        }
 
-            var byteArray = Serialize(msg);
-
-            //This confirms that the message data is correct
-            // var testMessage = Deserialize(msg.GetType(), byteArray);
-
-            var msgSize = byteArray.Length;
-            var msgName = msg.GetType().Name;
-
-            var messageTypeString = "MessageType" + msgName;
-
-            var messageType = GetEnumValue(messageTypeString);
-
-            var msgId = (int)messageType;
-            var data = new ByteBuffer(msgSize + 1024); // 32768);
-            data.Put((byte)'#');
-            data.Put((byte)'#');
-            data.Put((byte)((msgId >> 8) & 0xFF));
-            data.Put((byte)(msgId & 0xFF));
-            data.Put((byte)((msgSize >> 24) & 0xFF));
-            data.Put((byte)((msgSize >> 16) & 0xFF));
-            data.Put((byte)((msgSize >> 8) & 0xFF));
-            data.Put((byte)(msgSize & 0xFF));
-            data.Put(byteArray);
-
-            while (data.Position % 63 > 0)
+        private static object Deserialize(Type type, byte[] data)
+        {
+            using (var writer = new MemoryStream(data))
             {
-                data.Put(0);
+                return Serializer.NonGeneric.Deserialize(type, writer);
             }
+        }
 
-            var chunks = data.Position / 63;
+        /// <summary>
+        /// Horribly inefficient array thing
+        /// </summary>
+        /// <returns></returns>
+        private static byte[] GetRange(byte[] bytes, int startIndex, int length) => bytes.ToList().GetRange(startIndex, length).ToArray();
 
-            var wholeArray = data.ToArray();
-
-            for (var i = 0; i < chunks; i++)
+        private static byte[] Serialize(object msg)
+        {
+            using (var writer = new MemoryStream())
             {
-                var range = new byte[64];
-                range[0] = (byte)'?';
+                Serializer.NonGeneric.Serialize(writer, msg);
+                return writer.ToArray();
+            }
+        }
 
-                for (var x = 0; x < 63; x++)
+        private object Deserialize(TMessageType messageType, byte[] data)
+        {
+            try
+            {
+                var messageTypeNamespace = ContractNamespace;
+
+                if (IsOldFirmware.HasValue && IsOldFirmware.Value)
                 {
-                    range[x + 1] = wholeArray[(i * 63) + x];
+                    //Look for the type in the backwards compatibility namespace
+                    messageTypeNamespace = $"{messageTypeNamespace}.BackwardsCompatible";
                 }
 
-                _ = await Device.WriteAsync(range).ConfigureAwait(false);
-            }
+                var typeName = $"{messageTypeNamespace}.{messageType.ToString().Replace("MessageType", string.Empty)}";
 
-            _LastWrittenMessage = msg;
+                if (IsOldFirmware.HasValue && IsOldFirmware.Value)
+                {
+                    var type = Type.GetType(typeName);
+
+                    //Fall back on the non-backwards compatible namespace if necessary
+                    if (type == null) typeName = $"{ContractNamespace}.{messageType.ToString().Replace("MessageType", string.Empty)}";
+                }
+
+                var contractType = GetContractType(messageType, typeName);
+
+                return Deserialize(contractType, data);
+            }
+            catch (Exception ex)
+            {
+                throw new ManagerException("InvalidProtocolBufferException", ex);
+            }
         }
 
         private async Task<object> ReadAsync()
@@ -320,104 +372,60 @@ namespace Trezor.Net
             return msg;
         }
 
-        private object Deserialize(TMessageType messageType, byte[] data)
+        private async Task WriteAsync(object msg)
         {
-            try
-            {
-                var messageTypeNamespace = ContractNamespace;
+            Logger?.LogInformation($"Write: {msg}", LogSection);
 
-                if (IsOldFirmware.HasValue && IsOldFirmware.Value)
+            var byteArray = Serialize(msg);
+
+            //This confirms that the message data is correct
+            // var testMessage = Deserialize(msg.GetType(), byteArray);
+
+            var msgSize = byteArray.Length;
+            var msgName = msg.GetType().Name;
+
+            var messageTypeString = "MessageType" + msgName;
+
+            var messageType = GetEnumValue(messageTypeString);
+
+            var msgId = (int)messageType;
+            var data = new ByteBuffer(msgSize + 1024); // 32768);
+            data.Put((byte)'#');
+            data.Put((byte)'#');
+            data.Put((byte)((msgId >> 8) & 0xFF));
+            data.Put((byte)(msgId & 0xFF));
+            data.Put((byte)((msgSize >> 24) & 0xFF));
+            data.Put((byte)((msgSize >> 16) & 0xFF));
+            data.Put((byte)((msgSize >> 8) & 0xFF));
+            data.Put((byte)(msgSize & 0xFF));
+            data.Put(byteArray);
+
+            while (data.Position % 63 > 0)
+            {
+                data.Put(0);
+            }
+
+            var chunks = data.Position / 63;
+
+            var wholeArray = data.ToArray();
+
+            for (var i = 0; i < chunks; i++)
+            {
+                var range = new byte[64];
+                range[0] = (byte)'?';
+
+                for (var x = 0; x < 63; x++)
                 {
-                    //Look for the type in the backwards compatibility namespace
-                    messageTypeNamespace = $"{messageTypeNamespace}.BackwardsCompatible";
+                    range[x + 1] = wholeArray[(i * 63) + x];
                 }
 
-                var typeName = $"{messageTypeNamespace}.{messageType.ToString().Replace("MessageType", string.Empty)}";
-
-                if (IsOldFirmware.HasValue && IsOldFirmware.Value)
-                {
-                    var type = Type.GetType(typeName);
-
-                    //Fall back on the non-backwards compatible namespace if necessary
-                    if (type == null) typeName = $"{ContractNamespace}.{messageType.ToString().Replace("MessageType", string.Empty)}";
-                }
-
-                var contractType = GetContractType(messageType, typeName);
-
-                return Deserialize(contractType, data);
+                _ = await Device.WriteAsync(range).ConfigureAwait(false);
             }
-            catch (Exception ex)
-            {
-                throw new ManagerException("InvalidProtocolBufferException", ex);
-            }
-        }
-        #endregion
 
-        #region Protected Methods
-        protected void ValidateInitialization(object message)
-        {
-            if (!IsInitialized && !IsInitialize(message))
-            {
-                throw new ManagerException($"The device has not been successfully initialised. Please call {nameof(InitializeAsync)}.");
-            }
+            _LastWrittenMessage = msg;
         }
 
-        /// <summary>
-        /// Warning: This is not thread safe. It should only be used inside the generic version of this method or to call pin related stuff
-        /// </summary>
-        protected async Task<object> SendMessageAsync(object message)
-        {
-            if (message == null) throw new ArgumentNullException(nameof(message));
-
-            await WriteAsync(message).ConfigureAwait(false);
-
-            var retVal = await ReadAsync().ConfigureAwait(false);
-
-            CheckForFailure(retVal);
-
-            return retVal;
-        }
-        #endregion
-
-        #region Protected Abstract Methods
-        protected abstract void CheckForFailure(object returnMessage);
-        protected abstract Task<object> PinMatrixAckAsync(string pin);
-        protected abstract Task<object> PassphraseAckAsync(string passPhrase);
-        protected abstract Task<object> ButtonAckAsync();
-        #endregion
-
-        #region Private Static Methods
-        /// <summary>
-        /// Horribly inefficient array thing
-        /// </summary>
-        /// <returns></returns>
-        private static byte[] GetRange(byte[] bytes, int startIndex, int length) => bytes.ToList().GetRange(startIndex, length).ToArray();
-
-        private static byte[] Append(byte[] x, byte[] y)
-        {
-            var z = new byte[x.Length + y.Length];
-            x.CopyTo(z, 0);
-            y.CopyTo(z, x.Length);
-            return z;
-        }
-
-        private static byte[] Serialize(object msg)
-        {
-            using (var writer = new MemoryStream())
-            {
-                Serializer.NonGeneric.Serialize(writer, msg);
-                return writer.ToArray();
-            }
-        }
-
-        private static object Deserialize(Type type, byte[] data)
-        {
-            using (var writer = new MemoryStream(data))
-            {
-                return Serializer.NonGeneric.Deserialize(type, writer);
-            }
-        }
-        #endregion
+        #endregion Private Methods
     }
 }
 
