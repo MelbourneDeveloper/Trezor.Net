@@ -41,7 +41,7 @@ namespace Trezor.Net
             ILogger<TrezorManagerBase<TMessageType>> logger = null,
             ICoinUtility coinUtility = null)
         {
-            CoinUtility = coinUtility;
+            CoinUtility = coinUtility ?? DefaultCoinUtility.Instance;
             _EnterPinCallback = enterPinCallback;
             _EnterPassphraseCallback = enterPassphraseCallback;
             Device = device ?? throw new ArgumentNullException(nameof(device));

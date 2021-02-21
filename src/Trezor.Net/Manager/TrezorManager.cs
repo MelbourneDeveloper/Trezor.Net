@@ -22,10 +22,6 @@ using Trezor.Net.Contracts.Ripple;
 using Trezor.Net.Contracts.Stellar;
 using Trezor.Net.Contracts.Tezos;
 
-#if NETSTANDARD2_0
-using Microsoft.Extensions.Logging;
-#endif
-
 namespace Trezor.Net
 {
     public class TrezorManager : TrezorManagerBase<MessageType>
@@ -44,11 +40,12 @@ namespace Trezor.Net
             EnterPinArgs enterPinCallback,
             EnterPinArgs enterPassphraseCallback,
             IDevice trezorDevice,
-            ILogger<TrezorManager> logger,
-            ICoinUtility coinUtility) : base(
+            ILogger<TrezorManager> logger = null,
+            ICoinUtility coinUtility = null) : base(
                 enterPinCallback,
                 enterPassphraseCallback,
                 trezorDevice,
+                logger,
                 coinUtility)
         {
         }

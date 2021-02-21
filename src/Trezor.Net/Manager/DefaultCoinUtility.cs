@@ -8,6 +8,8 @@ namespace Trezor.Net
 {
     public class DefaultCoinUtility : ICoinUtility
     {
+        public static DefaultCoinUtility Instance { get; } = new DefaultCoinUtility();
+
         public Dictionary<uint, CoinInfo> Coins { get; } = new Dictionary<uint, CoinInfo>();
 
         public DefaultCoinUtility()

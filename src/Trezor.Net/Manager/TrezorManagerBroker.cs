@@ -26,7 +26,7 @@ namespace Trezor.Net.Manager
         #endregion
 
         #region Protected Overrides
-        protected override TrezorManager CreateTrezorManager(IDevice device) => new TrezorManager(EnterPinArgs, EnterPassphraseArgs, device);
+        protected override TrezorManager CreateTrezorManager(IDevice device) => new TrezorManager(EnterPinArgs, EnterPassphraseArgs, device, LoggerFactory.CreateLogger<TrezorManager>());
         #endregion
     }
 }

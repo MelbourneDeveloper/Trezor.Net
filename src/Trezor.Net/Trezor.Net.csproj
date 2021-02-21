@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<LangVersion>Latest</LangVersion>
-		<TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0</TargetFrameworks>
 		<CodeAnalysisRuleSet>..\Hid.Net\CodeRules.ruleset</CodeAnalysisRuleSet>
 		<RunCodeAnalysis>false</RunCodeAnalysis>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>

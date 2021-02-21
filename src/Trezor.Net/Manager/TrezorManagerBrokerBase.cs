@@ -13,6 +13,8 @@ namespace Trezor.Net.Manager
 
     public abstract class TrezorManagerBrokerBase<T, TMessageType> where T : TrezorManagerBase<TMessageType>, IDisposable
     {
+        protected ILoggerFactory LoggerFactory { get; }
+
         #region Fields
         private bool _disposed;
         private readonly DeviceListener _DeviceListener;
@@ -53,6 +55,7 @@ namespace Trezor.Net.Manager
             EnterPassphraseArgs = enterPassphraseArgs;
             CoinUtility = coinUtility;
             PollInterval = pollInterval;
+            LoggerFactory = loggerFactory;
 
 
             _DeviceListener = new DeviceListener(deviceFactory, PollInterval, loggerFactory);
