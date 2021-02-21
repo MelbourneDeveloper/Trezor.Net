@@ -9,22 +9,25 @@
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<Version>4.3.0</Version>
 		<Authors>Christian Findlay</Authors>
-    <Company>Christian Findlay</Company>
-    <Description>A cross platform library for communicating with the Satoshi Labs' Trezor Hardware Wallet
+		<Company>Christian Findlay</Company>
+		<Description>
+			A cross platform library for communicating with the Satoshi Labs' Trezor Hardware Wallet
 
-Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for other platforms can be added with Hid.Net dependency injection</Description>
-    <Copyright>Copyright (c) 2019 Christian Findlay</Copyright>
-    <PackageLicenseUrl></PackageLicenseUrl>
+			Supports Android, UWP, .NET Core and .NET Framework with Hid.Net. Support for other platforms can be added with Hid.Net dependency injection
+		</Description>
+		<Copyright>Copyright (c) 2019 Christian Findlay</Copyright>
+		<PackageLicenseUrl></PackageLicenseUrl>
 		<PackageProjectUrl>https://github.com/MelbourneDeveloper/Trezor.Net</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/MelbourneDeveloper/Trezor.Net</RepositoryUrl>
 		<PackageTags>Hid Usb Trezor Hardwarewallet Bitcoin Ethereum SatoshiLabs KeepKey Cryptocurrency security</PackageTags>
 		<AssemblyVersion>4.3.0.0</AssemblyVersion>
-    <FileVersion>4.3.0.0</FileVersion>
-    <PackageReleaseNotes>Fix compatibility with Device.Net, Usb.Net, and Hid.Net 
-https://github.com/MelbourneDeveloper/Trezor.Net/projects/4</PackageReleaseNotes>
-    <LangVersion>7.3</LangVersion>
-    <NoWarn>CA2007,IDE0010</NoWarn>
-		<CodeAnalysisRuleSet>CodeRules.ruleset</CodeAnalysisRuleSet>
+		<FileVersion>4.3.0.0</FileVersion>
+		<PackageReleaseNotes>
+			Fix compatibility with Device.Net, Usb.Net, and Hid.Net
+			https://github.com/MelbourneDeveloper/Trezor.Net/projects/4
+		</PackageReleaseNotes>
+		<LangVersion>7.3</LangVersion>
+		<NoWarn>CA2007,IDE0010</NoWarn>
 		<PackageLicenseFile>License.txt</PackageLicenseFile>
 	</PropertyGroup>
 
@@ -55,6 +58,6 @@ https://github.com/MelbourneDeveloper/Trezor.Net/projects/4</PackageReleaseNotes
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="protobuf-net" Version="2.4.0" />
-  </ItemGroup>
+	</ItemGroup>
 
 </Project>
