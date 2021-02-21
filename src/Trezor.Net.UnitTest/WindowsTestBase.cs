@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -38,8 +38,7 @@ namespace Trezor.Net
             {
                 throw new Exception($"The pin exe doesn't exist at passwordExePath {passwordExePath}");
             }
-
-            var process = Process.Start(passwordExePath, prompt);
+            var process = Process.Start(new ProcessStartInfo(passwordExePath, prompt) { UseShellExecute = true });
             process.WaitForExit();
             await Task.Delay(100).ConfigureAwait(false);
             var pin = File.ReadAllText(Path.Combine(GetExecutingAssemblyDirectoryPath(), "pin.txt"));

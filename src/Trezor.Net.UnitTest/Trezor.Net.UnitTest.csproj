@@ -27,4 +27,10 @@
 		<ProjectReference Include="..\Trezor.Net\Trezor.Net.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="Misc\GetPassword.exe">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>
