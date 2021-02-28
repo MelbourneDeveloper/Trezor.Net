@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -14,8 +14,7 @@ namespace Trezor.Net
     {
         private static readonly ILoggerFactory _loggerFactory = LoggerFactory.Create(builder => _ = builder.AddDebug().SetMinimumLevel(LogLevel.Trace));
 
-        public WindowsTestBase() : base(TrezorManager.DeviceDefinitions.CreateWindowsHidDeviceFactory(_loggerFactory)
-            .Aggregate(TrezorManager.DeviceDefinitions.CreateWindowsUsbDeviceFactory(_loggerFactory)), _loggerFactory)
+        public WindowsTestBase() : base(TrezorManager.DeviceDefinitions.CreateWindowsUsbDeviceFactory(_loggerFactory), _loggerFactory)
         {
 
         }
