@@ -6,9 +6,6 @@ namespace Trezor.Net.Manager
     {
         public TrezorManagerBase<TMessageType> TrezorManager { get; }
 
-        public TrezorManagerConnectionEventArgs(TrezorManagerBase<TMessageType> trezorManager)
-        {
-            TrezorManager = trezorManager;
-        }
+        public TrezorManagerConnectionEventArgs(TrezorManagerBase<TMessageType> trezorManager) => TrezorManager = trezorManager;
     }
 }

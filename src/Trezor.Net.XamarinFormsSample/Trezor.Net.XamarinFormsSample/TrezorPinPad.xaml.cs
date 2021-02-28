@@ -2,6 +2,9 @@
 using System.Threading.Tasks;
 using Xamarin.Forms.Xaml;
 
+#pragma warning disable CA1501
+
+
 namespace Trezor.Net.XamarinFormsSample
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -9,77 +12,45 @@ namespace Trezor.Net.XamarinFormsSample
     {
         public event EventHandler OKClicked;
 
-        public string Pin => PinBox.Text;
-
         public static async Task<string> GetPin()
         {
             var trezorPinPad = new TrezorPinPad();
-            await App.MainNavigationPage.Navigation.PushModalAsync(trezorPinPad);
+            await App.MainNavigationPage.Navigation.PushModalAsync(trezorPinPad).ConfigureAwait(false);
             var taskCompletionSource = new TaskCompletionSource<string>();
 
             async void CompletedHandler(object s, EventArgs args)
             {
-                await App.MainNavigationPage.Navigation.PopModalAsync();
+                _ = await App.MainNavigationPage.Navigation.PopModalAsync().ConfigureAwait(false);
 
-                var currentApp = App.Current as App;
+                var currentApp = Xamarin.Forms.Application.Current as App;
 
-                taskCompletionSource.SetResult(trezorPinPad.Pin);
+                taskCompletionSource.SetResult(trezorPinPad.PinBox.Text);
             }
 
             trezorPinPad.OKClicked += CompletedHandler;
 
-            return await taskCompletionSource.Task;
+            return await taskCompletionSource.Task.ConfigureAwait(false);
         }
 
-        public TrezorPinPad()
-        {
-            InitializeComponent();
-        }
+        public TrezorPinPad() => InitializeComponent();
 
-        private void Button1_Clicked(object sender, EventArgs e)
-        {
-            PinBox.Text += "1";
-        }
+        private void Button1_Clicked(object sender, EventArgs e) => PinBox.Text += "1";
 
-        private void Button2_Clicked(object sender, EventArgs e)
-        {
-            PinBox.Text += "2";
-        }
+        private void Button2_Clicked(object sender, EventArgs e) => PinBox.Text += "2";
 
-        private void Button3_Clicked(object sender, EventArgs e)
-        {
-            PinBox.Text += "3";
-        }
+        private void Button3_Clicked(object sender, EventArgs e) => PinBox.Text += "3";
 
-        private void Button4_Clicked(object sender, EventArgs e)
-        {
-            PinBox.Text += "4";
-        }
+        private void Button4_Clicked(object sender, EventArgs e) => PinBox.Text += "4";
 
-        private void Button5_Clicked(object sender, EventArgs e)
-        {
-            PinBox.Text += "5";
-        }
+        private void Button5_Clicked(object sender, EventArgs e) => PinBox.Text += "5";
 
-        private void Button6_Clicked(object sender, EventArgs e)
-        {
-            PinBox.Text += "6";
-        }
+        private void Button6_Clicked(object sender, EventArgs e) => PinBox.Text += "6";
 
-        private void Button7_Clicked(object sender, EventArgs e)
-        {
-            PinBox.Text += "7";
-        }
+        private void Button7_Clicked(object sender, EventArgs e) => PinBox.Text += "7";
 
-        private void Button8_Clicked(object sender, EventArgs e)
-        {
-            PinBox.Text += "8";
-        }
+        private void Button8_Clicked(object sender, EventArgs e) => PinBox.Text += "8";
 
-        private void Button9_Clicked(object sender, EventArgs e)
-        {
-            PinBox.Text += "9";
-        }
+        private void Button9_Clicked(object sender, EventArgs e) => PinBox.Text += "9";
 
         private void Backspace_Clicked(object sender, EventArgs e)
         {

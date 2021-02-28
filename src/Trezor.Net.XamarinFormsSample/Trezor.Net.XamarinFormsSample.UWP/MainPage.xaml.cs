@@ -1,7 +1,4 @@
-﻿using Device.Net;
-using Hid.Net.UWP;
-using Usb.Net.UWP;
-using app = Trezor.Net.XamarinFormsSample.App;
+﻿using app = Trezor.Net.XamarinFormsSample.App;
 
 namespace Trezor.Net.XamarinFormsSample.UWP
 {

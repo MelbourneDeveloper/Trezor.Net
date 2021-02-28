@@ -1,5 +1,7 @@
-﻿using Hardwarewallets.Net;
+﻿using Device.Net;
+using Hardwarewallets.Net;
 using Hardwarewallets.Net.AddressManagement;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.RLP;
@@ -12,14 +14,27 @@ using Trezor.Net.Contracts.Bitcoin;
 using Trezor.Net.Contracts.Ethereum;
 using Trezor.Net.Manager;
 
+#pragma warning disable CA2201 // Do not raise reserved exception types
+
 namespace Trezor.Net
 {
+    //TODO: Put a LibUsb test back
+
     [TestClass]
     public abstract partial class UnitTestBase
     {
+        private readonly IDeviceFactory deviceFactory;
+        private readonly ILoggerFactory loggerFactory;
+
+        protected UnitTestBase(IDeviceFactory deviceFactory, ILoggerFactory loggerFactory)
+        {
+            this.deviceFactory = deviceFactory;
+            this.loggerFactory = loggerFactory;
+        }
+
         #region Fields
         //This must remain static for persistenance across tests
-        protected static TrezorManager TrezorManager;
+        protected static TrezorManager TrezorManager { get; set; }
         private readonly string[] _Addresses = new string[50];
         private TrezorManagerBroker _TrezorManagerBroker;
         #endregion
@@ -32,42 +47,39 @@ namespace Trezor.Net
         #region Protected Virtual Methods
         protected virtual async Task<TrezorManager> ConnectAsync()
         {
-            _TrezorManagerBroker = new TrezorManagerBroker(GetPin, GetPassphrase, 2000, new DefaultCoinUtility());
-            return await _TrezorManagerBroker.WaitForFirstTrezorAsync();
+            _TrezorManagerBroker = new TrezorManagerBroker(GetPin, GetPassphrase, 2000, deviceFactory, loggerFactory: loggerFactory);
+            return await _TrezorManagerBroker.WaitForFirstTrezorAsync().ConfigureAwait(false);
         }
         #endregion
 
         #region Helpers
-        private async Task<string> GetAddressAsync(uint index)
-        {
-            return await GetAddressAsync(true, 0, false, index, false);
-        }
+        private static async Task<string> GetAddressAsync(uint index) => await GetAddressAsync(true, 0, false, index, false).ConfigureAwait(false);
 
-        private async Task<string> GetAddressAsync(uint coinNumber, bool display)
+        private static async Task<string> GetAddressAsync(uint coinNumber, bool display)
         {
             var coinInfo = TrezorManager.CoinUtility.GetCoinInfo(coinNumber);
-            var address = await GetAddressAsync(coinInfo.IsSegwit, coinInfo.CoinType, false, 0, display);
+            var address = await GetAddressAsync(coinInfo.IsSegwit, coinInfo.CoinType, false, 0, display).ConfigureAwait(false);
             return address;
         }
 
-        private async Task<string> GetAddressAsync(bool isSegwit, uint coinNumber, bool isChange, uint index, bool display, string coinName = null, bool isPublicKey = false)
+        private static async Task<string> GetAddressAsync(bool isSegwit, uint coinNumber, bool isChange, uint index, bool display, bool isPublicKey = false)
         {
             var addressPath = new BIP44AddressPath(isSegwit, coinNumber, 0, isChange, index);
-            var firstAddress = await TrezorManager.GetAddressAsync(addressPath, isPublicKey, display);
+            var firstAddress = await TrezorManager.GetAddressAsync(addressPath, isPublicKey, display).ConfigureAwait(false);
             var addressPathString = $"m/{(isSegwit ? 49 : 44)}'/{coinNumber}'/{(isChange ? 1 : 0)}'/{0}/{index}";
-            var secondAddress = await GetAddressAsync(addressPathString);
+            var secondAddress = await GetAddressAsync(addressPathString).ConfigureAwait(false);
 
             Assert.IsTrue(firstAddress == secondAddress, "The parsed version of the address path yielded a different result to the non-parsed version");
 
             return secondAddress;
         }
 
-        private async Task<string> GetAddressAsync(string addressPath, bool display = false, string coinName = null, bool isPublicKey = false)
+        private static async Task<string> GetAddressAsync(string addressPath, bool display = false, bool isPublicKey = false)
         {
             var bip44AddressPath = AddressPathBase.Parse<BIP44AddressPath>(addressPath);
 
             //TODO: Duplicate code here
-            var address = await TrezorManager.GetAddressAsync(bip44AddressPath, isPublicKey, display);
+            var address = await TrezorManager.GetAddressAsync(bip44AddressPath, isPublicKey, display).ConfigureAwait(false);
             Assert.IsTrue(!string.IsNullOrEmpty(address), $"The address was null or empty. Path: {addressPath}");
             Console.WriteLine(address);
             return address;
@@ -75,7 +87,7 @@ namespace Trezor.Net
 
         private async Task DoGetAddress(uint i)
         {
-            var address = await GetAddressAsync(i);
+            var address = await GetAddressAsync(i).ConfigureAwait(false);
             _Addresses[i] = address;
         }
         #endregion
@@ -89,7 +101,7 @@ namespace Trezor.Net
                 return;
             }
 
-            TrezorManager = await ConnectAsync();
+            TrezorManager = await ConnectAsync().ConfigureAwait(false);
         }
 
         [TestCleanup]
@@ -195,11 +207,11 @@ namespace Trezor.Net
             var serializedTx = new List<byte>();
 
             // We send SignTx() to the Trezor and we wait him to send us Request
-            var request = await TrezorManager.SendMessageAsync<TxRequest, SignTx>(signTx);
+            var request = await TrezorManager.SendMessageAsync<TxRequest, SignTx>(signTx).ConfigureAwait(false);
 
             // We do loop here since we need to send over and over the same transactions to trezor because his 64 kilobytes memory
             // and he will sign chunks and return part of signed chunk in serialized manner, until we receive finall type of Txrequest TxFinished
-            bool running = true;
+            var running = true;
             while (running)
             {
                 if (request.Serialized != null)
@@ -226,13 +238,14 @@ namespace Trezor.Net
                                 // retrieve input from specified previous tx
                                 var prevtx = prevTxes[prevHash.ToHexString()];
                                 txAck.Tx.Inputs.Add(prevtx.Inputs[prevIndex]);
-                            } else
+                            }
+                            else
                             {
                                 // take one of the current transaction inputs
                                 txAck.Tx.Inputs.Add(txInputs[prevIndex]);
                             }
 
-                            request = await TrezorManager.SendMessageAsync<TxRequest, TxAck>(txAck);
+                            request = await TrezorManager.SendMessageAsync<TxRequest, TxAck>(txAck).ConfigureAwait(false);
                             break;
                         }
                     case TxRequest.RequestType.Txoutput:
@@ -252,7 +265,7 @@ namespace Trezor.Net
                                 txAck.Tx.Outputs.Add(txOutputs[prevIndex]);
                             }
 
-                            request = await TrezorManager.SendMessageAsync<TxRequest, object>(txAck);
+                            request = await TrezorManager.SendMessageAsync<TxRequest, object>(txAck).ConfigureAwait(false);
                             break;
                         }
 
@@ -265,7 +278,7 @@ namespace Trezor.Net
                             // request.Details will contain offset and length, pick that chunk and put it into TransactionType.ExtraData that you send.
                             throw new NotImplementedException();
                         }
-                    
+
                     case TxRequest.RequestType.Txmeta:
                         {
                             // This will only happen when txHash is set.
@@ -277,7 +290,7 @@ namespace Trezor.Net
                                 InputsCnt = (uint)prevtx.Inputs.Count,
                                 OutputsCnt = (uint)prevtx.BinOutputs.Count,
                             };
-                            request = await TrezorManager.SendMessageAsync<TxRequest, object>(txAck);
+                            request = await TrezorManager.SendMessageAsync<TxRequest, object>(txAck).ConfigureAwait(false);
                             break;
                         }
 
@@ -297,10 +310,7 @@ namespace Trezor.Net
         /// Note: I don't know how to verify if this is returning the correct address or not
         /// </summary>
         [TestMethod]
-        public async Task DisplayStellarPublicKey()
-        {
-            var address = await GetAddressAsync("m/44'/148'/0'/0/0", true, null, true);
-        }
+        public async Task DisplayStellarPublicKey() => _ = await GetAddressAsync("m/44'/148'/0'/0/0", true, true).ConfigureAwait(false);
 
         /// <summary>
         /// Confirmed address valid as per online wallet
@@ -313,7 +323,7 @@ namespace Trezor.Net
             string address = null;
             try
             {
-                address = await GetAddressAsync(1815, false);
+                address = await GetAddressAsync(1815, false).ConfigureAwait(false);
             }
             catch (NotSupportedException)
             {
@@ -337,7 +347,7 @@ namespace Trezor.Net
             string address = null;
             try
             {
-                address = await GetAddressAsync("44'/1729'/0'", false);
+                address = await GetAddressAsync("44'/1729'/0'", false).ConfigureAwait(false);
             }
             catch (NotSupportedException)
             {
@@ -354,28 +364,16 @@ namespace Trezor.Net
         /// Note: I don't know how to verify if this is returning the correct address or not
         /// </summary>
         [TestMethod]
-        public async Task GetNEMAddress()
-        {
-            var address = await GetAddressAsync("44'/43'/0'", false);
-        }
+        public async Task GetNEMAddress() => _ = await GetAddressAsync("44'/43'/0'", false).ConfigureAwait(false);
 
         [TestMethod]
-        public async Task GetNamecoinAddress()
-        {
-            var address = await GetAddressAsync(7, false);
-        }
+        public async Task GetNamecoinAddress() => _ = await GetAddressAsync(7, false).ConfigureAwait(false);
 
         [TestMethod]
-        public async Task DisplayBitcoinAddress()
-        {
-            var address = await GetAddressAsync(0, true);
-        }
+        public async Task DisplayBitcoinAddress() => _ = await GetAddressAsync(0, true).ConfigureAwait(false);
 
         [TestMethod]
-        public async Task GetBitcoinAddress()
-        {
-            var address = await GetAddressAsync(true, 0, false, 0, false);
-        }
+        public async Task GetBitcoinAddress() => _ = await GetAddressAsync(true, 0, false, 0, false).ConfigureAwait(false);
 
         [TestMethod]
         public async Task GetBitcoinAddresses()
@@ -385,7 +383,7 @@ namespace Trezor.Net
             //Get 10 addresses with all the trimming
             const int numberOfAddresses = 3;
             const int numberOfAccounts = 2;
-            var addresses = await addressManager.GetAddressesAsync(0, numberOfAddresses, numberOfAccounts, true, true);
+            var addresses = await addressManager.GetAddressesAsync(0, numberOfAddresses, numberOfAccounts, true, true).ConfigureAwait(false);
 
             Assert.IsTrue(addresses != null);
             Assert.IsTrue(addresses.Accounts != null);
@@ -398,54 +396,32 @@ namespace Trezor.Net
         }
 
         [TestMethod]
-        public async Task GetBitcoinCashAddress()
-        {
-            var address = await GetAddressAsync(false, 145, false, 0, false);
-        }
+        public async Task GetBitcoinCashAddress() => _ = await GetAddressAsync(false, 145, false, 0, false).ConfigureAwait(false);
 
         [TestMethod]
-        public async Task GetBitcoinCashParsedAddress()
-        {
-            var address = await GetAddressAsync("m/44'/145'/0'/0/0");
-        }
+        public async Task GetBitcoinCashParsedAddress() => _ = await GetAddressAsync("m/44'/145'/0'/0/0").ConfigureAwait(false);
 
         [TestMethod]
-        public async Task DisplayBitcoinCashAddress()
-        {
-            var address = await GetAddressAsync(false, 145, false, 0, true, "Bcash");
-        }
+        public async Task DisplayBitcoinCashAddress() => _ = await GetAddressAsync(false, 145, false, 0, true).ConfigureAwait(false);
 
         [TestMethod]
-        public async Task GetBitcoinGoldAddress()
-        {
-            var address = await GetAddressAsync(156, false);
-        }
+        public async Task GetBitcoinGoldAddress() => _ = await GetAddressAsync(156, false).ConfigureAwait(false);
 
         [TestMethod]
-        public async Task DisplayEthereumAddress()
-        {
+        public async Task DisplayEthereumAddress() =>
             //Ethereum coins don't need the coin name
-            var address = await GetAddressAsync(false, 60, false, 0, true);
-        }
+            _ = await GetAddressAsync(false, 60, false, 0, true).ConfigureAwait(false);
 
         [TestMethod]
-        public async Task GetEthereumAddress()
-        {
-            var address = await GetAddressAsync("m/44'/60'/0'/1/0");
-        }
+        public async Task GetEthereumAddress() => _ = await GetAddressAsync("m/44'/60'/0'/1/0").ConfigureAwait(false);
 
         [TestMethod]
-        public async Task GetEthereumClassicAddressParsed()
-        {
-            var address = await GetAddressAsync("m/44'/61'/0'/1/0");
-        }
+        public async Task GetEthereumClassicAddressParsed() => _ = await GetAddressAsync("m/44'/61'/0'/1/0").ConfigureAwait(false);
 
         [TestMethod]
-        public async Task GetEthereumClassicAddress()
-        {
+        public async Task GetEthereumClassicAddress() =>
             //Ethereum coins don't need the coin name
-            var address = await GetAddressAsync(false, 61, false, 0, false);
-        }
+            _ = await GetAddressAsync(false, 61, false, 0, false).ConfigureAwait(false);
 
         [TestMethod]
         public async Task TestThreadSafety()
@@ -459,11 +435,11 @@ namespace Trezor.Net
                 tasks.Add(DoGetAddress(i));
             }
 
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
 
             for (uint i = 0; i < addresses; i++)
             {
-                var address = await GetAddressAsync(i);
+                var address = await GetAddressAsync(i).ConfigureAwait(false);
 
                 Console.WriteLine($"Index: {i} (No change) - Address: {address}");
 
@@ -489,7 +465,7 @@ namespace Trezor.Net
                 ChainId = 4
             };
 
-            var transaction = await TrezorManager.SendMessageAsync<EthereumTxRequest, EthereumSignTx>(txMessage);
+            var transaction = await TrezorManager.SendMessageAsync<EthereumTxRequest, EthereumSignTx>(txMessage).ConfigureAwait(false);
 
             Assert.AreEqual(transaction.SignatureR.Length, 32);
             Assert.AreEqual(transaction.SignatureS.Length, 32);
@@ -508,14 +484,14 @@ namespace Trezor.Net
                 AddressNs = AddressPathBase.Parse<BIP44AddressPath>("m/44'/60'/0'/0/0").ToArray(),
                 ChainId = 1
             };
-            var transaction = await TrezorManager.SendMessageAsync<EthereumTxRequest, EthereumSignTx>(txMessage);
+            var transaction = await TrezorManager.SendMessageAsync<EthereumTxRequest, EthereumSignTx>(txMessage).ConfigureAwait(false);
 
             Assert.AreEqual(transaction.SignatureR.Length, 32);
             Assert.AreEqual(transaction.SignatureS.Length, 32);
         }
 
         [TestMethod]
-        public async Task GetBitcoinCashCoinInfo()
+        public void GetBitcoinCashCoinInfo()
         {
             var defaultCoinUtility = new DefaultCoinUtility();
             var bitcoinCashCoinInfo = defaultCoinUtility.GetCoinInfo(145);
