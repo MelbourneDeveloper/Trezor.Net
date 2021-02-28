@@ -44,7 +44,7 @@ namespace TrezorTestApp
             var aggregateFactory = usbFactory.Aggregate(hidFactory, _loggerFactory);
 
 
-            _TrezorManagerBroker = new TrezorManagerBroker(GetPin, GetPassphrase, 2000, new DefaultCoinUtility(), aggregateFactory, _loggerFactory);
+            _TrezorManagerBroker = new TrezorManagerBroker(GetPin, GetPassphrase, 2000, aggregateFactory, new DefaultCoinUtility(), _loggerFactory);
             return await _TrezorManagerBroker.WaitForFirstTrezorAsync().ConfigureAwait(false);
         }
 

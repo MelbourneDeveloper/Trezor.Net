@@ -33,7 +33,7 @@ namespace Trezor.Net.XamarinFormsSample
             if (_IsDisplayed) return;
             _IsDisplayed = true;
 
-            TrezorManagerBroker = new TrezorManagerBroker(TrezorPinPad.GetPin, () => { return Task.FromResult("a"); }, 2000, new DefaultCoinUtility(), deviceFactory, _loggerFactory);
+            TrezorManagerBroker = new TrezorManagerBroker(TrezorPinPad.GetPin, () => { return Task.FromResult("a"); }, 2000, deviceFactory, new DefaultCoinUtility(), _loggerFactory);
 
             var trezorManager = await TrezorManagerBroker.WaitForFirstTrezorAsync().ConfigureAwait(false);
 

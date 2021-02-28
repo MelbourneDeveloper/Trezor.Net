@@ -48,12 +48,12 @@ namespace Trezor.Net.Manager
             EnterPinArgs enterPassphraseArgs,
             int? pollInterval,
             IDeviceFactory deviceFactory,
-            ICoinUtility coinUtility,
+            ICoinUtility coinUtility = null,
             ILoggerFactory loggerFactory = null)
         {
             EnterPinArgs = enterPinArgs;
             EnterPassphraseArgs = enterPassphraseArgs;
-            CoinUtility = coinUtility;
+            CoinUtility = coinUtility ?? new DefaultCoinUtility();
             PollInterval = pollInterval;
             LoggerFactory = loggerFactory;
 

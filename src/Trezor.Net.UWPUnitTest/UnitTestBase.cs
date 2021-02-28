@@ -47,7 +47,7 @@ namespace Trezor.Net
         #region Protected Virtual Methods
         protected virtual async Task<TrezorManager> ConnectAsync()
         {
-            _TrezorManagerBroker = new TrezorManagerBroker(GetPin, GetPassphrase, 2000, new DefaultCoinUtility(), deviceFactory, loggerFactory);
+            _TrezorManagerBroker = new TrezorManagerBroker(GetPin, GetPassphrase, 2000, deviceFactory, loggerFactory: loggerFactory);
             return await _TrezorManagerBroker.WaitForFirstTrezorAsync().ConfigureAwait(false);
         }
         #endregion

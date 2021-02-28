@@ -11,8 +11,8 @@ namespace Trezor.Net.Manager
             EnterPinArgs enterPinArgs,
             EnterPinArgs enterPassphraseArgs,
             int? pollInterval,
-            ICoinUtility coinUtility,
             IDeviceFactory deviceFactory,
+            ICoinUtility coinUtility = null,
             ILoggerFactory loggerFactory = null
             ) : base(
                 enterPinArgs,
