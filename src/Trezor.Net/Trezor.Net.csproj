@@ -24,10 +24,6 @@
 		<PackageLicenseFile>License.txt</PackageLicenseFile>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<OutputPath>C:\GitRepos\Trezor.Net\NuGet\</OutputPath>
-	</PropertyGroup>
-
 	<ItemGroup>
 		<None Remove="Resources\Coins.xml" />
 		<None Include="..\..\CONTRIBUTING.md" Link="CONTRIBUTING.md" />
