@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2000
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trezor.Net", "Trezor.Net\Trezor.Net.csproj", "{DDA97F34-2E5E-481C-83DD-EE58E9E6AAF0}"
 EndProject
@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trezor.Net.Sample", "Trezor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trezor.Net.UWPUnitTest", "Trezor.Net.UWPUnitTest\Trezor.Net.UWPUnitTest.csproj", "{97924306-CC9E-4D40-B121-1040ECE2347E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trezor.Net.UnitTest", "Trezor.Net.UnitTest\Trezor.Net.UnitTest.csproj", "{2397AD63-6E69-4FAB-BDD2-0B6C353C8B22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trezor.Net.UnitTest", "Trezor.Net.UnitTest\Trezor.Net.UnitTest.csproj", "{2397AD63-6E69-4FAB-BDD2-0B6C353C8B22}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{0DB57113-50C2-4F8A-9308-0B7DE396803E}"
 EndProject
@@ -24,6 +24,13 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrezorCoinInfoGenerator", "TrezorCoinInfoGenerator\TrezorCoinInfoGenerator.csproj", "{3244B22F-022F-4B3A-8F17-FC0526FA2330}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trezor.Net.LibUsbUnitTest", "Trezor.Net.LibUsbUnitTest\Trezor.Net.LibUsbUnitTest.csproj", "{8CF79314-B992-4EF8-BBEA-F52280FEAA6A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{787D8216-1D81-42F9-8C33-16D0DF011DEF}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		..\.gitignore = ..\.gitignore
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

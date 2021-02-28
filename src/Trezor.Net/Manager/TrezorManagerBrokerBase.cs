@@ -1,4 +1,5 @@
 ﻿using Device.Net;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace Trezor.Net.Manager
 {
+    //TODO: Add logging (Inject the logger factory)
+
     public abstract class TrezorManagerBrokerBase<T, TMessageType> where T : TrezorManagerBase<TMessageType>, IDisposable
     {
-        #region Protected Abstract Properties
-        protected abstract List<FilterDeviceDefinition> DeviceDefinitions { get; }
+        protected ILoggerFactory LoggerFactory { get; }
 
-        #endregion
         #region Fields
         private bool _disposed;
-        private DeviceListener _DeviceListener;
+        private readonly DeviceListener _DeviceListener;
         private readonly SemaphoreSlim _Lock = new SemaphoreSlim(1, 1);
         private readonly TaskCompletionSource<T> _FirstTrezorTaskCompletionSource = new TaskCompletionSource<T>();
         #endregion
@@ -42,12 +43,24 @@ namespace Trezor.Net.Manager
         #endregion
 
         #region Constructor
-        protected TrezorManagerBrokerBase(EnterPinArgs enterPinArgs, EnterPinArgs enterPassphraseArgs, int? pollInterval, ICoinUtility coinUtility)
+        protected TrezorManagerBrokerBase(
+            EnterPinArgs enterPinArgs,
+            EnterPinArgs enterPassphraseArgs,
+            int? pollInterval,
+            IDeviceFactory deviceFactory,
+            ICoinUtility coinUtility = null,
+            ILoggerFactory loggerFactory = null)
         {
             EnterPinArgs = enterPinArgs;
             EnterPassphraseArgs = enterPassphraseArgs;
-            CoinUtility = coinUtility;
+            CoinUtility = coinUtility ?? new DefaultCoinUtility();
             PollInterval = pollInterval;
+            LoggerFactory = loggerFactory;
+
+
+            _DeviceListener = new DeviceListener(deviceFactory, PollInterval, loggerFactory);
+            _DeviceListener.DeviceDisconnected += DevicePoller_DeviceDisconnected;
+            _DeviceListener.DeviceInitialized += DevicePoller_DeviceInitialized;
         }
         #endregion
 
@@ -60,7 +73,7 @@ namespace Trezor.Net.Manager
         {
             try
             {
-                await _Lock.WaitAsync();
+                await _Lock.WaitAsync().ConfigureAwait(false);
 
                 var trezorManager = TrezorManagers.FirstOrDefault(t => ReferenceEquals(t.Device, e.Device));
 
@@ -75,7 +88,7 @@ namespace Trezor.Net.Manager
 
                 TrezorManagers = new ReadOnlyCollection<T>(tempList);
 
-                await trezorManager.InitializeAsync();
+                await trezorManager.InitializeAsync().ConfigureAwait(false);
 
                 if (_FirstTrezorTaskCompletionSource.Task.Status == TaskStatus.WaitingForActivation) _FirstTrezorTaskCompletionSource.SetResult(trezorManager);
 
@@ -83,7 +96,7 @@ namespace Trezor.Net.Manager
             }
             finally
             {
-                _Lock.Release();
+                _ = _Lock.Release();
             }
         }
 
@@ -91,7 +104,7 @@ namespace Trezor.Net.Manager
         {
             try
             {
-                await _Lock.WaitAsync();
+                await _Lock.WaitAsync().ConfigureAwait(false);
 
                 var trezorManager = TrezorManagers.FirstOrDefault(t => ReferenceEquals(t.Device, e.Device));
 
@@ -103,13 +116,13 @@ namespace Trezor.Net.Manager
 
                 var tempList = new List<T>(TrezorManagers);
 
-                tempList.Remove(trezorManager);
+                _ = tempList.Remove(trezorManager);
 
                 TrezorManagers = new ReadOnlyCollection<T>(tempList);
             }
             finally
             {
-                _Lock.Release();
+                _ = _Lock.Release();
             }
         }
         #endregion
@@ -123,18 +136,12 @@ namespace Trezor.Net.Manager
         {
             if (_DeviceListener != null) return;
 
-            _DeviceListener = new DeviceListener(DeviceDefinitions, PollInterval);
-            _DeviceListener.DeviceDisconnected += DevicePoller_DeviceDisconnected;
-            _DeviceListener.DeviceInitialized += DevicePoller_DeviceInitialized;
             _DeviceListener.Start();
 
             //TODO: Call Start on the DeviceListener when it is implemented...
         }
 
-        public void Stop()
-        {
-            _DeviceListener?.Stop();
-        }
+        public void Stop() => _DeviceListener?.Stop();
 
         /// <summary>
         /// Check to see if there are any devices connected
@@ -143,7 +150,7 @@ namespace Trezor.Net.Manager
         {
             try
             {
-                await _DeviceListener.CheckForDevicesAsync();
+                await _DeviceListener.CheckForDevicesAsync().ConfigureAwait(false);
             }
             catch
             {
@@ -157,8 +164,8 @@ namespace Trezor.Net.Manager
         public async Task<T> WaitForFirstTrezorAsync()
         {
             if (_DeviceListener == null) Start();
-            await _DeviceListener.CheckForDevicesAsync();
-            return await _FirstTrezorTaskCompletionSource.Task;
+            await _DeviceListener.CheckForDevicesAsync().ConfigureAwait(false);
+            return await _FirstTrezorTaskCompletionSource.Task.ConfigureAwait(false);
         }
 
         public void Dispose()

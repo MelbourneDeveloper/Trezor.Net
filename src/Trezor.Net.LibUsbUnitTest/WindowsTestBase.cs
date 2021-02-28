@@ -1,15 +1,31 @@
-﻿using System;
+﻿using Device.Net;
+using Hid.Net.Windows;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
+using Usb.Net.Windows;
+
+#pragma warning disable CA2201 // Do not raise reserved exception types
 
 namespace Trezor.Net
 {
+    //Why are there two WindowsTestBase classes?
+
     public abstract class WindowsTestBase : UnitTestBase
     {
+        private static readonly ILoggerFactory _loggerFactory = LoggerFactory.Create(builder => _ = builder.AddDebug().SetMinimumLevel(LogLevel.Trace));
+
+        public WindowsTestBase() : base(TrezorManager.DeviceDefinitions.CreateWindowsHidDeviceFactory(_loggerFactory)
+    .Aggregate(TrezorManager.DeviceDefinitions.CreateWindowsUsbDeviceFactory(_loggerFactory)), _loggerFactory)
+        {
+
+        }
+
         #region Platform Specific Overrides
-        protected string GetExecutingAssemblyDirectoryPath()
+        protected static string GetExecutingAssemblyDirectoryPath()
         {
             var codeBase = Assembly.GetExecutingAssembly().CodeBase;
             var uri = new UriBuilder(codeBase);
@@ -17,17 +33,12 @@ namespace Trezor.Net
             return executingAssemblyDirectoryPath;
         }
 
-        protected override async Task<string> GetPin()
-        {
-            return GetTextFromUI();
-        }
+        protected override Task<string> GetPin() => GetTextFromUI();
 
-        protected override async Task<string> GetPassphrase()
-        {
-            return GetTextFromUI();
-        }
+        protected override Task<string> GetPassphrase() => GetTextFromUI();
 
-        private string GetTextFromUI()
+        private static Task<string> GetTextFromUI()
+        => Task.Run(() =>
         {
             var passwordExePath = Path.Combine(GetExecutingAssemblyDirectoryPath(), "Misc", "GetPassword.exe");
             if (!File.Exists(passwordExePath))
@@ -45,7 +56,8 @@ namespace Trezor.Net
 
             process.WaitForExit();
             return File.ReadAllText(Path.Combine(GetExecutingAssemblyDirectoryPath(), "pin.txt"));
-        }
+        });
+
         #endregion
     }
 }
