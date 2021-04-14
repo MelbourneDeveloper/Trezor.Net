@@ -1,5 +1,7 @@
 ﻿using System;
 
+#pragma warning disable CA1032
+
 namespace Trezor.Net
 {
     public class NotSupportedException : Exception

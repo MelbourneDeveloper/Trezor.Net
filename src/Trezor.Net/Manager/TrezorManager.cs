@@ -22,6 +22,8 @@ using Trezor.Net.Contracts.Ripple;
 using Trezor.Net.Contracts.Stellar;
 using Trezor.Net.Contracts.Tezos;
 
+#pragma warning disable CA1816 // Dispose methods should call SuppressFinalize
+
 namespace Trezor.Net
 {
     public class TrezorManager : TrezorManagerBase<MessageType>

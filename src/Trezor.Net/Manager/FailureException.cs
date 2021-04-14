@@ -1,5 +1,8 @@
 ﻿using System;
 
+#pragma warning disable CA2229
+#pragma warning disable CA1032
+
 namespace Trezor.Net
 {
     [Serializable]

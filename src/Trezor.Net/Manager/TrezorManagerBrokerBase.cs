@@ -7,6 +7,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+#pragma warning disable CA1001 // Types that own disposable fields should be disposable
+
 namespace Trezor.Net.Manager
 {
     //TODO: Add logging (Inject the logger factory)
@@ -181,8 +183,6 @@ namespace Trezor.Net.Manager
             {
                 trezorManager.Dispose();
             }
-
-            GC.SuppressFinalize(this);
         }
         #endregion
     }

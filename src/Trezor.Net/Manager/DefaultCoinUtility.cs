@@ -4,6 +4,8 @@ using System.IO;
 using System.Reflection;
 using System.Xml.Serialization;
 
+#pragma warning disable CA5369
+
 namespace Trezor.Net
 {
     public class DefaultCoinUtility : ICoinUtility
