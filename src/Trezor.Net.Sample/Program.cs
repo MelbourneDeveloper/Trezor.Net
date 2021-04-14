@@ -1,6 +1,7 @@
 ﻿using Device.Net;
 using Hardwarewallets.Net.AddressManagement;
 using Hid.Net.Windows;
+using Usb.Net.Windows;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,7 @@ namespace TrezorTestApp
         #region Private  Methods
         private static async Task<TrezorManager> ConnectAsync()
         {
-            var usbFactory = TrezorManager.DeviceDefinitions.CreateWindowsHidDeviceFactory();
+            var usbFactory = TrezorManager.DeviceDefinitions.CreateWindowsUsbDeviceFactory();
             var hidFactory = TrezorManager.DeviceDefinitions.CreateWindowsHidDeviceFactory();
             var aggregateFactory = usbFactory.Aggregate(hidFactory, _loggerFactory);
 
