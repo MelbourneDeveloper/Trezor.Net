@@ -7,8 +7,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Trezor.Net;
 using Trezor.Net.Manager;
+using Usb.Net.Windows;
 
 #pragma warning disable CA2201 // Do not raise reserved exception types
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
 
 namespace TrezorTestApp
 {
