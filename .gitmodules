@@ -1,0 +1,3 @@
+[submodule "Device.Net"]
+	path = Device.Net
+	url = https://github.com/MelbourneDeveloper/Device.Net.git
